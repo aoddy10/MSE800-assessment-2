@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from .models import Item
+from .models import Item, SystemLog
 from .serializers import ItemSerializer
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
@@ -11,6 +11,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework_api_key.permissions import HasAPIKey
 from django.core.mail import send_mail
 from django.conf import settings
+
 
 
 User = get_user_model()  # use custom Model User
@@ -48,6 +49,14 @@ def register(request):
     recipient_list = [email]
 
     send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+    
+    # create system log
+    SystemLog.objects.create(
+        user=user,
+        module="User",
+        relate_id=user.id,
+        description=f"Registered new user: {username} ({email})"
+    )
 
     return Response({"message": "User registered successfully. A confirmation email has been sent."}, status=201)
 

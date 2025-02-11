@@ -1,12 +1,7 @@
 from django.contrib import admin
-from .models import Item  # Import your model
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import User, SystemLog
 
-@admin.register(Item)
-class ItemAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "created_at")  # Columns to display in admin panel
-    search_fields = ("name",)  # Enable search
     
 class CustomUserAdmin(UserAdmin):
     model = User
@@ -15,3 +10,9 @@ class CustomUserAdmin(UserAdmin):
     ordering = ("id",)
 
 admin.site.register(User, CustomUserAdmin)
+
+class SystemLogsAdmin(admin.ModelAdmin):
+    list_display = ("id", "user", "module", "relate_id", "description", "created_at")
+    search_fields = ("user__username", "module", "description")
+    ordering = ("-created_at",)
+admin.site.register(SystemLog, SystemLogsAdmin)
