@@ -1,3 +1,4 @@
+import uuid
 from rest_framework import viewsets
 from .models import Item, SystemLog
 from .serializers import ItemSerializer
@@ -103,6 +104,65 @@ def login(request):
 def logout(request):
     request.auth.delete()  # delete Token of user
     return Response({"message": "Logged out successfully"}, status=200)
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def password_reset_request(request):
+    email = request.data.get("email")
+
+    # check if email is existing
+    user = User.objects.filter(email=email).first()
+    if not user:
+        return Response({"error": "Email not found"}, status=404)
+
+    # create Token for Reset Password
+    reset_token = str(uuid.uuid4())
+    user.reset_token = reset_token
+    user.save()
+
+    # create URL for Reset Password
+    reset_link = f"http://localhost:3000/reset-password/{reset_token}"
+
+    # send email to user
+    subject = "Password Reset Request"
+    message = f"Hello {user.username},\n\nClick the link below to reset your password:\n\n{reset_link}\n\nBest Regards,\nKiwi Explorer"
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
+
+    # create Log
+    SystemLog.objects.create(
+        user=user,
+        module="User",
+        relate_id=user.id,
+        description="Requested password reset"
+    )
+
+    return Response({"message": "Password reset email sent"}, status=200)
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def password_reset_confirm(request):
+    reset_token = request.data.get("reset_token")
+    new_password = request.data.get("new_password")
+
+    # check if Token is correct
+    user = User.objects.filter(reset_token=reset_token).first()
+    if not user:
+        return Response({"error": "Invalid or expired reset token"}, status=400)
+
+    # update new password
+    user.set_password(new_password)
+    user.reset_token = None  # clear token
+    user.save()
+
+    # create Log
+    SystemLog.objects.create(
+        user=user,
+        module="User",
+        relate_id=user.id,
+        description="Reset password successfully"
+    )
+
+    return Response({"message": "Password has been reset successfully"}, status=200)
 
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
