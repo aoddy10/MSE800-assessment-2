@@ -9,6 +9,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework_api_key.permissions import HasAPIKey
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 User = get_user_model()  # use custom Model User
@@ -38,7 +40,16 @@ def register(request):
 
     # create new user
     user = User.objects.create_user(username=username, email=email, password=password)
-    return Response({"message": "User registered successfully"}, status=201)
+    
+    # send confirmation email
+    subject = "Welcome to Kiwi Explorer Platform!"
+    message = f"Hello {username},\n\nThank you for registering with us. We are excited to have you on board!\n\nBest Regards,\nKiwi Explorer Developer Team."
+    from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = [email]
+
+    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
+    return Response({"message": "User registered successfully. A confirmation email has been sent."}, status=201)
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
