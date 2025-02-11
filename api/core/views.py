@@ -1,7 +1,6 @@
 import uuid
 from rest_framework import viewsets
 from .models import Item, SystemLog
-from .serializers import ItemSerializer
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
@@ -163,7 +162,3 @@ def password_reset_confirm(request):
     )
 
     return Response({"message": "Password has been reset successfully"}, status=200)
-
-class ItemViewSet(viewsets.ModelViewSet):
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer
