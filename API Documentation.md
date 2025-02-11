@@ -64,7 +64,7 @@ POST /api/login/
 
 ### **Description:**
 
-Logs in a user and returns an authentication token.
+Logs in a user and returns an authentication token along with user details.
 
 ### **Request Body:**
 
@@ -79,7 +79,19 @@ Logs in a user and returns an authentication token.
 
 ```json
 {
-    "token": "your-generated-token"
+    "token": "your-generated-token",
+    "user": {
+        "id": 1,
+        "username": "testuser",
+        "email": "test@example.com",
+        "first_name": "Test",
+        "last_name": "User",
+        "phone": "1234567890",
+        "role": "user",
+        "profile_image_url": "https://example.com/profile.jpg",
+        "is_suspended": false,
+        "last_login": "2024-02-05 12:34:56"
+    }
 }
 ```
 
@@ -88,6 +100,14 @@ Logs in a user and returns an authentication token.
 ```json
 {
     "error": "Invalid credentials"
+}
+```
+
+### **Response (Error - 403 Forbidden - Suspended User):**
+
+```json
+{
+    "error": "Your account is suspended"
 }
 ```
 
@@ -123,7 +143,7 @@ Authorization: Token your-generated-token
 
 ```json
 {
-    "error": "Invalid token or missing authentication"
+    "detail": "Invalid token."
 }
 ```
 
@@ -138,6 +158,7 @@ Authorization: Token your-generated-token
 ```
 
 -   **Logout API** requires a valid token to invalidate the session.
+-   **After logging out, the token becomes invalid, and the user must log in again.**
 
 ---
 
