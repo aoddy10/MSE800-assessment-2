@@ -30,6 +30,12 @@ Registers a new user in the system.
 }
 ```
 
+### **Validation Rules:**
+
+-   `email`, `username`, and `password` **are required**.
+-   `password` must be **at least 8 characters**.
+-   `username` must be **at least 3 characters**.
+
 ### **Response (Success - 201 Created):**
 
 ```json
@@ -42,13 +48,31 @@ Registers a new user in the system.
 
 ```json
 {
-    "error": "Username already exists"
+    "error": "Please provide all the fields"
+}
+```
+
+```json
+{
+    "error": "Password must be at least 8 characters"
+}
+```
+
+```json
+{
+    "error": "Username must be at least 3 characters"
 }
 ```
 
 ```json
 {
     "error": "Email already registered"
+}
+```
+
+```json
+{
+    "error": "Username already exists"
 }
 ```
 
