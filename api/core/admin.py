@@ -16,3 +16,4 @@ class SystemLogsAdmin(admin.ModelAdmin):
     search_fields = ("user__username", "module", "description")
     ordering = ("-created_at",)
 admin.site.register(SystemLog, SystemLogsAdmin)
+
