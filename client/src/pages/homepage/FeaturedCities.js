@@ -1,42 +1,69 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
+import { getCities } from "../../services/cities.services";
 
-const cities = [
-  {
-    name: "Auckland CBD",
-    image: "/path-to-auckland-image.jpg",
-    rating: 4.9,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis consectetur nisi sagittis.",
-    features: [
-      "Lorem ipsum dolor sit amet",
-      "Cras iaculis consectetur nisi sagittis.",
-      "Consectetur adipiscing amet elit."
-    ]
-  },
-  {
-    name: "Waiheke Island",
-    image: "/path-to-waiheke-image.jpg",
-    rating: 4.9,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis consectetur nisi sagittis.",
-    features: [
-      "Lorem ipsum dolor sit amet",
-      "Cras iaculis consectetur nisi sagittis.",
-      "Consectetur adipiscing amet elit."
-    ]
-  },
-  {
-    name: "Christchurch",
-    image: "/path-to-christchurch-image.jpg",
-    rating: 4.9,
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis consectetur nisi sagittis.",
-    features: [
-      "Lorem ipsum dolor sit amet",
-      "Cras iaculis consectetur nisi sagittis.",
-      "Consectetur adipiscing amet elit."
-    ]
-  }
-];
+
+
+
+// const cities = [
+//   {
+//     name: "Auckland CBD",
+//     image: "/path-to-auckland-image.jpg",
+//     rating: 4.9,
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis consectetur nisi sagittis.",
+//     features: [
+//       "Lorem ipsum dolor sit amet",
+//       "Cras iaculis consectetur nisi sagittis.",
+//       "Consectetur adipiscing amet elit."
+//     ]
+//   },
+//   {
+//     name: "Waiheke Island",
+//     image: "/path-to-waiheke-image.jpg",
+//     rating: 4.9,
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis consectetur nisi sagittis.",
+//     features: [
+//       "Lorem ipsum dolor sit amet",
+//       "Cras iaculis consectetur nisi sagittis.",
+//       "Consectetur adipiscing amet elit."
+//     ]
+//   },
+//   {
+//     name: "Christchurch",
+//     image: "/path-to-christchurch-image.jpg",
+//     rating: 4.9,
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis consectetur nisi sagittis.",
+//     features: [
+//       "Lorem ipsum dolor sit amet",
+//       "Cras iaculis consectetur nisi sagittis.",
+//       "Consectetur adipiscing amet elit."
+//     ]
+//   }
+// ];
 
 const FeaturedCities = () => {
+
+  const [cities,setCities] = useState([]);
+  useEffect(() => {
+  const fetch_city = async () => {
+    try {
+      const response = await getCities();
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const result = await response.json();
+      setCities(result);
+
+    } catch (error) {
+      //setError(error);
+    } finally {
+      //setLoading(false);
+    }
+  }
+
+  fetch_city();
+},[]);
+
+  
   return (
     <section className="my-12">
    
