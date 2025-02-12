@@ -1,18 +1,18 @@
 import axios from "axios";
 
-// ตั้งค่า axios instance
+// setup axios instance
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:8000/api", // ตั้งค่า base URL
-    timeout: 5000, // ตั้งค่า timeout 5 วินาที
+    baseURL: "http://localhost:8000/api",
+    timeout: 5000,
     headers: {
         "Content-Type": "application/json",
     },
 });
 
-// Interceptor สำหรับแนบ Token (ถ้ามี)
+// Interceptor for Token
 // axiosInstance.interceptors.request.use(
 //     (config) => {
-//         const token = localStorage.getItem("token"); // ดึง Token จาก localStorage
+//         const token = localStorage.getItem("token"); // get Token from localStorage
 //         if (token) {
 //             config.headers.Authorization = `Token ${token}`;
 //         }
