@@ -8,19 +8,15 @@ http://localhost:8000/api/
 
 ---
 
-## 📝 **1. User Registration**
+## 📝 **1. Authentication**
 
-### **Endpoint:**
+### **1️⃣ User Registration**
 
 ```http
 POST /api/register/
 ```
 
-### **Description:**
-
-Registers a new user in the system and sends a confirmation email.
-
-### **Request Body:**
+#### **Request Body**
 
 ```json
 {
@@ -30,13 +26,7 @@ Registers a new user in the system and sends a confirmation email.
 }
 ```
 
-### **Validation Rules:**
-
--   `email`, `username`, and `password` **are required**.
--   `password` must be **at least 8 characters**.
--   `username` must be **at least 3 characters**.
-
-### **Response (Success - 201 Created):**
+#### **Response (201 Created)**
 
 ```json
 {
@@ -44,53 +34,13 @@ Registers a new user in the system and sends a confirmation email.
 }
 ```
 
-### **Response (Error - 400 Bad Request):**
-
-```json
-{
-    "error": "Please provide all the fields"
-}
-```
-
-```json
-{
-    "error": "Password must be at least 8 characters"
-}
-```
-
-```json
-{
-    "error": "Username must be at least 3 characters"
-}
-```
-
-```json
-{
-    "error": "Email already registered"
-}
-```
-
-```json
-{
-    "error": "Username already exists"
-}
-```
-
----
-
-## 📝 **2. User Login**
-
-### **Endpoint:**
+### **2️⃣ User Login**
 
 ```http
 POST /api/login/
 ```
 
-### **Description:**
-
-Logs in a user and returns an authentication token along with user details.
-
-### **Request Body:**
+#### **Request Body**
 
 ```json
 {
@@ -99,7 +49,7 @@ Logs in a user and returns an authentication token along with user details.
 }
 ```
 
-### **Response (Success - 200 OK):**
+#### **Response (200 OK)**
 
 ```json
 {
@@ -119,43 +69,13 @@ Logs in a user and returns an authentication token along with user details.
 }
 ```
 
-### **Response (Error - 400 Bad Request):**
-
-```json
-{
-    "error": "Invalid credentials"
-}
-```
-
-### **Response (Error - 403 Forbidden - Suspended User):**
-
-```json
-{
-    "error": "Your account is suspended"
-}
-```
-
----
-
-## 📝 **3. User Logout**
-
-### **Endpoint:**
+### **3️⃣ User Logout**
 
 ```http
 POST /api/logout/
 ```
 
-### **Description:**
-
-Logs out the user by invalidating their authentication token.
-
-### **Headers:**
-
-```http
-Authorization: Token your-generated-token
-```
-
-### **Response (Success - 200 OK):**
+#### **Response (200 OK)**
 
 ```json
 {
@@ -163,29 +83,13 @@ Authorization: Token your-generated-token
 }
 ```
 
-### **Response (Error - 401 Unauthorized):**
-
-```json
-{
-    "detail": "Invalid token."
-}
-```
-
----
-
-## 📝 **4. Password Reset Request**
-
-### **Endpoint:**
+### **4️⃣ Password Reset Request**
 
 ```http
 POST /api/password-reset-request/
 ```
 
-### **Description:**
-
-Sends a password reset link to the user's email.
-
-### **Request Body:**
+#### **Request Body**
 
 ```json
 {
@@ -193,7 +97,7 @@ Sends a password reset link to the user's email.
 }
 ```
 
-### **Response (Success - 200 OK):**
+#### **Response (200 OK)**
 
 ```json
 {
@@ -201,29 +105,13 @@ Sends a password reset link to the user's email.
 }
 ```
 
-### **Response (Error - 404 Not Found):**
-
-```json
-{
-    "error": "Email not found"
-}
-```
-
----
-
-## 📝 **5. Password Reset Confirm**
-
-### **Endpoint:**
+### **5️⃣ Password Reset Confirm**
 
 ```http
 POST /api/password-reset-confirm/
 ```
 
-### **Description:**
-
-Allows the user to reset their password using the token received via email.
-
-### **Request Body:**
+#### **Request Body**
 
 ```json
 {
@@ -232,7 +120,7 @@ Allows the user to reset their password using the token received via email.
 }
 ```
 
-### **Response (Success - 200 OK):**
+#### **Response (200 OK)**
 
 ```json
 {
@@ -240,26 +128,122 @@ Allows the user to reset their password using the token received via email.
 }
 ```
 
-### **Response (Error - 400 Bad Request):**
+---
+
+## 📝 **2. City Management**
+
+### **1️⃣ Get All Cities**
+
+```http
+GET /api/cities/
+```
+
+#### **Response (200 OK)**
+
+```json
+[
+    {
+        "id": 1,
+        "title": "Bangkok",
+        "description": "Capital city of Thailand",
+        "image_url": "https://example.com/bangkok.jpg",
+        "is_active": true,
+        "rating": 4.5
+    }
+]
+```
+
+### **2️⃣ Get One City**
+
+```http
+GET /api/cities/{city_id}/
+```
+
+#### **Response (200 OK)**
 
 ```json
 {
-    "error": "Invalid or expired reset token"
+    "id": 1,
+    "title": "Bangkok",
+    "description": "Capital city of Thailand",
+    "image_url": "https://example.com/bangkok.jpg",
+    "is_active": true,
+    "rating": 4.5
 }
 ```
 
----
-
-## 🔹 **Authentication Mechanism**
-
--   **Login API** returns a token that must be included in the `Authorization` header as:
+### **3️⃣ Create a City**
 
 ```http
-Authorization: Token your-generated-token
+POST /api/cities/create/
 ```
 
--   **Logout API** requires a valid token to invalidate the session.
--   **After logging out, the token becomes invalid, and the user must log in again.**
+#### **Request Body**
+
+```json
+{
+    "title": "Chiang Mai",
+    "description": "A beautiful city in northern Thailand",
+    "image_url": "https://example.com/chiangmai.jpg",
+    "is_active": true,
+    "rating": 4.0
+}
+```
+
+#### **Response (201 Created)**
+
+```json
+{
+    "id": 2,
+    "title": "Chiang Mai",
+    "description": "A beautiful city in northern Thailand",
+    "image_url": "https://example.com/chiangmai.jpg",
+    "is_active": true,
+    "rating": 4.0
+}
+```
+
+### **4️⃣ Update a City**
+
+```http
+PUT /api/cities/{city_id}/update/
+```
+
+#### **Request Body**
+
+```json
+{
+    "title": "Bangkok Updated",
+    "rating": 4.8
+}
+```
+
+#### **Response (200 OK)**
+
+```json
+{
+    "id": 1,
+    "title": "Bangkok Updated",
+    "description": "Capital city of Thailand",
+    "image_url": "https://example.com/bangkok.jpg",
+    "is_active": true,
+    "rating": 4.8
+}
+```
+
+### **5️⃣ Delete a City**
+
+```http
+DELETE /api/cities/{city_id}/delete/
+```
+
+#### **Response (204 No Content)**
+
+```json
+{
+    "message": "City deleted successfully"
+}
+```
 
 ---
 
