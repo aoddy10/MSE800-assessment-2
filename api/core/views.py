@@ -1,6 +1,6 @@
 import uuid
 from rest_framework import viewsets
-from .models import Item, SystemLog
+from .models import SystemLog
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
