@@ -18,7 +18,7 @@ POST /api/register/
 
 ### **Description:**
 
-Registers a new user in the system.
+Registers a new user in the system and sends a confirmation email.
 
 ### **Request Body:**
 
@@ -40,7 +40,7 @@ Registers a new user in the system.
 
 ```json
 {
-    "message": "User registered successfully"
+    "message": "User registered successfully. A confirmation email has been sent."
 }
 ```
 
@@ -168,6 +168,83 @@ Authorization: Token your-generated-token
 ```json
 {
     "detail": "Invalid token."
+}
+```
+
+---
+
+## 📝 **4. Password Reset Request**
+
+### **Endpoint:**
+
+```http
+POST /api/password-reset-request/
+```
+
+### **Description:**
+
+Sends a password reset link to the user's email.
+
+### **Request Body:**
+
+```json
+{
+    "email": "test@example.com"
+}
+```
+
+### **Response (Success - 200 OK):**
+
+```json
+{
+    "message": "Password reset email sent"
+}
+```
+
+### **Response (Error - 404 Not Found):**
+
+```json
+{
+    "error": "Email not found"
+}
+```
+
+---
+
+## 📝 **5. Password Reset Confirm**
+
+### **Endpoint:**
+
+```http
+POST /api/password-reset-confirm/
+```
+
+### **Description:**
+
+Allows the user to reset their password using the token received via email.
+
+### **Request Body:**
+
+```json
+{
+    "reset_token": "your-reset-token",
+    "new_password": "newsecurepassword"
+}
+```
+
+### **Response (Success - 200 OK):**
+
+```json
+{
+    "message": "Password has been reset successfully"
+}
+```
+
+### **Response (Error - 400 Bad Request):**
+
+```json
+{
+    "error": "Invalid or expired reset token"
 }
 ```
 
