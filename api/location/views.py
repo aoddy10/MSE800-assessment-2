@@ -4,19 +4,29 @@ from rest_framework import status
 from .models import Location
 from .serializers import LocationSerializer
 
+from django.db.models import Q
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Location
+from .serializers import LocationSerializer
+
 @api_view(["GET"])
 def get_locations(request):
     """
-    Retrieve all locations with optional filtering by user, city, and type.
+    Retrieve all locations with optional filtering by user, city, type, search text (title only), and minimum rating.
     Query Parameters:
     - user (int): Filter locations by user ID.
     - city (int): Filter locations by city ID.
     - type (str): Filter locations by type ('restaurant' or 'activity').
+    - search (str): Search locations by title only.
+    - min_rating (float): Filter locations with a rating greater than or equal to the given value.
     """
     # Get query parameters from the request
     user_id = request.GET.get("user")
     city_id = request.GET.get("city")
     location_type = request.GET.get("type")
+    search_text = request.GET.get("search")
+    min_rating = request.GET.get("min_rating")
 
     # Start with all locations
     locations = Location.objects.all()
@@ -28,6 +38,10 @@ def get_locations(request):
         locations = locations.filter(city_id=city_id)
     if location_type:
         locations = locations.filter(type=location_type)
+    if search_text:
+        locations = locations.filter(title__icontains=search_text)  # Search only in title
+    if min_rating:
+        locations = locations.filter(avg_rating__gte=min_rating)
 
     # Serialize and return filtered data
     serializer = LocationSerializer(locations, many=True)
