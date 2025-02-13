@@ -247,21 +247,75 @@ DELETE /api/cities/{city_id}/delete/
 
 ---
 
-## 📝 **3. Location Management**
+# 📝 **3. Location Management**
 
-### **1️⃣ Get All Locations**
+## **1️⃣ Get All Locations**
+
+## **Endpoint:**
 
 ```http
 GET /api/locations/
 ```
 
-### **Query Parameters**
+## **Description:**
 
--   `user` (int) - Filter locations by user ID
--   `city` (int) - Filter locations by city ID
--   `type` (str) - Filter locations by type (`restaurant` or `activity`)
+Retrieve all locations with optional filtering by user, city, type, title search, and minimum rating.
 
-### **Response (200 OK)**
+## **Query Parameters:**
+
+| Parameter    | Type   | Description                                                              |
+| ------------ | ------ | ------------------------------------------------------------------------ |
+| `user`       | int    | Filter locations by user ID.                                             |
+| `city`       | int    | Filter locations by city ID.                                             |
+| `type`       | string | Filter locations by type (`restaurant` or `activity`).                   |
+| `search`     | string | Search locations by `title` only. Case insensitive.                      |
+| `min_rating` | float  | Filter locations with a rating greater than or equal to the given value. |
+
+## **Example Requests:**
+
+### Get All Locations
+
+```http
+GET /api/locations/
+```
+
+### Filter by User ID
+
+```http
+GET /api/locations/?user=1
+```
+
+### Filter by City ID
+
+```http
+GET /api/locations/?city=2
+```
+
+### Filter by Type
+
+```http
+GET /api/locations/?type=restaurant
+```
+
+### Search by Title
+
+```http
+GET /api/locations/?search=Pizza
+```
+
+### Filter by Minimum Rating
+
+```http
+GET /api/locations/?min_rating=4.5
+```
+
+### Combine Filters
+
+```http
+GET /api/locations/?search=Pizza&min_rating=4.5&city=2&type=restaurant
+```
+
+## **Response Example (200 OK):**
 
 ```json
 [
@@ -284,6 +338,13 @@ GET /api/locations/
     }
 ]
 ```
+
+## **Response Codes:**
+
+| Status Code       | Description                       |
+| ----------------- | --------------------------------- |
+| `200 OK`          | Successfully retrieved locations. |
+| `400 Bad Request` | Invalid request parameters.       |
 
 ---
 
