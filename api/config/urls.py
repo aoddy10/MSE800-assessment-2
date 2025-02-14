@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/', include('core.urls')),  # Add API routes
     path("api/city/", include("city.urls")),
     path("api/locations/", include("location.urls")),
+    path("api/reviews/", include("review.urls")),
 ]
