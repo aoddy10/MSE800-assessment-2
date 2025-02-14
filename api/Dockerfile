@@ -17,5 +17,4 @@ COPY . .
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Use entrypoint.sh to handle migrations and server startup
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]

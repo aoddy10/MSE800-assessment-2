@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from "react";
-import { getCities } from "../../services/cities.services";
+import { getCities } from "../../services/city.services";
+
 
 
 
@@ -46,11 +47,8 @@ const FeaturedCities = () => {
   useEffect(() => {
   const fetch_city = async () => {
     try {
-      const response = await getCities();
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const result = await response.json();
+      const result = await getCities();
+      console.log(result)
       setCities(result);
 
     } catch (error) {
@@ -72,8 +70,8 @@ const FeaturedCities = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {cities.map((city, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-lg p-4">
-            <img src={city.image} alt={city.name} className="w-full h-48 object-cover rounded-lg" />
+          <div key={city.id} className="bg-white rounded-lg shadow-lg p-4">
+            <img src={city.image_url} alt={city.name} className="w-full h-48 object-cover rounded-lg" />
             <div className="flex justify-between items-center mt-3">
               <h3 className="text-lg font-semibold">{city.name}</h3>
               <div className="flex items-center gap-1 text-yellow-500 text-sm">
@@ -82,11 +80,11 @@ const FeaturedCities = () => {
               </div>
             </div>
             <p className="text-gray-600 text-sm mt-2">{city.description}</p>
-            <ul className="text-gray-700 text-sm mt-3 list-disc pl-5">
+            {/* <ul className="text-gray-700 text-sm mt-3 list-disc pl-5">
               {city.features.map((feature, i) => (
                 <li key={i}>{feature}</li>
               ))}
-            </ul>
+            </ul> */}
           </div>
         ))}
       </div>
