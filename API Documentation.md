@@ -247,6 +247,343 @@ DELETE /api/cities/{city_id}/delete/
 
 ---
 
+# 📝 **3. Location Management**
+
+## **1️⃣ Get All Locations**
+
+## **Endpoint:**
+
+```http
+GET /api/locations/
+```
+
+## **Description:**
+
+Retrieve all locations with optional filtering by user, city, type, title search, and minimum rating.
+
+## **Query Parameters:**
+
+| Parameter    | Type   | Description                                                              |
+| ------------ | ------ | ------------------------------------------------------------------------ |
+| `user`       | int    | Filter locations by user ID.                                             |
+| `city`       | int    | Filter locations by city ID.                                             |
+| `type`       | string | Filter locations by type (`restaurant` or `activity`).                   |
+| `search`     | string | Search locations by `title` only. Case insensitive.                      |
+| `min_rating` | float  | Filter locations with a rating greater than or equal to the given value. |
+
+## **Example Requests:**
+
+### Get All Locations
+
+```http
+GET /api/locations/
+```
+
+### Filter by User ID
+
+```http
+GET /api/locations/?user=1
+```
+
+### Filter by City ID
+
+```http
+GET /api/locations/?city=2
+```
+
+### Filter by Type
+
+```http
+GET /api/locations/?type=restaurant
+```
+
+### Search by Title
+
+```http
+GET /api/locations/?search=Pizza
+```
+
+### Filter by Minimum Rating
+
+```http
+GET /api/locations/?min_rating=4.5
+```
+
+### Combine Filters
+
+```http
+GET /api/locations/?search=Pizza&min_rating=4.5&city=2&type=restaurant
+```
+
+## **Response Example (200 OK):**
+
+```json
+[
+    {
+        "id": 1,
+        "user": 1,
+        "city": 1,
+        "type": "restaurant",
+        "title": "Pizza Palace",
+        "description": "The best pizza in town",
+        "contact_email": "info@pizzapalace.com",
+        "contact_phone": "123-456-7890",
+        "cover_image_url": "https://example.com/pizza.jpg",
+        "open_hour_detail": "Mon-Fri: 10am - 10pm",
+        "location_url": "https://maps.example.com/location",
+        "menu_url": "https://example.com/menu",
+        "price_per_person": 15.99,
+        "avg_rating": 4.5,
+        "is_active": true
+    }
+]
+```
+
+## **Response Codes:**
+
+| Status Code       | Description                       |
+| ----------------- | --------------------------------- |
+| `200 OK`          | Successfully retrieved locations. |
+| `400 Bad Request` | Invalid request parameters.       |
+
+---
+
+### **2️⃣ Get One Location**
+
+```http
+GET /api/locations/{location_id}/
+```
+
+### **Response (200 OK)**
+
+```json
+{
+    "id": 1,
+    "user": 1,
+    "city": 1,
+    "type": "restaurant",
+    "title": "Pizza Palace",
+    "description": "The best pizza in town",
+    "contact_email": "info@pizzapalace.com",
+    "contact_phone": "123-456-7890",
+    "cover_image_url": "https://example.com/pizza.jpg",
+    "open_hour_detail": "Mon-Fri: 10am - 10pm",
+    "location_url": "https://maps.example.com/location",
+    "menu_url": "https://example.com/menu",
+    "price_per_person": 15.99,
+    "avg_rating": 4.5,
+    "is_active": true
+}
+```
+
+---
+
+### **3️⃣ Create a Location**
+
+```http
+POST /api/locations/create/
+```
+
+### **Request Body**
+
+```json
+{
+    "user": 1,
+    "city": 1,
+    "type": "restaurant",
+    "title": "Pizza Palace",
+    "description": "The best pizza in town",
+    "contact_email": "info@pizzapalace.com",
+    "contact_phone": "123-456-7890",
+    "cover_image_url": "https://example.com/pizza.jpg",
+    "open_hour_detail": "Mon-Fri: 10am - 10pm",
+    "location_url": "https://maps.example.com/location",
+    "menu_url": "https://example.com/menu",
+    "price_per_person": 15.99,
+    "avg_rating": 4.5,
+    "is_active": true
+}
+```
+
+### **Response (201 Created)**
+
+```json
+{
+    "id": 2,
+    "user": 1,
+    "city": 1,
+    "type": "restaurant",
+    "title": "Pizza Palace",
+    "description": "The best pizza in town",
+    "contact_email": "info@pizzapalace.com",
+    "contact_phone": "123-456-7890",
+    "cover_image_url": "https://example.com/pizza.jpg",
+    "open_hour_detail": "Mon-Fri: 10am - 10pm",
+    "location_url": "https://maps.example.com/location",
+    "menu_url": "https://example.com/menu",
+    "price_per_person": 15.99,
+    "avg_rating": 4.5,
+    "is_active": true
+}
+```
+
+---
+
+### **4️⃣ Update a Location**
+
+```http
+PUT /api/locations/{location_id}/update/
+```
+
+### **Request Body**
+
+```json
+{
+    "title": "Updated Pizza Palace",
+    "avg_rating": 4.8
+}
+```
+
+### **Response (200 OK)**
+
+```json
+{
+    "id": 1,
+    "title": "Updated Pizza Palace",
+    "avg_rating": 4.8
+}
+```
+
+---
+
+### **5️⃣ Delete a Location**
+
+```http
+DELETE /api/locations/{location_id}/delete/
+```
+
+### **Response (204 No Content)**
+
+```json
+{
+    "message": "Location deleted successfully"
+}
+```
+
+---
+
+# 📌 Review Management
+
+## 📝 **1. Get Reviews**
+
+```http
+GET /api/reviews/
+```
+
+### **Query Parameters**
+
+| Parameter  | Type | Description                                                     |
+| ---------- | ---- | --------------------------------------------------------------- |
+| `user`     | int  | Filter reviews by user ID.                                      |
+| `location` | int  | Filter reviews by location ID.                                  |
+| `city`     | int  | Filter reviews by city ID.                                      |
+| `limit`    | int  | Number of reviews to return (sorted by newest first). Optional. |
+
+### **Example Requests:**
+
+#### **1️⃣ Get All Reviews (Sorted by Newest)**
+
+```http
+GET /api/reviews/
+```
+
+#### **2️⃣ Filter by User ID**
+
+```http
+GET /api/reviews/?user=1
+```
+
+#### **3️⃣ Filter by Location ID**
+
+```http
+GET /api/reviews/?location=2
+```
+
+#### **4️⃣ Filter by City ID**
+
+```http
+GET /api/reviews/?city=3
+```
+
+#### **5️⃣ Get the Latest 5 Reviews**
+
+```http
+GET /api/reviews/?limit=5
+```
+
+#### **6️⃣ Get the Latest 3 Reviews for a Specific Location**
+
+```http
+GET /api/reviews/?location=2&limit=3
+```
+
+### **Response Example (200 OK)**
+
+```json
+[
+    {
+        "id": 1,
+        "user": 1,
+        "location": 2,
+        "review": "Amazing experience!",
+        "rating": 5,
+        "created_at": "2024-02-10T15:30:00Z"
+    }
+]
+```
+
+---
+
+## 📝 **2. Create a Review**
+
+```http
+POST /api/reviews/create/
+```
+
+### **Request Body**
+
+```json
+{
+    "user": 1,
+    "location": 2,
+    "review": "Amazing experience!",
+    "rating": 5
+}
+```
+
+### **Response Example (201 Created)**
+
+```json
+{
+    "id": 2,
+    "user": 1,
+    "location": 2,
+    "review": "Amazing experience!",
+    "rating": 5,
+    "created_at": "2024-02-10T16:00:00Z"
+}
+```
+
+## **Response Codes:**
+
+| Status Code       | Description                     |
+| ----------------- | ------------------------------- |
+| `200 OK`          | Successfully retrieved reviews. |
+| `201 Created`     | Review successfully created.    |
+| `400 Bad Request` | Invalid request data.           |
+
+---
+
 ## 🎯 **Notes**
 
 -   Ensure that the **Authorization token** is included in protected API requests.

@@ -21,5 +21,7 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('api/', include('core.urls')),  # Add API routes
-    path("api/cities/", include("city.urls")),
+    path("api/city/", include("city.urls")),
+    path("api/locations/", include("location.urls")),
+    path("api/reviews/", include("review.urls")),
 ]

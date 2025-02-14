@@ -14,7 +14,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Ensure entrypoint script is executable
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# COPY entrypoint.sh /entrypoint.sh
+# RUN chmod +x /entrypoint.sh
+# TODO: delete entrypoint file if do not need anymore.
 
 CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]

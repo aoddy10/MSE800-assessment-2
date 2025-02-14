@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     # Local apps
     'core',
     "city",
+    "location",
+    "review",
 ]
 
 MIDDLEWARE = [
