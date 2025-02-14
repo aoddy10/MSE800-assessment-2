@@ -28,3 +28,11 @@ class Location(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Gallery(models.Model):
+    id = models.AutoField(primary_key=True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="gallery")
+    image_url = models.URLField()
+
+    def __str__(self):
+        return f"Image for {self.location.title}"
