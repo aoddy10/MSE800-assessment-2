@@ -326,6 +326,10 @@ GET /api/locations/?search=Pizza&min_rating=4.5&city=2&type=restaurant
         "type": "restaurant",
         "title": "Pizza Palace",
         "description": "The best pizza in town",
+        "gallery": [
+            { "id": 10, "image_url": "https://example.com/image1.jpg" },
+            { "id": 11, "image_url": "https://example.com/image2.jpg" }
+        ],
         "contact_email": "info@pizzapalace.com",
         "contact_phone": "123-456-7890",
         "cover_image_url": "https://example.com/pizza.jpg",
@@ -364,6 +368,10 @@ GET /api/locations/{location_id}/
     "type": "restaurant",
     "title": "Pizza Palace",
     "description": "The best pizza in town",
+    "gallery": [
+        { "id": 10, "image_url": "https://example.com/image1.jpg" },
+        { "id": 11, "image_url": "https://example.com/image2.jpg" }
+    ],
     "contact_email": "info@pizzapalace.com",
     "contact_phone": "123-456-7890",
     "cover_image_url": "https://example.com/pizza.jpg",
@@ -415,6 +423,7 @@ POST /api/locations/create/
     "type": "restaurant",
     "title": "Pizza Palace",
     "description": "The best pizza in town",
+    "gallery": [],
     "contact_email": "info@pizzapalace.com",
     "contact_phone": "123-456-7890",
     "cover_image_url": "https://example.com/pizza.jpg",
@@ -581,6 +590,104 @@ POST /api/reviews/create/
 | `200 OK`          | Successfully retrieved reviews. |
 | `201 Created`     | Review successfully created.    |
 | `400 Bad Request` | Invalid request data.           |
+
+---
+
+# 📌 Location Gallery Management
+
+## 📝 **1. Get Gallery Images by Location**
+
+```http
+GET /api/locations/<location_id>/gallery/
+```
+
+### **Path Parameters**
+
+| Parameter     | Type | Description                             |
+| ------------- | ---- | --------------------------------------- |
+| `location_id` | int  | ID of the location to fetch images for. |
+
+### **Example Request**
+
+```http
+GET /api/locations/1/gallery/
+```
+
+### **Response Example (200 OK)**
+
+```json
+[
+    { "id": 10, "image_url": "https://example.com/image1.jpg" },
+    { "id": 11, "image_url": "https://example.com/image2.jpg" }
+]
+```
+
+---
+
+## 📝 **2. Add an Image to a Location**
+
+```http
+POST /api/locations/gallery/add/
+```
+
+### **Request Body**
+
+```json
+{
+    "location": 1,
+    "image_url": "https://example.com/image1.jpg"
+}
+```
+
+### **Response Example (201 Created)**
+
+```json
+{
+    "id": 10,
+    "location": 1,
+    "image_url": "https://example.com/image1.jpg"
+}
+```
+
+---
+
+## 📝 **3. Delete an Image**
+
+```http
+DELETE /api/locations/gallery/<image_id>/delete/
+```
+
+### **Path Parameters**
+
+| Parameter  | Type | Description                    |
+| ---------- | ---- | ------------------------------ |
+| `image_id` | int  | ID of the image to be deleted. |
+
+### **Example Request**
+
+```http
+DELETE /api/gallery/10/delete/
+```
+
+### **Response Example (204 No Content)**
+
+```json
+{
+    "message": "Image deleted successfully"
+}
+```
+
+---
+
+## **Response Codes:**
+
+| Status Code       | Description                    |
+| ----------------- | ------------------------------ |
+| `200 OK`          | Successfully retrieved images. |
+| `201 Created`     | Image successfully added.      |
+| `204 No Content`  | Image successfully deleted.    |
+| `400 Bad Request` | Invalid request data.          |
+| `404 Not Found`   | Image or location not found.   |
 
 ---
 
