@@ -472,6 +472,118 @@ DELETE /api/locations/{location_id}/delete/
 
 ---
 
+# 📌 Review Management
+
+## 📝 **1. Get Reviews**
+
+```http
+GET /api/reviews/
+```
+
+### **Query Parameters**
+
+| Parameter  | Type | Description                                                     |
+| ---------- | ---- | --------------------------------------------------------------- |
+| `user`     | int  | Filter reviews by user ID.                                      |
+| `location` | int  | Filter reviews by location ID.                                  |
+| `city`     | int  | Filter reviews by city ID.                                      |
+| `limit`    | int  | Number of reviews to return (sorted by newest first). Optional. |
+
+### **Example Requests:**
+
+#### **1️⃣ Get All Reviews (Sorted by Newest)**
+
+```http
+GET /api/reviews/
+```
+
+#### **2️⃣ Filter by User ID**
+
+```http
+GET /api/reviews/?user=1
+```
+
+#### **3️⃣ Filter by Location ID**
+
+```http
+GET /api/reviews/?location=2
+```
+
+#### **4️⃣ Filter by City ID**
+
+```http
+GET /api/reviews/?city=3
+```
+
+#### **5️⃣ Get the Latest 5 Reviews**
+
+```http
+GET /api/reviews/?limit=5
+```
+
+#### **6️⃣ Get the Latest 3 Reviews for a Specific Location**
+
+```http
+GET /api/reviews/?location=2&limit=3
+```
+
+### **Response Example (200 OK)**
+
+```json
+[
+    {
+        "id": 1,
+        "user": 1,
+        "location": 2,
+        "review": "Amazing experience!",
+        "rating": 5,
+        "created_at": "2024-02-10T15:30:00Z"
+    }
+]
+```
+
+---
+
+## 📝 **2. Create a Review**
+
+```http
+POST /api/reviews/create/
+```
+
+### **Request Body**
+
+```json
+{
+    "user": 1,
+    "location": 2,
+    "review": "Amazing experience!",
+    "rating": 5
+}
+```
+
+### **Response Example (201 Created)**
+
+```json
+{
+    "id": 2,
+    "user": 1,
+    "location": 2,
+    "review": "Amazing experience!",
+    "rating": 5,
+    "created_at": "2024-02-10T16:00:00Z"
+}
+```
+
+## **Response Codes:**
+
+| Status Code       | Description                     |
+| ----------------- | ------------------------------- |
+| `200 OK`          | Successfully retrieved reviews. |
+| `201 Created`     | Review successfully created.    |
+| `400 Bad Request` | Invalid request data.           |
+
+---
+
 ## 🎯 **Notes**
 
 -   Ensure that the **Authorization token** is included in protected API requests.
