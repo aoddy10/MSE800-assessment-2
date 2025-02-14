@@ -1,14 +1,9 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
-from .models import Location
-from .serializers import LocationSerializer
-
 from django.db.models import Q
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Location
-from .serializers import LocationSerializer
+from .models import Location,Gallery
+from .serializers import LocationSerializer, GallerySerializer
+from core.models import SystemLog
 
 @api_view(["GET"])
 def get_locations(request):
@@ -64,58 +59,117 @@ def get_location(request, location_id):
 @api_view(["POST"])
 def create_location(request):
     """
-    Create a new location with the provided data.
-    Expected JSON Body:
-    - user (int): ID of the user who owns the location.
-    - city (int): ID of the city where the location is situated.
-    - type (str): Type of the location ('restaurant' or 'activity').
-    - title (str): Name of the location.
-    - description (str, optional): Description of the location.
-    - contact_email (str, optional): Email contact for the location.
-    - contact_phone (str, optional): Phone contact for the location.
-    - cover_image_url (str, optional): URL of the location's cover image.
-    - open_hour_detail (str, optional): Opening hours description.
-    - location_url (str, optional): Google Maps or external location link.
-    - menu_url (str, optional): Link to the menu (for restaurants).
-    - price_per_person (float, optional): Approximate cost per person.
-    - avg_rating (float, optional): Average rating of the location.
-    - is_active (bool, optional): Status of the location (active/inactive).
+    Create a new location and log the activity.
     """
-    # Deserialize request data and validate it
     serializer = LocationSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        location = serializer.save()
+        
+        # Log the creation of the location
+        SystemLog.objects.create(
+            user=location.user, 
+            module="Location",
+            relate_id=location.id,
+            description=f"Created location: {location.title}"
+        )
+
         return Response(serializer.data, status=201)
     return Response(serializer.errors, status=400)
 
 @api_view(["PUT"])
 def update_location(request, location_id):
     """
-    Update an existing location by its ID.
-    Partial updates are allowed (only send the fields to be updated).
+    Update an existing location and log the activity.
     """
     try:
-        # Fetch the location by ID
         location = Location.objects.get(id=location_id)
     except Location.DoesNotExist:
         return Response({"error": "Location not found"}, status=404)
 
-    # Deserialize request data and validate it for update
     serializer = LocationSerializer(location, data=request.data, partial=True)
     if serializer.is_valid():
         serializer.save()
+
+        # Log the update of the location
+        SystemLog.objects.create(
+            user=location.user, 
+            module="Location",
+            relate_id=location.id,
+            description=f"Updated location: {location.title}"
+        )
+
         return Response(serializer.data)
     return Response(serializer.errors, status=400)
 
 @api_view(["DELETE"])
 def delete_location(request, location_id):
     """
-    Delete a location by its ID.
+    Delete a location and log the activity.
     """
     try:
-        # Fetch the location by ID
         location = Location.objects.get(id=location_id)
         location.delete()
+
+        # Log the deletion of the location
+        SystemLog.objects.create(
+            user=location.user, 
+            module="Location",
+            relate_id=location.id,
+            description=f"Deleted location: {location.title}"
+        )
+
         return Response({"message": "Location deleted successfully"}, status=204)
     except Location.DoesNotExist:
         return Response({"error": "Location not found"}, status=404)
+    
+    
+@api_view(["GET"])
+def get_gallery(request, location_id):
+    """
+    Retrieve all images for a specific location.
+    """
+    images = Gallery.objects.filter(location_id=location_id)
+    serializer = GallerySerializer(images, many=True)
+    return Response(serializer.data)
+
+@api_view(["POST"])
+def add_image(request):
+    """
+    Add a new image to a location and log the activity.
+    """
+    serializer = GallerySerializer(data=request.data)
+    if serializer.is_valid():
+        image = serializer.save()
+
+        # Log the creation of an image
+        SystemLog.objects.create(
+            user=image.location.user, 
+            module="Gallery",
+            relate_id=image.id,
+            description=f"Added image to location: {image.location.title} ({image.image_url})"
+        )
+
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
+
+@api_view(["DELETE"])
+def delete_image(request, image_id):
+    """
+    Delete an image and log the activity.
+    """
+    try:
+        image = Gallery.objects.get(id=image_id)
+        location = image.location
+        image.delete()
+
+        # Log the deletion of an image
+        SystemLog.objects.create(
+            user=location.user, 
+            module="Gallery",
+            relate_id=image.id,
+            description=f"Deleted image from location: {location.title}"
+        )
+
+        return Response({"message": "Image deleted successfully"}, status=204)
+    except Gallery.DoesNotExist:
+        return Response({"error": "Image not found"}, status=404)
