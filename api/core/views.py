@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_api_key.permissions import HasAPIKey
 from django.core.mail import send_mail
 from django.conf import settings
@@ -162,3 +162,12 @@ def password_reset_confirm(request):
     )
 
     return Response({"message": "Password has been reset successfully"}, status=200)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def validate_token(request):
+    """
+    API endpoint to validate if the token is still active.
+    """
+    return Response({"message": "Token is valid"}, status=200)
