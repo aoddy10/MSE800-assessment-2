@@ -691,6 +691,100 @@ DELETE /api/gallery/10/delete/
 
 ---
 
+# 📌 Newsletter Subscribe Management
+
+## 📝 **1. Subscribe to Newsletter**
+
+```http
+POST /api/newsletter/subscribe/
+```
+
+### **Request Body**
+
+```json
+{
+    "email": "user@example.com"
+}
+```
+
+### **Response Example (201 Created)**
+
+```json
+{
+    "message": "Subscription successful!"
+}
+```
+
+---
+
+## 📝 **2. Unsubscribe from Newsletter**
+
+```http
+POST /api/newsletter/unsubscribe/
+```
+
+### **Request Body**
+
+```json
+{
+    "email": "user@example.com"
+}
+```
+
+### **Response Example (200 OK)**
+
+```json
+{
+    "message": "Successfully unsubscribed!"
+}
+```
+
+### **Response Example (404 Not Found)**
+
+```json
+{
+    "error": "Email not found in the subscription list."
+}
+```
+
+---
+
+## 📝 **3. List All Subscribers** _(Admin Use)_
+
+```http
+GET /api/newsletter/list/
+```
+
+### **Response Example (200 OK)**
+
+```json
+[
+    {
+        "id": 1,
+        "email": "user1@example.com",
+        "subscribed_at": "2024-02-10T12:00:00Z"
+    },
+    {
+        "id": 2,
+        "email": "user2@example.com",
+        "subscribed_at": "2024-02-10T13:00:00Z"
+    }
+]
+```
+
+---
+
+## **Response Codes:**
+
+| Status Code       | Description                             |
+| ----------------- | --------------------------------------- |
+| `200 OK`          | Successfully retrieved or unsubscribed. |
+| `201 Created`     | Successfully subscribed.                |
+| `400 Bad Request` | Invalid request data.                   |
+| `404 Not Found`   | Email not found in subscription list.   |
+
+---
+
 ## 🎯 **Notes**
 
 -   Ensure that the **Authorization token** is included in protected API requests.
