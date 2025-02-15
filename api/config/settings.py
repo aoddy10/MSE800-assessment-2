@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "city",
     "location",
     "review",
+    "newsletter"
 ]
 
 MIDDLEWARE = [
