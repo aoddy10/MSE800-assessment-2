@@ -1,8 +1,23 @@
-import { Outlet, Link } from "react-router-dom";
-import useLogout from "../hooks/useLogout";
+import { Outlet, Link, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 const ProtectedLayout = () => {
-    const logout = useLogout(); // Use the custom hook
+    const { token, isLoading } = useContext(AuthContext);
+
+    // Show loading state while checking token
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                Loading...
+            </div>
+        );
+    }
+
+    // Redirect to login if no valid token
+    if (!token) {
+        return <Navigate to="/login" />;
+    }
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -13,10 +28,7 @@ const ProtectedLayout = () => {
                     <Link to="/dashboard" className="mr-4">
                         Dashboard
                     </Link>
-                    <button
-                        onClick={logout}
-                        className="bg-red-500 px-3 py-1 rounded"
-                    >
+                    <button className="bg-red-500 px-3 py-1 rounded">
                         Logout
                     </button>
                 </div>
