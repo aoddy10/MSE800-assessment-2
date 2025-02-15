@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 import apiClient from "../api/axios";
 
 const AuthContext = createContext();
@@ -8,8 +8,8 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem("token") || null);
     const [isLoading, setIsLoading] = useState(true); // Track loading state
 
-    // Function to validate token with API
-    const validateToken = async () => {
+    // Function to validate token with API (memoized using useCallback)
+    const validateToken = useCallback(async () => {
         if (!token) {
             setIsLoading(false);
             return;
@@ -25,12 +25,12 @@ export const AuthProvider = ({ children }) => {
         }
 
         setIsLoading(false);
-    };
+    }, [token, setToken]);
 
     // Effect to validate token when app loads
     useEffect(() => {
         validateToken();
-    }, [token]);
+    }, [validateToken]);
 
     // Effect to sync token with localStorage
     useEffect(() => {

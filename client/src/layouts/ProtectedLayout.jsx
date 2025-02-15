@@ -1,9 +1,11 @@
 import { Outlet, Link, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import useLogout from "../hooks/useLogout";
 
 const ProtectedLayout = () => {
     const { token, isLoading } = useContext(AuthContext);
+    const logout = useLogout(); // Use the custom logout hook
 
     // Show loading state while checking token
     if (isLoading) {
@@ -28,7 +30,10 @@ const ProtectedLayout = () => {
                     <Link to="/dashboard" className="mr-4">
                         Dashboard
                     </Link>
-                    <button className="bg-red-500 px-3 py-1 rounded">
+                    <button
+                        className="bg-red-500 px-3 py-1 rounded"
+                        onClick={logout}
+                    >
                         Logout
                     </button>
                 </div>
