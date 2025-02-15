@@ -3,7 +3,7 @@ import axiosInstance from "../hooks/axios";
 // get all cities
 export const getCities = async () => {
     try {
-        const response = await axiosInstance.get("/cities/");
+        const response = await axiosInstance.get("/city/");
         console.log(response.data);
         return response.data;
     } catch (error) {
@@ -15,7 +15,7 @@ export const getCities = async () => {
 // get city by id
 export const getCityById = async (cityId) => {
     try {
-        const response = await axiosInstance.get(`/cities/${cityId}/`);
+        const response = await axiosInstance.get(`/city/${cityId}/`);
         return response.data;
     } catch (error) {
         console.error("Error fetching city:", error);

@@ -1,5 +1,6 @@
 import React from "react";
 import FeaturedCities from "./FeaturedCities";
+import FeaturedRestaurants from "./featuredRestaurants";
 import Banner from "./HomeBanner";
 const HomePage = () => {
 
@@ -10,7 +11,7 @@ const HomePage = () => {
       <Banner/>
 
     <FeaturedCities/>
-    
+    <FeaturedRestaurants/>
     
     </div>
     
