@@ -1,4 +1,4 @@
-import axiosInstance from "../hooks/axios";
+import axiosInstance from "../api/axios";
 
 // get all cities
 export const getCities = async () => {
