@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "client": "file:",
     "axios": "^1.7.9",
+    "client": "file:",
     "cra-template": "1.2.0",
     "gsap": "^3.12.7",
     "locomotive-scroll": "^4.1.4",
