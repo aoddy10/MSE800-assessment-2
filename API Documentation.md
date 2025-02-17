@@ -457,335 +457,236 @@ DELETE /api/cities/{city_id}/delete/
 
 ---
 
-# 📝 **Location Management**
+# 📝 **Locations Management**
 
-## **1️⃣ Get All Locations**
+This API allows users to **view and manage locations**. Admins and business users can **create, update, delete locations and manage gallery images**.
 
-## **Endpoint:**
+---
 
-```http
-GET /api/locations/
+## 🔒 **Authentication & Permissions**
+
+-   **Authentication:** Required (`Token Authentication`)
+-   **Access:**
+    -   `GET` endpoints: Open to all users
+    -   `POST`, `PUT`, `DELETE`: Restricted to users with `role = "admin"` or `role = "business"`
+
+---
+
+## 📌 **API Endpoints**
+
+### **1️⃣ Get All Locations**
+
+📍 **Endpoint:** `GET /api/locations/`  
+📍 **Description:** Retrieves a list of all locations, with optional filtering.  
+📍 **Permissions:** Open to all users
+
+#### **📩 Request Example**
+
+```sh
+curl -X GET http://localhost:8000/api/locations/
 ```
 
-## **Description:**
+#### **🔎 Query Parameters (Optional)**
 
-Retrieve all locations with optional filtering by user, city, type, title search, and minimum rating.
+| Parameter  | Type  | Description                                  |
+| ---------- | ----- | -------------------------------------------- |
+| user       | int   | Filter by user ID                            |
+| city       | int   | Filter by city ID                            |
+| type       | str   | Filter by type (`restaurant` or `activity`)  |
+| search     | str   | Search locations by title only               |
+| min_rating | float | Filter locations with rating `>= min_rating` |
 
-## **Query Parameters:**
-
-| Parameter    | Type   | Description                                                              |
-| ------------ | ------ | ------------------------------------------------------------------------ |
-| `user`       | int    | Filter locations by user ID.                                             |
-| `city`       | int    | Filter locations by city ID.                                             |
-| `type`       | string | Filter locations by type (`restaurant` or `activity`).                   |
-| `search`     | string | Search locations by `title` only. Case insensitive.                      |
-| `min_rating` | float  | Filter locations with a rating greater than or equal to the given value. |
-
-## **Example Requests:**
-
-### Get All Locations
-
-```http
-GET /api/locations/
-```
-
-### Filter by User ID
-
-```http
-GET /api/locations/?user=1
-```
-
-### Filter by City ID
-
-```http
-GET /api/locations/?city=2
-```
-
-### Filter by Type
-
-```http
-GET /api/locations/?type=restaurant
-```
-
-### Search by Title
-
-```http
-GET /api/locations/?search=Pizza
-```
-
-### Filter by Minimum Rating
-
-```http
-GET /api/locations/?min_rating=4.5
-```
-
-### Combine Filters
-
-```http
-GET /api/locations/?search=Pizza&min_rating=4.5&city=2&type=restaurant
-```
-
-## **Response Example (200 OK):**
+#### **✅ Response Example (`200 OK`)**
 
 ```json
 [
     {
         "id": 1,
-        "user": 1,
-        "city": 1,
+        "title": "Best Pizza Place",
+        "city_id": 5,
         "type": "restaurant",
-        "title": "Pizza Palace",
-        "description": "The best pizza in town",
-        "gallery": [
-            { "id": 10, "image_url": "https://example.com/image1.jpg" },
-            { "id": 11, "image_url": "https://example.com/image2.jpg" }
-        ],
-        "contact_email": "info@pizzapalace.com",
-        "contact_phone": "123-456-7890",
-        "cover_image_url": "https://example.com/pizza.jpg",
-        "open_hour_detail": "Mon-Fri: 10am - 10pm",
-        "location_url": "https://maps.example.com/location",
-        "menu_url": "https://example.com/menu",
-        "price_per_person": 15.99,
         "avg_rating": 4.5,
-        "is_active": true
+        "gallery": [
+            { "id": 1, "image_url": "https://example.com/image1.jpg" },
+            { "id": 2, "image_url": "https://example.com/image2.jpg" }
+        ]
     }
 ]
 ```
 
-## **Response Codes:**
-
-| Status Code       | Description                       |
-| ----------------- | --------------------------------- |
-| `200 OK`          | Successfully retrieved locations. |
-| `400 Bad Request` | Invalid request parameters.       |
-
 ---
 
-### **2️⃣ Get One Location**
+### **2️⃣ Get Location by ID**
 
-```http
-GET /api/locations/{location_id}/
+📍 **Endpoint:** `GET /api/locations/<id>/`  
+📍 **Description:** Retrieves details of a specific location.  
+📍 **Permissions:** Open to all users
+
+#### **📩 Request Example**
+
+```sh
+curl -X GET http://localhost:8000/api/locations/1/
 ```
 
-### **Response (200 OK)**
+#### **✅ Response Example (`200 OK`)**
 
 ```json
 {
     "id": 1,
-    "user": 1,
-    "city": 1,
+    "title": "Best Pizza Place",
+    "city_id": 5,
     "type": "restaurant",
-    "title": "Pizza Palace",
-    "description": "The best pizza in town",
+    "avg_rating": 4.5,
     "gallery": [
-        { "id": 10, "image_url": "https://example.com/image1.jpg" },
-        { "id": 11, "image_url": "https://example.com/image2.jpg" }
-    ],
-    "contact_email": "info@pizzapalace.com",
-    "contact_phone": "123-456-7890",
-    "cover_image_url": "https://example.com/pizza.jpg",
-    "open_hour_detail": "Mon-Fri: 10am - 10pm",
-    "location_url": "https://maps.example.com/location",
-    "menu_url": "https://example.com/menu",
-    "price_per_person": 15.99,
-    "avg_rating": 4.5,
-    "is_active": true
+        { "id": 1, "image_url": "https://example.com/image1.jpg" },
+        { "id": 2, "image_url": "https://example.com/image2.jpg" }
+    ]
 }
 ```
 
 ---
 
-### **3️⃣ Create a Location**
+### **3️⃣ Create Location**
 
-```http
-POST /api/locations/create/
+📍 **Endpoint:** `POST /api/locations/create/`  
+📍 **Description:** Creates a new location.  
+📍 **Permissions:** **Admin or Business users only**
+
+#### **📩 Request Example**
+
+```sh
+curl -X POST http://localhost:8000/api/locations/create/ \
+     -H "Authorization: Token your_token_here" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "title": "New Cafe",
+           "city_id": 3,
+           "type": "restaurant",
+           "avg_rating": 4.2
+         }'
 ```
 
-### **Request Body**
-
-```json
-{
-    "user": 1,
-    "city": 1,
-    "type": "restaurant",
-    "title": "Pizza Palace",
-    "description": "The best pizza in town",
-    "contact_email": "info@pizzapalace.com",
-    "contact_phone": "123-456-7890",
-    "cover_image_url": "https://example.com/pizza.jpg",
-    "open_hour_detail": "Mon-Fri: 10am - 10pm",
-    "location_url": "https://maps.example.com/location",
-    "menu_url": "https://example.com/menu",
-    "price_per_person": 15.99,
-    "avg_rating": 4.5,
-    "is_active": true
-}
-```
-
-### **Response (201 Created)**
-
-```json
-{
-    "id": 2,
-    "user": 1,
-    "city": 1,
-    "type": "restaurant",
-    "title": "Pizza Palace",
-    "description": "The best pizza in town",
-    "gallery": [],
-    "contact_email": "info@pizzapalace.com",
-    "contact_phone": "123-456-7890",
-    "cover_image_url": "https://example.com/pizza.jpg",
-    "open_hour_detail": "Mon-Fri: 10am - 10pm",
-    "location_url": "https://maps.example.com/location",
-    "menu_url": "https://example.com/menu",
-    "price_per_person": 15.99,
-    "avg_rating": 4.5,
-    "is_active": true
-}
-```
-
----
-
-### **4️⃣ Update a Location**
-
-```http
-PUT /api/locations/{location_id}/update/
-```
-
-### **Request Body**
-
-```json
-{
-    "title": "Updated Pizza Palace",
-    "avg_rating": 4.8
-}
-```
-
-### **Response (200 OK)**
-
-```json
-{
-    "id": 1,
-    "title": "Updated Pizza Palace",
-    "avg_rating": 4.8
-}
-```
-
----
-
-### **5️⃣ Delete a Location**
-
-```http
-DELETE /api/locations/{location_id}/delete/
-```
-
-### **Response (204 No Content)**
-
-```json
-{
-    "message": "Location deleted successfully"
-}
-```
-
----
-
-# 📝 **Location Gallery Management**
-
-## **1. Get Gallery Images by Location**
-
-```http
-GET /api/locations/<location_id>/gallery/
-```
-
-### **Path Parameters**
-
-| Parameter     | Type | Description                             |
-| ------------- | ---- | --------------------------------------- |
-| `location_id` | int  | ID of the location to fetch images for. |
-
-### **Example Request**
-
-```http
-GET /api/locations/1/gallery/
-```
-
-### **Response Example (200 OK)**
-
-```json
-[
-    { "id": 10, "image_url": "https://example.com/image1.jpg" },
-    { "id": 11, "image_url": "https://example.com/image2.jpg" }
-]
-```
-
----
-
-## **2. Add an Image to a Location**
-
-```http
-POST /api/locations/gallery/add/
-```
-
-### **Request Body**
-
-```json
-{
-    "location": 1,
-    "image_url": "https://example.com/image1.jpg"
-}
-```
-
-### **Response Example (201 Created)**
+#### **✅ Response Example (`201 Created`)**
 
 ```json
 {
     "id": 10,
-    "location": 1,
-    "image_url": "https://example.com/image1.jpg"
+    "title": "New Cafe",
+    "city_id": 3,
+    "type": "restaurant",
+    "avg_rating": 4.2,
+    "gallery": []
 }
+```
+
+#### **⛔ Error Response (`403 Forbidden`)**
+
+```json
+{ "error": "Permission denied" }
 ```
 
 ---
 
-## **3. Delete an Image**
+### **4️⃣ Update Location**
 
-```http
-DELETE /api/locations/gallery/<image_id>/delete/
+📍 **Endpoint:** `PUT /api/locations/<id>/update/`  
+📍 **Description:** Updates details of a location.  
+📍 **Permissions:** **Admin or Business users only**
+
+#### **📩 Request Example**
+
+```sh
+curl -X PUT http://localhost:8000/api/locations/1/update/ \
+     -H "Authorization: Token your_token_here" \
+     -H "Content-Type: application/json" \
+     -d '{ "title": "Updated Name" }'
 ```
 
-### **Path Parameters**
-
-| Parameter  | Type | Description                    |
-| ---------- | ---- | ------------------------------ |
-| `image_id` | int  | ID of the image to be deleted. |
-
-### **Example Request**
-
-```http
-DELETE /api/gallery/10/delete/
-```
-
-### **Response Example (204 No Content)**
+#### **✅ Response Example (`200 OK`)**
 
 ```json
 {
-    "message": "Image deleted successfully"
+    "id": 1,
+    "title": "Updated Name",
+    "city_id": 5,
+    "type": "restaurant",
+    "avg_rating": 4.5,
+    "gallery": []
 }
 ```
 
 ---
 
-## **Response Codes:**
+### **5️⃣ Delete Location**
 
-| Status Code       | Description                    |
-| ----------------- | ------------------------------ |
-| `200 OK`          | Successfully retrieved images. |
-| `201 Created`     | Image successfully added.      |
-| `204 No Content`  | Image successfully deleted.    |
-| `400 Bad Request` | Invalid request data.          |
-| `404 Not Found`   | Image or location not found.   |
+📍 **Endpoint:** `DELETE /api/locations/<id>/delete/`  
+📍 **Description:** Deletes a location.  
+📍 **Permissions:** **Admin or Business users only**
+
+#### **📩 Request Example**
+
+```sh
+curl -X DELETE http://localhost:8000/api/locations/1/delete/ \
+     -H "Authorization: Token your_token_here"
+```
+
+#### **✅ Response Example (`204 No Content`)**
+
+```json
+{ "message": "Location deleted successfully" }
+```
+
+---
+
+### **6️⃣ Get Gallery by Location**
+
+📍 **Endpoint:** `GET /api/locations/<id>/gallery/`  
+📍 **Description:** Retrieves all images of a location.  
+📍 **Permissions:** Open to all users
+
+#### **📩 Request Example**
+
+```sh
+curl -X GET http://localhost:8000/api/locations/1/gallery/
+```
+
+---
+
+### **7️⃣ Add Image to Location**
+
+📍 **Endpoint:** `POST /api/locations/gallery/add/`  
+📍 **Description:** Adds an image to a location.  
+📍 **Permissions:** **Admin or Business users only**
+
+#### **📩 Request Example**
+
+```sh
+curl -X POST http://localhost:8000/api/locations/gallery/add/ \
+     -H "Authorization: Token your_token_here" \
+     -H "Content-Type: application/json" \
+     -d '{ "location": 1, "image_url": "https://example.com/image.jpg" }'
+```
+
+---
+
+### **8️⃣ Delete Image from Gallery**
+
+📍 **Endpoint:** `DELETE /api/locations/gallery/<image_id>/delete/`  
+📍 **Description:** Deletes an image from a location.  
+📍 **Permissions:** **Admin or Business users only**
+
+#### **📩 Request Example**
+
+```sh
+curl -X DELETE http://localhost:8000/api/locations/gallery/5/delete/ \
+     -H "Authorization: Token your_token_here"
+```
+
+#### **✅ Response Example (`204 No Content`)**
+
+```json
+{ "message": "Image deleted successfully" }
+```
 
 ---
 
