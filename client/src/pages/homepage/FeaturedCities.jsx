@@ -41,25 +41,7 @@ import { getCities } from "../../services/city.services";
 //   }
 // ];
 
-const FeaturedCities = () => {
-
-  const [cities,setCities] = useState([]);
-  useEffect(() => {
-  const fetch_city = async () => {
-    try {
-      const result = await getCities();
-      console.log(result)
-      setCities(result);
-
-    } catch (error) {
-      //setError(error);
-    } finally {
-      //setLoading(false);
-    }
-  }
-
-  fetch_city();
-},[]);
+const FeaturedCities = ({cities}) =>{
 
   
   return (
@@ -68,8 +50,9 @@ const FeaturedCities = () => {
       <h2 className="text-2xl font-bold mb-2">This is a placeholder text for the featured Cities</h2>
       <p className="text-gray-600 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis consectetur nisi sagittis.</p>
       
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {cities.map((city, index) => (
+        {cities && cities.length > 0 ? cities.map((city, index) => (
           <div key={city.id} className="bg-white rounded-lg shadow-lg p-4">
             <img src={city.image_url} alt={city.name} className="w-full h-48 object-cover rounded-lg" />
             <div className="flex justify-between items-center mt-3">
@@ -80,13 +63,10 @@ const FeaturedCities = () => {
               </div>
             </div>
             <p className="text-gray-600 text-sm mt-2">{city.description}</p>
-            {/* <ul className="text-gray-700 text-sm mt-3 list-disc pl-5">
-              {city.features.map((feature, i) => (
-                <li key={i}>{feature}</li>
-              ))}
-            </ul> */}
+           
           </div>
-        ))}
+        )) : "No Data"
+      }
       </div>
     
     </section>
