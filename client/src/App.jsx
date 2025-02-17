@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/landingpage/LandingPage";
 //import HomePage from "./pages/HomePage";
 import HomePage from "./pages/homepage/home";
 import LoginPage from "./pages/LoginPage";
@@ -18,7 +18,7 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
 
                     <Route element={<MainLayout />}>
-                        <Route path="/home" element={<HomePage />} />
+                        <Route path="/explore" element={<HomePage />} />
                     </Route>
 
                     {/* Protected Layout */}
