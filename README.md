@@ -12,6 +12,7 @@ my_project/
 │── client/           # React + Tailwind Frontend
 │── docker-compose.yml
 │── .env              # Environment variables
+│── seeds/            # Seed data files
 │── README.md
 ```
 
@@ -82,6 +83,24 @@ Test database connection:
 
 ```sh
 docker exec -it postgres_db psql -U postgres -d mydatabase
+```
+
+---
+
+## 🌱 **Seeding the Database**
+
+If you need to seed the database with initial data, run the following command:
+
+```sh
+docker exec -it django_api python manage.py load_seed_data
+```
+
+This will load seed data from the `seeds/` directory into the database.
+
+To verify that the data has been successfully seeded, you can check the database:
+
+```sh
+docker exec -it django_api python manage.py dumpdata city.City
 ```
 
 ---
