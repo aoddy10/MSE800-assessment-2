@@ -8,7 +8,7 @@ http://localhost:8000/api/
 
 ---
 
-## 📝 **1. Authentication**
+# 📝 **Authentication**
 
 ### **1️⃣ User Registration**
 
@@ -130,7 +130,217 @@ POST /api/password-reset-confirm/
 
 ---
 
-## 📝 **2. City Management**
+# 📝 Users Management
+
+This API allows **admin users** (users with `role = "admin"`) to **manage users** in the system.  
+Admin users can **view, update, delete, and suspend/unsuspend other users**.
+
+---
+
+## **🔐 Authentication & Permissions**
+
+-   **Authentication:** Required (`Token Authentication`)
+-   **Access:** Only users with `role = "admin"`
+
+---
+
+## **📌 API Endpoints**
+
+### **1️⃣ Get All Users**
+
+🔹 **Endpoint:** `GET /api/users/`  
+🔹 **Description:** Retrieves a list of all users.  
+🔹 **Permissions:** Requires `role = "admin"`
+
+#### **👥 Request Example**
+
+```sh
+curl -X GET http://localhost:8000/api/users/ \
+     -H "Authorization: Token your_admin_token_here"
+```
+
+#### **📈 Response Example (`200 OK`)**
+
+```json
+[
+    {
+        "id": 1,
+        "username": "admin",
+        "email": "admin@example.com",
+        "first_name": "John",
+        "last_name": "Doe",
+        "phone": "123456789",
+        "role": "admin",
+        "profile_image_url": "https://example.com/profile.jpg",
+        "is_suspended": false,
+        "last_login": "2024-02-17 14:30:00"
+    },
+    {
+        "id": 2,
+        "username": "testuser",
+        "email": "testuser@example.com",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "phone": "987654321",
+        "role": "user",
+        "profile_image_url": null,
+        "is_suspended": false,
+        "last_login": "2024-02-16 10:15:00"
+    }
+]
+```
+
+#### **❌ Error Response (`403 Forbidden`)**
+
+```json
+{ "error": "Permission denied" }
+```
+
+---
+
+### **2️⃣ Get User by ID**
+
+🔹 **Endpoint:** `GET /api/users/<user_id>/`  
+🔹 **Description:** Retrieves details of a specific user by `user_id`.  
+🔹 **Permissions:** Requires `role = "admin"`
+
+#### **👥 Request Example**
+
+```sh
+curl -X GET http://localhost:8000/api/users/2/ \
+     -H "Authorization: Token your_admin_token_here"
+```
+
+#### **📈 Response Example (`200 OK`)**
+
+```json
+{
+    "id": 2,
+    "username": "testuser",
+    "email": "testuser@example.com",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "phone": "987654321",
+    "role": "user",
+    "profile_image_url": null,
+    "is_suspended": false,
+    "last_login": "2024-02-16 10:15:00"
+}
+```
+
+#### **❌ Error Response (`404 Not Found`)**
+
+```json
+{ "error": "User not found" }
+```
+
+---
+
+### **3️⃣ Update User**
+
+🔹 **Endpoint:** `PUT /api/users/<user_id>/update/`  
+🔹 **Description:** Updates user details. **Partial updates allowed.**  
+🔹 **Permissions:** Requires `role = "admin"`
+
+#### **👥 Request Example**
+
+```sh
+curl -X PUT http://localhost:8000/api/users/2/update/ \
+     -H "Authorization: Token your_admin_token_here" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "first_name": "Updated",
+           "last_name": "User",
+           "phone": "555123456"
+         }'
+```
+
+#### **📈 Response Example (`200 OK`)**
+
+```json
+{
+    "id": 2,
+    "username": "testuser",
+    "email": "testuser@example.com",
+    "first_name": "Updated",
+    "last_name": "User",
+    "phone": "555123456",
+    "role": "user",
+    "profile_image_url": null,
+    "is_suspended": false,
+    "last_login": "2024-02-16 10:15:00"
+}
+```
+
+#### **❌ Error Response (`403 Forbidden`)**
+
+```json
+{ "error": "Permission denied" }
+```
+
+---
+
+### **🛡️ Delete User**
+
+🔹 **Endpoint:** `DELETE /api/users/<user_id>/delete/`  
+🔹 **Description:** Deletes a user by `user_id`.  
+🔹 **Permissions:** Requires `role = "admin"`
+
+#### **👥 Request Example**
+
+```sh
+curl -X DELETE http://localhost:8000/api/users/2/delete/ \
+     -H "Authorization: Token your_admin_token_here"
+```
+
+#### **📈 Response Example (`204 No Content`)**
+
+```json
+{ "message": "User deleted successfully" }
+```
+
+#### **❌ Error Response (`404 Not Found`)**
+
+```json
+{ "error": "User not found" }
+```
+
+---
+
+### **🛡️ Suspend/Unsuspend User**
+
+🔹 **Endpoint:** `PATCH /api/users/<user_id>/toggle-suspend/`  
+🔹 **Description:** Toggles the `is_suspended` status of a user.  
+🔹 **Permissions:** Requires `role = "admin"`
+
+#### **👥 Request Example**
+
+```sh
+curl -X PATCH http://localhost:8000/api/users/2/toggle-suspend/ \
+     -H "Authorization: Token your_admin_token_here"
+```
+
+#### **📈 Response Example (`200 OK` - Suspended)**
+
+```json
+{ "message": "User suspended successfully" }
+```
+
+#### **📈 Response Example (`200 OK` - Unsuspended)**
+
+```json
+{ "message": "User unsuspended successfully" }
+```
+
+#### **❌ Error Response (`403 Forbidden`)**
+
+```json
+{ "error": "Permission denied" }
+```
+
+---
+
+# 📝 **City Management**
 
 ### **1️⃣ Get All Cities**
 
@@ -247,7 +457,7 @@ DELETE /api/cities/{city_id}/delete/
 
 ---
 
-# 📝 **3. Location Management**
+# 📝 **Location Management**
 
 ## **1️⃣ Get All Locations**
 
@@ -481,9 +691,107 @@ DELETE /api/locations/{location_id}/delete/
 
 ---
 
-# 📌 Review Management
+# 📝 **Location Gallery Management**
 
-## 📝 **1. Get Reviews**
+## **1. Get Gallery Images by Location**
+
+```http
+GET /api/locations/<location_id>/gallery/
+```
+
+### **Path Parameters**
+
+| Parameter     | Type | Description                             |
+| ------------- | ---- | --------------------------------------- |
+| `location_id` | int  | ID of the location to fetch images for. |
+
+### **Example Request**
+
+```http
+GET /api/locations/1/gallery/
+```
+
+### **Response Example (200 OK)**
+
+```json
+[
+    { "id": 10, "image_url": "https://example.com/image1.jpg" },
+    { "id": 11, "image_url": "https://example.com/image2.jpg" }
+]
+```
+
+---
+
+## **2. Add an Image to a Location**
+
+```http
+POST /api/locations/gallery/add/
+```
+
+### **Request Body**
+
+```json
+{
+    "location": 1,
+    "image_url": "https://example.com/image1.jpg"
+}
+```
+
+### **Response Example (201 Created)**
+
+```json
+{
+    "id": 10,
+    "location": 1,
+    "image_url": "https://example.com/image1.jpg"
+}
+```
+
+---
+
+## **3. Delete an Image**
+
+```http
+DELETE /api/locations/gallery/<image_id>/delete/
+```
+
+### **Path Parameters**
+
+| Parameter  | Type | Description                    |
+| ---------- | ---- | ------------------------------ |
+| `image_id` | int  | ID of the image to be deleted. |
+
+### **Example Request**
+
+```http
+DELETE /api/gallery/10/delete/
+```
+
+### **Response Example (204 No Content)**
+
+```json
+{
+    "message": "Image deleted successfully"
+}
+```
+
+---
+
+## **Response Codes:**
+
+| Status Code       | Description                    |
+| ----------------- | ------------------------------ |
+| `200 OK`          | Successfully retrieved images. |
+| `201 Created`     | Image successfully added.      |
+| `204 No Content`  | Image successfully deleted.    |
+| `400 Bad Request` | Invalid request data.          |
+| `404 Not Found`   | Image or location not found.   |
+
+---
+
+# 📝 **Review Management**
+
+## **1. Get Reviews**
 
 ```http
 GET /api/reviews/
@@ -553,7 +861,7 @@ GET /api/reviews/?location=2&limit=3
 
 ---
 
-## 📝 **2. Create a Review**
+## **2. Create a Review**
 
 ```http
 POST /api/reviews/create/
@@ -593,107 +901,9 @@ POST /api/reviews/create/
 
 ---
 
-# 📌 Location Gallery Management
+# 📝 **Newsletter Subscribe Management**
 
-## 📝 **1. Get Gallery Images by Location**
-
-```http
-GET /api/locations/<location_id>/gallery/
-```
-
-### **Path Parameters**
-
-| Parameter     | Type | Description                             |
-| ------------- | ---- | --------------------------------------- |
-| `location_id` | int  | ID of the location to fetch images for. |
-
-### **Example Request**
-
-```http
-GET /api/locations/1/gallery/
-```
-
-### **Response Example (200 OK)**
-
-```json
-[
-    { "id": 10, "image_url": "https://example.com/image1.jpg" },
-    { "id": 11, "image_url": "https://example.com/image2.jpg" }
-]
-```
-
----
-
-## 📝 **2. Add an Image to a Location**
-
-```http
-POST /api/locations/gallery/add/
-```
-
-### **Request Body**
-
-```json
-{
-    "location": 1,
-    "image_url": "https://example.com/image1.jpg"
-}
-```
-
-### **Response Example (201 Created)**
-
-```json
-{
-    "id": 10,
-    "location": 1,
-    "image_url": "https://example.com/image1.jpg"
-}
-```
-
----
-
-## 📝 **3. Delete an Image**
-
-```http
-DELETE /api/locations/gallery/<image_id>/delete/
-```
-
-### **Path Parameters**
-
-| Parameter  | Type | Description                    |
-| ---------- | ---- | ------------------------------ |
-| `image_id` | int  | ID of the image to be deleted. |
-
-### **Example Request**
-
-```http
-DELETE /api/gallery/10/delete/
-```
-
-### **Response Example (204 No Content)**
-
-```json
-{
-    "message": "Image deleted successfully"
-}
-```
-
----
-
-## **Response Codes:**
-
-| Status Code       | Description                    |
-| ----------------- | ------------------------------ |
-| `200 OK`          | Successfully retrieved images. |
-| `201 Created`     | Image successfully added.      |
-| `204 No Content`  | Image successfully deleted.    |
-| `400 Bad Request` | Invalid request data.          |
-| `404 Not Found`   | Image or location not found.   |
-
----
-
-# 📌 Newsletter Subscribe Management
-
-## 📝 **1. Subscribe to Newsletter**
+## **1. Subscribe to Newsletter**
 
 ```http
 POST /api/newsletter/subscribe/
@@ -717,7 +927,7 @@ POST /api/newsletter/subscribe/
 
 ---
 
-## 📝 **2. Unsubscribe from Newsletter**
+## **2. Unsubscribe from Newsletter**
 
 ```http
 POST /api/newsletter/unsubscribe/
@@ -749,7 +959,7 @@ POST /api/newsletter/unsubscribe/
 
 ---
 
-## 📝 **3. List All Subscribers** _(Admin Use)_
+## **3. List All Subscribers** _(Admin Use)_
 
 ```http
 GET /api/newsletter/list/
