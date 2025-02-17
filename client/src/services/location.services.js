@@ -7,6 +7,7 @@ export const getRestaurants= async () => {
 
         const response = await axiosInstance.get("/locations/?type=restaurant");
         console.log(response.data);
+        console.log("restaurant")
         return response.data;
     } catch (error) {
         console.error("Error fetching cities:", error);
