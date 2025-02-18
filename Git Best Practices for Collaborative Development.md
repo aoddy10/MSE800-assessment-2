@@ -140,3 +140,90 @@ $ git commit -m "fix(cart): resolve issue with incorrect item count"
 | Delete branch   | `git branch -d feature/new-feature`      |
 
 Following these best practices ensures a clean, scalable, and maintainable codebase for all developers. 🚀
+
+---
+
+# Git Workflow: Keeping Branch Updated
+
+## **Scenario**
+
+You have merged your `feature/api/authentication` branch into `develop` and deleted it. Another developer working on `feature/homepage` needs to integrate your changes before continuing their work.
+
+---
+
+## **1️⃣ Sync `feature/homepage` with `develop`**
+
+### **Method: Using `git merge` **
+
+```sh
+# Switch to feature/homepage branch
+git checkout feature/homepage
+
+# Fetch latest changes
+git fetch origin
+
+# Merge develop into feature/homepage
+git merge origin/develop
+```
+
+If merge conflicts occur:
+
+```sh
+git add .
+git commit -m "Resolve merge conflicts from develop"
+```
+
+---
+
+## **2️⃣ Continue Development and Push Changes**
+
+After syncing with `develop`, the developer can continue their work:
+
+```sh
+# Add changes
+git add .
+
+# Commit changes
+git commit -m "feat: add homepage layout"
+
+# Push to remote
+git push -u origin feature/homepage
+```
+
+---
+
+## **3️⃣ Create a Pull Request (PR) and Merge into `develop`**
+
+### **Steps to create a PR**
+
+-   Navigate to the repository.
+-   Click **Create Pull Request (PR)**.
+-   Select `feature/homepage` → `develop`.
+-   Provide a description of the changes.
+-   Request review and approval.
+
+### **Merge PR into `develop`**
+
+Once the PR is approved:
+
+1. Click **Merge Pull Request**.
+2. Delete `feature/homepage` locally and remotely:
+    ```sh
+    git branch -d feature/homepage
+    git push origin --delete feature/homepage
+    ```
+
+---
+
+## **📌 Summary of Steps**
+
+| Step                         | Git Command                                                                   |
+| ---------------------------- | ----------------------------------------------------------------------------- |
+| 1. Fetch latest `develop`    | `git fetch origin`                                                            |
+| 2. Merge or rebase `develop` | `git merge origin/develop`                                                    |
+| 3. Continue development      | `git add . && git commit -m "feat: add homepage layout"`                      |
+| 4. Push branch               | `git push -u origin feature/homepage`                                         |
+| 5. Create PR and merge       | Done via GitHub/GitLab UI                                                     |
+| 6. Delete branch after merge | `git branch -d feature/homepage && git push origin --delete feature/homepage` |
+
+---

@@ -1,0 +1,59 @@
+
+
+.hero-content {
+    width: 70%;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.blur-container {
+    width: max-content;
+    position: relative;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(1px);
+    border-radius: 100px;
+    padding: 15px 25px;
+}
+
+.bold-text {
+    font-family: 'LatoBold';
+}
+
+.blur-container p {
+    color: #fff;
+    font-family: 'LatoThin';
+}
+
+.hero-text h1 {
+    font-size: 64px;
+    color: #fff;
+    font-family: 'LatoThin';
+    font-weight: 500;
+}
+
+.scroll-container {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+
+.scroll-icon {
+    width: 55px;
+    height: 55px;
+}
+
+.scroll-txt {
+    color: #b4b4b4;
+    font-family: 'LatoThin';
+    font-size: 12px;
+}
