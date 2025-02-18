@@ -5,11 +5,15 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.decorators import api_view, authentication_classes, permission_classes, parser_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.parsers import MultiPartParser, FormParser
 from django.core.mail import send_mail
 from django.conf import settings
 from .serializers import UserSerializer
+from .models import UploadedImage
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
 
 
@@ -281,3 +285,32 @@ def toggle_suspend_user(request, user_id):
         return Response({"message": f"User {action.lower()} successfully"}, status=200)
     except User.DoesNotExist:
         return Response({"error": "User not found"}, status=404)
+    
+
+# =============================================================
+# Upload image Endpoint
+# =============================================================
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
+def upload_image(request):
+    """
+    API endpoint to upload an image (Only authenticated users)
+    """
+    image = request.FILES.get("image")
+
+    if not image:
+        return Response({"error": "No image provided"}, status=400)
+
+    # Save image to storage
+    file_path = f"uploads/{request.user.id}/{image.name}"
+    saved_path = default_storage.save(file_path, ContentFile(image.read()))
+    
+    # Generate file URL
+    file_url = request.build_absolute_uri(f"/media/{saved_path}")
+
+    # Save record in database
+    uploaded_image = UploadedImage.objects.create(user=request.user, image=saved_path)
+
+    return Response({"image_url": file_url}, status=201)

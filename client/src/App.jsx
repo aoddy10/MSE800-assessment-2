@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import MainLayout from "./layouts/MainLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout";
+import CityPage from "./pages/CityPage";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                     {/* Public Layout */}
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/city" element={<CityPage />} />
 
                     <Route element={<MainLayout />}>
                         <Route path="/explore" element={<HomePage />} />
