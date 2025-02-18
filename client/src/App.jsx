@@ -1,14 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/landingpage/LandingPage";
 //import HomePage from "./pages/HomePage";
 import HomePage from "./pages/homepage/home";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import MainLayout from "./layouts/MainLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout";
-
 import CityPage from "./pages/CityPage";
+
+
 
 function App() {
     return (
@@ -22,7 +23,7 @@ function App() {
 
                     <Route element={<MainLayout />}>
                         <Route path="/city/:id" element={<CityPage />} />
-                        <Route path="/home" element={<HomePage />} />
+                        <Route path="/explore" element={<HomePage />} />
                     </Route>
 
                     {/* Protected Layout */}

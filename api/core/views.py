@@ -1,16 +1,19 @@
 import uuid
-from rest_framework import viewsets
 from .models import SystemLog
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.decorators import api_view, authentication_classes, permission_classes, parser_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework_api_key.permissions import HasAPIKey
+from rest_framework.parsers import MultiPartParser, FormParser
 from django.core.mail import send_mail
 from django.conf import settings
+from .serializers import UserSerializer
+from .models import UploadedImage
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
 
 
@@ -171,3 +174,143 @@ def validate_token(request):
     API endpoint to validate if the token is still active.
     """
     return Response({"message": "Token is valid"}, status=200)
+
+
+# =============================================================
+# Users Endpoint
+# =============================================================
+
+# Custom permission check: Only users with role = "admin" can access
+def is_admin_role(user):
+    return user.is_authenticated and user.role == "admin"
+
+# Get all users
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_users(request):
+    if not is_admin_role(request.user):
+        return Response({"error": "Permission denied"}, status=403)
+
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+# Get a single user by ID
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user(request, user_id):
+    if not is_admin_role(request.user):
+        return Response({"error": "Permission denied"}, status=403)
+
+    try:
+        user = User.objects.get(id=user_id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    except User.DoesNotExist:
+        return Response({"error": "User not found"}, status=404)
+
+# Update user details
+@api_view(["PUT"])
+@permission_classes([IsAuthenticated])
+def update_user(request, user_id):
+    if not is_admin_role(request.user):
+        return Response({"error": "Permission denied"}, status=403)
+
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return Response({"error": "User not found"}, status=404)
+
+    serializer = UserSerializer(user, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+
+        # Log the update action
+        SystemLog.objects.create(
+            user=request.user,
+            module="User",
+            relate_id=user.id,
+            description=f"Updated user: {user.username}"
+        )
+
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
+
+# Delete a user
+@api_view(["DELETE"])
+@permission_classes([IsAuthenticated])
+def delete_user(request, user_id):
+    if not is_admin_role(request.user):
+        return Response({"error": "Permission denied"}, status=403)
+
+    try:
+        user = User.objects.get(id=user_id)
+        user.delete()
+
+        # Log the delete action
+        SystemLog.objects.create(
+            user=request.user,
+            module="User",
+            relate_id=user_id,
+            description=f"Deleted user: {user.username}"
+        )
+
+        return Response({"message": "User deleted successfully"}, status=204)
+    except User.DoesNotExist:
+        return Response({"error": "User not found"}, status=404)
+
+# Toggle suspend user (Activate/Deactivate account)
+@api_view(["PATCH"])
+@permission_classes([IsAuthenticated])
+def toggle_suspend_user(request, user_id):
+    print(f'here')
+    if not is_admin_role(request.user):
+        return Response({"error": "Permission denied"}, status=403)
+
+    try:
+        user = User.objects.get(id=user_id)
+        user.is_suspended = not user.is_suspended
+        user.save()
+
+        action = "Suspended" if user.is_suspended else "Unsuspended"
+
+        # Log the suspend action
+        SystemLog.objects.create(
+            user=request.user,
+            module="User",
+            relate_id=user.id,
+            description=f"{action} user: {user.username}"
+        )
+
+        return Response({"message": f"User {action.lower()} successfully"}, status=200)
+    except User.DoesNotExist:
+        return Response({"error": "User not found"}, status=404)
+    
+
+# =============================================================
+# Upload image Endpoint
+# =============================================================
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
+def upload_image(request):
+    """
+    API endpoint to upload an image (Only authenticated users)
+    """
+    image = request.FILES.get("image")
+
+    if not image:
+        return Response({"error": "No image provided"}, status=400)
+
+    # Save image to storage
+    file_path = f"uploads/{request.user.id}/{image.name}"
+    saved_path = default_storage.save(file_path, ContentFile(image.read()))
+    
+    # Generate file URL
+    file_url = request.build_absolute_uri(f"/media/{saved_path}")
+
+    # Save record in database
+    uploaded_image = UploadedImage.objects.create(user=request.user, image=saved_path)
+
+    return Response({"image_url": file_url}, status=201)

@@ -29,3 +29,11 @@ class SystemLog(models.Model):
 
     def __str__(self):
         return f"{self.module} - {self.description} ({self.created_at})"
+    
+class UploadedImage(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="uploads/")  # Store images under "media/uploads/"
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.image.url}"

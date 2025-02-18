@@ -5,9 +5,14 @@ from .models import User, SystemLog
     
 class CustomUserAdmin(UserAdmin):
     model = User
-    list_display = ("id", "username", "email", "role", "is_suspended", "last_login")
-    search_fields = ("username", "email", "role")
-    ordering = ("id",)
+    list_display = ["id", "username", "email", "role", "is_active", "is_staff"]
+    list_filter = ["role", "is_active", "is_staff"]
+    fieldsets = UserAdmin.fieldsets + (
+        ("Custom Fields", {"fields": ("role",)}),
+    )
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        ("Custom Fields", {"fields": ("role",)}),
+    )
 
 admin.site.register(User, CustomUserAdmin)
 
