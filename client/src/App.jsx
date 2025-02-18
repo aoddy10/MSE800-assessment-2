@@ -4,10 +4,12 @@ import LandingPage from "./pages/landingpage/LandingPage";
 //import HomePage from "./pages/HomePage";
 import HomePage from "./pages/homepage/home";
 import LoginPage from "./pages/LoginPage";
-import DashboardPage from "./pages/DashboardPage";
 import MainLayout from "./layouts/MainLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 import CityPage from "./pages/CityPage";
+import AdminUserPage from "./pages/admin/AdminUserPage";
+import AdminCityPage from "./pages/admin/AdminCityPage";
+import AdminLocationPage from "./pages/admin/AdminLocationPage";
 
 function App() {
     return (
@@ -25,7 +27,18 @@ function App() {
 
                     {/* Protected Layout */}
                     <Route element={<ProtectedLayout />}>
-                        <Route path="/dashboard" element={<DashboardPage />} />
+                        <Route
+                            path="/admin/users"
+                            element={<AdminUserPage />}
+                        />
+                        <Route
+                            path="/admin/cities"
+                            element={<AdminCityPage />}
+                        />
+                        <Route
+                            path="/admin/locations"
+                            element={<AdminLocationPage />}
+                        />
                     </Route>
                 </Routes>
             </Router>
