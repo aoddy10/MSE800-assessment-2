@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+import os
+from django.core.files.storage import default_storage
 
 class User(AbstractUser):
     ROLE_CHOICES = [
@@ -37,3 +39,12 @@ class UploadedImage(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.image.url}"
+    
+    def delete(self, *args, **kwargs):
+        """Override delete method to remove the image file from storage"""
+        if self.image:
+            # Remove the file from the filesystem
+            if default_storage.exists(self.image.name):
+                default_storage.delete(self.image.name)
+        super().delete(*args, **kwargs)
+        
