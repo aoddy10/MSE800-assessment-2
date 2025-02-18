@@ -1,6 +1,4 @@
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from .views import register, login, logout, validate_token, password_reset_request, password_reset_confirm
 from .views import get_users, get_user, update_user, delete_user, toggle_suspend_user
@@ -24,4 +22,4 @@ urlpatterns = [
     path("users/<int:user_id>/toggle-suspend/", toggle_suspend_user, name="toggle_suspend_user"),
     # Image
     path("upload-image/", upload_image, name="upload_image"),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
