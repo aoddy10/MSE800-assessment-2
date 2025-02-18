@@ -8,6 +8,8 @@ import DashboardPage from "./pages/DashboardPage";
 import MainLayout from "./layouts/MainLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 
+import CityPage from "./pages/CityPage";
+
 function App() {
     return (
         <AuthProvider>
@@ -16,8 +18,10 @@ function App() {
                     {/* Public Layout */}
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<LoginPage />} />
+                   
 
                     <Route element={<MainLayout />}>
+                        <Route path="/city/:id" element={<CityPage />} />
                         <Route path="/home" element={<HomePage />} />
                     </Route>
 
