@@ -1,13 +1,13 @@
-<<<<<<< HEAD
 import React, { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getCityById } from "../services/city.services";
-
+import { getLocatoinByCityId } from "../services/location.services";
 
 
 const CityPage = () => {
     const { id } = useParams(); // Get city ID from URL
     const [city,  setCity]= useState([]);
+    const [locations,setLocations]= useState([]);
     
     useEffect(() => {
       const fetch_cityinfo= async () => {
@@ -24,6 +24,23 @@ const CityPage = () => {
       fetch_cityinfo();
     }, [id])
 
+    useEffect(() => {
+      const fetch_locationinfo = async () => {
+            try {
+                const result =await getLocatoinByCityId(id);
+                setLocations(result);
+                //console.log('testing')
+                console.log(result);
+            } catch (error) {
+                console.log(error)
+            }
+
+      }
+    
+      fetch_locationinfo();
+      
+    }, [id])
+    
     
     
 
@@ -33,7 +50,7 @@ const CityPage = () => {
         <div className="container mx-auto p-6">
         {/* Banner Image */}
         <div className="w-full h-80 rounded-xl overflow-hidden">
-            <img src={city.image_url} alt="Auckland, New Zealand" className="w-full h-full object-cover" />
+            <img src={city.image_url} alt={city.title} className="w-full h-full object-cover" />
         </div>
         
         <div className="bg-gray-100 p-6 flex flex-col lg:flex-row gap-3">
@@ -89,21 +106,20 @@ const CityPage = () => {
       <p className="text-gray-600 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis consectetur nisi sagittis.</p>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* {restaurants && restaurants.length > 0 ? restaurants.map((restaurant, index) => (
-          <div key={`restaurant-${restaurant.id}`} className="bg-white rounded-lg shadow-lg p-4"> */}
-         <div  className="bg-white rounded-lg shadow-lg p-4"> 
-            <img src="" alt="" className="w-full h-48 object-cover rounded-lg" />
+        {locations && locations.length > 0 ? locations.map((location, index) => (
+          <div key={`location-${location.id}`} className="bg-white rounded-lg shadow-lg p-4">
+            <img src={location.cover_image_url} alt={location.description} className="w-full h-48 object-cover rounded-lg" />
             <div className="flex justify-between items-center mt-3">
-              <h3 className="text-lg font-semibold">title</h3>
+              <h3 className="text-lg font-semibold">{location.title}</h3>
               <div className="flex items-center gap-1 text-yellow-500 text-sm">
-                <span className="font-semibold">4</span> 
+                <span className="font-semibold">{location.avg_rating}</span> 
                 <span>⭐</span>
               </div>
             </div>
-            <p className="text-gray-600 text-sm mt-2">desc</p>
+            <p className="text-gray-600 text-sm mt-2">{location.description}</p>
             
           </div>
-        {/* )): "No Data"} */}
+        )): "No Data"}
       </div>
     
     </section>
@@ -119,62 +135,5 @@ const CityPage = () => {
     
   );
 };
-=======
-import React from "react";
-
-function CityPage() {
-    return (
-        <div className="flex flex-col items-center">
-            <div className="container flex flex-col gap-4">
-                <image src="" className="h-[482px] bg-secondary" />
-                <div className="flex gap-8 bg-red-200 p-8">
-                    {/* description */}
-                    <div className="bg-blue-200">
-                        <h2 className="text-medium font-extrabold text-2xl">
-                            Auckland, New Zealand
-                        </h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Duis sed erat nisi. Nunc tellus sapien,
-                            suscipit vel varius non, sagittis in nisl. Maecenas
-                            sem metus, feugiat eu consectetur eget, varius
-                            tempor elit. Aliquam cursus enim turpis, tempor
-                            dapibus enim imperdiet ac. Suspendisse tincidunt
-                            elementum erat eu vulputate. Phasellus ornare lectus
-                            vel velit bibendum, sit amet dapibus nibh
-                            ullamcorper. Maecenas tristique venenatis urna, non
-                            porta nisi ultrices in. Etiam posuere pharetra
-                            lacus, in hendrerit eros consectetur vel. Sed lorem
-                            mi, imperdiet vel elit nec, eleifend condimentum
-                            elit. Duis sollicitudin lobortis ultrices.
-                        </p>
-                    </div>
-                    {/* review */}
-                    <div className="flex flex-col bg-green-200">
-                        <h2>Reviews</h2>
-                        <div className="flex flex-col">
-                            <div className="flex">
-                                <image />
-                                <div className="flex flex-col">
-                                    <div>James Smith</div>
-                                    <div>Tourist</div>
-                                </div>
-                            </div>
-                            <div>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Duis sed erat nisi. Nunc tellus
-                                sapien, suscipit vel varius non, sagittis in
-                                nisl. Maecenas sem metus, feugiat eu consectetur
-                                eget, varius tempor elit. Aliquam cursus enim
-                                turpis.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
->>>>>>> origin/develop
 
 export default CityPage;
