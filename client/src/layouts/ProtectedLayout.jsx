@@ -4,6 +4,7 @@ import AuthContext from "../context/AuthContext";
 import useLogout from "../hooks/useLogout";
 import apiClient from "../api/axios";
 import ActivitySection from "../components/ActivitySection";
+import StatisticSection from "../components/StatisticSection";
 
 const ProtectedLayout = () => {
     const { token } = useContext(AuthContext);
@@ -138,8 +139,14 @@ const ProtectedLayout = () => {
                 <Sidebar />
 
                 {/* Main Content Area */}
-                <main className="flex-grow p-6 bg-white shadow-md">
-                    <Outlet />
+                <main className="flex-grow p-4 flex flex-col gap-4 bg-white shadow-md bg-gray-50">
+                    {/* Statistic section */}
+                    <StatisticSection />
+
+                    {/* Content area */}
+                    <div className=" flex-grow bg-white shadow-md">
+                        <Outlet />
+                    </div>
                 </main>
 
                 {/* Activity Logs Section */}
