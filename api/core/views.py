@@ -19,6 +19,14 @@ from django.core.files.base import ContentFile
 
 User = get_user_model()  # use custom Model User
 
+# Custom permission check: Only users with role = "admin" can access
+def is_admin_role(user):
+    return user.is_authenticated and user.role == "admin"
+
+# Function to check if user is admin or business
+def is_admin_or_business(user):
+    return user.is_authenticated and user.role in ["admin", "business"]
+
 # user authentication
 # ----------------------------------------------
 @api_view(["POST"])
@@ -180,10 +188,6 @@ def validate_token(request):
 # Users Endpoint
 # =============================================================
 
-# Custom permission check: Only users with role = "admin" can access
-def is_admin_role(user):
-    return user.is_authenticated and user.role == "admin"
-
 # Get all users
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -296,10 +300,12 @@ def toggle_suspend_user(request, user_id):
 @parser_classes([MultiPartParser, FormParser])
 def upload_image(request):
     """
-    API endpoint to upload an image (Only authenticated users)
+    API endpoint to upload an image (Only admin or business users).
     """
-    image = request.FILES.get("image")
+    if not is_admin_or_business(request.user):
+        return Response({"error": "Permission denied"}, status=403)
 
+    image = request.FILES.get("image")
     if not image:
         return Response({"error": "No image provided"}, status=400)
 
@@ -313,4 +319,40 @@ def upload_image(request):
     # Save record in database
     uploaded_image = UploadedImage.objects.create(user=request.user, image=saved_path)
 
+    # Log the image upload
+    SystemLog.objects.create(
+        user=request.user,
+        module="UploadedImage",
+        relate_id=uploaded_image.id,
+        description=f"Uploaded image: {file_url}"
+    )
+
     return Response({"image_url": file_url}, status=201)
+
+
+@api_view(["DELETE"])
+@permission_classes([IsAuthenticated])
+def delete_uploaded_image(request, image_id):
+    """
+    API endpoint to delete an uploaded image (Only admin or business users).
+    """
+    if not is_admin_or_business(request.user):
+        return Response({"error": "Permission denied"}, status=403)
+
+    try:
+        image = UploadedImage.objects.get(id=image_id, user=request.user)
+    except UploadedImage.DoesNotExist:
+        return Response({"error": "Image not found"}, status=404)
+
+    # Log image deletion
+    SystemLog.objects.create(
+        user=request.user,
+        module="UploadedImage",
+        relate_id=image.id,
+        description=f"Deleted image: {image.image.url}"
+    )
+
+    # Delete the image file from storage
+    image.delete()
+
+    return Response({"message": "Image deleted successfully"}, status=204)
