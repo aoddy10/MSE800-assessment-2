@@ -1,6 +1,5 @@
 import React from "react";
-import "../../style/HeroContent.css";
-import "../../App.css";
+import "../../styles/HeroContent.css";
 import scrollIcon from "../../assets/scroll-down-v2.gif";
 
 const HeroContent = () => {

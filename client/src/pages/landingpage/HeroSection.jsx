@@ -1,6 +1,5 @@
 import React from "react";
-import "../../style/HeroSection.css";
-import "../../App.css";
+import "../../styles/HeroSection.css";
 import activeUsers from "../../assets/activeUsers.png";
 
 const HeroSection = () => {

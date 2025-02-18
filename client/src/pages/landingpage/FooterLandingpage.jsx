@@ -1,6 +1,5 @@
 import React from "react";
-import "../../style/FooterLandingpage.css";
-import "../../App.css";
+import "../../styles/FooterLandingpage.css";
 
 import logo from "../../assets/logo-white.png";
 import facebook from "../../assets/socmed/facebook.svg";
