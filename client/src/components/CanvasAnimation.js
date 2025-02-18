@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.css";
-import "../style/CanvasAnimation.css";
+import "../styles/CanvasAnimation.css";
 
 import HeroContent from "../pages/landingpage/HeroContent";
 import HeroSection from "../pages/landingpage/HeroSection";
