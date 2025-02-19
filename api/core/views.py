@@ -16,7 +16,6 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 
 
-
 User = get_user_model()  # use custom Model User
 
 # Custom permission check: Only users with role = "admin" can access
@@ -188,6 +187,29 @@ def validate_token(request):
 # Users Endpoint
 # =============================================================
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_me(request):
+    """
+    Retrieve the authenticated user's profile details.
+    """
+    user = request.user  # Get the currently authenticated user
+
+    # Serialize the user data manually
+    user_data = {
+        "id": user.id,
+        "email": user.email,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "phone": user.phone,
+        "role": user.role,
+        "profile_image_url": request.build_absolute_uri(user.profile_image_url) if user.profile_image_url else None,
+        "is_suspended": user.is_suspended,
+        "last_login": user.last_login.strftime("%Y-%m-%d %H:%M:%S") if user.last_login else None,
+    }
+
+    return Response(user_data)
+
 # Get all users
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -295,12 +317,16 @@ def toggle_suspend_user(request, user_id):
 # Upload image Endpoint
 # =============================================================
 
+# Maximum file size (10MB)
+MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB in bytes
+
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser, FormParser])
 def upload_image(request):
     """
-    API endpoint to upload an image (Only admin or business users).
+    API endpoint to upload an image (Only admin or business users, Max size: 10MB).
+    Generates a unique filename using UUID to prevent duplicate file names.
     """
     if not is_admin_or_business(request.user):
         return Response({"error": "Permission denied"}, status=403)
@@ -309,8 +335,16 @@ def upload_image(request):
     if not image:
         return Response({"error": "No image provided"}, status=400)
 
+    # Check file size limit (10MB)
+    if image.size > MAX_FILE_SIZE:
+        return Response({"error": "File size exceeds the maximum limit of 10MB."}, status=400)
+
+    # Generate a unique filename using UUID
+    file_extension = image.name.split(".")[-1]  # Get file extension
+    unique_filename = f"{uuid.uuid4()}.{file_extension}"  # Append UUID
+    file_path = f"uploads/{request.user.id}/{unique_filename}"  # Save under user directory
+
     # Save image to storage
-    file_path = f"uploads/{request.user.id}/{image.name}"
     saved_path = default_storage.save(file_path, ContentFile(image.read()))
     
     # Generate file URL
