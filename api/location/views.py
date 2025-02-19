@@ -71,6 +71,7 @@ def create_location(request):
         return Response({"error": "Permission denied"}, status=403)
 
     serializer = LocationSerializer(data=request.data)
+    print(serializer)
     if serializer.is_valid():
         location = serializer.save()
 

@@ -6,6 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     // State to store the authentication token
     const [token, setToken] = useState(localStorage.getItem("token") || null);
+    const [authUserInfo, setAuthUserInfo] = useState(null);
     const [isLoading, setIsLoading] = useState(true); // Track loading state
 
     // Function to validate token with API (memoized using useCallback)
@@ -47,7 +48,16 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ token, setToken, login, isLoading }}>
+        <AuthContext.Provider
+            value={{
+                token,
+                setToken,
+                authUserInfo,
+                setAuthUserInfo,
+                login,
+                isLoading,
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );
