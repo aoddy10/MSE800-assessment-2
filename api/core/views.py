@@ -187,6 +187,29 @@ def validate_token(request):
 # Users Endpoint
 # =============================================================
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_me(request):
+    """
+    Retrieve the authenticated user's profile details.
+    """
+    user = request.user  # Get the currently authenticated user
+
+    # Serialize the user data manually
+    user_data = {
+        "id": user.id,
+        "email": user.email,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "phone": user.phone,
+        "role": user.role,
+        "profile_image_url": request.build_absolute_uri(user.profile_image_url) if user.profile_image_url else None,
+        "is_suspended": user.is_suspended,
+        "last_login": user.last_login.strftime("%Y-%m-%d %H:%M:%S") if user.last_login else None,
+    }
+
+    return Response(user_data)
+
 # Get all users
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
