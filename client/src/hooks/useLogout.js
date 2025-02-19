@@ -32,7 +32,7 @@ const useLogout = () => {
         setToken(null);
 
         // Redirect user to the login page after logout
-        navigate("/login");
+        navigate("/explore");
     };
 
     return logout; // Return the logout function for use in components

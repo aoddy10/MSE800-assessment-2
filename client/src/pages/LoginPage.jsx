@@ -29,7 +29,7 @@ const LoginPage = () => {
             login(response.data.token);
 
             // Redirect user to the dashboard after successful login
-            navigate("/dashboard");
+            navigate("/admin/locations");
         } catch (error) {
             // Set an error message if login fails
             setError(error.response?.data?.error || "Login failed");

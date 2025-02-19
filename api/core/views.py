@@ -187,6 +187,29 @@ def validate_token(request):
 # Users Endpoint
 # =============================================================
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_me(request):
+    """
+    Retrieve the authenticated user's profile details.
+    """
+    user = request.user  # Get the currently authenticated user
+
+    # Serialize the user data manually
+    user_data = {
+        "id": user.id,
+        "email": user.email,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "phone": user.phone,
+        "role": user.role,
+        "profile_image_url": request.build_absolute_uri(user.profile_image_url) if user.profile_image_url else None,
+        "is_suspended": user.is_suspended,
+        "last_login": user.last_login.strftime("%Y-%m-%d %H:%M:%S") if user.last_login else None,
+    }
+
+    return Response(user_data)
+
 # Get all users
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -343,15 +366,24 @@ def upload_image(request):
 
 @api_view(["DELETE"])
 @permission_classes([IsAuthenticated])
-def delete_uploaded_image(request, image_id):
+def delete_uploaded_image(request):
     """
     API endpoint to delete an uploaded image (Only admin or business users).
+    Requires the image URL in the request body.
     """
     if not is_admin_or_business(request.user):
         return Response({"error": "Permission denied"}, status=403)
 
+    image_url = request.data.get("image_url")
+
+    if not image_url:
+        return Response({"error": "Image URL is required"}, status=400)
+
+    # Extract file path from URL
+    file_path = image_url.split("/media/")[-1]  # Extract the relative path
+
     try:
-        image = UploadedImage.objects.get(id=image_id, user=request.user)
+        image = UploadedImage.objects.get(image=file_path, user=request.user)
     except UploadedImage.DoesNotExist:
         return Response({"error": "Image not found"}, status=404)
 
@@ -364,6 +396,7 @@ def delete_uploaded_image(request, image_id):
     )
 
     # Delete the image file from storage
-    image.delete()
+    image.image.delete()  # Deletes the file from media storage
+    image.delete()  # Deletes the DB record
 
     return Response({"message": "Image deleted successfully"}, status=204)
