@@ -11,6 +11,8 @@ import AdminUserPage from "./pages/admin/AdminUserPage";
 import AdminCityPage from "./pages/admin/AdminCityPage";
 import AdminLocationPage from "./pages/admin/AdminLocationPage";
 
+
+
 function App() {
     return (
         <AuthProvider>
@@ -19,9 +21,10 @@ function App() {
                     {/* Public Layout */}
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<LoginPage />} />
-                    <Route path="/city" element={<CityPage />} />
+                   
 
                     <Route element={<MainLayout />}>
+                        <Route path="/city/:id" element={<CityPage />} />
                         <Route path="/explore" element={<HomePage />} />
                     </Route>
 

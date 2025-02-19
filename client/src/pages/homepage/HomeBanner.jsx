@@ -1,7 +1,17 @@
 import React, {useState,useEffect} from "react";
 
-const HomeBanner = ({cities}) => {
 
+const HomeBanner = ({cities,onSearchClick}) => {
+
+  const[city,setCity] =useState('');
+  const[type,setType] =useState('');
+  const[price,setPrice]=useState('');
+
+  const HandleSearchClick = () => {
+      console.log(city);
+      onSearchClick(city,type,price);
+
+  }
   // const FeaturedCities = () => {
   
   //   const [cities,setCities] = useState([]);
@@ -44,12 +54,14 @@ const HomeBanner = ({cities}) => {
             </span>
             <div>
               <p className="text-gray-500 text-sm">City</p>
-              <select className="text-black font-medium bg-transparent border-none focus:outline-none">
+              <select value={city} onChange={ e => {
+                      console.log(e.target.value);
+                      setCity(e.target.value)}} className="text-black font-medium bg-transparent border-none focus:outline-none">
                 
-                
+                <option value="">-</option>
                 {cities && cities.length > 0 
                 ? cities.map((city, idx) => (
-                    <option key={idx}>{city.title}</option>
+                    <option value={city.id} key={city.id}>{city.title}</option>
                   ))
                   : <option>Auckland</option>
                 }
@@ -66,10 +78,10 @@ const HomeBanner = ({cities}) => {
             </span>
             <div>
               <p className="text-gray-500 text-sm">Type</p>
-              <select className="text-black font-medium bg-transparent border-none focus:outline-none">
-                <option>Restaurants</option>
-                <option>Hotels</option>
-                <option>Attractions</option>
+              <select  value={type} onChange={e=> setType(e.target.value)} className="text-black font-medium bg-transparent border-none focus:outline-none">
+                <option value="">-</option>
+                <option value='restaurant'>Restaurants</option>
+                <option value='activity'>Attractions</option>
               </select>
             </div>
           </div>
@@ -80,15 +92,16 @@ const HomeBanner = ({cities}) => {
             </span>
             <div>
               <p className="text-gray-500 text-sm">Price range</p>
-              <select className="text-black font-medium bg-transparent border-none focus:outline-none">
-                <option>$$$</option>
-                <option>$$</option>
-                <option>$</option>
+              <select value={price} onChange={e=> setPrice(e.target.value)}  className="text-black font-medium bg-transparent border-none focus:outline-none">
+                <option value="">-</option>
+                <option value='high'>$$$</option>
+                <option value='medium'>$$</option>
+                <option value='low'>$</option>
               </select>
             </div>
           </div>
           
-          <button className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded">
+          <button onClick={HandleSearchClick} className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded">
             SEARCH
           </button>
         </div>
