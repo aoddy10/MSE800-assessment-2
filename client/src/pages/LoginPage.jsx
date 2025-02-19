@@ -115,7 +115,7 @@ const LoginPage = () => {
                         </div>
 
                         <p className="registerHere">
-                            Don't have an account?&nbsp;
+                            Don't have an account?&nbsp;    
                             <a href="/register" className="registerLink">
                                 Register here
                             </a>
