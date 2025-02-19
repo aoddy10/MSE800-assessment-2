@@ -7,7 +7,7 @@ import ActivitySection from "../components/ActivitySection";
 import StatisticSection from "../components/StatisticSection";
 
 const ProtectedLayout = () => {
-    const { token } = useContext(AuthContext);
+    const { token, authUserInfo, setAuthUserInfo } = useContext(AuthContext);
     const [user, setUser] = useState(null);
     const [selectedMenu, setSelectedMenu] = useState("locations"); // Default menu
     const logout = useLogout();
@@ -22,7 +22,7 @@ const ProtectedLayout = () => {
                 const response = await apiClient.get("/me/", {
                     headers: { Authorization: `Token ${token}` },
                 });
-                setUser(response.data);
+                setAuthUserInfo(response.data);
             } catch (error) {
                 console.error("Failed to fetch user");
             }
@@ -43,7 +43,7 @@ const ProtectedLayout = () => {
     ];
 
     // Show loading state while checking token
-    if (!user) {
+    if (!authUserInfo) {
         return (
             <div className="flex justify-center items-center h-screen">
                 Loading...
@@ -64,22 +64,23 @@ const ProtectedLayout = () => {
 
                 {/* User Info & Logout */}
                 <div className="flex items-center gap-4">
-                    {user && (
+                    {authUserInfo && (
                         <div className="flex items-center gap-2">
                             <img
                                 src={
-                                    user.profile_image_url ||
+                                    authUserInfo.profile_image_url ||
                                     "/default-avatar.png"
                                 }
-                                alt="User Avatar"
+                                alt="authUserInfo Avatar"
                                 className="w-8 h-8 rounded-full border"
                             />
                             <div>
                                 <p className="text-sm">
-                                    {user.first_name} {user.last_name}
+                                    {authUserInfo.first_name}{" "}
+                                    {authUserInfo.last_name}
                                 </p>
                                 <p className="text-xs opacity-80">
-                                    {user.email}
+                                    {authUserInfo.email}
                                 </p>
                             </div>
                         </div>
@@ -102,7 +103,7 @@ const ProtectedLayout = () => {
                 <ul className="space-y-2">
                     {menuItems.map(
                         (item) =>
-                            item.roles.includes(user.role) && (
+                            item.roles.includes(authUserInfo.role) && (
                                 <li key={item.path}>
                                     <button
                                         onClick={() => {

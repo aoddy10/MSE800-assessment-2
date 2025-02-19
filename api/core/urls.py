@@ -23,6 +23,6 @@ urlpatterns = [
     path("users/<int:user_id>/toggle-suspend/", toggle_suspend_user, name="toggle_suspend_user"),
     # Image
     path("upload-image/", upload_image, name="upload_image"),
-    path("upload-image/<int:id>/delete", delete_uploaded_image, name="delete_uploaded_image"),
+    path("upload-image/delete/", delete_uploaded_image, name="delete_uploaded_image"),
     
 ]

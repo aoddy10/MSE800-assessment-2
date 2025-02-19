@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import apiClient from "../../api/axios";
-import AuthContext from "../../context/AuthContext";
-import { Table } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Modal } from "@/components/ui/modal";
 import { useNavigate } from "react-router-dom";
 import LocationForm from "./form/LocationForm";
+import AuthContext from "../../context/AuthContext";
+import { Button } from "../../components/ui/button";
+import { Table } from "../../components/ui/table";
+import { Modal } from "../../components/ui/modal";
 
 const AdminLocationPage = () => {
     const { token } = useContext(AuthContext);
@@ -74,6 +74,7 @@ const AdminLocationPage = () => {
                     { key: "type", label: "Type" },
                     { key: "city", label: "City" },
                     { key: "avg_rating", label: "Rating" },
+                    { key: "price_per_person", label: "Price" },
                     {
                         key: "actions",
                         label: "Actions",

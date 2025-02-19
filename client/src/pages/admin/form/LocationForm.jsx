@@ -1,31 +1,44 @@
 import { useState, useEffect, useContext } from "react";
-import apiClient from "../../api/axios";
-import AuthContext from "../../context/AuthContext";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Modal } from "@/components/ui/modal";
+import { Input } from "../../../components/ui/input";
+import apiClient from "../../../api/axios";
+import { Button } from "../../../components/ui/button";
+import { Modal } from "../../../components/ui/modal";
+import AuthContext from "../../../context/AuthContext";
 
 const LocationForm = ({ location, onClose, onRefresh }) => {
-    const { token } = useContext(AuthContext);
+    const { token, authUserInfo } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         title: "",
+        user: authUserInfo.id,
         city: "",
         type: "restaurant",
         description: "",
+        contact_email: "",
+        contact_phone: "",
+        open_hour_detail: "",
+        location_url: "",
+        menu_url: "",
         price_per_person: "",
         is_active: true,
+        cover_image_url: "", // Store the uploaded image URL
     });
     const [image, setImage] = useState(null);
     const [gallery, setGallery] = useState([]);
+    const [cities, setCities] = useState([]); // Stores fetched cities
 
-    useEffect(() => {
-        if (location) {
-            setFormData({ ...location });
-            fetchGallery();
+    // Fetch Cities from API
+    const fetchCities = async () => {
+        try {
+            const response = await apiClient.get("/city/");
+            setCities(response.data);
+        } catch (error) {
+            console.error("Failed to fetch cities");
         }
-    }, [location]);
+    };
 
+    // Fetch Gallery Images for Location
     const fetchGallery = async () => {
+        if (!location) return;
         try {
             const response = await apiClient.get(
                 `/locations/${location.id}/gallery/`
@@ -36,40 +49,66 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
         }
     };
 
+    // Load Data on Component Mount
+    useEffect(() => {
+        fetchCities(); // Load city data
+        if (location) {
+            setFormData({ ...location });
+            fetchGallery();
+        }
+    }, [location]);
+
+    // Handle Input Change
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleImageUpload = async () => {
+    // Handle Cover Image Upload
+    const handleUploadCoverImage = async () => {
         if (!image) return;
 
-        const formData = new FormData();
-        formData.append("image", image);
+        const uploadData = new FormData();
+        uploadData.append("image", image);
 
         try {
-            const response = await apiClient.post("/upload-image/", formData, {
-                headers: {
-                    Authorization: `Token ${token}`,
-                    "Content-Type": "multipart/form-data",
-                },
+            const response = await apiClient.post(
+                "/upload-image/",
+                uploadData,
+                {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            setFormData({
+                ...formData,
+                cover_image_url: response.data.image_url, // Store the uploaded image URL
             });
-            setGallery([...gallery, response.data]);
         } catch (error) {
-            console.error("Failed to upload image");
+            console.error("Failed to upload cover image");
         }
     };
 
-    const handleImageDelete = async (imageId) => {
+    // Handle Cover Image Delete
+    const handleRemoveCoverImage = async () => {
+        if (!formData.cover_image_url) return;
+
         try {
-            await apiClient.delete(`/upload-image/${imageId}/delete/`, {
+            await apiClient.delete("/upload-image/delete/", {
                 headers: { Authorization: `Token ${token}` },
+                data: { image_url: formData.cover_image_url }, // Send URL in request body
             });
-            setGallery(gallery.filter((img) => img.id !== imageId));
+
+            // Update the UI state
+            setFormData({ ...formData, cover_image_url: null });
         } catch (error) {
-            console.error("Failed to delete image");
+            console.error("Failed to remove cover image", error);
+            alert("Error: Unable to remove cover image.");
         }
     };
 
+    // Handle Form Submission (Create or Update)
     const handleSubmit = async () => {
         try {
             if (location) {
@@ -81,6 +120,7 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                     }
                 );
             } else {
+                console.log(formData);
                 await apiClient.post("/locations/create/", formData, {
                     headers: { Authorization: `Token ${token}` },
                 });
@@ -95,64 +135,121 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
     return (
         <Modal
             title={location ? "Edit Location" : "New Location"}
+            width="500px"
             onClose={onClose}
         >
+            {/* Title Input */}
             <Input
                 name="title"
                 label="Title"
                 value={formData.title}
                 onChange={handleChange}
             />
-            <Input
+
+            {/* City Dropdown */}
+            <label className="block text-sm font-medium text-gray-700 mt-4">
+                City
+            </label>
+            <select
                 name="city"
-                label="City"
                 value={formData.city}
                 onChange={handleChange}
-            />
-            <Input
+                className="p-2 border rounded w-full"
+            >
+                <option value="">Select a City</option>
+                {cities.map((city) => (
+                    <option key={city.id} value={city.id}>
+                        {city.title}
+                    </option>
+                ))}
+            </select>
+
+            {/* Type Dropdown */}
+            <label className="block text-sm font-medium text-gray-700 mt-4">
+                Type
+            </label>
+            <select
                 name="type"
-                label="Type"
                 value={formData.type}
                 onChange={handleChange}
-            />
-            <Input
+                className="p-2 border rounded w-full"
+            >
+                <option value="restaurant">Restaurant</option>
+                <option value="activity">Activity</option>
+            </select>
+
+            {/* Description TextArea */}
+            <label className="block text-sm font-medium text-gray-700 mt-4">
+                Description
+            </label>
+            <textarea
                 name="description"
-                label="Description"
                 value={formData.description}
+                onChange={handleChange}
+                className="p-2 border rounded w-full"
+                rows="4"
+            />
+
+            {/* Contact Email and Phone */}
+            <Input
+                name="contact_email"
+                label="Contact Email"
+                value={formData.contact_email}
                 onChange={handleChange}
             />
             <Input
+                name="contact_phone"
+                label="Contact Phone"
+                value={formData.contact_phone}
+                onChange={handleChange}
+            />
+
+            {/* Price Per Person (Number) */}
+            <Input
+                type="number"
                 name="price_per_person"
                 label="Price Per Person"
                 value={formData.price_per_person}
                 onChange={handleChange}
             />
 
-            <label>Upload Image</label>
-            <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-            <Button onClick={handleImageUpload}>Upload</Button>
-
+            {/* Cover Image Display */}
             <div className="mt-4">
-                <h3 className="text-lg font-bold">Gallery</h3>
-                <div className="grid grid-cols-3 gap-2">
-                    {gallery.map((img) => (
-                        <div key={img.id} className="relative">
-                            <img
-                                src={img.image_url}
-                                alt="Location"
-                                className="rounded-lg w-full"
-                            />
-                            <button
-                                className="absolute top-0 right-0 bg-red-500 text-white p-1"
-                                onClick={() => handleImageDelete(img.id)}
-                            >
-                                X
-                            </button>
-                        </div>
-                    ))}
-                </div>
+                <h3 className="text-lg font-bold">Cover Image</h3>
+                {formData.cover_image_url ? (
+                    <div className="relative border rounded-lg p-2 w-64">
+                        <img
+                            src={formData.cover_image_url}
+                            alt="Cover"
+                            className="rounded-lg w-full object-cover"
+                        />
+                        <button
+                            className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                            onClick={handleRemoveCoverImage}
+                        >
+                            ❌
+                        </button>
+                    </div>
+                ) : (
+                    <div className="flex flex-col">
+                        <label className="text-gray-700">
+                            Upload Cover Image
+                        </label>
+                        <input
+                            type="file"
+                            onChange={(e) => setImage(e.target.files[0])}
+                        />
+                        <Button
+                            onClick={handleUploadCoverImage}
+                            className="mt-2"
+                        >
+                            Upload
+                        </Button>
+                    </div>
+                )}
             </div>
 
+            {/* Submit Button */}
             <div className="flex justify-end mt-4">
                 <Button onClick={handleSubmit}>
                     {location ? "Save Changes" : "Create Location"}
