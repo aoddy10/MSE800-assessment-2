@@ -29,7 +29,6 @@ const CityPage = () => {
             try {
                 const result =await getLocatoinByCityId(id);
                 setLocations(result);
-                //console.log('testing')
                 console.log(result);
             } catch (error) {
                 console.log(error)
@@ -40,7 +39,39 @@ const CityPage = () => {
       fetch_locationinfo();
       
     }, [id])
+
+
+    const fetch_locationinfoByID = async (param) => {
+      try {
+          console.log(id);
+          const result =await getLocatoinByCityId(id);
+          console.log(result);
+          if(param==='All')
+          {
+            //console.log('All');
+            setLocations(result);
+          }
+          else if(param==='restaurant' || param==='activity')
+          {
+             
+              //console.log(param);
+              const rresult= result.filter(r=> r.type==param);
+              setLocations(rresult);
+          }
+          
+          
+      } catch (error) {
+          console.log(error);
+      }
+
+      }
     
+    const handlebuttonClick = (param) => {
+
+      fetch_locationinfoByID(param);
+
+      
+    }
     
     
 
@@ -104,7 +135,12 @@ const CityPage = () => {
    
       <h2 className="text-2xl font-bold mb-2">Things to do in {city.title}</h2>
       <p className="text-gray-600 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis consectetur nisi sagittis.</p>
-      
+      <div>
+   
+        <button  onClick={() => handlebuttonClick('All')}  className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">All Activities</button>
+        <button onClick={() => handlebuttonClick('restaurant')}  className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Restaurants</button>
+        <button onClick={() => handlebuttonClick('activity')}  className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Activities</button>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {locations && locations.length > 0 ? locations.map((location, index) => (
           <div key={`location-${location.id}`} className="bg-white rounded-lg shadow-lg p-4">

@@ -6,13 +6,17 @@ import { getCities } from "../../services/city.services";
 import { getRestaurants } from "../../services/location.services";
 import { getActivity } from "../../services/location.services";
 import FeaturedActivities from "./FeaturedActivities";
-
+import { getLocatoinByCityId } from "../../services/location.services";
 
 const HomePage = () => {
 
   const [cities, setCities] = useState([]);
   const [restaurants,setRestaurants] = useState([]);
   const [activities,setActivities] = useState([]);
+
+  const[selectedCity,setSelectedCity] =useState('');
+  const[selectedType,setSelectedType] =useState('');
+  const[selectedPrice,setSelectedPrice] =useState('');
 
  
   useEffect(() => {
@@ -59,15 +63,71 @@ const HomePage = () => {
   
     fetch_activities();
   },[]);
+
+  
+    const fetch_location_bycity = async ( cityid, type ) => {
+        const result =await getLocatoinByCityId(cityid);
+        console.log(type);
+        if (type==="restaurant")
+        {
+          
+           const  fresult=result.filter(f=> f.type==type);
+           setRestaurants(fresult);
+        }
+        else if (type==="activity")
+        {
+         
+          const fresult=result.filter(f=> f.type==type);
+          setActivities(fresult);
+      
+        }
+        else
+        {
+          //City only search option
+          console.log('city only select option');
+          const  rresult=result.filter(f=> f.type=="restaurant");
+          setRestaurants(rresult);
+          const aresult=result.filter(f=> f.type=="activity");
+          setActivities(aresult);
+      
+
+        }
+        
+    }
+  
+    
+ 
+  
+
+  const searchButtonClick = (city,type,price) => {
+      
+      setSelectedCity(city);
+      setSelectedPrice(price);
+      setSelectedType(type);
+      
+      if (city)
+      {
+        
+        fetch_location_bycity(city,type);
+      }
+
+      
+  }
   
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
-  
-      <Banner cities={cities}/>
-
-      <FeaturedCities  cities={cities} />
-      <FeaturedRestaurants restaurants={restaurants}/>
-      <FeaturedActivities activities={activities}/>
+     
+      <Banner cities={cities} 
+        onSearchClick={searchButtonClick}
+     />
+       { !selectedCity && <FeaturedCities  cities={cities} />}
+      
+      { 
+      !selectedType ? <><FeaturedRestaurants restaurants={restaurants}/> <FeaturedActivities activities={activities}/></> 
+      : selectedType ==='restaurant'?  <FeaturedRestaurants restaurants={restaurants}/> : <FeaturedActivities activities={activities}/>
+      }
+      
+      
     </div>
     
   );
