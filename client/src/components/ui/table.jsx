@@ -17,7 +17,7 @@ export const Table = ({ data, columns }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.length > 0 ? (
+                    {data && data.length > 0 ? (
                         data.map((row, rowIndex) => (
                             <tr
                                 key={rowIndex}

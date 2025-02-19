@@ -4,6 +4,16 @@ import apiClient from "../../../api/axios";
 import { Button } from "../../../components/ui/button";
 import { Modal } from "../../../components/ui/modal";
 import AuthContext from "../../../context/AuthContext";
+import { getCities } from "../../../services/city.services";
+import {
+    createLocation,
+    getLocationGallery,
+    updateLocation,
+} from "../../..//services/location.services";
+import {
+    createUploadImage,
+    deleteUploadImage,
+} from "../../../services/upload-image.services";
 
 const LocationForm = ({ location, onClose, onRefresh }) => {
     const { token, authUserInfo } = useContext(AuthContext);
@@ -29,8 +39,8 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
     // Fetch Cities from API
     const fetchCities = async () => {
         try {
-            const response = await apiClient.get("/city/");
-            setCities(response.data);
+            const newCities = await getCities();
+            setCities(newCities);
         } catch (error) {
             console.error("Failed to fetch cities");
         }
@@ -40,9 +50,7 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
     const fetchGallery = async () => {
         if (!location) return;
         try {
-            const response = await apiClient.get(
-                `/locations/${location.id}/gallery/`
-            );
+            const response = await getLocationGallery(location.id);
             setGallery(response.data);
         } catch (error) {
             console.error("Failed to fetch gallery");
@@ -67,23 +75,12 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
     const handleUploadCoverImage = async () => {
         if (!image) return;
 
-        const uploadData = new FormData();
-        uploadData.append("image", image);
-
         try {
-            const response = await apiClient.post(
-                "/upload-image/",
-                uploadData,
-                {
-                    headers: {
-                        Authorization: `Token ${token}`,
-                        "Content-Type": "multipart/form-data",
-                    },
-                }
-            );
+            const result = await createUploadImage(image, token);
+            console.log(result.image_url);
             setFormData({
                 ...formData,
-                cover_image_url: response.data.image_url, // Store the uploaded image URL
+                cover_image_url: result.image_url, // Store the uploaded image URL
             });
         } catch (error) {
             console.error("Failed to upload cover image");
@@ -95,10 +92,7 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
         if (!formData.cover_image_url) return;
 
         try {
-            await apiClient.delete("/upload-image/delete/", {
-                headers: { Authorization: `Token ${token}` },
-                data: { image_url: formData.cover_image_url }, // Send URL in request body
-            });
+            await deleteUploadImage(formData.cover_image_url, token);
 
             // Update the UI state
             setFormData({ ...formData, cover_image_url: null });
@@ -112,18 +106,9 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
     const handleSubmit = async () => {
         try {
             if (location) {
-                await apiClient.put(
-                    `/locations/${location.id}/update/`,
-                    formData,
-                    {
-                        headers: { Authorization: `Token ${token}` },
-                    }
-                );
+                await updateLocation(location.id, { ...formData }, token);
             } else {
-                console.log(formData);
-                await apiClient.post("/locations/create/", formData, {
-                    headers: { Authorization: `Token ${token}` },
-                });
+                await createLocation({ ...formData }, token);
             }
             onClose();
             onRefresh();

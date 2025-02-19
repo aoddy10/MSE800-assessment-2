@@ -6,25 +6,43 @@ import AuthContext from "../../context/AuthContext";
 import { Button } from "../../components/ui/button";
 import { Table } from "../../components/ui/table";
 import { Modal } from "../../components/ui/modal";
+import {
+    getLocations,
+    getLocationByUserId,
+    deleteLocation,
+} from "../../services/location.services";
 
 const AdminLocationPage = () => {
-    const { token } = useContext(AuthContext);
+    const { token, authUserInfo } = useContext(AuthContext);
     const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
-        fetchLocations();
-    }, [token]);
+        // check if auth user's role is admin, fetch all location
+        // and fetch location by user id if role is business
+        if (token && authUserInfo.role === "admin") {
+            fetchLocations();
+        } else if (token && authUserInfo.role === "business") {
+            fetchLocationsByUserId(authUserInfo.id);
+        }
+    }, [token, authUserInfo]);
 
     const fetchLocations = async () => {
         try {
-            const response = await apiClient.get("/locations/", {
-                headers: { Authorization: `Token ${token}` },
-            });
-            setLocations(response.data);
+            const newLocations = await getLocations();
+            setLocations(newLocations);
+        } catch (error) {
+            console.error("Failed to fetch locations", error);
+        }
+    };
+
+    // fetch location by user id
+    const fetchLocationsByUserId = async (userId) => {
+        try {
+            const newLocations = await getLocationByUserId(userId);
+            setLocations(newLocations);
         } catch (error) {
             console.error("Failed to fetch locations", error);
         }
@@ -47,12 +65,7 @@ const AdminLocationPage = () => {
 
     const confirmDelete = async () => {
         try {
-            await apiClient.delete(
-                `/locations/${selectedLocation.id}/delete/`,
-                {
-                    headers: { Authorization: `Token ${token}` },
-                }
-            );
+            await deleteLocation(selectedLocation.id, token);
             setShowConfirmDelete(false);
             fetchLocations(); // Refresh list after deletion
         } catch (error) {
