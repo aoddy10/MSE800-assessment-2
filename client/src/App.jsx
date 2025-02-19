@@ -10,8 +10,7 @@ import CityPage from "./pages/CityPage";
 import AdminUserPage from "./pages/admin/AdminUserPage";
 import AdminCityPage from "./pages/admin/AdminCityPage";
 import AdminLocationPage from "./pages/admin/AdminLocationPage";
-
-
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
     return (
@@ -21,7 +20,6 @@ function App() {
                     {/* Public Layout */}
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<LoginPage />} />
-                   
 
                     <Route element={<MainLayout />}>
                         <Route path="/city/:id" element={<CityPage />} />
@@ -43,6 +41,9 @@ function App() {
                             element={<AdminLocationPage />}
                         />
                     </Route>
+
+                    {/* 404 Page (Must be at the bottom) */}
+                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </Router>
         </AuthProvider>
