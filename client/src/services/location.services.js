@@ -13,12 +13,9 @@ export const getRestaurants = async () => {
     }
 };
 
-
 // get Activity
-export const getActivity= async () => {
+export const getActivity = async () => {
     try {
-        
-
         const response = await axiosInstance.get("/locations/?type=activity");
         //console.log(response.data);
         //console.log("restaurant")
@@ -30,7 +27,7 @@ export const getActivity= async () => {
 };
 
 // get location by city id
-export const getLocatoinByCityId = async (cityId) => {
+export const getLocationByCityId = async (cityId) => {
     try {
         const response = await axiosInstance.get(`/locations/?city=${cityId}`);
         return response.data;
