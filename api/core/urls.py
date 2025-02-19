@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import register, login, logout, validate_token, password_reset_request, password_reset_confirm
 from .views import get_users, get_user, update_user, delete_user, toggle_suspend_user, get_me
-from .views import upload_image
+from .views import upload_image, delete_uploaded_image
 
 router = DefaultRouter()
 
@@ -23,4 +23,6 @@ urlpatterns = [
     path("users/<int:user_id>/toggle-suspend/", toggle_suspend_user, name="toggle_suspend_user"),
     # Image
     path("upload-image/", upload_image, name="upload_image"),
+    path("upload-image/<int:id>/delete", delete_uploaded_image, name="delete_uploaded_image"),
+    
 ]
