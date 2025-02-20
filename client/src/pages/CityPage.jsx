@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getCityById } from "../services/city.services";
-import { getLocatoinByCityId } from "../services/location.services";
+import { getLocationByCityId } from "../services/location.services";
 
 
 const CityPage = () => {
@@ -27,7 +27,7 @@ const CityPage = () => {
     useEffect(() => {
       const fetch_locationinfo = async () => {
             try {
-                const result =await getLocatoinByCityId(id);
+                const result =await getLocationByCityId(id);
                 setLocations(result);
                 console.log(result);
             } catch (error) {
@@ -44,7 +44,7 @@ const CityPage = () => {
     const fetch_locationinfoByID = async (param) => {
       try {
           console.log(id);
-          const result =await getLocatoinByCityId(id);
+          const result =await getLocationByCityId(id);
           console.log(result);
           if(param==='All')
           {

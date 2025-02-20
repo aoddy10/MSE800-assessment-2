@@ -6,7 +6,7 @@ import { getCities } from "../../services/city.services";
 import { getRestaurants } from "../../services/location.services";
 import { getActivity } from "../../services/location.services";
 import FeaturedActivities from "./FeaturedActivities";
-import { getLocatoinByCityId } from "../../services/location.services";
+import { getLocationByCityId } from "../../services/location.services";
 
 const HomePage = () => {
 
@@ -66,7 +66,7 @@ const HomePage = () => {
 
   
     const fetch_location_bycity = async ( cityid, type ) => {
-        const result =await getLocatoinByCityId(cityid);
+        const result =await getLocationByCityId(cityid);
         console.log(type);
         if (type==="restaurant")
         {
@@ -84,7 +84,7 @@ const HomePage = () => {
         else
         {
           //City only search option
-          console.log('city only select option');
+          
           const  rresult=result.filter(f=> f.type=="restaurant");
           setRestaurants(rresult);
           const aresult=result.filter(f=> f.type=="activity");

@@ -4,8 +4,7 @@ import axiosInstance from "../api/axios";
 export const getRestaurants = async () => {
     try {
         const response = await axiosInstance.get("/locations/?type=restaurant");
-        //console.log(response.data);
-        //console.log("restaurant")
+       
         return response.data;
     } catch (error) {
         console.error("Error fetching cities:", error);
@@ -20,8 +19,7 @@ export const getActivity= async () => {
         
 
         const response = await axiosInstance.get("/locations/?type=activity");
-        //console.log(response.data);
-        //console.log("restaurant")
+       
         return response.data;
     } catch (error) {
         console.error("Error fetching activity:", error);
@@ -30,12 +28,23 @@ export const getActivity= async () => {
 };
 
 // get location by city id
-export const getLocatoinByCityId = async (cityId) => {
+export const getLocationByCityId = async (cityId) => {
     try {
         const response = await axiosInstance.get(`/locations/?city=${cityId}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching location by city id:", error);
+        throw error;
+    }
+};
+
+// get location by Location id
+export const getLocationByLocationId = async (locationId) => {
+    try {
+        const response = await axiosInstance.get(`/locations/${locationId}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching location by locationId id:", error);
         throw error;
     }
 };

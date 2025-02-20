@@ -10,7 +10,7 @@ import CityPage from "./pages/CityPage";
 import AdminUserPage from "./pages/admin/AdminUserPage";
 import AdminCityPage from "./pages/admin/AdminCityPage";
 import AdminLocationPage from "./pages/admin/AdminLocationPage";
-
+import LocationPage from "./pages/LocationPage";
 
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
                     <Route element={<MainLayout />}>
                         <Route path="/city/:id" element={<CityPage />} />
                         <Route path="/explore" element={<HomePage />} />
+                        <Route path="/location/:id" element={<LocationPage />} />
                     </Route>
 
                     {/* Protected Layout */}

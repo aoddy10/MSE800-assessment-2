@@ -1,11 +1,21 @@
 import React, { useState,useEffect } from "react";
-
+import { useNavigate } from "react-router-dom"; 
 
 
 
 
 const FeaturedActivities= ({activities}) => {
 
+  const navigate = useNavigate();
+    
+      const handleActivitieClick = ({activitie}) => {
+        
+        console.log(activitie);
+        const paramValue = activitie.id;
+        
+        navigate(`/location/${paramValue}`);
+        
+      };
   
   
   return (
@@ -17,7 +27,7 @@ const FeaturedActivities= ({activities}) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {activities && activities.length > 0 ? activities.map((activitie, index) => (
           <div key={`Activitie-${activitie.id}`} className="bg-white rounded-lg shadow-lg p-4">
-            <img src={activitie.cover_image_url} alt={activitie.description} className="w-full h-48 object-cover rounded-lg" />
+            <img src={activitie.cover_image_url} alt={activitie.description}   style={{ cursor: "pointer", margin: 10 }} onClick={() => handleActivitieClick({activitie})}  className="w-full h-48 object-cover rounded-lg" />
             <div className="flex justify-between items-center mt-3">
               <h3 className="text-lg font-semibold">{activitie.title}</h3>
               <div className="flex items-center gap-1 text-yellow-500 text-sm">
