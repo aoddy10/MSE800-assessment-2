@@ -3,6 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import register, login, logout, validate_token, password_reset_request, password_reset_confirm
 from .views import get_users, get_user, update_user, delete_user, toggle_suspend_user, get_me
 from .views import upload_image, delete_uploaded_image
+from .views import get_system_logs
 
 router = DefaultRouter()
 
@@ -24,5 +25,7 @@ urlpatterns = [
     # Image
     path("upload-image/", upload_image, name="upload_image"),
     path("upload-image/delete/", delete_uploaded_image, name="delete_uploaded_image"),
+    # System Logs
+    path("system-logs/", get_system_logs, name="get_system_logs"),
     
 ]
