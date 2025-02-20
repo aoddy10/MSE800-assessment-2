@@ -1,12 +1,20 @@
 import React, { useState,useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 
 
 
 const FeaturedRestaurants= ({restaurants}) => {
 
+  const navigate = useNavigate();
   
+    const handleRestaurantClick = ({restaurant}) => {
+      
+      const paramValue = restaurant.id;
+      
+      navigate(`/location/${paramValue}`);
+      
+    };
   
   return (
     <section className="my-12">
@@ -17,7 +25,7 @@ const FeaturedRestaurants= ({restaurants}) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {restaurants && restaurants.length > 0 ? restaurants.map((restaurant, index) => (
           <div key={`restaurant-${restaurant.id}`} className="bg-white rounded-lg shadow-lg p-4">
-            <img src={restaurant.cover_image_url} alt={restaurant.description} className="w-full h-48 object-cover rounded-lg" />
+            <img src={restaurant.cover_image_url} alt={restaurant.description}   style={{ cursor: "pointer", margin: 10 }} onClick={() => handleRestaurantClick({restaurant})}   className="w-full h-48 object-cover rounded-lg" />
             <div className="flex justify-between items-center mt-3">
               <h3 className="text-lg font-semibold">{restaurant.title}</h3>
               <div className="flex items-center gap-1 text-yellow-500 text-sm">
