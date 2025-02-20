@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from "react";
+import AuthContext from "../context/AuthContext";
+import { getSystemLogs } from "../services/systemlog.services";
+import React, { useContext, useEffect, useState } from "react";
 
 function ActivitySection() {
+    const { token } = useContext(AuthContext);
     const [logs, setLogs] = useState([]);
 
+    // Fetch dashboard stats
     useEffect(() => {
-        // Fetch activity logs
         const fetchLogs = async () => {
-            //     try {
-            //         const response = await apiClient.get("/logs/recent", {
-            //             headers: { Authorization: `Token ${token}` },
-            //         });
-            //         setLogs(response.data);
-            //     } catch (error) {
-            //         console.error("Failed to fetch logs");
-            //     }
+            try {
+                const response = await getSystemLogs(token);
+                setLogs(response.data.slice(0, 10)); // Get latest 10 logs
+            } catch (error) {
+                console.error("Failed to fetch logs");
+            }
         };
 
         fetchLogs();
-    }, []);
+    }, [token]);
 
     return (
         <>
