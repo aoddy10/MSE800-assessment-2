@@ -25,16 +25,18 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
         description: "",
         contact_email: "",
         contact_phone: "",
+        cover_image_url: "",
         open_hour_detail: "",
         location_url: "",
         menu_url: "",
         price_per_person: "",
         is_active: true,
-        cover_image_url: "", // Store the uploaded image URL
     });
     const [image, setImage] = useState(null);
+    const [menuFile, setMenuFile] = useState(null);
     const [gallery, setGallery] = useState([]);
-    const [cities, setCities] = useState([]); // Stores fetched cities
+    const [cities, setCities] = useState([]);
+    const [errors, setErrors] = useState({});
 
     // Fetch Cities from API
     const fetchCities = async () => {
@@ -71,6 +73,42 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // Validate Required Fields
+    const validateForm = () => {
+        const newErrors = {};
+        if (!formData.title) newErrors.title = "Title is required";
+        if (!formData.city) newErrors.city = "City is required";
+        if (!formData.type) newErrors.type = "Type is required";
+        if (!formData.price_per_person)
+            newErrors.price_per_person = "Price is required";
+        if (!formData.contact_email)
+            newErrors.contact_email = "Email is required";
+        if (!formData.contact_phone)
+            newErrors.contact_phone = "Phone is required";
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    // Handle Form Submission (Create or Update)
+    const handleSubmit = async () => {
+        if (!validateForm()) return; // Stop if validation fails
+
+        try {
+            if (location) {
+                await updateLocation(location.id, { ...formData }, token);
+            } else {
+                await createLocation({ ...formData }, token);
+            }
+            onClose();
+            onRefresh();
+        } catch (error) {
+            // set errors to for the reponse error
+            setErrors(error.response.data);
+
+            console.error("Failed to save location", error.response.data);
+        }
+    };
+
     // Handle Cover Image Upload
     const handleUploadCoverImage = async () => {
         if (!image) return;
@@ -80,7 +118,7 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
             console.log(result.image_url);
             setFormData({
                 ...formData,
-                cover_image_url: result.image_url, // Store the uploaded image URL
+                cover_image_url: result.image_url, // Store  URL
             });
         } catch (error) {
             console.error("Failed to upload cover image");
@@ -102,18 +140,34 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
         }
     };
 
-    // Handle Form Submission (Create or Update)
-    const handleSubmit = async () => {
+    // Handle Menu Image Upload
+    const handleUploadMenuImage = async () => {
+        if (!menuFile) return;
+
         try {
-            if (location) {
-                await updateLocation(location.id, { ...formData }, token);
-            } else {
-                await createLocation({ ...formData }, token);
-            }
-            onClose();
-            onRefresh();
+            const result = await createUploadImage(menuFile, token);
+            console.log(result.image_url);
+            setFormData({
+                ...formData,
+                menu_url: result.image_url, // Store URL
+            });
         } catch (error) {
-            console.error("Failed to save location");
+            console.error("Failed to upload menu file");
+        }
+    };
+
+    // Handle Menu Image Delete
+    const handleRemoveMenuImage = async () => {
+        if (!formData.menu_url) return;
+
+        try {
+            await deleteUploadImage(formData.menu_url, token);
+
+            // Update the UI state
+            setFormData({ ...formData, menu_url: null });
+        } catch (error) {
+            console.error("Failed to remove menu file", error);
+            alert("Error: Unable to remove menu file.");
         }
     };
 
@@ -126,14 +180,15 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
             {/* Title Input */}
             <Input
                 name="title"
-                label="Title"
+                label="Title *"
                 value={formData.title}
                 onChange={handleChange}
+                error={errors.title}
             />
 
             {/* City Dropdown */}
             <label className="block text-sm font-medium text-gray-700 mt-4">
-                City
+                City *
             </label>
             <select
                 name="city"
@@ -148,10 +203,11 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                     </option>
                 ))}
             </select>
+            {errors.city && <p className="text-red-500">{errors.city}</p>}
 
             {/* Type Dropdown */}
             <label className="block text-sm font-medium text-gray-700 mt-4">
-                Type
+                Type *
             </label>
             <select
                 name="type"
@@ -175,28 +231,89 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                 rows="4"
             />
 
-            {/* Contact Email and Phone */}
+            {/* Open Hour Detail (Textarea) */}
+            <label className="block text-sm font-medium text-gray-700 mt-4">
+                Open Hour Details
+            </label>
+            <textarea
+                name="open_hour_detail"
+                value={formData.open_hour_detail}
+                onChange={handleChange}
+                className="p-2 border rounded w-full"
+                rows="2"
+            />
+
+            {/* Location URL */}
             <Input
-                name="contact_email"
-                label="Contact Email"
-                value={formData.contact_email}
+                name="location_url"
+                label="Location URL"
+                value={formData.location_url}
                 onChange={handleChange}
             />
+
+            {/* Contact Email */}
+            <Input
+                name="contact_email"
+                label="Contact Email *"
+                value={formData.contact_email}
+                onChange={handleChange}
+                error={errors.contact_email}
+            />
+
+            {/* Contact Phone */}
             <Input
                 name="contact_phone"
-                label="Contact Phone"
+                label="Contact Phone *"
                 value={formData.contact_phone}
                 onChange={handleChange}
+                error={errors.contact_phone}
             />
 
             {/* Price Per Person (Number) */}
             <Input
                 type="number"
                 name="price_per_person"
-                label="Price Per Person"
+                label="Price Per Person *"
                 value={formData.price_per_person}
                 onChange={handleChange}
+                error={errors.price_per_person}
             />
+
+            {/* Menu URL Upload */}
+            <div className="mt-4">
+                <h3 className="text-lg font-bold">Menu Image</h3>
+                {formData.menu_url ? (
+                    <div className="relative border rounded-lg p-2 w-64">
+                        <img
+                            src={formData.menu_url}
+                            alt="Cover"
+                            className="rounded-lg w-full object-cover"
+                        />
+                        <button
+                            className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                            onClick={handleRemoveMenuImage}
+                        >
+                            ❌
+                        </button>
+                    </div>
+                ) : (
+                    <div className="flex flex-col">
+                        <label className="text-gray-700">
+                            Upload Menu Image
+                        </label>
+                        <input
+                            type="file"
+                            onChange={(e) => setMenuFile(e.target.files[0])}
+                        />
+                        <Button
+                            onClick={handleUploadMenuImage}
+                            className="mt-2"
+                        >
+                            Upload
+                        </Button>
+                    </div>
+                )}
+            </div>
 
             {/* Cover Image Display */}
             <div className="mt-4">
