@@ -26,10 +26,10 @@ const NavigationMain = () => {
                         ABOUT
                     </a>
                     <a
-                        href="/reviews"
+                        href="/maori"
                         className=" text-text m-auto hover:text-primary transition-colors duration-300 ease-in-out"
                     >
-                        REVIEWS
+                        MAORI INFO
                     </a>
                     <a
                         href="/contact"
