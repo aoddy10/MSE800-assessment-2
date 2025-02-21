@@ -1,0 +1,314 @@
+.maori-page {
+    width: 100%;
+    height: 100vh;
+    height: max-content;
+    position: relative;
+    background-color: #f9f9fb;
+}
+
+.maori-section1 {
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    padding-top: 115px;
+}
+
+.maori-content {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.hero-content {
+    width: 70%;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.blur-container {
+    width: max-content;
+    position: relative;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(1px);
+    border-radius: 100px;
+    padding: 15px 25px;
+}
+
+.bold-text {
+    font-family: 'LatoBold';
+}
+
+.blur-container p {
+    color: #fff;
+    font-family: 'LatoThin';
+}
+
+.hero-text h1 {
+    font-size: 64px;
+    color: #fff;
+    font-family: 'LatoThin';
+    font-weight: 500;
+}
+
+.scroll-container {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+
+.scroll-icon {
+    width: 55px;
+    height: 55px;
+}
+
+.scroll-txt {
+    color: #b4b4b4;
+    font-family: 'LatoThin';
+    font-size: 12px;
+}
+
+/* -------------------Section 2--------------- */
+
+.maori-section2 {
+    width: 100%;
+    height: max-content;
+    background-color: #f9f9fb;
+}
+
+.maori-content2 {
+    width: 70%;
+    height: max-content;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.maori-txt {
+    width: 100%;
+    height: max-content;
+    margin-bottom: 50px;
+}
+
+.maori-text h1 {
+    font-size: 64px;
+    color: #232323;
+    font-family: 'LatoThin';
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.maori-text p {
+    width: 50%;
+    font-size: 1em;
+    line-height: 1.3em;
+    color: #767676;
+    font-family: 'LatoRegular';
+    font-weight: 400;
+}
+
+.maori-container {
+    width: 100%;
+    height: max-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+}
+
+.maori-column {
+    width: 100%;
+    height: 30vw;
+    display: grid;
+    grid-template-rows: 6fr 1fr;
+    row-gap: 30px;
+}
+
+.maori-column2 {
+    width: 100%;
+    height: 30vw;
+    margin-top: 75px;
+    display: grid;
+    grid-template-rows: 6fr 1fr;
+    row-gap: 30px;
+}
+
+.maori-card {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    position: relative;
+}
+
+.maori-card-txt {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+}
+
+.maori-card-txt h1 {
+    font-size: 24px;
+    color: #232323;
+    font-family: 'LatoBold';
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.maori-card-txt p {
+    font-size: 16px;
+    line-height: 1.3em;
+    color: #767676;
+    font-family: 'LatoRegular';
+    font-weight: 500;
+}
+
+/* --------------- Section 3 -------------- */
+
+.maori-section3 {
+    width: 100%;
+    height: max-content;
+    background-color: #fff;
+}
+
+.box1 {
+    width: 47.5%;
+    height: 500px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.box2 {
+    width: 47.5%;
+    height: 500px;
+    display: grid;
+    grid-template-rows: auto;
+}
+
+.maori {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.maori-items {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 50px;
+    padding-right: 25px;
+}
+
+.maori-title {
+    color: #31AAB7;
+    font-weight: 500;
+    font-size: 1.2em;
+    line-height: 1.3em; 
+    font-family: 'LatoBold';
+}
+
+.maori-txt-2 {
+    color: #767676;
+    font-weight: 500;
+    font-size: 1.2em;
+    line-height: 1.4em;
+    font-family: 'LatoRegular';
+}
+
+.faq-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.faq-container h2 {
+    font-size: 36px;
+    color: #232323;
+    font-family: 'LatoBold';
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.faq-item {
+    border: 1px  solid #d4d4d4;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 25px;
+    background: #f9f9fb;
+    border: none;
+    text-align: left;
+    font-size: 18px;
+    font-family: 'LatoBold';
+    color: #232323;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: #f0f0f0;
+}
+
+.faq-question.active {
+    background-color: #f0f0f0;
+}
+
+.faq-icon {
+    font-size: 32px;
+    color: #31AAB7;
+    font-family: 'LatoRegular';
+    transition: transform 0.3s ease;
+}
+
+.faq-question.active .faq-icon {
+    color: #31AAB7;
+}
+
+.faq-answer {
+    text-align: left;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+    font-family: 'LatoRegular';
+    color: #767676;
+    line-height: 1.6;
+}
+
+.faq-answer.active {
+    max-height: 300px;
+    padding: 20px;
+}
