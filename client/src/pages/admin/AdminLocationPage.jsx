@@ -1,6 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-import apiClient from "../../api/axios";
-import { useNavigate } from "react-router-dom";
 import LocationForm from "./form/LocationForm";
 import AuthContext from "../../context/AuthContext";
 import { Button } from "../../components/ui/button";
