@@ -28,7 +28,20 @@ class Location(models.Model):
 
     def __str__(self):
         return self.title
-    
+
+    @property
+    def price_range(self):
+        """Calculate price range based on price_per_person"""
+        if self.price_per_person is None:
+            return None
+        elif self.price_per_person <= 40:
+            return "low"
+        elif 41 <= self.price_per_person <= 100:
+            return "medium"
+        else:
+            return "high"
+
+
 class Gallery(models.Model):
     id = models.AutoField(primary_key=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="gallery")

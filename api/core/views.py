@@ -10,7 +10,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.core.mail import send_mail
 from django.conf import settings
-from .serializers import UserSerializer
+from .serializers import UserSerializer, SystemLogSerializer
 from .models import UploadedImage
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
@@ -400,3 +400,46 @@ def delete_uploaded_image(request):
     image.delete()  # Deletes the DB record
 
     return Response({"message": "Image deleted successfully"}, status=204)
+
+
+# =============================================================
+# System Logs Endpoint
+# =============================================================
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_system_logs(request):
+    """
+    Retrieve system logs with optional filters:
+    - `limit` (int): Number of logs to retrieve.
+    - `sort_order` (str): Sorting order ('asc' or 'desc').
+    - `user_id` (int): Filter by user ID.
+
+    Example:
+    `/api/system-logs/?limit=10&sort_order=desc&user_id=1&location_id=5&rating=4.5`
+    """
+    # Retrieve query parameters
+    limit = request.GET.get("limit")
+    sort_order = request.GET.get("sort_order", "desc")
+    user_id = request.GET.get("user_id")
+
+    # Start with all logs
+    logs = SystemLog.objects.all()
+
+    # Apply filters if provided
+    if user_id:
+        logs = logs.filter(user_id=user_id)
+
+    # Apply sorting order
+    if sort_order == "asc":
+        logs = logs.order_by("created_at")
+    else:
+        logs = logs.order_by("-created_at")
+
+    # Apply limit if provided
+    if limit:
+        logs = logs[: int(limit)]
+
+    # Serialize and return logs
+    serializer = SystemLogSerializer(logs, many=True)
+    return Response(serializer.data)

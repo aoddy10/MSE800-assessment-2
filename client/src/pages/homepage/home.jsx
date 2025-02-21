@@ -3,10 +3,11 @@ import FeaturedCities from "./FeaturedCities";
 import FeaturedRestaurants from "./featuredRestaurants";
 import Banner from "./HomeBanner";
 import { getCities } from "../../services/city.services";
-import { getRestaurants } from "../../services/location.services";
+import { getLocations, getRestaurants } from "../../services/location.services";
 import { getActivity } from "../../services/location.services";
 import FeaturedActivities from "./FeaturedActivities";
 import { getLocationByCityId } from "../../services/location.services";
+
 
 const HomePage = () => {
     const [cities, setCities] = useState([]);
@@ -43,33 +44,61 @@ const HomePage = () => {
         fetch_restauarnts();
     }, []);
 
-    useEffect(() => {
-        const fetch_activities = async () => {
-            const result = await getActivity();
-            //console.log(result)
-            setActivities(result);
-        };
+  useEffect(() => {
+    const fetch_activities = async () => {
+      
+        const result = await getActivity();
+        //console.log(result)
+        setActivities(result);
+  
+     
+    }
+  
+    fetch_activities();
+  },[]);
 
-        fetch_activities();
-    }, []);
+  
+    const fetch_location_bycity = async ( cityid, type ,price) => {
+        //const result =await getLocationByCityId(cityid);
+        const restaurant =await getLocations(cityid,"restaurant",price);
+        const activity =await getLocations(cityid,"activity",price);
+        console.log(restaurant);
+        console.log(activity);
+        setRestaurants(restaurant);
+        setActivities(activity);
+        //console.log(type);
 
-    const fetch_location_bycity = async (cityid, type) => {
-        const result = await getLocationByCityId(cityid);
-        console.log(type);
-        if (type === "restaurant") {
-            const fresult = result.filter((f) => f.type == type);
-            setRestaurants(fresult);
-        } else if (type === "activity") {
-            const fresult = result.filter((f) => f.type == type);
-            setActivities(fresult);
-        } else {
-            //City only search option
-            console.log("city only select option");
-            const rresult = result.filter((f) => f.type == "restaurant");
-            setRestaurants(rresult);
-            const aresult = result.filter((f) => f.type == "activity");
-            setActivities(aresult);
-        }
+        // if (type==="restaurant")
+        // {
+          
+        //    const  fresult=result.filter(f=> f.type==type);
+        //    setRestaurants(fresult);
+        // }
+        // else if (type==="activity")
+        // {
+         
+        //   const fresult=result.filter(f=> f.type==type);
+        //   setActivities(fresult);
+      
+        // }
+        // else
+        // {
+        //   //City only search option
+        //   let query_pricevalue='';
+        //   if(price)
+        //     {
+        //       query_pricevalue= "&&price_range=" & price;
+        //     }
+            
+        //   const  rresult=result.filter(f=> f.type=="restaurant" + query_pricevalue);
+        //   setRestaurants(rresult);
+        //   const aresult=result.filter(f=> f.type=="activity" + query_pricevalue);
+        //   setActivities(aresult);
+
+          
+      
+
+        // }
     };
 
     const searchButtonClick = (city, type, price) => {
@@ -77,9 +106,9 @@ const HomePage = () => {
         setSelectedPrice(price);
         setSelectedType(type);
 
-        if (city) {
-            fetch_location_bycity(city, type);
-        }
+        //if (city) {
+            fetch_location_bycity(city, type ,price);
+        //}
     };
 
     return (

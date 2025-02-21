@@ -13,13 +13,14 @@ def is_admin_or_business(user):
 @api_view(["GET"])
 def get_locations(request):
     """
-    Retrieve all locations with optional filtering by user, city, type, search text (title only), and minimum rating.
+    Retrieve all locations with optional filtering by user, city, type, search text (title only), minimum rating, and price range.
     Query Parameters:
     - user (int): Filter locations by user ID.
     - city (int): Filter locations by city ID.
     - type (str): Filter locations by type ('restaurant' or 'activity').
     - search (str): Search locations by title only.
     - min_rating (float): Filter locations with a rating greater than or equal to the given value.
+    - price_range (str): Filter locations by price range ('low', 'medium', 'high').
     """
     # Get query parameters from the request
     user_id = request.GET.get("user")
@@ -27,6 +28,7 @@ def get_locations(request):
     location_type = request.GET.get("type")
     search_text = request.GET.get("search")
     min_rating = request.GET.get("min_rating")
+    price_range = request.GET.get("price_range")
 
     # Start with all locations
     locations = Location.objects.all()
@@ -42,6 +44,14 @@ def get_locations(request):
         locations = locations.filter(title__icontains=search_text)  # Search only in title
     if min_rating:
         locations = locations.filter(avg_rating__gte=min_rating)
+
+    # Filter by price range
+    if price_range == "low":
+        locations = locations.filter(price_per_person__lte=40)
+    elif price_range == "medium":
+        locations = locations.filter(price_per_person__gte=41, price_per_person__lte=100)
+    elif price_range == "high":
+        locations = locations.filter(price_per_person__gt=100)
 
     # Serialize and return filtered data
     serializer = LocationSerializer(locations, many=True)

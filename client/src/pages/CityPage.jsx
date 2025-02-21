@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getCityById } from "../services/city.services";
 import { getLocationByCityId } from "../services/location.services";
 
+
 const CityPage = () => {
     const { id } = useParams(); // Get city ID from URL
     const [city, setCity] = useState([]);
@@ -25,7 +26,7 @@ const CityPage = () => {
     useEffect(() => {
         const fetch_locationinfo = async () => {
             try {
-                const result = await getLocationByCityId(id);
+                const result =await getLocationByCityId(id);
                 setLocations(result);
                 console.log(result);
             } catch (error) {
@@ -37,23 +38,30 @@ const CityPage = () => {
     }, [id]);
 
     const fetch_locationinfoByID = async (param) => {
-        try {
-            console.log(id);
-            const result = await getLocationByCityId(id);
-            console.log(result);
-            if (param === "All") {
-                //console.log('All');
-                setLocations(result);
-            } else if (param === "restaurant" || param === "activity") {
-                //console.log(param);
-                const rresult = result.filter((r) => r.type == param);
-                setLocations(rresult);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+      try {
+          console.log(id);
+          const result =await getLocationByCityId(id);
+          console.log(result);
+          if(param==='All')
+          {
+            //console.log('All');
+            setLocations(result);
+          }
+          else if(param==='restaurant' || param==='activity')
+          {
+             
+              //console.log(param);
+              const rresult= result.filter(r=> r.type==param);
+              setLocations(rresult);
+          }
+          
+          
+      } catch (error) {
+          console.log(error);
+      }
 
+      }
+    
     const handlebuttonClick = (param) => {
         fetch_locationinfoByID(param);
     };
