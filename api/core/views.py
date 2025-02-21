@@ -414,8 +414,6 @@ def get_system_logs(request):
     - `limit` (int): Number of logs to retrieve.
     - `sort_order` (str): Sorting order ('asc' or 'desc').
     - `user_id` (int): Filter by user ID.
-    - `location_id` (int): Filter by location ID.
-    - `rating` (float): Filter by rating.
 
     Example:
     `/api/system-logs/?limit=10&sort_order=desc&user_id=1&location_id=5&rating=4.5`
@@ -424,8 +422,6 @@ def get_system_logs(request):
     limit = request.GET.get("limit")
     sort_order = request.GET.get("sort_order", "desc")
     user_id = request.GET.get("user_id")
-    location_id = request.GET.get("location_id")
-    rating = request.GET.get("rating")
 
     # Start with all logs
     logs = SystemLog.objects.all()
@@ -433,10 +429,6 @@ def get_system_logs(request):
     # Apply filters if provided
     if user_id:
         logs = logs.filter(user_id=user_id)
-    if location_id:
-        logs = logs.filter(relate_id=location_id, module="Location")
-    if rating:
-        logs = logs.filter(description__icontains=f"Rating: {rating}")
 
     # Apply sorting order
     if sort_order == "asc":
