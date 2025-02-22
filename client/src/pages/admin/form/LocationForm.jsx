@@ -114,7 +114,6 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
 
         try {
             const result = await createUploadImage(image, token);
-            console.log(result.image_url);
             setFormData({
                 ...formData,
                 cover_image_url: result.image_url, // Store  URL
