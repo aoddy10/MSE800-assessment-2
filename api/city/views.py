@@ -60,7 +60,12 @@ def update_city(request, city_id):
 
 # Delete city
 @api_view(["DELETE"])
+@permission_classes([IsAuthenticated])
 def delete_city(request, city_id):
+    
+    if not is_admin(request.user):
+        return Response({"error": "Permission denied"}, status=403)
+    
     try:
         city = City.objects.get(id=city_id)
         city.delete()
