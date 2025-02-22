@@ -1,15 +1,13 @@
-import { Outlet, Link, Navigate, useNavigate } from "react-router-dom";
+import { Outlet, Navigate, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import useLogout from "../hooks/useLogout";
-import apiClient from "../api/axios";
 import ActivitySection from "../components/ActivitySection";
 import StatisticSection from "../components/StatisticSection";
 import { getMe } from "../services/auth.service.s";
 
 const ProtectedLayout = () => {
     const { token, authUserInfo, setAuthUserInfo } = useContext(AuthContext);
-    const [user, setUser] = useState(null);
     const [selectedMenu, setSelectedMenu] = useState("locations"); // Default menu
     const logout = useLogout();
     const navigate = useNavigate();

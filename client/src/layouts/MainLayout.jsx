@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import NavigationMain from "../components/Navigation-main";
 import FooterWhite from "../components/FooterWhite";
 
