@@ -7,7 +7,7 @@ import { Modal } from "../../components/ui/modal";
 import { getUsers, toggleUserSuspended } from "../../services/user.services";
 
 const AdminUserPage = () => {
-    const { token, authUserInfo } = useContext(AuthContext);
+    const { token } = useContext(AuthContext);
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [showModal, setShowModal] = useState(false);
@@ -16,12 +16,11 @@ const AdminUserPage = () => {
 
     useEffect(() => {
         fetchUsers();
-    }, [token, authUserInfo]);
+    }, []);
 
     const fetchUsers = async () => {
         try {
             const newUsers = await getUsers(token);
-            console.log(newUsers);
             setUsers(newUsers);
         } catch (error) {
             console.error("Failed to fetch locations", error);
@@ -40,6 +39,7 @@ const AdminUserPage = () => {
 
     const confirmToggleSuspended = async () => {
         try {
+            // TODO: Code still not working as get unauthorize from backend, but it can test by postman.
             await toggleUserSuspended(token, selectedUser.id);
             setShowConfirmToggleSuspended(false);
             fetchUsers(); // Refresh list after deletion

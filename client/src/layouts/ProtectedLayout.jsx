@@ -5,6 +5,7 @@ import useLogout from "../hooks/useLogout";
 import apiClient from "../api/axios";
 import ActivitySection from "../components/ActivitySection";
 import StatisticSection from "../components/StatisticSection";
+import { getMe } from "../services/auth.service.s";
 
 const ProtectedLayout = () => {
     const { token, authUserInfo, setAuthUserInfo } = useContext(AuthContext);
@@ -19,10 +20,8 @@ const ProtectedLayout = () => {
         // Fetch user details
         const fetchUser = async () => {
             try {
-                const response = await apiClient.get("/me/", {
-                    headers: { Authorization: `Token ${token}` },
-                });
-                setAuthUserInfo(response.data);
+                const response = await getMe(token);
+                setAuthUserInfo(response);
             } catch (error) {
                 console.error("Failed to fetch user");
             }
