@@ -19,8 +19,8 @@ const Navbar = () => {
                     <a href="/about" className="navbar-link">
                         ABOUT
                     </a>
-                    <a href="/reviews" className="navbar-link">
-                        REVIEWS
+                    <a href="/maori" className="navbar-link">
+                        MAORI
                     </a>
                     <a href="/contact" className="navbar-link">
                         CONTACT
