@@ -24,6 +24,9 @@ const useLogout = () => {
                     },
                 }
             );
+
+            // delete the token from local storage
+            localStorage.removeItem("token");
         } catch (error) {
             console.error("Logout failed", error); // Log an error if API request fails
         }

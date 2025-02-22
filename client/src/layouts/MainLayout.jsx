@@ -1,5 +1,6 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import NavigationMain from "../components/Navigation-main";
+import FooterWhite from "../components/FooterWhite";
 
 const MainLayout = () => {
     return (
@@ -13,9 +14,7 @@ const MainLayout = () => {
             </div>
 
             {/* Footer */}
-            <footer className="bg-gray-800 text-white text-center p-4">
-                © 2024 MyApp. All rights reserved.
-            </footer>
+            <FooterWhite />
         </div>
     );
 };

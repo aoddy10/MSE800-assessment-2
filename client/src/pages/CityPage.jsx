@@ -46,8 +46,8 @@ const CityPage = () => {
                 setLocations(result);
             } else if (param === "restaurant" || param === "activity") {
                 //console.log(param);
-                const rresult = result.filter((r) => r.type == param);
-                setLocations(rresult);
+                const newLocations = result.filter((r) => r.type === param);
+                setLocations(newLocations);
             }
         } catch (error) {
             console.log(error);
