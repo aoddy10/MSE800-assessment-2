@@ -60,7 +60,7 @@ const AdminCityPage = () => {
             {/* City Form Modal */}
             {showModal && (
                 <CityForm
-                    location={selectedCity}
+                    city={selectedCity}
                     onClose={() => setShowModal(false)}
                     onRefresh={fetchCities}
                 />

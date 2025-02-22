@@ -1,4 +1,6 @@
-from rest_framework import viewsets
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import City
@@ -23,6 +25,7 @@ def get_city(request, city_id):
 
 # Create city
 @api_view(["POST"])
+@permission_classes([IsAuthenticated])
 def create_city(request):
     serializer = CitySerializer(data=request.data)
     if serializer.is_valid():
@@ -32,6 +35,7 @@ def create_city(request):
 
 # Update city
 @api_view(["PUT"])
+@permission_classes([IsAuthenticated])
 def update_city(request, city_id):
     try:
         city = City.objects.get(id=city_id)
