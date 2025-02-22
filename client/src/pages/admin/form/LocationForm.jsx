@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { Input } from "../../../components/ui/input";
-import apiClient from "../../../api/axios";
 import { Button } from "../../../components/ui/button";
 import { Modal } from "../../../components/ui/modal";
 import AuthContext from "../../../context/AuthContext";
@@ -349,6 +348,27 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                         </Button>
                     </div>
                 )}
+            </div>
+
+            <div>
+                {gallery.map((image) => (
+                    <div
+                        key={image.id}
+                        className="relative border rounded-lg p-2"
+                    >
+                        <img
+                            src={image.image_url}
+                            alt="Gallery"
+                            className="rounded-lg w-full object-cover"
+                        />
+                        {/* <button
+                            className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                            onClick={() => handleRemoveGalleryImage(image.id)}
+                        >
+                            ❌
+                        </button> */}
+                    </div>
+                ))}
             </div>
 
             {/* Submit Button */}
