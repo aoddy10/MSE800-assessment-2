@@ -1,58 +1,31 @@
 import React from "react";
-import "../styles/Navbar.css";
+import "../styles/NavigationWhite.css";
 import logo from "../assets/logo-black.png";
 
 const NavigationMain = () => {
     return (
-        <nav className=" text-text">
-            <div className="flex justify-between items-center m-auto w-[70%] h-[50px]">
-                <div className="w-[12vw]">
+        <nav className="navbar-white">
+            <div className="navbar-container">
+                <div className="navbar-logo">
                     <a href="/" className="flex items-center">
                         <img src={logo} alt="Kiwi Explorer Logo" />
                     </a>
+
                 </div>
 
-                <div className="flex gap-5">
-                    <a
-                        href="/explore"
-                        className=" text-text m-auto hover:text-primary transition-colors duration-300 ease-in-out"
-                    >
-                        EXPLORE
-                    </a>
-                    <a
-                        href="/about"
-                        className=" text-text m-auto hover:text-primary transition-colors duration-300 ease-in-out"
-                    >
-                        ABOUT
-                    </a>
-                    <a
-                        href="/maori"
-                        className=" text-text m-auto hover:text-primary transition-colors duration-300 ease-in-out"
-                    >
-                        MAORI INFO
-                    </a>
-                    <a
-                        href="/contact"
-                        className=" text-text m-auto hover:text-primary transition-colors duration-300 ease-in-out"
-                    >
-                        CONTACT
-                    </a>
+                <div className="navbar-links">
+                    <a href="/explore" className="navbar-link-white">EXPLORE</a>
+                    <a href="/about" className="navbar-link-white">ABOUT</a>
+                    <a href="/maori" className="navbar-link-white">MAORI</a>
+                    <a href="/contact" className="navbar-link-white">CONTACT</a>
+
                 </div>
 
-                <div className="flex items-center">
-                    <a
-                        href="/register"
-                        className=" text-text m-auto hover:text-primary transition-colors duration-300 ease-in-out"
-                    >
-                        REGISTER
-                    </a>
-                    <hr className="h-[15px] bg-secondary w-[2px] border-none mx-4" />
-                    <a
-                        href="/login"
-                        className=" text-text m-auto hover:text-primary transition-colors duration-300 ease-in-out"
-                    >
-                        LOGIN
-                    </a>
+                <div className="navbar-auth flex">
+                    <a href="/register" className="navbar-link-white">REGISTER</a>
+                    <hr className="auth-divider-white" />
+                    <a href="/login" className="navbar-link-white">LOGIN</a>
+
                 </div>
             </div>
         </nav>

@@ -1,0 +1,189 @@
+.contact-page {
+    width: 100%;
+    height: max-content;
+    position: relative;
+    background-color: #f9f9fb;
+}
+
+.contact-content {
+    width: 70%;
+    height: max-content;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 200px;
+    padding-bottom: 100px;
+}
+
+.contact-txt {
+    width: 100%;
+    height: max-content;
+    margin-bottom: 75px;
+}
+
+.contact-text h1 {
+    font-size: 64px;
+    color: #232323;
+    font-family: 'LatoThin' !important;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.contact-text p {
+    margin: auto;
+    width: 50%;
+    font-size: 1em;
+    line-height: 1.3em;
+    color: #232323;
+    font-family: 'LatoRegular';
+    font-weight: 400;
+}
+
+.contact-form-details-box {
+    width: 100%;
+    height: max-content;
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    column-gap: 50px;
+}
+
+.contact-box {
+    width: 100%;
+    height: 500;
+    display: row;
+    row-gap: 30px;
+    border-bottom: 1px solid #D4D4D4;
+}
+
+.contact-box-form {
+    width: 100%;
+    height: max-content;
+    display: grid;
+    grid-template-columns: 5% 90%;
+    column-gap: 5%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-top: 1px solid #D4D4D4;
+}
+
+.contact-box-form h1 {
+    width: 100%;
+    height: 100%;
+    font-family: 'LatoBold';
+    color: #31AAB7;
+    font-size: 1.2em;
+    text-align: left;
+}
+
+.contact-form {
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: left;
+}
+
+.contact-form h1 {
+    width: 100%;
+    height: 100%;
+    font-family: 'LatoBold';
+    color: #232323;
+    font-size: 1.2em;
+    text-align: left;
+}
+
+.contact-form label {
+    text-align: left;
+    width: 100%;
+    height: auto;
+    display: block;
+    font-family: 'LatoBold';
+    color: #232323;
+    font-size: 1.2em;
+}
+
+.contact-form input {
+    width: 100%;
+    height: 50px;
+    border-style: none;
+    font-size: 1.2em;
+    font-family: 'LatoRegular';
+    color: #232323;
+    background-color: #f9f9fb;
+}
+
+.contact-form input:focus {
+    outline: none;
+    border-style: none;
+}
+
+.contact-form input::placeholder {
+    color: #999999;
+    font-family: 'LatoRegular';
+}
+
+.details-box {
+    width: 100%;
+    height: max-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 50px;
+}
+
+.details {
+    width: 100%;
+    height: max-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    justify-content: start;
+    text-align: left;
+}
+
+.details h1 {
+    text-align: left;
+    width: 100%;
+    height: auto;
+    display: block;
+    font-family: 'LatoBold' !important;
+    color: #232323;
+    font-size: 1.2em;
+}
+
+.details p {
+    text-align: left;
+    width: 100%;
+    height: auto;
+    display: block;
+    font-family: 'LatoRegular';
+    color: #5e5e5e;
+    font-size: 1.2em;
+    line-height: 1.3em;
+}
+
+.icons-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+.socmed-icons {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.socmed-icons path {
+    transition: fill 0.3s ease;
+}
+
+.socmed-icons:hover path {
+    fill: #31AAB7;
+}
+
+

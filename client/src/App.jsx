@@ -14,6 +14,11 @@ import CityPage from "./pages/CityPage";
 import AdminUserPage from "./pages/admin/AdminUserPage";
 import AdminCityPage from "./pages/admin/AdminCityPage";
 import AdminLocationPage from "./pages/admin/AdminLocationPage";
+import ContactPage from "./pages/ContactPage";
+import AboutPage from "./pages/AboutPage";
+import MaoriPage from "./pages/MaoriPage";
+
+
 import LocationPage from "./pages/LocationPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -30,6 +35,9 @@ function App() {
                     <Route element={<MainLayout />}>
                         <Route path="/city/:id" element={<CityPage />} />
                         <Route path="/explore" element={<HomePage />} />
+                        <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/about" element={<AboutPage />} />
+                        <Route path="/maori" element={<MaoriPage />} />
                         <Route path="/location/:id" element={<LocationPage />} />
                     </Route>
 
