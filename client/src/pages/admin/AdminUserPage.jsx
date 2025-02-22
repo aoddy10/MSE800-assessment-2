@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-import LocationForm from "./form/LocationForm";
 import AuthContext from "../../context/AuthContext";
 import { Button } from "../../components/ui/button";
 import { Table } from "../../components/ui/table";
@@ -85,13 +84,13 @@ const AdminUserPage = () => {
             />
 
             {/* User Form Modal */}
-            {showModal && (
-                <LocationForm
+            {/* {showModal && (
+                <UserForm
                     location={selectedUser}
                     onClose={() => setShowModal(false)}
                     onRefresh={fetchUsers}
                 />
-            )}
+            )} */}
 
             {/* Confirm toggle suspended Modal */}
             {showConfirmToggleSuspended && (
