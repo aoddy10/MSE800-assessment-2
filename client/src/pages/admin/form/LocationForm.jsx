@@ -349,8 +349,9 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                 )}
             </div>
 
-            <div>
-                {gallery.map((image) => (
+            {gallery &&
+                gallery.length > 0 &&
+                gallery.map((image) => (
                     <div
                         key={image.id}
                         className="relative border rounded-lg p-2"
@@ -368,7 +369,6 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                         </button> */}
                     </div>
                 ))}
-            </div>
 
             {/* Submit Button */}
             <div className="flex justify-end mt-4">
