@@ -14,6 +14,7 @@ from .serializers import UserSerializer, SystemLogSerializer
 from .models import UploadedImage
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.utils.timezone import now, timedelta
 
 
 User = get_user_model()  # use custom Model User
@@ -426,14 +427,29 @@ def get_system_logs(request):
     - `limit` (int): Number of logs to retrieve.
     - `sort_order` (str): Sorting order ('asc' or 'desc').
     - `user_id` (int): Filter by user ID.
+    - `location_id` (int): Filter by Location ID.
+    - `date_range` (str): Filter logs within a time range (Only accepts: "today", "week", "month").
 
     Example:
-    `/api/system-logs/?limit=10&sort_order=desc&user_id=1&location_id=5&rating=4.5`
+    ```
+    /api/system-logs/?limit=10&sort_order=desc&user_id=1&location_id=5&date_range=week
+    ```
     """
+
     # Retrieve query parameters
     limit = request.GET.get("limit")
     sort_order = request.GET.get("sort_order", "desc")
     user_id = request.GET.get("user_id")
+    location_id = request.GET.get("location_id")
+    date_range = request.GET.get("date_range")
+
+    # Validate date_range
+    valid_date_ranges = ["today", "week", "month"]
+    if date_range and date_range not in valid_date_ranges:
+        return Response(
+            {"error": "Invalid date_range. Allowed values: 'today', 'week', 'month'"},
+            status=400
+        )
 
     # Start with all logs
     logs = SystemLog.objects.all()
@@ -441,6 +457,18 @@ def get_system_logs(request):
     # Apply filters if provided
     if user_id:
         logs = logs.filter(user_id=user_id)
+
+    if location_id:
+        logs = logs.filter(relate_id=location_id, module="Location")  # Filter by location ID
+
+    # Apply date range filtering
+    today = now().date()
+    if date_range == "today":
+        logs = logs.filter(created_at__date=today)
+    elif date_range == "week":
+        logs = logs.filter(created_at__gte=today - timedelta(days=7))
+    elif date_range == "month":
+        logs = logs.filter(created_at__gte=today - timedelta(days=30))
 
     # Apply sorting order
     if sort_order == "asc":
