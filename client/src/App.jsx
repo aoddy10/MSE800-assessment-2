@@ -7,7 +7,7 @@ import MainLayout from "./layouts/MainLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 
 // pages
-import HomePage from "./pages/homepage/Home";
+import HomePage from "./pages/homepage/HomePage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import CityPage from "./pages/CityPage";
