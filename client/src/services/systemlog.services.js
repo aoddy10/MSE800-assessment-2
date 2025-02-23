@@ -14,7 +14,7 @@ import axiosInstance from "../api/axios";
 
 export const getSystemLogs = async (token, filter) => {
     // Unpack filter object to extract filtering criteria
-    const { sort_order, user_id, limit } = filter;
+    const { sort_order, user_id, limit, location_id, date_range } = filter;
 
     // Construct query string dynamically based on available filters
     let queryString = "";
@@ -26,6 +26,12 @@ export const getSystemLogs = async (token, filter) => {
     }
     if (limit) {
         queryString += `limit=${limit}&`; // Append result limit
+    }
+    if (location_id) {
+        queryString += `location_id=${location_id}&`; // Append location filter
+    }
+    if (date_range) {
+        queryString += `date_range=${date_range}&`; // Append date range filter
     }
 
     try {

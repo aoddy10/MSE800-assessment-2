@@ -32,10 +32,18 @@ const HomePage = () => {
 
     const fetchLocations = async (cityId = null, price = null) => {
         // update restaurants
-        const newRestaurants = await getLocations(cityId, "restaurant", price);
+        const newRestaurants = await getLocations({
+            cityId: cityId,
+            type: "restaurant",
+            price: price,
+        });
         setRestaurants(newRestaurants);
         // update activities
-        const newActivities = await getLocations(cityId, "activity", price);
+        const newActivities = await getLocations({
+            cityId: cityId,
+            type: "activity",
+            price: price,
+        });
         setActivities(newActivities);
     };
 
