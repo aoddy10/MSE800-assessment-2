@@ -2,6 +2,7 @@ import { getLocations } from "../services/location.services";
 import AuthContext from "../context/AuthContext";
 import { getUsers } from "../services/user.services";
 import React, { useContext, useEffect, useState } from "react";
+import { getSystemLogs } from "../services/systemlog.services";
 
 const StatisticCard = ({ title, value }) => {
     return (
@@ -23,6 +24,7 @@ const StatisticSection = () => {
     useEffect(() => {
         fetchTotalUsers();
         fetchTotalLocations();
+        fetchSystemLogs();
     }, []);
 
     // fetch total user
@@ -35,6 +37,12 @@ const StatisticSection = () => {
     const fetchTotalLocations = async () => {
         const response = await getLocations(token);
         setData((prev) => ({ ...prev, countLocations: response.length || 0 }));
+    };
+
+    // fetch system logs for last 7 days
+    const fetchSystemLogs = async () => {
+        const response = await getSystemLogs(token, { date_range: "week" });
+        setData((prev) => ({ ...prev, countActivities: response.length || 0 }));
     };
 
     return (
