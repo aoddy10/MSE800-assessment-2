@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getCityById } from "../services/city.services";
 import { getLocationByCityId } from "../services/location.services";
+import LocationCard from "../components/LocationCard";
 
 const CityPage = () => {
     const { id } = useParams(); // Get city ID from URL
     const [city, setCity] = useState([]);
     const [locations, setLocations] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetch_cityinfo = async () => {
@@ -56,6 +58,10 @@ const CityPage = () => {
 
     const handlebuttonClick = (param) => {
         fetch_locationinfoByID(param);
+    };
+
+    const handleLocationCardClick = (location) => {
+        navigate(`/location/${location.id}`);
     };
 
     return (
@@ -167,31 +173,12 @@ const CityPage = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {locations && locations.length > 0
-                            ? locations.map((location, index) => (
-                                  <div
+                            ? locations.map((location) => (
+                                  <LocationCard
                                       key={`location-${location.id}`}
-                                      className="bg-white rounded-lg shadow-lg p-4"
-                                  >
-                                      <img
-                                          src={location.cover_image_url}
-                                          alt={location.description}
-                                          className="w-full h-48 object-cover rounded-lg"
-                                      />
-                                      <div className="flex justify-between items-center mt-3">
-                                          <h3 className="text-lg font-semibold">
-                                              {location.title}
-                                          </h3>
-                                          <div className="flex items-center gap-1 text-yellow-500 text-sm">
-                                              <span className="font-semibold">
-                                                  {location.avg_rating}
-                                              </span>
-                                              <span>⭐</span>
-                                          </div>
-                                      </div>
-                                      <p className="text-gray-600 text-sm mt-2">
-                                          {location.description}
-                                      </p>
-                                  </div>
+                                      location={location}
+                                      onClick={handleLocationCardClick}
+                                  />
                               ))
                             : "No Data"}
                     </div>

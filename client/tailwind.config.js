@@ -10,13 +10,6 @@ module.exports = {
     ],
     theme: {
         extend: {
-            fontFamily: {
-                sans: ["LatoRegular", "sans-serif"], // ✅ Ensure this matches global.css
-                bold: ["LatoBold", "sans-serif"],
-                medium: ["LatoMedium", "sans-serif"],
-                semibold: ["LatoSemibold", "sans-serif"],
-                thin: ["LatoThin", "sans-serif"],
-            },
             colors: {
                 primary: "#31AAB7",
                 secondary: "#767676",
