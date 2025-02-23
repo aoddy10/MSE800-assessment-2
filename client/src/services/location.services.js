@@ -16,7 +16,7 @@ import axiosInstance from "../api/axios";
 export const getRestaurants = async () => {
     try {
         const response = await axiosInstance.get("/locations/?type=restaurant");
-       
+
         return response.data;
     } catch (error) {
         console.error("Error fetching cities:", error);
@@ -28,7 +28,7 @@ export const getRestaurants = async () => {
 export const getActivity = async () => {
     try {
         const response = await axiosInstance.get("/locations/?type=activity");
-       
+
         return response.data;
     } catch (error) {
         console.error("Error fetching activity:", error);
@@ -38,7 +38,6 @@ export const getActivity = async () => {
 
 // get location by city id
 export const getLocationByCityId = async (cityId) => {
-
     try {
         const response = await axiosInstance.get(`/locations/?city=${cityId}`);
         return response.data;
@@ -130,31 +129,31 @@ export const deleteLocation = async (id, token) => {
 };
 
 //
-export const getLocations = async (cityid,type,pricerange) => {
+export const getLocations = async (filterAttribute = {}) => {
+    const { cityId, type, priceRange } = filterAttribute;
+
     try {
-        let searchquery ="";
-        if (cityid) {
-            searchquery =`city=${cityid}`;
+        let searchQuery = "";
+        if (cityId) {
+            searchQuery = `city=${cityId}`;
         }
-        if(type){
-            if (searchquery){
-              searchquery+="&";     
+        if (type) {
+            if (searchQuery) {
+                searchQuery += "&";
             }
-            searchquery +=`type=${type}`;
+            searchQuery += `type=${type}`;
         }
-        if(pricerange){
-            if (searchquery){
-                searchquery+="&";     
-              }
-            searchquery +=`price_range=${pricerange}`;
+        if (priceRange) {
+            if (searchQuery) {
+                searchQuery += "&";
+            }
+            searchQuery += `price_range=${priceRange}`;
         }
-                
 
-        const response=await axiosInstance.get(`/locations/?${searchquery}`);
+        const response = await axiosInstance.get(`/locations/?${searchQuery}`);
         return response.data;
-
     } catch (error) {
         console.error("Error getLocations:", error);
         throw error;
     }
-} 
+};
