@@ -3,7 +3,7 @@ import React from "react";
 function LocationCard({ location, onClick }) {
     return (
         <div
-            className="bg-white rounded-lg shadow-lg p-4 cursor-pointer flex flex-col gap-4 justify-between"
+            className="bg-white rounded-lg shadow-lg p-4 cursor-pointer flex flex-col gap-4 justify-between hover:shadow-black/30"
             onClick={() => onClick(location)}
         >
             <div className="flex flex-col gap-2">

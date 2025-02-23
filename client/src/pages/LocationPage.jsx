@@ -46,10 +46,8 @@ const LocationPage = () => {
         }
     };
 
-    const handleClick = ({ location }) => {
-        const paramValue = location.id;
-
-        navigate(`/location/${paramValue}`);
+    const handleClick = (location) => {
+        navigate(`/location/${location.id}`);
     };
 
     return (
