@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getCityById } from "../services/city.services";
 import { getLocationByCityId } from "../services/location.services";
 
@@ -8,6 +8,7 @@ const CityPage = () => {
     const { id } = useParams(); // Get city ID from URL
     const [city, setCity] = useState([]);
     const [locations, setLocations] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetch_cityinfo = async () => {
@@ -65,6 +66,14 @@ const CityPage = () => {
     const handlebuttonClick = (param) => {
         fetch_locationinfoByID(param);
     };
+
+    const handleClick = ({location}) => {
+      
+        const paramValue = location.id;
+        
+        navigate(`/location/${paramValue}`);
+        
+      };
 
     return (
         <>
@@ -183,6 +192,7 @@ const CityPage = () => {
                                       <img
                                           src={location.cover_image_url}
                                           alt={location.description}
+                                          onClick={() => handleClick({location})}    style={{ cursor: "pointer", margin: 10 }} 
                                           className="w-full h-48 object-cover rounded-lg"
                                       />
                                       <div className="flex justify-between items-center mt-3">

@@ -62,8 +62,8 @@ const HomePage = () => {
         //const result =await getLocationByCityId(cityid);
         const restaurant =await getLocations(cityid,"restaurant",price);
         const activity =await getLocations(cityid,"activity",price);
-        console.log(restaurant);
-        console.log(activity);
+        //console.log(restaurant);
+        //console.log(activity);
         setRestaurants(restaurant);
         setActivities(activity);
         //console.log(type);

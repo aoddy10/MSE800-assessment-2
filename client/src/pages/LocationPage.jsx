@@ -1,7 +1,10 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+
 import { getCityById } from "../services/city.services";
 import { getLocationByCityId, getLocationByLocationId } from "../services/location.services";
+import AuthContext from "../context/AuthContext";
+
 
 
 const LocationPage = () => {
@@ -10,6 +13,7 @@ const LocationPage = () => {
     const [locations,setLocations]= useState([]);
     const [type,setType]= useState('');
     const navigate = useNavigate();
+    const {  authUserInfo } = useContext(AuthContext);
       
     useEffect(() => {
       const fetch_locationinfo= async () => {
@@ -109,7 +113,7 @@ const LocationPage = () => {
                   {location.open_hour_detail}
                 </div>
 
-                
+           
               
                 
                 </div>
