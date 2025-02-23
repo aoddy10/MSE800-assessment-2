@@ -4,6 +4,7 @@ import {
     getLocationByCityId,
     getLocationByLocationId,
 } from "../services/location.services";
+import LocationCard from "../components/LocationCard";
 
 const LocationPage = () => {
     const { id } = useParams(); // Get location ID from URL
@@ -13,24 +14,24 @@ const LocationPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetch_locationinfo = async () => {
+        const fetchLocationInfo = async () => {
             try {
                 const result = await getLocationByLocationId(id);
                 setLocation(result);
 
                 if (result) {
                     setType(result.type);
-                    fetch_locationinfoByCityIDAndType(result.city, result.type);
+                    fetchLocationInfoByCityIDAndType(result.city, result.type);
                 }
             } catch (error) {
                 console.log(error);
             }
         };
 
-        fetch_locationinfo();
+        fetchLocationInfo();
     }, [id]);
 
-    const fetch_locationinfoByCityIDAndType = async (cityid, param) => {
+    const fetchLocationInfoByCityIDAndType = async (cityid, param) => {
         try {
             const result = await getLocationByCityId(cityid);
             if (param === "restaurant" || param === "activity") {
@@ -114,37 +115,11 @@ const LocationPage = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {locations && locations.length > 0
                             ? locations.map((location, index) => (
-                                  <div
+                                  <LocationCard
                                       key={`location-${location.id}`}
-                                      className="bg-white rounded-lg shadow-lg p-4"
-                                  >
-                                      <img
-                                          src={location.cover_image_url}
-                                          alt={location.description}
-                                          onClick={() =>
-                                              handleClick({ location })
-                                          }
-                                          style={{
-                                              cursor: "pointer",
-                                              margin: 10,
-                                          }}
-                                          className="w-full h-48 object-cover rounded-lg"
-                                      />
-                                      <div className="flex justify-between items-center mt-3">
-                                          <h3 className="text-lg font-semibold">
-                                              {location.title}
-                                          </h3>
-                                          <div className="flex items-center gap-1 text-yellow-500 text-sm">
-                                              <span className="font-semibold">
-                                                  {location.avg_rating}
-                                              </span>
-                                              <span>⭐</span>
-                                          </div>
-                                      </div>
-                                      <p className="text-gray-600 text-sm mt-2">
-                                          {location.description}
-                                      </p>
-                                  </div>
+                                      location={location}
+                                      onClick={handleClick}
+                                  />
                               ))
                             : "No Data"}
                     </div>

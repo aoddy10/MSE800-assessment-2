@@ -7,7 +7,7 @@ import MainLayout from "./layouts/MainLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 
 // pages
-import HomePage from "./pages/homepage/home";
+import HomePage from "./pages/homepage/Home";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import CityPage from "./pages/CityPage";
@@ -17,7 +17,6 @@ import AdminLocationPage from "./pages/admin/AdminLocationPage";
 import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import MaoriPage from "./pages/MaoriPage";
-
 
 import LocationPage from "./pages/LocationPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -38,7 +37,10 @@ function App() {
                         <Route path="/contact" element={<ContactPage />} />
                         <Route path="/about" element={<AboutPage />} />
                         <Route path="/maori" element={<MaoriPage />} />
-                        <Route path="/location/:id" element={<LocationPage />} />
+                        <Route
+                            path="/location/:id"
+                            element={<LocationPage />}
+                        />
                     </Route>
 
                     {/* Protected Layout */}

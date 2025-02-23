@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import FeaturedCities from "./FeaturedCities";
-import FeaturedRestaurants from "./featuredRestaurants";
+import FeaturedRestaurants from "./FeaturedRestaurants";
 import Banner from "./HomeBanner";
 import { getCities } from "../../services/city.services";
-import { getLocations, getRestaurants } from "../../services/location.services";
-import { getActivity } from "../../services/location.services";
+import { getLocations } from "../../services/location.services";
 import FeaturedActivities from "./FeaturedActivities";
 
 const HomePage = () => {
