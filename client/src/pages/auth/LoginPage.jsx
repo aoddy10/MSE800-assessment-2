@@ -40,19 +40,22 @@ const LoginPage = () => {
             navigate("/admin/locations");
         } catch (error) {
             // Set an error message if login fails
+            setError(error.response?.data?.error || "Incorrect email or password. Please try again.");
             setError(
                 error.response?.data?.error ||
-                    "Incorrect email or password. Please try again."
+                "Incorrect email or password. Please try again."
             );
         }
     };
 
     return (
+
+
         <div className="login-container">
+
             <div className="back-btn">
                 <a href="/" className="back-link">
-                    <img className="arrow-left" src={arrowleft} alt="arrow" />
-                    Back
+                    <img className="arrow-left" src={arrowleft} alt="arrow" />Back
                 </a>
             </div>
 
@@ -102,13 +105,10 @@ const LoginPage = () => {
                         <a href="/forgot-password" className="forgot-password">
                             Forgot password?
                         </a>
+
                     </div>
 
-                    <button
-                        type="submit"
-                        className="sign-in-button"
-                        onClick={handleLogin}
-                    >
+                    <button type="submit" className="sign-in-button" onClick={handleLogin}>
                         Login
                     </button>
 
@@ -129,25 +129,23 @@ const LoginPage = () => {
 
             {/* --------------------------------------------------- */}
             <div className="right-container">
-                <img src={cornerImage} alt="corner" />
-                <img src={cornerImage2} alt="corner2" className="corner2" />
+                <img src={cornerImage} alt='corner' />
+                <img src={cornerImage2} alt='corner2' className="corner2" />
                 <div className="text-content">
                     <h2>Lorem Ipsum Dolor Sit Amet</h2>
                     <h2>Dolor Tetus Consectetur</h2>
                     <div className="active-users-container">
-                        <img src={activeUsers} alt="activeUsers" />
+                        <img src={activeUsers} alt='activeUsers' />
                         <p>Active users</p>
                     </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur <br />
-                        adipiscing elit. Cras iaculis consectetur nisi.
-                        <br />
-                        Aliquam sagittis lobortis auctor. Ut pulvinar
-                    </p>
+                    <p>Lorem ipsum dolor sit amet, consectetur <br />
+                        adipiscing elit. Cras iaculis consectetur nisi.<br />
+                        Aliquam sagittis lobortis auctor. Ut pulvinar</p>
                     <button className="exploreBtn">Explore Now</button>
                 </div>
             </div>
         </div>
+
     );
 };
 

@@ -896,6 +896,151 @@ GET /api/newsletter/list/
 
 ---
 
+# 📝 **System Logs API Documentation**
+
+## Overview
+
+The **System Logs API** provides access to system logs with filtering, sorting, and pagination capabilities. It allows retrieving logs based on user, location, and date range, with control over the number of logs returned and sorting order.
+
+## Endpoints
+
+### 1. **Get System Logs**
+
+#### `GET /api/system-logs/`
+
+Retrieve system logs with optional filters.
+
+#### **Query Parameters**
+
+| Parameter     | Type   | Required | Description                                                                      |
+| ------------- | ------ | -------- | -------------------------------------------------------------------------------- |
+| `limit`       | int    | No       | Number of logs to retrieve.                                                      |
+| `sort_order`  | string | No       | Sorting order: `asc` (oldest first) or `desc` (newest first). Default is `desc`. |
+| `user_id`     | int    | No       | Filter logs by user ID.                                                          |
+| `location_id` | int    | No       | Filter logs by location ID.                                                      |
+| `date_range`  | string | No       | Filter logs by time period. Allowed values: `today`, `week`, `month`.            |
+
+#### **Example Requests**
+
+1. **Get the last 10 logs sorted by newest first:**
+    ```http
+    GET /api/system-logs/?limit=10&sort_order=desc
+    ```
+2. **Get logs for user ID 5 from today:**
+    ```http
+    GET /api/system-logs/?user_id=5&date_range=today
+    ```
+3. **Get logs for location ID 10 from the last month:**
+    ```http
+    GET /api/system-logs/?location_id=10&date_range=month
+    ```
+4. **Get logs sorted from oldest to newest:**
+    ```http
+    GET /api/system-logs/?sort_order=asc
+    ```
+
+#### **Example Response**
+
+```json
+[
+    {
+        "id": 1,
+        "user": {
+            "id": 5,
+            "username": "admin_user"
+        },
+        "module": "Location",
+        "relate_id": 10,
+        "description": "Updated location details",
+        "created_at": "2024-02-21T12:00:00Z"
+    },
+    {
+        "id": 2,
+        "user": {
+            "id": 3,
+            "username": "business_owner"
+        },
+        "module": "User",
+        "relate_id": 3,
+        "description": "Suspended user: john_doe",
+        "created_at": "2024-02-20T15:30:00Z"
+    }
+]
+```
+
+### 2. **Create a System Log**
+
+#### `POST /api/system-logs/`
+
+Create a new system log entry.
+
+#### **Request Body**
+
+| Field         | Type   | Required | Description                                                     |
+| ------------- | ------ | -------- | --------------------------------------------------------------- |
+| `module`      | string | Yes      | The module related to the log entry (e.g., `User`, `Location`). |
+| `relate_id`   | int    | Yes      | The ID of the related object.                                   |
+| `description` | string | Yes      | Description of the activity.                                    |
+
+#### **Example Request**
+
+```json
+{
+    "module": "User",
+    "relate_id": 3,
+    "description": "User logged in successfully"
+}
+```
+
+#### **Example Response**
+
+```json
+{
+    "id": 15,
+    "user": {
+        "id": 2,
+        "username": "admin"
+    },
+    "module": "User",
+    "relate_id": 3,
+    "description": "User logged in successfully",
+    "created_at": "2024-02-21T13:45:00Z"
+}
+```
+
+## Authentication
+
+-   All endpoints **require authentication** using a valid token.
+-   Provide the token in the `Authorization` header:
+    ```http
+    Authorization: Token your-auth-token
+    ```
+
+## Error Handling
+
+| Status Code       | Meaning                                                    |
+| ----------------- | ---------------------------------------------------------- |
+| `400` Bad Request | Invalid request format (e.g., invalid `date_range` value). |
+| `403` Forbidden   | User does not have permission.                             |
+| `404` Not Found   | Requested resource does not exist.                         |
+
+## Notes
+
+-   `date_range` supports only `today`, `week`, and `month`.
+-   Only **admin** or **authorized users** can create system logs.
+-   Logs **cannot be updated or deleted**.
+
+---
+
+### **🚀 Summary**
+
+-   **Retrieve system logs** with filters for **user, location, sorting, and time range**.
+-   **Create system logs** to track user activities.
+-   **Secure endpoints** requiring authentication.
+-   **No updates or deletions allowed** for logs.
+
+This documentation provides all necessary details to interact with the **System Logs API** efficiently. 🚀
+
 ## 🎯 **Notes**
 
 -   Ensure that the **Authorization token** is included in protected API requests.
