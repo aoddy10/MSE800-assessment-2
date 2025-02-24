@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCityById } from "../services/city.services";
-import { getLocationByCityId } from "../services/location.services";
+import { getLocationByCityId, getReviews } from "../services/location.services";
 import LocationCard from "../components/LocationCard";
+import ReviewSection from "../components/ReviewSection";
 
 const CityPage = () => {
     const { id } = useParams(); // Get city ID from URL
     const [city, setCity] = useState([]);
     const [locations, setLocations] = useState([]);
+    const [reviews, setReviews] = useState([]);
     const navigate = useNavigate();
+    
 
     useEffect(() => {
         const fetch_cityinfo = async () => {
@@ -36,6 +39,7 @@ const CityPage = () => {
         };
 
         fetch_locationinfo();
+        fetch_reviews();
     }, [id]);
 
     const fetch_locationinfoByID = async (param) => {
@@ -55,6 +59,17 @@ const CityPage = () => {
             console.log(error);
         }
     };
+
+    
+    const fetch_reviews = async () => {
+        try {
+            const result = await getReviews({city:id,limit:3})
+           
+            setReviews(result);
+        } catch (error) {
+            
+        }
+    }
 
     const handlebuttonClick = (param) => {
         fetch_locationinfoByID(param);
@@ -86,61 +101,7 @@ const CityPage = () => {
                     </div>
 
                     {/* Right Section - Reviews */}
-                    <div className="lg:w-1/3 bg-white p-6 rounded-xl shadow-lg">
-                        <h2 className="text-xl font-semibold">Reviews</h2>
-                        <div className="mt-4 space-y-4">
-                            {/* Review 1 */}
-                            <div className="p-4 bg-gray-50 rounded-lg shadow">
-                                <div className="flex items-center space-x-3">
-                                    <img
-                                        src="/user1.jpg"
-                                        alt="James Smith"
-                                        className="w-10 h-10 rounded-full"
-                                    />
-                                    <div>
-                                        <h3 className="font-medium">
-                                            James Smith
-                                        </h3>
-                                        <p className="text-sm text-gray-500">
-                                            Tourist
-                                        </p>
-                                    </div>
-                                    <span className="ml-auto text-yellow-500 font-bold">
-                                        4.9 ⭐
-                                    </span>
-                                </div>
-                                <p className="text-gray-600 mt-2 text-sm">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Duis sed erat nisl.
-                                </p>
-                            </div>
-                            {/* Review 2 */}
-                            <div className="p-4 bg-gray-50 rounded-lg shadow">
-                                <div className="flex items-center space-x-3">
-                                    <img
-                                        src="/user2.jpg"
-                                        alt="John Doe"
-                                        className="w-10 h-10 rounded-full"
-                                    />
-                                    <div>
-                                        <h3 className="font-medium">
-                                            John Doe
-                                        </h3>
-                                        <p className="text-sm text-gray-500">
-                                            Traveler
-                                        </p>
-                                    </div>
-                                    <span className="ml-auto text-yellow-500 font-bold">
-                                        4.9 ⭐
-                                    </span>
-                                </div>
-                                <p className="text-gray-600 mt-2 text-sm">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Duis sed erat nisl.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <ReviewSection reviews={reviews}/>
                 </div>
 
                 <section className="my-12">

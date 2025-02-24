@@ -3,14 +3,20 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
     getLocationByCityId,
     getLocationByLocationId,
+    getReviews
 } from "../services/location.services";
 import LocationCard from "../components/LocationCard";
+import ReviewSection from "../components/ReviewSection";
+import { Modal } from "../components/ui/modal";
+import ReviewForm from "../components/forms/ReviewForm";
 
 const LocationPage = () => {
     const { id } = useParams(); // Get location ID from URL
     const [location, setLocation] = useState([]);
     const [locations, setLocations] = useState([]);
     const [type, setType] = useState("");
+    const [reviews,setReviews] =useState([]);
+    const [showReviewForm,setShowReviewForm] =useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,6 +35,7 @@ const LocationPage = () => {
         };
 
         fetchLocationInfo();
+        fetch_reviews();
     }, [id]);
 
     const fetchLocationInfoByCityIDAndType = async (cityid, param) => {
@@ -46,8 +53,22 @@ const LocationPage = () => {
         }
     };
 
+    const fetch_reviews = async () => {
+            try {
+                const result = await getReviews({location:id,limit:3})
+               
+                setReviews(result);
+            } catch (error) {
+                
+            }
+        }
+
     const handleClick = (location) => {
         navigate(`/location/${location.id}`);
+    };
+
+    const handleReviewClick = () => {
+        setShowReviewForm(true);
     };
 
     return (
@@ -64,16 +85,19 @@ const LocationPage = () => {
                 </div>
 
                 <div className="bg-gray-100 p-6 flex flex-col lg:flex-row gap-3">
-                    {/* Left Section */}
-
-                    <div className="lg:w-2/3 bg-white p-6 rounded-xl shadow-lg">
+                    
+                   
+                     {/* <div className="lg:w-2/3 bg-white p-6 rounded-xl shadow-lg"> */}
+                     <div className="lg:w-2/3 bg-white p-6 rounded-xl shadow-lg">
+                    
                         <h1 className="text-2xl font-bold">{location.title}</h1>
                         <p className="text-gray-600 mt-2">
                             {location.description}
                         </p>
+                       
                     </div>
-
-                    <div className="lg:w-1/3 bg-white p-6 rounded-xl shadow-lg">
+                    <div className="bg-white p-3 rounded-xl shadow-lg">
+                    {/* <div className="bg-white p-6 rounded-xl shadow-lg"> */}
                         <h2 className="text-xl font-semibold">
                             Contact Information
                         </h2>
@@ -99,6 +123,13 @@ const LocationPage = () => {
                             </div>
                         </div>
                     </div>
+
+                    
+                    <div className="flex flex-col flex-grow gap-2">
+                        <ReviewSection reviews={reviews}/>  
+                        <button className="bg-primary p-2 rounded-md" onClick={handleReviewClick}  >Write Review</button>
+                    </div>
+                      
                 </div>
 
                 <section className="my-12">
@@ -123,6 +154,13 @@ const LocationPage = () => {
                     </div>
                 </section>
             </div>
+            {showReviewForm && (
+                <Modal title="Review Form"  onClose={ () => setShowReviewForm(false)} >
+
+                <ReviewForm locationId={id} onClose={ () => setShowReviewForm(false)} onRefresh={fetch_reviews} />
+                </Modal>
+            )}
+            
         </>
     );
 };
