@@ -138,15 +138,10 @@ const MaoriPage = () => {
                                     <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Early settlement</b><br />The ancestors of Māori arrived on canoes from Pacific islands before 1300 CE. Settling first on the coast, they hunted seals and moas. They also began to grow food, and some moved to the forests. They lived in small tribal groups, with a rich culture of spoken stories, and strong traditions of warfare. Their ancestors, and the gods of the natural world, were very important.</h2>
                                 </div>
                             </div>
+                            
                             <div className="maori">
                                 <div className="maori-items">
                                     <h1 className="maori-title">02</h1>
-                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Europeans arrive.</b><br />The arrival of Europeans from the early 1800s had a major effect on these early communities. Among the newcomers were missionaries, and many Māori became Christians. They learnt to read and write and began trading, especially in pigs and potatoes.</h2>
-                                </div>
-                            </div>
-                            <div className="maori">
-                                <div className="maori-items">
-                                    <h1 className="maori-title">03</h1>
                                     <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Māori today</b><br />In 2019 there were nearly 800,000 Māori people, with most living in cities. There were kōhanga reo (preschool language nests) and schools using the Māori language, two Māori television channels and 21 radio stations, 29 members of Parliament who identified as Māori, and many creative projects in film, music and art.</h2>
                                 </div>
                             </div>

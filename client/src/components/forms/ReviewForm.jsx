@@ -24,7 +24,7 @@ function ReviewForm({locationId, onClose, onRefresh}) {
 
         const handleRatingChange = (rateValue) => {
             setFormData({ ...formData, rating: rateValue });
-            console.log(rateValue);
+            //console.log(rateValue);
         };
 
         const handleSubmit =async() => {
