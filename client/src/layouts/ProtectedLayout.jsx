@@ -37,6 +37,11 @@ const ProtectedLayout = () => {
         },
         { name: "Cities", path: "/admin/cities", roles: ["admin"] },
         { name: "Users", path: "/admin/users", roles: ["admin"] },
+        {
+            name: "Profile",
+            path: "/admin/profile",
+            roles: ["user", "admin", "business"],
+        },
     ];
 
     // Show loading state while checking token
@@ -80,7 +85,7 @@ const ProtectedLayout = () => {
             <nav className="bg-blue-900 text-white p-4 flex justify-between items-center">
                 {/* Logo */}
                 <h1
-                    className="text-xl font-bold bg-white/20 p-2 flex justify-center items-center"
+                    className="text-xl font-bold bg-white/20 p-2  flex justify-center items-center hover:cursor-pointer"
                     onClick={() => navigate("/explore")}
                 >
                     Kiwi explore
@@ -118,7 +123,7 @@ const ProtectedLayout = () => {
                         </div>
                     )}
                     <button
-                        className="bg-red-500 px-3 py-1 rounded"
+                        className=" bg-accent px-3 py-1 rounded"
                         onClick={logout}
                     >
                         Logout
@@ -174,7 +179,9 @@ const ProtectedLayout = () => {
                 {/* Main Content Area */}
                 <main className="flex-grow p-4 flex flex-col gap-4 bg-white shadow-md bg-gray-50">
                     {/* Statistic section */}
-                    <StatisticSection />
+                    {["admin", "business"].includes(authUserInfo.role) && (
+                        <StatisticSection />
+                    )}
 
                     {/* Content area */}
                     <div className=" flex-grow bg-white shadow-md">
@@ -183,9 +190,11 @@ const ProtectedLayout = () => {
                 </main>
 
                 {/* Activity Logs Section */}
-                <aside className="w-60 bg-gray-200 p-4 shadow-md">
-                    <ActivitySection />
-                </aside>
+                {["admin", "business"].includes(authUserInfo.role) && (
+                    <aside className="w-60 bg-gray-200 p-4 shadow-md">
+                        <ActivitySection />
+                    </aside>
+                )}
             </div>
 
             {/* Footer */}
