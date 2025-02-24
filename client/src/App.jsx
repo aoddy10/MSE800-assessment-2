@@ -20,6 +20,7 @@ import MaoriPage from "./pages/MaoriPage";
 
 import LocationPage from "./pages/LocationPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import UserProfilePage from "./pages/admin/UserProfilePage";
 
 function App() {
     return (
@@ -56,6 +57,10 @@ function App() {
                         <Route
                             path="/admin/locations"
                             element={<AdminLocationPage />}
+                        />
+                        <Route
+                            path="/admin/profile"
+                            element={<UserProfilePage />}
                         />
                     </Route>
 
