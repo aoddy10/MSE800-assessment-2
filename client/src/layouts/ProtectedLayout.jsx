@@ -54,23 +54,58 @@ const ProtectedLayout = () => {
     }
 
     const Navbar = () => {
+        // random color
+        const getRandomColor = () => {
+            const colors = [
+                "bg-red-500",
+                "bg-blue-500",
+                "bg-green-500",
+                "bg-yellow-500",
+                "bg-purple-500",
+                "bg-pink-500",
+                "bg-indigo-500",
+                "bg-teal-500",
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        };
+
+        // get initial from first name and last name
+        const getInitials = (firstName, lastName) => {
+            return `${firstName?.charAt(0) || ""}${
+                lastName?.charAt(0) || ""
+            }`.toUpperCase();
+        };
+
         return (
             <nav className="bg-blue-900 text-white p-4 flex justify-between items-center">
                 {/* Logo */}
-                <h1 className="text-xl font-bold">MyAdmin Dashboard</h1>
+                <h1
+                    className="text-xl font-bold bg-white/20 p-2 flex justify-center items-center"
+                    onClick={() => navigate("/explore")}
+                >
+                    Kiwi explore
+                </h1>
 
                 {/* User Info & Logout */}
                 <div className="flex items-center gap-4">
                     {authUserInfo && (
                         <div className="flex items-center gap-2">
-                            <img
-                                src={
-                                    authUserInfo.profile_image_url ||
-                                    "/default-avatar.png"
-                                }
-                                alt="authUserInfo Avatar"
-                                className="w-8 h-8 rounded-full border"
-                            />
+                            {authUserInfo.profile_image_url ? (
+                                <img
+                                    src={authUserInfo.profile_image_url}
+                                    alt="User Avatar"
+                                    className="w-10 h-10 rounded-full border"
+                                />
+                            ) : (
+                                <div
+                                    className={`w-10 h-10 flex items-center justify-center text-white text-lg font-bold rounded-full border ${getRandomColor()}`}
+                                >
+                                    {getInitials(
+                                        authUserInfo.first_name,
+                                        authUserInfo.last_name
+                                    )}
+                                </div>
+                            )}
                             <div>
                                 <p className="text-sm">
                                     {authUserInfo.first_name}{" "}
