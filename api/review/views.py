@@ -19,7 +19,6 @@ def get_reviews(request):
     - limit (int): Number of reviews to return (optional).
     - sort_order (str): Sorting order ('asc' for oldest first, 'desc' for newest first).
     """
-    # Get query parameters
     user_id = request.GET.get("user")
     location_id = request.GET.get("location")
     city_id = request.GET.get("city")
@@ -27,10 +26,8 @@ def get_reviews(request):
     limit = request.GET.get("limit")
     sort_order = request.GET.get("sort_order", "desc")  # Default to newest first
 
-    # Start with all reviews
-    reviews = Review.objects.all()
+    reviews = Review.objects.all().select_related("user")  # Optimize query for user data
 
-    # Apply filters
     if user_id:
         reviews = reviews.filter(user_id=user_id)
     if location_id:
@@ -44,17 +41,14 @@ def get_reviews(request):
         except ValueError:
             return Response({"error": "Invalid min_rating value"}, status=400)
 
-    # Apply sorting order
     if sort_order == "asc":
-        reviews = reviews.order_by("created_at")  # Oldest first
+        reviews = reviews.order_by("created_at")
     else:
-        reviews = reviews.order_by("-created_at")  # Newest first
+        reviews = reviews.order_by("-created_at")
 
-    # Apply limit if provided
     if limit and limit.isdigit():
         reviews = reviews[:int(limit)]
 
-    # Serialize and return filtered reviews
     serializer = ReviewSerializer(reviews, many=True)
     return Response(serializer.data)
 
