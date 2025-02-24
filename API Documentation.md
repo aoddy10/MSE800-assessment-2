@@ -690,115 +690,129 @@ curl -X DELETE http://localhost:8000/api/locations/gallery/5/delete/ \
 
 ---
 
-# 📝 **Review Management**
+# 📝 **Reviews Management**
 
-## **1. Get Reviews**
+## Overview
 
-```http
-GET /api/reviews/
+This API allows users to **retrieve** and **create** reviews for locations. Users must be **authenticated** to create a review.
+
+---
+
+## **Endpoints**
+
+### 1️⃣ **Retrieve Reviews**
+
+#### `GET /api/reviews/`
+
+#### **Query Parameters**
+
+| Parameter    | Type  | Description                                                     |
+| ------------ | ----- | --------------------------------------------------------------- |
+| `user`       | int   | Filter reviews by user ID                                       |
+| `location`   | int   | Filter reviews by location ID                                   |
+| `city`       | int   | Filter reviews by city ID                                       |
+| `min_rating` | float | Filter reviews with rating greater than or equal to this value  |
+| `limit`      | int   | Number of reviews to return (optional)                          |
+| `sort_order` | str   | Sorting order (`asc` for oldest first, `desc` for newest first) |
+
+#### **Example Request**
+
+```
+GET /api/reviews/?location=2&min_rating=4.0&sort_order=desc&limit=5
 ```
 
-### **Query Parameters**
-
-| Parameter  | Type | Description                                                     |
-| ---------- | ---- | --------------------------------------------------------------- |
-| `user`     | int  | Filter reviews by user ID.                                      |
-| `location` | int  | Filter reviews by location ID.                                  |
-| `city`     | int  | Filter reviews by city ID.                                      |
-| `limit`    | int  | Number of reviews to return (sorted by newest first). Optional. |
-
-### **Example Requests:**
-
-#### **1️⃣ Get All Reviews (Sorted by Newest)**
-
-```http
-GET /api/reviews/
-```
-
-#### **2️⃣ Filter by User ID**
-
-```http
-GET /api/reviews/?user=1
-```
-
-#### **3️⃣ Filter by Location ID**
-
-```http
-GET /api/reviews/?location=2
-```
-
-#### **4️⃣ Filter by City ID**
-
-```http
-GET /api/reviews/?city=3
-```
-
-#### **5️⃣ Get the Latest 5 Reviews**
-
-```http
-GET /api/reviews/?limit=5
-```
-
-#### **6️⃣ Get the Latest 3 Reviews for a Specific Location**
-
-```http
-GET /api/reviews/?location=2&limit=3
-```
-
-### **Response Example (200 OK)**
+#### **Example Response**
 
 ```json
 [
     {
         "id": 1,
-        "user": 1,
+        "user": 5,
         "location": 2,
-        "review": "Amazing experience!",
-        "rating": 5,
-        "created_at": "2024-02-10T15:30:00Z"
+        "review": "Amazing place! Had a great time.",
+        "rating": 4.8,
+        "created_at": "2024-03-20T10:30:00Z"
+    },
+    {
+        "id": 2,
+        "user": 3,
+        "location": 2,
+        "review": "Nice experience but a bit crowded.",
+        "rating": 4.0,
+        "created_at": "2024-03-18T15:45:00Z"
     }
 ]
 ```
 
 ---
 
-## **2. Create a Review**
+### 2️⃣ **Create a Review**
 
-```http
-POST /api/reviews/create/
-```
+#### `POST /api/reviews/create/`
 
-### **Request Body**
+##### **Requires Authentication**
 
-```json
-{
-    "user": 1,
-    "location": 2,
-    "review": "Amazing experience!",
-    "rating": 5
-}
-```
+#### **Request Body (JSON)**
 
-### **Response Example (201 Created)**
+| Parameter  | Type  | Required | Description                       |
+| ---------- | ----- | -------- | --------------------------------- |
+| `location` | int   | ✅ Yes   | ID of the location being reviewed |
+| `review`   | str   | ✅ Yes   | The text content of the review    |
+| `rating`   | float | ✅ Yes   | The rating score (1-5)            |
+
+#### **Example Request**
 
 ```json
 {
-    "id": 2,
-    "user": 1,
     "location": 2,
-    "review": "Amazing experience!",
-    "rating": 5,
-    "created_at": "2024-02-10T16:00:00Z"
+    "review": "Amazing place! Had a great time.",
+    "rating": 4.8
 }
 ```
 
-## **Response Codes:**
+#### **Response**
 
-| Status Code       | Description                     |
-| ----------------- | ------------------------------- |
-| `200 OK`          | Successfully retrieved reviews. |
-| `201 Created`     | Review successfully created.    |
-| `400 Bad Request` | Invalid request data.           |
+```json
+{
+    "id": 10,
+    "user": 5,
+    "location": 2,
+    "review": "Amazing place! Had a great time.",
+    "rating": 4.8,
+    "created_at": "2024-03-20T12:00:00Z"
+}
+```
+
+#### **System Log Entry (Automatic Logging)**
+
+Upon review creation, a **system log entry** is automatically created:
+
+```json
+{
+    "user": 5,
+    "module": "Review",
+    "relate_id": 10,
+    "description": "User 5 added a review for Location ID 2 with rating 4.8",
+    "created_at": "2024-03-20T12:00:00Z"
+}
+```
+
+---
+
+## **Permissions**
+
+-   **GET** `/api/reviews/` - Publicly accessible
+-   **POST** `/api/reviews/` - Requires authentication (User must be logged in)
+
+---
+
+## **Error Handling**
+
+| Status Code        | Message                                   |
+| ------------------ | ----------------------------------------- |
+| `400` Bad Request  | Invalid or missing parameters             |
+| `401` Unauthorized | User not logged in when creating a review |
+| `404` Not Found    | Location or user not found                |
 
 ---
 
