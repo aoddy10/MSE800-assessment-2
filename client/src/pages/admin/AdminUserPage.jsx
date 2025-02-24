@@ -83,15 +83,6 @@ const AdminUserPage = () => {
                 ]}
             />
 
-            {/* User Form Modal */}
-            {/* {showModal && (
-                <UserForm
-                    location={selectedUser}
-                    onClose={() => setShowModal(false)}
-                    onRefresh={fetchUsers}
-                />
-            )} */}
-
             {/* Confirm toggle suspended Modal */}
             {showConfirmToggleSuspended && (
                 <Modal

@@ -293,9 +293,11 @@ def delete_user(request, user_id):
 @permission_classes([IsAuthenticated])
 def toggle_suspend_user(request, user_id):
     """
-    Toggle the suspension status of a user (Only accessible by admin role).
+    Toggle the suspension and active status of a user (Only accessible by admin role).
     
     - Admin users can suspend or unsuspend other users.
+    - If a user is suspended, they are also deactivated (`is_active=False`).
+    - If a user is unsuspended, they are reactivated (`is_active=True`).
     - A log entry is created for every action performed.
     """
     if not is_admin_role(request.user):
@@ -307,6 +309,7 @@ def toggle_suspend_user(request, user_id):
 
         # Toggle suspension status
         user.is_suspended = not user.is_suspended
+        user.is_active = not user.is_suspended  # Deactivate if suspended, activate if unsuspended
         user.save()
 
         # Determine action performed
@@ -320,7 +323,15 @@ def toggle_suspend_user(request, user_id):
             description=f"{action.capitalize()} user: {user.username}"
         )
 
-        return Response({"message": f"User {action} successfully"}, status=200)
+        return Response(
+            {
+                "message": f"User {action} successfully",
+                "user_id": user.id,
+                "is_suspended": user.is_suspended,
+                "is_active": user.is_active,
+            },
+            status=200,
+        )
 
     except User.DoesNotExist:
         return Response({"error": "User not found"}, status=404)
