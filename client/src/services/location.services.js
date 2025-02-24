@@ -157,3 +157,52 @@ export const getLocations = async (filterAttribute = {}) => {
         throw error;
     }
 };
+
+export const getReviews = async (filterAttribute = {}) => {
+    const { cityId,locationId, userId, limit } = filterAttribute;
+
+    try {
+        let searchQuery = "";
+        if (cityId) {
+            searchQuery = `city=${cityId}`;
+        }
+        if (locationId) {
+            if (searchQuery) {
+                searchQuery += "&";
+            }
+            searchQuery += `location=${locationId}`;
+        }
+        if (userId) {
+            if (searchQuery) {
+                searchQuery += "&";
+            }
+            searchQuery += `user=${userId}`;
+        }
+         
+        if (limit) {
+            if (searchQuery) {
+                searchQuery += "&";
+            }
+            searchQuery += `limit=${limit}`;
+        }
+        const response = await axiosInstance.get(`/reviews/?${searchQuery}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error reviews:", error);
+        throw error;
+    }
+};
+
+
+// create review
+export const createReview = async (data, token) => {
+    try {
+        const response = await axiosInstance.post("/reviews/create/", data, {
+            headers: { Authorization: `Token ${token}` },
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error creating review:", error);
+        throw error;
+    }
+};

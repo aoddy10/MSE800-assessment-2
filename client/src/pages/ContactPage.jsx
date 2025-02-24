@@ -7,12 +7,12 @@ const ContactPage = () => {
             <div className="contact-content">
                 <div className="contact-txt">
                     <div className="contact-text">
-                        <h1>Lorem Ipsum<br /><b>Dolor Sit Amet Cons</b></h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In laoreet elit posuere odio rutrum, eu vulputate magna fringilla. Curabitur ornare consequat ex, et interdum nibh aliquet vitae.</p>
+                        <h1>Contact Us</h1>
+                      
                     </div>
                 </div>
                 <div className="contact-form-details-box">
-                    <div className="contact-box">
+                    {/* <div className="contact-box">
                         <div className="contact-box-form">
                             <h1>01</h1>
                             <div className="contact-form">
@@ -74,16 +74,16 @@ const ContactPage = () => {
                             </div>
                         </div>
                         
-                    </div>
+                    </div> */}
                     <div className="details-box">
                         <div className="details">
                             <h1>Contact Details</h1>
-                            <p>info@kiwiexplorer.com <br/>+64 20 123 4567</p>
+                            <p>If you have any query, you can email to info@kiwiexplorer.com <br/>or give us a call on +64 20 123 4567</p>
                         </div>
-                        <div className="details">
+                        {/* <div className="details">
                             <h1>Project Details</h1>
                             <p>MSE800 - Assessment 2 <br/>Auckland, New Zealand</p>
-                        </div>
+                        </div> */}
                         <div className="details">
                             <h1>Socials</h1>
                             <div className="icons-container">
