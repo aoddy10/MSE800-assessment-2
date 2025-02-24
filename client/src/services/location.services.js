@@ -130,10 +130,13 @@ export const deleteLocation = async (id, token) => {
 
 //
 export const getLocations = async (filterAttribute = {}) => {
-    const { cityId, type, priceRange } = filterAttribute;
+    const { userId, cityId, type, priceRange } = filterAttribute;
 
     try {
         let searchQuery = "";
+        if (userId) {
+            searchQuery = `user=${userId}`;
+        }
         if (cityId) {
             searchQuery = `city=${cityId}`;
         }
@@ -159,7 +162,7 @@ export const getLocations = async (filterAttribute = {}) => {
 };
 
 export const getReviews = async (filterAttribute = {}) => {
-    const { cityId,locationId, userId, limit } = filterAttribute;
+    const { cityId, locationId, userId, limit } = filterAttribute;
 
     try {
         let searchQuery = "";
@@ -178,7 +181,7 @@ export const getReviews = async (filterAttribute = {}) => {
             }
             searchQuery += `user=${userId}`;
         }
-         
+
         if (limit) {
             if (searchQuery) {
                 searchQuery += "&";
@@ -192,7 +195,6 @@ export const getReviews = async (filterAttribute = {}) => {
         throw error;
     }
 };
-
 
 // create review
 export const createReview = async (data, token) => {

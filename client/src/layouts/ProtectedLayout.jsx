@@ -190,7 +190,7 @@ const ProtectedLayout = () => {
                 </main>
 
                 {/* Activity Logs Section */}
-                {["admin", "business"].includes(authUserInfo.role) && (
+                {["admin"].includes(authUserInfo.role) && (
                     <aside className="w-60 bg-gray-200 p-4 shadow-md">
                         <ActivitySection />
                     </aside>
