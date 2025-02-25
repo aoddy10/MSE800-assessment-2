@@ -21,12 +21,10 @@ const NavigationMain = () => {
             }
         };
 
-        console.log(token);
-
         if (token) {
             fetchUser();
         }
-    }, [token]);
+    }, [token, authUserInfo, setAuthUserInfo]);
 
     return (
         <nav className="navbar-white">

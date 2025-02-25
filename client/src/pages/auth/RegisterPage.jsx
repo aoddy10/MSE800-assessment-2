@@ -10,6 +10,7 @@ import cornerImage from "../../assets/corner-png.png";
 import cornerImage2 from "../../assets/corner-png2.png";
 import activeUsers from "../../assets/activeUsers.png";
 import arrowleft from "../../assets/arrow-left.svg";
+import { isValidEmail } from "../../utils/libs";
 
 const RegisterPage = () => {
     const { login } = useContext(AuthContext); // Use auth context to store token after registration
@@ -31,12 +32,6 @@ const RegisterPage = () => {
     // Function to handle input field changes
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    // Function to validate email format
-    const isValidEmail = (email) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex pattern
-        return emailRegex.test(email);
     };
 
     // Function to validate required fields and check password match
