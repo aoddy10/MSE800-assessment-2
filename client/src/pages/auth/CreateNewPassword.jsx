@@ -6,7 +6,7 @@ import cornerImage2 from "../../assets/corner-png2.png";
 import activeUsers from "../../assets/activeUsers.png";
 import arrowleft from "../../assets/arrow-left.svg";
 
-const ForgotPassword = () => {
+const CreateNewPassword = () => {
 
     return (
 
@@ -26,11 +26,16 @@ const ForgotPassword = () => {
                         lobortis commodo ipsum sit amet pharetra. Quisque nisi diam,</p>
 
                     <div className="input-group">
-                        <label htmlFor="email">Email</label>
-                        <input type="text" id="email" name="email" placeholder="Enter your email" />
+                        <label htmlFor="newPassword">Create a new password</label>
+                        <input type="password" id="newPassword" name="newPassword" placeholder="Enter your new password" />
                     </div>
 
-                    <button type="submit" className="sign-in-button">Send Reset Code</button>
+                    <div className="input-group">
+                        <label htmlFor="newPassword2">Re-enter your new password</label>
+                        <input type="password" id="newPassword2" name="newPassword2" placeholder="Re-enter your new password" />
+                    </div>
+
+                    <button type="submit" className="sign-in-button">Change Password</button>
 
                     <div className="divider">
                         <hr />
@@ -65,4 +70,4 @@ const ForgotPassword = () => {
     );
 };
 
-export default ForgotPassword;
+export default CreateNewPassword;
