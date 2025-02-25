@@ -6,7 +6,7 @@ import { getSystemLogs } from "../services/systemlog.services";
 
 const StatisticCard = ({ title, value }) => {
     return (
-        <div className="flex flex-col gap-2 flex-grow shadow-md rounded-lg bg-gray-50 h-40 p-4 justify-between">
+        <div className="flex flex-col gap-2 min-w-72 shadow-md rounded-lg bg-gray-50 h-40 p-4 justify-between">
             <h3 className=" text-secondary">{title}</h3>
             <p className="text-4xl text-right font-bold">{value}</p>
         </div>
@@ -14,7 +14,7 @@ const StatisticCard = ({ title, value }) => {
 };
 
 const StatisticSection = () => {
-    const { token } = useContext(AuthContext);
+    const { token, authUserInfo } = useContext(AuthContext);
     const [data, setData] = useState({
         countUsers: 0,
         countLocations: 0,
@@ -22,9 +22,13 @@ const StatisticSection = () => {
     });
 
     useEffect(() => {
-        fetchTotalUsers();
-        fetchTotalLocations();
-        fetchSystemLogs();
+        if (authUserInfo.role && authUserInfo.role === "admin") {
+            fetchTotalUsers();
+            fetchTotalLocations();
+            fetchSystemLogs();
+        } else {
+            fetchTotalLocations(authUserInfo.id);
+        }
     }, []);
 
     // fetch total user
@@ -34,8 +38,10 @@ const StatisticSection = () => {
     };
 
     // fetch total location
-    const fetchTotalLocations = async () => {
-        const response = await getLocations(token);
+    const fetchTotalLocations = async (userId = null) => {
+        const response = await getLocations({
+            userId: userId,
+        });
         setData((prev) => ({ ...prev, countLocations: response.length || 0 }));
     };
 
@@ -47,15 +53,19 @@ const StatisticSection = () => {
 
     return (
         <div className="flex gap-4">
-            <StatisticCard title="Total Users" value={data.countUsers} />
+            {authUserInfo.role && authUserInfo.role === "admin" && (
+                <StatisticCard title="Total Users" value={data.countUsers} />
+            )}
             <StatisticCard
                 title="Total Locations"
                 value={data.countLocations}
             />
-            <StatisticCard
-                title="Activities in last 7 Days"
-                value={data.countActivities}
-            />
+            {authUserInfo.role && authUserInfo.role === "admin" && (
+                <StatisticCard
+                    title="Total Activities"
+                    value={data.countActivities}
+                />
+            )}
         </div>
     );
 };

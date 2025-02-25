@@ -5,6 +5,7 @@ import useLogout from "../hooks/useLogout";
 import ActivitySection from "../components/ActivitySection";
 import StatisticSection from "../components/StatisticSection";
 import { getMe } from "../services/auth.service.s";
+import { UserAvatar } from "../components/UserAvatar";
 
 const ProtectedLayout = () => {
     const { token, authUserInfo, setAuthUserInfo } = useContext(AuthContext);
@@ -59,28 +60,6 @@ const ProtectedLayout = () => {
     }
 
     const Navbar = () => {
-        // random color
-        const getRandomColor = () => {
-            const colors = [
-                "bg-red-500",
-                "bg-blue-500",
-                "bg-green-500",
-                "bg-yellow-500",
-                "bg-purple-500",
-                "bg-pink-500",
-                "bg-indigo-500",
-                "bg-teal-500",
-            ];
-            return colors[Math.floor(Math.random() * colors.length)];
-        };
-
-        // get initial from first name and last name
-        const getInitials = (firstName, lastName) => {
-            return `${firstName?.charAt(0) || ""}${
-                lastName?.charAt(0) || ""
-            }`.toUpperCase();
-        };
-
         return (
             <nav className="bg-blue-900 text-white p-4 flex justify-between items-center">
                 {/* Logo */}
@@ -95,22 +74,11 @@ const ProtectedLayout = () => {
                 <div className="flex items-center gap-4">
                     {authUserInfo && (
                         <div className="flex items-center gap-2">
-                            {authUserInfo.profile_image_url ? (
-                                <img
-                                    src={authUserInfo.profile_image_url}
-                                    alt="User Avatar"
-                                    className="w-10 h-10 rounded-full border"
-                                />
-                            ) : (
-                                <div
-                                    className={`w-10 h-10 flex items-center justify-center text-white text-lg font-bold rounded-full border ${getRandomColor()}`}
-                                >
-                                    {getInitials(
-                                        authUserInfo.first_name,
-                                        authUserInfo.last_name
-                                    )}
-                                </div>
-                            )}
+                            <UserAvatar
+                                profileImageUrl={authUserInfo.profile_image_url}
+                                firstName={authUserInfo.first_name}
+                                lastName={authUserInfo.last_name}
+                            />
                             <div>
                                 <p className="text-sm">
                                     {authUserInfo.first_name}{" "}
@@ -190,7 +158,7 @@ const ProtectedLayout = () => {
                 </main>
 
                 {/* Activity Logs Section */}
-                {["admin", "business"].includes(authUserInfo.role) && (
+                {["admin"].includes(authUserInfo.role) && (
                     <aside className="w-60 bg-gray-200 p-4 shadow-md">
                         <ActivitySection />
                     </aside>
