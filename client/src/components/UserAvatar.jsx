@@ -50,7 +50,7 @@ export const UserAvatar = ({
                     alt="User Avatar"
                     className={`${
                         sizeClasses[size] || sizeClasses.md
-                    } rounded-full border`}
+                    } rounded-full border object-cover`}
                 />
             ) : (
                 <div

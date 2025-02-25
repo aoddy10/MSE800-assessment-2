@@ -1,9 +1,25 @@
 import { UserAvatar } from "../../components/UserAvatar";
 import AuthContext from "../../context/AuthContext";
 import React, { useContext } from "react";
+import { useState } from "react";
+import UserProfileForm from "./form/UserProfileForm";
+import { getMe } from "../../services/auth.service.s";
+import { Button } from "../../components/ui/button";
 
 function UserProfilePage() {
-    const { authUserInfo } = useContext(AuthContext);
+    const { token, authUserInfo, setAuthUserInfo } = useContext(AuthContext);
+    const [showModal, setShowModal] = useState(false);
+
+    const fetchMe = async () => {
+        try {
+            const newUser = await getMe(token);
+            setAuthUserInfo(newUser);
+        } catch (error) {}
+    };
+
+    const handleEdit = () => {
+        setShowModal(true);
+    };
 
     return (
         <div className="p-6">
@@ -34,7 +50,20 @@ function UserProfilePage() {
                         <div>{authUserInfo.phone}</div>
                     </div>
                 </div>
+
+                <div>
+                    <Button onClick={handleEdit}>Edit</Button>
+                </div>
             </div>
+
+            {/* User Form Modal */}
+            {showModal && (
+                <UserProfileForm
+                    user={authUserInfo}
+                    onClose={() => setShowModal(false)}
+                    onRefresh={fetchMe}
+                />
+            )}
         </div>
     );
 }
