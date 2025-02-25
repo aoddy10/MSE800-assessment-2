@@ -52,7 +52,11 @@ function UserProfilePage() {
                 </div>
 
                 <div>
-                    <Button onClick={handleEdit}>Edit</Button>
+                    <Button 
+                        variant="edit"
+                        onClick={handleEdit}>
+                            Edit
+                    </Button>
                 </div>
             </div>
 

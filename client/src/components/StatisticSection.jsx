@@ -6,7 +6,7 @@ import { getSystemLogs } from "../services/systemlog.services";
 
 const StatisticCard = ({ title, value }) => {
     return (
-        <div className="flex flex-col gap-2 min-w-72 shadow-md rounded-lg bg-gray-50 h-40 p-4 justify-between">
+        <div className="flex flex-col gap-2 min-w-72 shadow-md rounded-lg bg-white h-40 p-4 justify-between">
             <h3 className=" text-secondary">{title}</h3>
             <p className="text-4xl text-right font-bold">{value}</p>
         </div>

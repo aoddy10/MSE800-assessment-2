@@ -91,7 +91,7 @@ const AdminUserPage = () => {
                                     className={`${
                                         user.is_suspended
                                             ? "bg-red-400"
-                                            : "bg-blue-200"
+                                            : "bg-white"
                                     }`}
                                 >
                                     {user.is_suspended

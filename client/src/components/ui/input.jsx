@@ -9,14 +9,14 @@ export const Input = ({
     className = "",
 }) => {
     return (
-        <div className="mb-4">
+        <div className="mb-5">
             <label className="block text-sm font-medium mb-1">{label}</label>
             <input
                 type={type}
                 name={name}
                 value={value}
                 onChange={onChange}
-                className={`border rounded p-2 w-full focus:outline-none focus:ring focus:ring-blue-200 ${className}`}
+                className={`border rounded p-2 w-full focus:border-[#31aab7] focus:outline-none ${className}`}
             />
         </div>
     );

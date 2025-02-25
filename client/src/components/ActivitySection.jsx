@@ -3,6 +3,8 @@ import { getSystemLogs } from "../services/systemlog.services";
 import React, { useContext, useEffect, useState } from "react";
 import moment from "moment";
 
+import { BellIcon } from "@heroicons/react/24/solid";
+
 function ActivitySection() {
     const { token } = useContext(AuthContext);
     const [logs, setLogs] = useState([]);
@@ -27,7 +29,10 @@ function ActivitySection() {
 
     return (
         <>
-            <h2 className="text-lg font-semibold">Recent Activity</h2>
+            <h2 className="text-lg font-semibold flex items-center">
+                <BellIcon className="h-5 w-5 mr-2" />
+                Recent Activity
+            </h2>
             <div className="mt-2 space-y-2 overflow-auto h-fit flex flex-col ">
                 {logs.length > 0 ? (
                     logs.map((log, index) => (
