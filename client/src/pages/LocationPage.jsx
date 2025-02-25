@@ -47,6 +47,7 @@ const LocationPage = () => {
                 );
 
                 setLocations(rresult);
+                
             }
         } catch (error) {
             console.log(error);
@@ -71,6 +72,11 @@ const LocationPage = () => {
         setShowReviewForm(true);
     };
 
+    const handleCityClick = ({ location }) => {
+        const paramValue = location.city;
+        navigate(`/city/${paramValue}`);
+    };
+
     return (
         <>
             {/* <div className="bg-gray-100 min-h-screen p-6"> */}
@@ -88,7 +94,7 @@ const LocationPage = () => {
                     
                    
                      {/* <div className="lg:w-2/3 bg-white p-6 rounded-xl shadow-lg"> */}
-                     <div className="lg:w-2/3 bg-white p-6 rounded-xl shadow-lg">
+                     <div className="flex flex-col flex-grow  bg-white p-6 rounded-xl shadow-lg">
                     
                         <h1 className="text-2xl font-bold">{location.title}</h1>
                         <p className="text-gray-600 mt-2">
@@ -96,7 +102,7 @@ const LocationPage = () => {
                         </p>
                        
                     </div>
-                    <div className="bg-white p-3 rounded-xl shadow-lg">
+                    <div className="bg-white flex flex-col flex-grow   p-3 rounded-xl shadow-lg">
                     {/* <div className="bg-white p-6 rounded-xl shadow-lg"> */}
                         <h2 className="text-xl font-semibold">
                             Contact Information
@@ -133,13 +139,10 @@ const LocationPage = () => {
                 </div>
 
                 <section className="my-12">
-                    <h2 className="text-2xl font-bold mb-2">
-                        Browse Other {type} in {location.city_name}{" "}
+                    <h2 className="text-2xl font-bold mb-2" style={{ cursor: "pointer", margin: 10 }} onClick={() => handleCityClick({ location })}>
+                        Browse Other {type} in  {location.city_name}{" "}
                     </h2>
-                    <p className="text-gray-600 mb-6">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras iaculis consectetur nisi sagittis.
-                    </p>
+                 
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {locations && locations.length > 0
