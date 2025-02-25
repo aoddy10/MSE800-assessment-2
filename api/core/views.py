@@ -347,8 +347,6 @@ def upload_image(request):
     API endpoint to upload an image (Only admin or business users, Max size: 10MB).
     Generates a unique filename using UUID to prevent duplicate file names.
     """
-    if not is_admin_or_business(request.user):
-        return Response({"error": "Permission denied"}, status=403)
 
     image = request.FILES.get("image")
     if not image:
@@ -390,8 +388,6 @@ def delete_uploaded_image(request):
     API endpoint to delete an uploaded image (Only admin or business users).
     Requires the image URL in the request body.
     """
-    if not is_admin_or_business(request.user):
-        return Response({"error": "Permission denied"}, status=403)
 
     image_url = request.data.get("image_url")
 
