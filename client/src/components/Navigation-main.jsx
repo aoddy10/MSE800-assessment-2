@@ -21,8 +21,6 @@ const NavigationMain = () => {
             }
         };
 
-        console.log(token);
-
         if (token) {
             fetchUser();
         }
