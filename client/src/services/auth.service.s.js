@@ -27,8 +27,10 @@ export const forgotPassword = async (email) => {
 };
 
 // confirm reset password
-export const resetPassword = async ({ data }) => {
+export const resetPassword = async (data) => {
     const { resetToken, newPassword } = data;
+    console.log("resetToken", resetToken);
+    console.log("new password", newPassword);
 
     try {
         const response = await axiosInstance.post(`/password-reset-confirm/`, {

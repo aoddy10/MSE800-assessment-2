@@ -155,6 +155,8 @@ def password_reset_request(request):
 def password_reset_confirm(request):
     reset_token = request.data.get("reset_token")
     new_password = request.data.get("new_password")
+    
+    print(reset_token, new_password)
 
     # check if Token is correct
     user = User.objects.filter(reset_token=reset_token).first()

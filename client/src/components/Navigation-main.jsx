@@ -24,7 +24,7 @@ const NavigationMain = () => {
         if (token) {
             fetchUser();
         }
-    }, [token]);
+    }, [token, authUserInfo, setAuthUserInfo]);
 
     return (
         <nav className="navbar-white">

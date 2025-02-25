@@ -35,8 +35,14 @@ function App() {
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="/CreateNewPassword" element={<CreateNewPassword />} />
+                    <Route
+                        path="/forgot-password"
+                        element={<ForgotPassword />}
+                    />
+                    <Route
+                        path="/reset-password/:resetToken"
+                        element={<CreateNewPassword />}
+                    />
 
                     <Route element={<MainLayout />}>
                         <Route path="/city/:id" element={<CityPage />} />

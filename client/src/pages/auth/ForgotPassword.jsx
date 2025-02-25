@@ -48,7 +48,7 @@ const ForgotPassword = () => {
 
         try {
             // Sending reset password request data to API
-            const response = await forgotPassword(formData.email);
+            await forgotPassword(formData.email);
 
             navigate("/explore"); // Redirect to home page after successful request reset password
         } catch (error) {
