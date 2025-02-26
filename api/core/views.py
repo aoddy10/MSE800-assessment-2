@@ -461,10 +461,11 @@ def get_system_logs(request):
     - `user_id` (int): Filter by user ID.
     - `location_id` (int): Filter by Location ID.
     - `date_range` (str): Filter logs within a time range (Only accepts: "today", "week", "month").
+    - `module` (str): Filter logs by module name (e.g., "User", "Review", "Location").
 
     Example:
     ```
-    /api/system-logs/?limit=10&sort_order=desc&user_id=1&location_id=5&date_range=week
+    /api/system-logs/?limit=10&sort_order=desc&user_id=1&location_id=5&date_range=week&module=Review
     ```
     """
 
@@ -474,6 +475,7 @@ def get_system_logs(request):
     user_id = request.GET.get("user_id")
     location_id = request.GET.get("location_id")
     date_range = request.GET.get("date_range")
+    module = request.GET.get("module")  # New filter
 
     # Validate date_range
     valid_date_ranges = ["today", "week", "month"]
@@ -484,7 +486,7 @@ def get_system_logs(request):
         )
 
     # Start with all logs
-    logs = SystemLog.objects.all()
+    logs = SystemLog.objects.select_related("user").all()
 
     # Apply filters if provided
     if user_id:
@@ -492,6 +494,9 @@ def get_system_logs(request):
 
     if location_id:
         logs = logs.filter(relate_id=location_id, module="Location")  # Filter by location ID
+
+    if module:
+        logs = logs.filter(module=module)  # Filter by module
 
     # Apply date range filtering
     today = now().date()
@@ -512,6 +517,24 @@ def get_system_logs(request):
     if limit:
         logs = logs[: int(limit)]
 
-    # Serialize and return logs
-    serializer = SystemLogSerializer(logs, many=True)
-    return Response(serializer.data)
+    # Serialize and return logs with user data
+    logs_data = [
+        {
+            "id": log.id,
+            "module": log.module,
+            "relate_id": log.relate_id,
+            "description": log.description,
+            "created_at": log.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+            "user": {
+                "id": log.user.id,
+                "first_name": log.user.first_name,
+                "last_name": log.user.last_name,
+                "email": log.user.email,
+            }
+            if log.user
+            else None,
+        }
+        for log in logs
+    ]
+
+    return Response(logs_data)

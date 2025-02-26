@@ -8,13 +8,16 @@ import axiosInstance from "../api/axios";
  * @param {string} [filters.sort_by] - Sorting order ('asc' or 'desc').
  * @param {number} [filters.user_id] - Filter logs by user ID.
  * @param {number} [filters.limit] - Limit the number of logs returned.
+ * @param {string} [filters.module] - Filter logs by module.
+ * @param {string} [filters.date_range] - Filter logs by date range.
  * @returns {Promise<Object[]>} - Returns a list of system logs from the API.
  * @throws {Error} - Throws an error if fetching logs fails.
  */
 
 export const getSystemLogs = async (token, filter) => {
     // Unpack filter object to extract filtering criteria
-    const { sort_order, user_id, limit, location_id, date_range } = filter;
+    const { sort_order, user_id, limit, location_id, date_range, module } =
+        filter;
 
     // Construct query string dynamically based on available filters
     let queryString = "";
@@ -32,6 +35,9 @@ export const getSystemLogs = async (token, filter) => {
     }
     if (date_range) {
         queryString += `date_range=${date_range}&`; // Append date range filter
+    }
+    if (module) {
+        queryString += `module=${module}&`; // Append module filter
     }
 
     try {

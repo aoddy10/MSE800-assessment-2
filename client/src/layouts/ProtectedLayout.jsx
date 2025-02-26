@@ -11,6 +11,9 @@ import { UserAvatar } from "../components/UserAvatar";
 import blackLogo from "../assets/logo-black.png";
 import AdminSidebar from "../components/AdminSidebar";
 
+const navHeight = 150;
+const footerHeight = 50;
+
 const ProtectedLayout = () => {
     const { token, authUserInfo, setAuthUserInfo } = useContext(AuthContext);
 
@@ -48,7 +51,9 @@ const ProtectedLayout = () => {
 
     const Navbar = () => {
         return (
-            <nav className="p-6 flex justify-between items-center bg-white border-b border-gray-200">
+            <nav
+                className={`p-6 h-full flex justify-between items-center bg-white border-b border-gray-200`}
+            >
                 {/* Logo */}
                 <img
                     src={blackLogo}
@@ -92,14 +97,14 @@ const ProtectedLayout = () => {
     };
 
     return (
-        <div className="h-screen flex flex-col bg-gray-100">
+        <div className="h-screen flex flex-col bg-gray-100 !overflow-hidden">
             {/* Navbar */}
-            <div>
+            <div className={`h-[${navHeight}px]`}>
                 <Navbar user={authUserInfo} />
             </div>
 
             {/* Main Content Layout */}
-            <div className="flex flex-grow">
+            <div className="flex flex-grow overflow-auto">
                 {/* Sidebar */}
                 <div>
                     <AdminSidebar user={authUserInfo} />
@@ -113,23 +118,23 @@ const ProtectedLayout = () => {
                     )}
 
                     {/* Content area */}
-                    <div className="bg-white shadow-md">
+                    <div className="bg-white shadow-md overflow-auto">
                         <Outlet />
                     </div>
                 </main>
 
                 {/* Activity Logs Section */}
                 {["admin"].includes(authUserInfo.role) && (
-                    <div className="">
-                        <aside className="w-60 bg-white p-4 shadow-xl h-full">
-                            <ActivitySection />
-                        </aside>
-                    </div>
+                    <aside className="w-60 bg-white p-4 shadow-xl h-full overflow-auto">
+                        <ActivitySection />
+                    </aside>
                 )}
             </div>
 
             {/* Footer */}
-            <footer className="bg-[#232323] text-white text-center text-sm p-4">
+            <footer
+                className={`bg-[#232323] text-white text-center text-sm p-4 h-[${footerHeight}px]`}
+            >
                 © 2025 Kiwi Explorer.
             </footer>
         </div>
