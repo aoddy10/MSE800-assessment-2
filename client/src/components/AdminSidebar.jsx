@@ -45,13 +45,13 @@ function AdminSidebar() {
     const [selectedMenu, setSelectedMenu] = useState("locations"); // Default menu
 
     return (
-        <aside className="w-60 bg-white shadow-xl p-4">
+        <aside className="w-60 h-full bg-white shadow-xl p-4">
             <h2 className="text-lg font-semibold mb-4">Menu</h2>
-            <ul className="space-y-2">
+            <div className="space-y-2 w-full flex flex-col flex-grow">
                 {menuItems.map(
                     (item) =>
                         item.roles.includes(authUserInfo.role) && (
-                            <li key={item.path}>
+                            <div className=" w-full" key={item.path}>
                                 <button
                                     key={item.name}
                                     onClick={() => {
@@ -60,7 +60,7 @@ function AdminSidebar() {
                                         );
                                         navigate(item.path); // Assuming navigate is properly defined
                                     }}
-                                    className={`w-full text-left px-6 py-2 rounded flex items-center ${
+                                    className={` w-full text-left px-6 py-2 rounded flex gap-4 items-center ${
                                         selectedMenu === item.name.toLowerCase()
                                             ? "bg-[#232323] text-white" // Selected: Dark background, white text
                                             : "hover:bg-[#f9f9fb] hover:text-[#31AAB7]" // Default: Light hover background and text color change
@@ -68,7 +68,7 @@ function AdminSidebar() {
                                 >
                                     {/* Icon */}
                                     <span
-                                        className={`mr-4 transition-all duration-200 ${
+                                        className={`transition-all duration-200 ${
                                             selectedMenu ===
                                             item.name.toLowerCase()
                                                 ? "text-white"
@@ -80,7 +80,7 @@ function AdminSidebar() {
 
                                     {/* Item name */}
                                     <span
-                                        className={`${
+                                        className={` flex-grow ${
                                             selectedMenu ===
                                             item.name.toLowerCase()
                                                 ? "text-white"
@@ -90,13 +90,13 @@ function AdminSidebar() {
                                         {item.name}
                                     </span>
                                 </button>
-                            </li>
+                            </div>
                         )
                 )}
 
-                <li className="py-4 border-b border-gray-300"></li>
+                <div className="py-4 border-b border-gray-300"></div>
 
-                <li>
+                <div>
                     <button
                         className="w-full text-left px-6 py-2 rounded flex items-center text-red-500 hover:bg-[#f9f9fb]"
                         onClick={logout}
@@ -104,8 +104,8 @@ function AdminSidebar() {
                         <ArrowLeftStartOnRectangleIcon className="mr-4 text-red-500 h-6 w-6" />
                         Logout
                     </button>
-                </li>
-            </ul>
+                </div>
+            </div>
         </aside>
     );
 }

@@ -92,33 +92,39 @@ const ProtectedLayout = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100">
+        <div className="h-screen flex flex-col bg-gray-100">
             {/* Navbar */}
-            <Navbar user={authUserInfo} />
+            <div>
+                <Navbar user={authUserInfo} />
+            </div>
 
             {/* Main Content Layout */}
             <div className="flex flex-grow">
                 {/* Sidebar */}
-                <AdminSidebar user={authUserInfo} />
+                <div>
+                    <AdminSidebar user={authUserInfo} />
+                </div>
 
                 {/* Main Content Area */}
-                <main className="flex-grow p-4 flex flex-col gap-4 bg-[#f9f9fb]">
+                <main className="p-4 flex-grow flex flex-col gap-4 bg-[#f9f9fb]">
                     {/* Statistic section */}
                     {["admin", "business"].includes(authUserInfo.role) && (
                         <StatisticSection />
                     )}
 
                     {/* Content area */}
-                    <div className=" flex-grow bg-white shadow-md">
+                    <div className="bg-white shadow-md">
                         <Outlet />
                     </div>
                 </main>
 
                 {/* Activity Logs Section */}
                 {["admin"].includes(authUserInfo.role) && (
-                    <aside className="w-60 bg-white p-4 shadow-xl">
-                        <ActivitySection />
-                    </aside>
+                    <div className="">
+                        <aside className="w-60 bg-white p-4 shadow-xl h-full">
+                            <ActivitySection />
+                        </aside>
+                    </div>
                 )}
             </div>
 
