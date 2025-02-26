@@ -13,6 +13,7 @@ import {
     createUploadImage,
     deleteUploadImage,
 } from "../../../services/upload-image.services";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 const LocationForm = ({ location, onClose, onRefresh }) => {
     const { token, authUserInfo } = useContext(AuthContext);
@@ -101,7 +102,7 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
             onClose();
             onRefresh();
         } catch (error) {
-            // set errors to for the reponse error
+            // set errors to for the response error
             setErrors(error.response.data);
 
             console.error("Failed to save location", error.response.data);
@@ -288,10 +289,10 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                             className="rounded-lg w-full object-cover"
                         />
                         <button
-                            className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                            className="absolute top-2 right-2 p-2"
                             onClick={handleRemoveMenuImage}
                         >
-                            ❌
+                            <XMarkIcon className="size-6 rounded-full bg-red-500 text-white" />
                         </button>
                     </div>
                 ) : (
@@ -325,10 +326,10 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                             className="rounded-lg w-full object-cover"
                         />
                         <button
-                            className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                            className="absolute top-2 right-2 p-2"
                             onClick={handleRemoveCoverImage}
                         >
-                            ❌
+                            <XMarkIcon className="size-6 rounded-full bg-red-500 text-white" />
                         </button>
                     </div>
                 ) : (
@@ -342,7 +343,6 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                             onClick={handleUploadCoverImage}
                             variant="upload"
                             className="ml-3"
-
                         >
                             Upload
                         </Button>
@@ -373,7 +373,10 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
 
             {/* Submit Button */}
             <div className="flex w-full mt-4">
-                <button className="px-4 py-2 text-white rounded w-full bg-[#31AAB7] flex justify-center" onClick={handleSubmit}>
+                <button
+                    className="px-4 py-2 text-white rounded w-full bg-[#31AAB7] flex justify-center"
+                    onClick={handleSubmit}
+                >
                     {location ? "Save Changes" : "Create Location"}
                 </button>
             </div>

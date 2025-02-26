@@ -10,6 +10,7 @@ import {
     deleteUploadImage,
 } from "../../../services/upload-image.services";
 import { isValidEmail } from "../../../utils/libs";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 const UserProfileForm = ({ user, onClose, onRefresh }) => {
     const { token } = useContext(AuthContext);
@@ -151,11 +152,12 @@ const UserProfileForm = ({ user, onClose, onRefresh }) => {
                             alt="Cover"
                             className="rounded-lg w-full object-cover"
                         />
+
                         <button
-                            className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                            className="absolute top-2 right-2 p-2"
                             onClick={handleRemoveImage}
                         >
-                            ❌
+                            <XMarkIcon className="size-6 rounded-full bg-red-500 text-white" />
                         </button>
                     </div>
                 ) : (

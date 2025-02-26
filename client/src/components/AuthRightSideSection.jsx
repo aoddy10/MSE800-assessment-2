@@ -13,7 +13,6 @@ function AuthRightSideSection() {
     useEffect(() => {
         const loadUsers = async () => {
             const users = await gethActiveUsers();
-            console.log(users);
             setActiveUsers(users);
         };
         loadUsers();

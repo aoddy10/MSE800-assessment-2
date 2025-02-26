@@ -16,7 +16,7 @@ export const Table = ({ data, columns }) => {
                         ))}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="">
                     {data && data.length > 0 ? (
                         data.map((row, rowIndex) => (
                             <tr
