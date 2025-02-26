@@ -84,7 +84,7 @@ function AuthRightSideSection() {
                         Get travel insights, tips, and reviews to make your
                         adventure unforgettable!
                     </p>
-                    <button className=" w-max px-4 py-2 text-white text-sm  border-none rounded-md cursor-pointer hover:bg-white/90 bg-white text-primary">
+                    <button className=" w-max px-4 py-2 text-white text-sm  border-none rounded-md cursor-pointer hover:bg-white/90 bg-white !text-primary">
                         Explore Now
                     </button>
                 </div>
