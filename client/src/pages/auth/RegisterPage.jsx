@@ -6,9 +6,6 @@ import AuthContext from "../../context/AuthContext";
 import "../../styles/LoginPage.css";
 
 import blackLogo from "../../assets/logo-black.png";
-import cornerImage from "../../assets/corner-png.png";
-import cornerImage2 from "../../assets/corner-png2.png";
-import activeUsers from "../../assets/activeUsers.png";
 import arrowleft from "../../assets/arrow-left.svg";
 import { isValidEmail } from "../../utils/libs";
 import AuthRightSideSection from "../../components/AuthRightSideSection";
