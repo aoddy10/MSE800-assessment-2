@@ -10,6 +10,7 @@ import activeUsers from "../../assets/activeUsers.png";
 import arrowleft from "../../assets/arrow-left.svg";
 import AuthContext from "../../context/AuthContext";
 import useLogout from "../../hooks/useLogout";
+import AuthRightSideSection from "../../components/AuthRightSideSection";
 
 const CreateNewPassword = () => {
     const { token } = useContext(AuthContext);
@@ -158,23 +159,7 @@ const CreateNewPassword = () => {
             </div>
 
             {/* Right Side UI */}
-            <div className="right-container">
-                <img src={cornerImage} alt="corner" />
-                <img src={cornerImage2} alt="corner2" className="corner2" />
-                <div className="text-content">
-                    <h2>Secure Your Account</h2>
-                    <h2>Reset Your Password</h2>
-                    <div className="active-users-container">
-                        <img src={activeUsers} alt="activeUsers" />
-                        <p>Trusted by users</p>
-                    </div>
-                    <p>
-                        Ensure your account security by choosing a strong new
-                        password.
-                    </p>
-                    <button className="exploreBtn">Explore Now</button>
-                </div>
-            </div>
+            <AuthRightSideSection />
         </div>
     );
 };
