@@ -37,9 +37,30 @@ const AdminCityPage = () => {
                 data={cities}
                 columns={[
                     { key: "title", label: "Title" },
+                    {
+                        key: "image",
+                        label: "Image",
+                        render: (city) =>
+                            city.image_url ? (
+                                <img
+                                    src={city.image_url}
+                                    alt={city.title}
+                                    className="h-20 w-20 object-cover rounded-md"
+                                />
+                            ) : (
+                                <div className="h-20 w-20 rounded-md bg-gray-300 flex justify-center items-center">
+                                    No Image
+                                </div>
+                            ),
+                    },
                     { key: "description", label: "Description" },
                     { key: "rating", label: "Rating" },
-                    { key: "is_active", label: "Status" },
+                    {
+                        key: "is_active",
+                        label: "Status",
+                        render: (city) =>
+                            city.is_active ? "Active" : "Inactive",
+                    },
                     {
                         key: "actions",
                         label: "Actions",
