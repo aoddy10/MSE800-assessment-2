@@ -101,17 +101,16 @@ const CityPage = () => {
                     </div>
 
                     {/* Right Section - Reviews */}
-                    <ReviewSection reviews={reviews}/>
+                    <div className="flex-grow">
+                        <ReviewSection reviews={reviews} />
+                    </div>
                 </div>
 
                 <section className="my-12">
                     <h2 className="text-2xl font-bold mb-2">
                         Things to do in {city.title}
                     </h2>
-                    <p className="text-gray-600 mb-6">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras iaculis consectetur nisi sagittis.
-                    </p>
+                    
                     <div>
                         <button
                             onClick={() => handlebuttonClick("All")}

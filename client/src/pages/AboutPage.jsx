@@ -42,7 +42,7 @@ const AboutPage = () => {
                     </div>
                     <div className="about-hero">
                         <div className="about-column-1">
-                            <div className="about-row-1"></div>
+                            {/* <div className="about-row-1"></div> */}
                             <div
                                 className="about-row-2"
                                 style={{
@@ -72,7 +72,7 @@ const AboutPage = () => {
                                     backgroundSize: 'cover'
                                 }}
                             ></div>
-                            <div className="about-row-4"></div>
+                            {/* <div className="about-row-4"></div> */}
                         </div>
                     </div>
                 </div>

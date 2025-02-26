@@ -25,9 +25,7 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                         <span className="block font-bold">New Zealand</span>
                     </h1>
                     <p className="text-white text-sm mt-2 max-w-lg">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras iaculis consectetur nisi. Aliquam sagittis lobortis
-                        auctor. Ut pulvinar.
+                    Traveling – it leaves you speechless, then turns you into a storyteller.
                     </p>
                 </div>
 
