@@ -11,7 +11,7 @@ import {
 
 const StatisticCard = ({ title, value, icon }) => {
     return (
-        <div className="flex flex-col gap-2 min-w-72 shadow-md rounded-lg bg-white h-40 p-4 justify-between">
+        <div className=" w-full flex flex-col gap-2 min-w-72 shadow-md rounded-lg bg-white h-40 p-4 justify-between">
             <h3 className="text-lg font-bold text-[#232323]">{title}</h3>
             <div className="flex justify-between w-full">
                 <p className="text-4xl font-bold w-full text-[#31AAB7]">
@@ -66,25 +66,35 @@ const StatisticSection = () => {
     return (
         <div className="flex gap-4">
             {authUserInfo.role && authUserInfo.role === "admin" && (
-                <StatisticCard
-                    title="Total Users"
-                    value={data.countUsers}
-                    icon={<UsersIcon className="h-10 w-10 text-[#31AAB7]" />}
-                />
+                <div className=" w-1/3">
+                    <StatisticCard
+                        title="Total Users"
+                        value={data.countUsers}
+                        icon={
+                            <UsersIcon className="h-10 w-10 text-[#31AAB7]" />
+                        }
+                    />
+                </div>
             )}
-            <StatisticCard
-                title="Total Locations"
-                value={data.countLocations}
-                icon={
-                    <BuildingOfficeIcon className="h-10 w-10 text-[#31AAB7]" />
-                }
-            />
-            {authUserInfo.role && authUserInfo.role === "admin" && (
+            <div className=" w-1/3">
                 <StatisticCard
-                    title="Total Activities"
-                    value={data.countActivities}
-                    icon={<ChartPieIcon className="h-10 w-10 text-[#31AAB7]" />}
+                    title="Total Locations"
+                    value={data.countLocations}
+                    icon={
+                        <BuildingOfficeIcon className="h-10 w-10 text-[#31AAB7]" />
+                    }
                 />
+            </div>
+            {authUserInfo.role && authUserInfo.role === "admin" && (
+                <div className=" w-1/3">
+                    <StatisticCard
+                        title="Total Activities"
+                        value={data.countActivities}
+                        icon={
+                            <ChartPieIcon className="h-10 w-10 text-[#31AAB7]" />
+                        }
+                    />
+                </div>
             )}
         </div>
     );
