@@ -48,7 +48,9 @@ const AdminCityPage = () => {
                         label: "Actions",
                         render: (city) => (
                             <div className="flex gap-2">
-                                <Button onClick={() => handleEdit(city)}>
+                                <Button
+                                    variant="edit"
+                                    onClick={() => handleEdit(city)}>
                                     Edit
                                 </Button>
                             </div>

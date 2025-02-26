@@ -144,13 +144,14 @@ const CityForm = ({ city, onClose, onRefresh }) => {
                         </button>
                     </div>
                 ) : (
-                    <div className="flex flex-col">
-                        <label className="text-gray-700">Upload Image</label>
+                    <div className="flex items-center">
                         <input
                             type="file"
                             onChange={(e) => setImage(e.target.files[0])}
                         />
-                        <Button onClick={handleUploadImage} className="mt-2">
+                        <Button onClick={handleUploadImage}
+                            variant="upload"
+                            className="ml-3">
                             Upload
                         </Button>
                     </div>
@@ -159,9 +160,9 @@ const CityForm = ({ city, onClose, onRefresh }) => {
 
             {/* Submit Button */}
             <div className="flex justify-end mt-4">
-                <Button onClick={handleSubmit}>
+                <button className="px-4 py-2 text-white rounded w-full bg-[#31AAB7] flex justify-center" onClick={handleSubmit}>
                     {city ? "Save Changes" : "Create City"}
-                </Button>
+                </button>
             </div>
         </Modal>
     );

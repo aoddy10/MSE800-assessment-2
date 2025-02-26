@@ -3,12 +3,16 @@ import AuthContext from "../context/AuthContext";
 import { getUsers } from "../services/user.services";
 import React, { useContext, useEffect, useState } from "react";
 import { getSystemLogs } from "../services/systemlog.services";
+import { UsersIcon, BuildingOfficeIcon, ChartPieIcon } from "@heroicons/react/24/solid";
 
-const StatisticCard = ({ title, value }) => {
+const StatisticCard = ({ title, value, icon }) => {
     return (
-        <div className="flex flex-col gap-2 min-w-72 shadow-md rounded-lg bg-gray-50 h-40 p-4 justify-between">
-            <h3 className=" text-secondary">{title}</h3>
-            <p className="text-4xl text-right font-bold">{value}</p>
+        <div className="flex flex-col gap-2 min-w-72 shadow-md rounded-lg bg-white h-40 p-4 justify-between">
+            <h3 className="text-lg font-bold text-[#232323]">{title}</h3>
+            <div className="flex justify-between w-full">
+                <p className="text-4xl font-bold w-full text-[#31AAB7]">{icon}</p>
+                <p className="text-4xl font-bold text-right w-full text-[#31AAB7]">{value}</p>
+            </div>
         </div>
     );
 };
@@ -54,16 +58,22 @@ const StatisticSection = () => {
     return (
         <div className="flex gap-4">
             {authUserInfo.role && authUserInfo.role === "admin" && (
-                <StatisticCard title="Total Users" value={data.countUsers} />
+                <StatisticCard
+                    title="Total Users"
+                    value={data.countUsers}
+                    icon={<UsersIcon className="h-10 w-10 text-[#31AAB7]" />}
+                />
             )}
             <StatisticCard
                 title="Total Locations"
                 value={data.countLocations}
+                icon={<BuildingOfficeIcon className="h-10 w-10 text-[#31AAB7]" />}
             />
             {authUserInfo.role && authUserInfo.role === "admin" && (
                 <StatisticCard
                     title="Total Activities"
                     value={data.countActivities}
+                    icon={<ChartPieIcon className="h-10 w-10 text-[#31AAB7]" />}
                 />
             )}
         </div>
