@@ -333,6 +333,34 @@ def toggle_suspend_user(request, user_id):
     except User.DoesNotExist:
         return Response({"error": "User not found"}, status=404)
     
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def get_active_users(request):
+    """
+    Retrieve all active users sorted by last login date (descending).
+    
+    Returns:
+    - `first_name` (str): First name of the user.
+    - `last_name` (str): Last name of the user.
+    - `profile_image_url` (str): Profile image URL of the user.
+    - `last_login` (str): Last login of the user
+    """
+    # Query all active users and sort them by last_login (descending)
+    users = User.objects.filter(is_active=True).order_by("-last_login")
+
+    # Serialize only required fields
+    active_users_data = [
+        {
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "profile_image_url": request.build_absolute_uri(user.profile_image_url) if user.profile_image_url else None,
+            "last_login": user.last_login.strftime("%Y-%m-%d %H:%M:%S") if user.last_login else None,
+        }
+        for user in users
+    ]
+
+    return Response(active_users_data, status=200)
+    
 
 # =============================================================
 # Upload image Endpoint

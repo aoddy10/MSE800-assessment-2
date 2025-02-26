@@ -49,3 +49,14 @@ export const updateUser = async (token, userId, userData) => {
         throw error;
     }
 };
+
+// get active user
+export const gethActiveUsers = async () => {
+    try {
+        const response = await axiosInstance.get(`/users/active/`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching active users:", error);
+        throw error;
+    }
+};
