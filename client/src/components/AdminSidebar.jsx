@@ -7,7 +7,7 @@ import {
     UserGroupIcon,
     UserIcon,
 } from "@heroicons/react/24/solid";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Access Control: Only `admin` can see all menus, `business` can see `Locations`
@@ -42,7 +42,18 @@ function AdminSidebar() {
     const { authUserInfo } = useContext(AuthContext);
     const navigate = useNavigate();
     const logout = useLogout();
-    const [selectedMenu, setSelectedMenu] = useState("locations"); // Default menu
+    const [selectedMenu, setSelectedMenu] = useState(""); // Default menu
+
+    useEffect(() => {
+        // Set the default menu based on the user's role
+        if (["admin", "business"].includes(authUserInfo.role)) {
+            setSelectedMenu("locations");
+            navigate("/admin/locations");
+        } else {
+            setSelectedMenu("profile");
+            navigate("/admin/profile");
+        }
+    }, []);
 
     return (
         <aside className="w-60 h-full bg-white shadow-xl p-4">

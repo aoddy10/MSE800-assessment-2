@@ -56,7 +56,7 @@ function ActivitySection() {
                                             ? "bg-green-200"
                                             : log.module === "Review" &&
                                               "bg-orange-200"
-                                    } px-2 rounded text-xs font-thin`}
+                                    } px-2 py-1 rounded text-xs font-thin`}
                                 >
                                     {log.module}
                                 </div>
