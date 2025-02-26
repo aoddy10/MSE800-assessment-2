@@ -10,7 +10,7 @@ const FeaturedRestaurants = ({ restaurants }) => {
     };
 
     return (
-        <section className="my-12">
+        <section id="FeaturedRestaurants" className="my-12">
             <h2 className="text-2xl font-bold mb-2">
                 Featured restaurants
             </h2>

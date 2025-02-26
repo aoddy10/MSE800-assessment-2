@@ -10,7 +10,7 @@ const FooterWhite = () => {
                     <div className="footer-links">
                         <div className="column-1">
                             <img className="footer-logo" src={logo} alt="Kiwi Explorer Logo" />
-                            <p>Lorem ipsum dolor sit amet, consectetur<br />adipiscing elit. Cras iaculis consectetur nisi<br />sagittis.</p>
+                            
                             <div className="socmed-icons-container">
                                 {/* Facebook */}
                                 <svg className="footer-socmed-icons" viewBox="0 0 20 20">
@@ -65,24 +65,19 @@ const FooterWhite = () => {
                         </div>
                         <div className="column">
                             <h5>EXPLORE</h5>
-                            <a href="/cities">Cities</a>
-                            <a href="/restaurants">Restaurants</a>
-                            <a href="/hotel">Hotel</a>
-                            <a href="/activities">Activities</a>
+                            <a href="/explore#FeaturedCities">Cities</a>
+                            <a href="/explore#FeaturedRestaurants">Restaurants</a>
+                        
+                             <a href="/explore#FeaturedActivities">Activities</a>
                         </div>
                         <div className="column">
                             <h5>COMPANY</h5>
                             <a href="/about">About</a>
                             <a href="/contact">Contact</a>
                             <a href="/explore">Explore</a>
-                            <a href="/reviews">Reviews</a>
+                     
                         </div>
-                        <div className="column">
-                            <h5>LEGAL</h5>
-                            <a href="/tnc">Terms & Conditions</a>
-                            <a href="/privacy">Privacy Policy</a>
-                            <a href="/support">Support</a>
-                        </div>
+                        
                     </div>
 
                 </div>
