@@ -56,11 +56,7 @@ const FooterLandingpage = () => {
                         <a href="/explore">Explore</a>
                         
                     </div>
-                    <div className="landing-column">
-                        <h5>LEGAL</h5>
-                        <a href="/tnc">Terms & Conditions</a>
-                        <a href="/privacy">Privacy Policy</a>
-                    </div>
+                    
                 </div>
                 <div className="landing-footer-credits">
                     <p>© All Rights Reserved 2025 Kiwi Explorer</p>

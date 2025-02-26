@@ -77,12 +77,7 @@ const FooterWhite = () => {
                             <a href="/explore">Explore</a>
                      
                         </div>
-                        <div className="column">
-                            <h5>LEGAL</h5>
-                            <a href="/tnc">Terms & Conditions</a>
-                            <a href="/privacy">Privacy Policy</a>
-                            <a href="/support">Support</a>
-                        </div>
+                        
                     </div>
 
                 </div>
