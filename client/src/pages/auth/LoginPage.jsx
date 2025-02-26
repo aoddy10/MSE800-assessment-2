@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
 import AuthContext from "../../context/AuthContext";
 import "../../styles/LoginPage.css";
+import AuthRightSideSection from "../../components/AuthRightSideSection";
 
 import blackLogo from "../../assets/logo-black.png";
 import cornerImage from "../../assets/corner-png.png";
@@ -139,25 +140,7 @@ const LoginPage = () => {
             </div>
 
             {/* --------------------------------------------------- */}
-            <div className="right-container">
-                <img src={cornerImage} alt="corner" />
-                <img src={cornerImage2} alt="corner2" className="corner2" />
-                <div className="text-content">
-                    <h2>Lorem Ipsum Dolor Sit Amet</h2>
-                    <h2>Dolor Tetus Consectetur</h2>
-                    <div className="active-users-container">
-                        <img src={activeUsers} alt="activeUsers" />
-                        <p>Active users</p>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur <br />
-                        adipiscing elit. Cras iaculis consectetur nisi.
-                        <br />
-                        Aliquam sagittis lobortis auctor. Ut pulvinar
-                    </p>
-                    <button className="exploreBtn">Explore Now</button>
-                </div>
-            </div>
+            <AuthRightSideSection />
         </div>
     );
 };

@@ -9,6 +9,7 @@ import arrowleft from "../../assets/arrow-left.svg";
 import { isValidEmail } from "../../utils/libs";
 import { forgotPassword } from "../../services/auth.service.s";
 import { useNavigate } from "react-router-dom";
+import AuthRightSideSection from "../../components/AuthRightSideSection";
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
@@ -122,25 +123,7 @@ const ForgotPassword = () => {
             </div>
 
             {/* --------------------------------------------------- */}
-            <div className="right-container">
-                <img src={cornerImage} alt="corner" />
-                <img src={cornerImage2} alt="corner2" className="corner2" />
-                <div className="text-content">
-                    <h2>Lorem Ipsum Dolor Sit Amet</h2>
-                    <h2>Dolor Tetus Consectetur</h2>
-                    <div className="active-users-container">
-                        <img src={activeUsers} alt="activeUsers" />
-                        <p>Active users</p>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur <br />
-                        adipiscing elit. Cras iaculis consectetur nisi.
-                        <br />
-                        Aliquam sagittis lobortis auctor. Ut pulvinar
-                    </p>
-                    <button className="exploreBtn">Explore Now</button>
-                </div>
-            </div>
+            <AuthRightSideSection />
         </div>
     );
 };

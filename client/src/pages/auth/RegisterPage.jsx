@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
 import AuthContext from "../../context/AuthContext";
@@ -11,6 +11,7 @@ import cornerImage2 from "../../assets/corner-png2.png";
 import activeUsers from "../../assets/activeUsers.png";
 import arrowleft from "../../assets/arrow-left.svg";
 import { isValidEmail } from "../../utils/libs";
+import AuthRightSideSection from "../../components/AuthRightSideSection";
 
 const RegisterPage = () => {
     const { login } = useContext(AuthContext); // Use auth context to store token after registration
@@ -220,31 +221,7 @@ const RegisterPage = () => {
             </div>
 
             {/* Right section: Registration page banner */}
-            <div className="right-container">
-                <img src={cornerImage} alt="corner" />
-                <img src={cornerImage2} alt="corner2" className="corner2" />
-
-                <div className="text-content">
-                    <h2>Lorem Ipsum Dolor Sit Amet</h2>
-                    <h2>Dolor Tetus Consectetur</h2>
-
-                    {/* Active Users Count */}
-                    <div className="active-users-container">
-                        <img src={activeUsers} alt="activeUsers" />
-                        <p>Active users</p>
-                    </div>
-
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur <br />
-                        adipiscing elit. Cras iaculis consectetur nisi.
-                        <br />
-                        Aliquam sagittis lobortis auctor. Ut pulvinar
-                    </p>
-
-                    {/* Explore Now Button */}
-                    <button className="exploreBtn">Explore Now</button>
-                </div>
-            </div>
+            <AuthRightSideSection />
         </div>
     );
 };
