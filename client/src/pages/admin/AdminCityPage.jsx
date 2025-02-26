@@ -1,13 +1,10 @@
-import { useState, useEffect, useContext } from "react";
-import AuthContext from "../../context/AuthContext";
+import { useState, useEffect } from "react";
 import { Button } from "../../components/ui/button";
 import { Table } from "../../components/ui/table";
-import { Modal } from "../../components/ui/modal";
 import { getCities } from "../../services/city.services";
 import CityForm from "./form/CityForm";
 
 const AdminCityPage = () => {
-    const { token } = useContext(AuthContext);
     const [cities, setCities] = useState([]);
     const [selectedCity, setSelectedCity] = useState(null);
     const [showModal, setShowModal] = useState(false);
@@ -50,7 +47,8 @@ const AdminCityPage = () => {
                             <div className="flex gap-2">
                                 <Button
                                     variant="edit"
-                                    onClick={() => handleEdit(city)}>
+                                    onClick={() => handleEdit(city)}
+                                >
                                     Edit
                                 </Button>
                             </div>

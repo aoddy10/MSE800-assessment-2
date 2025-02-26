@@ -7,9 +7,6 @@ import "../../styles/LoginPage.css";
 import AuthRightSideSection from "../../components/AuthRightSideSection";
 
 import blackLogo from "../../assets/logo-black.png";
-import cornerImage from "../../assets/corner-png.png";
-import cornerImage2 from "../../assets/corner-png2.png";
-import activeUsers from "../../assets/activeUsers.png";
 import arrowleft from "../../assets/arrow-left.svg";
 import { getMe } from "../../services/auth.service.s";
 

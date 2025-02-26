@@ -101,7 +101,7 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
             onClose();
             onRefresh();
         } catch (error) {
-            // set errors to for the reponse error
+            // set errors to for the response error
             setErrors(error.response.data);
 
             console.error("Failed to save location", error.response.data);
@@ -342,7 +342,6 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                             onClick={handleUploadCoverImage}
                             variant="upload"
                             className="ml-3"
-
                         >
                             Upload
                         </Button>
@@ -373,7 +372,10 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
 
             {/* Submit Button */}
             <div className="flex w-full mt-4">
-                <button className="px-4 py-2 text-white rounded w-full bg-[#31AAB7] flex justify-center" onClick={handleSubmit}>
+                <button
+                    className="px-4 py-2 text-white rounded w-full bg-[#31AAB7] flex justify-center"
+                    onClick={handleSubmit}
+                >
                     {location ? "Save Changes" : "Create Location"}
                 </button>
             </div>

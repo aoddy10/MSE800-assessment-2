@@ -11,7 +11,6 @@ const AdminUserPage = () => {
     const { token } = useContext(AuthContext);
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
-    const [showModal, setShowModal] = useState(false);
     const [showConfirmToggleSuspended, setShowConfirmToggleSuspended] =
         useState(false);
 
