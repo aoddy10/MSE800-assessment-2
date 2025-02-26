@@ -8,6 +8,7 @@ import {
     createUploadImage,
     deleteUploadImage,
 } from "../../../services/upload-image.services";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 const CityForm = ({ city, onClose, onRefresh }) => {
     const { token } = useContext(AuthContext);
@@ -137,10 +138,10 @@ const CityForm = ({ city, onClose, onRefresh }) => {
                             className="rounded-lg w-full object-cover"
                         />
                         <button
-                            className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                            className="absolute top-2 right-2 p-2"
                             onClick={handleRemoveImage}
                         >
-                            ❌
+                            <XMarkIcon className="size-6 rounded-full bg-red-500 text-white" />
                         </button>
                     </div>
                 ) : (
@@ -149,9 +150,11 @@ const CityForm = ({ city, onClose, onRefresh }) => {
                             type="file"
                             onChange={(e) => setImage(e.target.files[0])}
                         />
-                        <Button onClick={handleUploadImage}
+                        <Button
+                            onClick={handleUploadImage}
                             variant="upload"
-                            className="ml-3">
+                            className="ml-3"
+                        >
                             Upload
                         </Button>
                     </div>
@@ -160,7 +163,10 @@ const CityForm = ({ city, onClose, onRefresh }) => {
 
             {/* Submit Button */}
             <div className="flex justify-end mt-4">
-                <button className="px-4 py-2 text-white rounded w-full bg-[#31AAB7] flex justify-center" onClick={handleSubmit}>
+                <button
+                    className="px-4 py-2 text-white rounded w-full bg-[#31AAB7] flex justify-center"
+                    onClick={handleSubmit}
+                >
                     {city ? "Save Changes" : "Create City"}
                 </button>
             </div>
