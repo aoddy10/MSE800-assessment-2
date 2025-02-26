@@ -295,17 +295,18 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                         </button>
                     </div>
                 ) : (
-                    <div className="flex flex-col">
-                        <label className="text-gray-700">
-                            Upload Menu Image
-                        </label>
-                        <input
-                            type="file"
-                            onChange={(e) => setMenuFile(e.target.files[0])}
-                        />
+                    <div className="flex items-center">
+                        <div className="flex-1">
+                            <input
+                                type="file"
+                                onChange={(e) => setMenuFile(e.target.files[0])}
+                                className="w-full border rounded p-2 focus:outline-none"
+                            />
+                        </div>
                         <Button
                             onClick={handleUploadMenuImage}
-                            className="mt-2"
+                            variant="upload"
+                            className="ml-3"
                         >
                             Upload
                         </Button>
@@ -331,17 +332,17 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                         </button>
                     </div>
                 ) : (
-                    <div className="flex flex-col">
-                        <label className="text-gray-700">
-                            Upload Cover Image
-                        </label>
+                    <div className="flex items-center">
                         <input
                             type="file"
                             onChange={(e) => setImage(e.target.files[0])}
+                            className="w-full border rounded p-2 focus:outline-none"
                         />
                         <Button
                             onClick={handleUploadCoverImage}
-                            className="mt-2"
+                            variant="upload"
+                            className="ml-3"
+
                         >
                             Upload
                         </Button>
@@ -371,10 +372,10 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                 ))}
 
             {/* Submit Button */}
-            <div className="flex justify-end mt-4">
-                <Button onClick={handleSubmit}>
+            <div className="flex w-full mt-4">
+                <button className="px-4 py-2 text-white rounded w-full bg-[#31AAB7] flex justify-center" onClick={handleSubmit}>
                     {location ? "Save Changes" : "Create Location"}
-                </Button>
+                </button>
             </div>
         </Modal>
     );

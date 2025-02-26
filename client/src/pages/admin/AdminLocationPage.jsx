@@ -72,10 +72,14 @@ const AdminLocationPage = () => {
     };
 
     return (
-        <div className="p-6">
+        <div className="p-6 rounded-xl">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold">Manage Locations</h1>
-                <Button onClick={handleCreate}>+ Add Location</Button>
+                <button onClick={handleCreate}
+                        className="px-4 py-2 rounded text-[#31AAB7] font-semibold transition hover:bg-[#f9f9fb]"
+                        >
+                        + Add Location
+                </button>
             </div>
 
             <Table
@@ -90,8 +94,10 @@ const AdminLocationPage = () => {
                         key: "actions",
                         label: "Actions",
                         render: (location) => (
-                            <div className="flex gap-2">
-                                <Button onClick={() => handleEdit(location)}>
+                            <div className="flex gap-4">
+                                <Button
+                                    variant="edit"
+                                    onClick={() => handleEdit(location)}>
                                     Edit
                                 </Button>
                                 <Button
@@ -105,6 +111,7 @@ const AdminLocationPage = () => {
                     },
                 ]}
             />
+
 
             {/* Location Form Modal */}
             {showModal && (

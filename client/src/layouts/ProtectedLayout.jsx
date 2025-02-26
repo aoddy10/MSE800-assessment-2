@@ -6,10 +6,16 @@ import ActivitySection from "../components/ActivitySection";
 import StatisticSection from "../components/StatisticSection";
 import { getMe } from "../services/auth.service.s";
 import { UserAvatar } from "../components/UserAvatar";
+import { UserIcon, UserGroupIcon, BuildingOffice2Icon, MapPinIcon, ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/solid";
+
+// assets
+import blackLogo from "../assets/logo-black.png";
+
+
 
 const ProtectedLayout = () => {
     const { token, authUserInfo, setAuthUserInfo } = useContext(AuthContext);
-    const [selectedMenu, setSelectedMenu] = useState("locations"); // Default menu
+    const [selectedMenu, setSelectedMenu] = useState("locations"); // Default menu  
     const logout = useLogout();
     const navigate = useNavigate();
 
@@ -35,13 +41,25 @@ const ProtectedLayout = () => {
             name: "Locations",
             path: "/admin/locations",
             roles: ["admin", "business"],
+            icon: <MapPinIcon className="h-6 w-6" />,
         },
-        { name: "Cities", path: "/admin/cities", roles: ["admin"] },
-        { name: "Users", path: "/admin/users", roles: ["admin"] },
+        {
+            name: "Cities",
+            path: "/admin/cities",
+            roles: ["admin"],
+            icon: <BuildingOffice2Icon className="h-6 w-6" />,
+        },
+        {
+            name: "Users",
+            path: "/admin/users",
+            roles: ["admin"],
+            icon: <UserGroupIcon className="h-6 w-6" />,
+        },
         {
             name: "Profile",
             path: "/admin/profile",
             roles: ["user", "admin", "business"],
+            icon: <UserIcon className="h-6 w-6" />,
         },
     ];
 
@@ -61,14 +79,18 @@ const ProtectedLayout = () => {
 
     const Navbar = () => {
         return (
-            <nav className="bg-blue-900 text-white p-4 flex justify-between items-center">
+            <nav className="p-6 flex justify-between items-center bg-white border-b border-gray-200">
+
                 {/* Logo */}
-                <h1
-                    className="text-xl font-bold bg-white/20 p-2  flex justify-center items-center hover:cursor-pointer"
+                <img
+                    src={blackLogo}
+                    alt="Kiwi Explorer Logo"
                     onClick={() => navigate("/explore")}
-                >
-                    Kiwi explore
-                </h1>
+                    style={{
+                        cursor: 'pointer',
+                        width: '10vw'
+                    }}
+                />
 
                 {/* User Info & Logout */}
                 <div className="flex items-center gap-4">
@@ -80,7 +102,7 @@ const ProtectedLayout = () => {
                                 lastName={authUserInfo.last_name}
                             />
                             <div>
-                                <p className="text-sm">
+                                <p className="text-sm font-bold">
                                     {authUserInfo.first_name}{" "}
                                     {authUserInfo.last_name}
                                 </p>
@@ -90,12 +112,12 @@ const ProtectedLayout = () => {
                             </div>
                         </div>
                     )}
-                    <button
+                    {/* <button
                         className=" bg-accent px-3 py-1 rounded"
                         onClick={logout}
                     >
                         Logout
-                    </button>
+                    </button> */}
                 </div>
             </nav>
         );
@@ -103,7 +125,7 @@ const ProtectedLayout = () => {
 
     const Sidebar = () => {
         return (
-            <aside className="w-60 bg-white shadow-md p-4">
+            <aside className="w-60 bg-white shadow-xl p-4">
                 <h2 className="text-lg font-semibold mb-4">Menu</h2>
                 <ul className="space-y-2">
                     {menuItems.map(
@@ -111,24 +133,54 @@ const ProtectedLayout = () => {
                             item.roles.includes(authUserInfo.role) && (
                                 <li key={item.path}>
                                     <button
+                                        key={item.name}
                                         onClick={() => {
-                                            setSelectedMenu(
-                                                item.name.toLowerCase()
-                                            );
-                                            navigate(item.path);
+                                            setSelectedMenu(item.name.toLowerCase());
+                                            navigate(item.path); // Assuming navigate is properly defined
                                         }}
-                                        className={`w-full text-left px-4 py-2 rounded ${
-                                            selectedMenu ===
-                                            item.name.toLowerCase()
-                                                ? "bg-blue-500 text-white"
-                                                : "hover:bg-gray-200"
-                                        }`}
+                                        className={`w-full text-left px-6 py-2 rounded flex items-center ${selectedMenu === item.name.toLowerCase()
+                                            ? "bg-[#232323] text-white" // Selected: Dark background, white text
+                                            : "hover:bg-[#f9f9fb] hover:text-[#31AAB7]" // Default: Light hover background and text color change
+                                            }`}
                                     >
-                                        {item.name}
+                                        {/* Icon */}
+                                        <span
+                                            className={`mr-4 transition-all duration-200 ${selectedMenu === item.name.toLowerCase()
+                                                ? "text-white"
+                                                : "text-[#767676]" // Make the icon smaller on hover and color change
+                                                }`}
+                                        >
+                                            {item.icon}
+                                        </span>
+
+                                        {/* Item name */}
+                                        <span
+                                            className={`${selectedMenu === item.name.toLowerCase() ? "text-white" : "text-[#767676]"
+                                                }`}
+                                        >
+                                            {item.name}
+                                        </span>
                                     </button>
+
+
+
+
                                 </li>
                             )
                     )}
+
+                    <li className="py-4 border-b border-gray-300"></li>
+
+                    <li>
+                        <button
+                            className="w-full text-left px-6 py-2 rounded flex items-center text-red-500 hover:bg-[#f9f9fb]"
+                            onClick={logout}
+                        >
+                            <ArrowLeftStartOnRectangleIcon className="mr-4 text-red-500 h-6 w-6" />
+                            Logout
+                        </button>
+
+                    </li>
                 </ul>
             </aside>
         );
@@ -145,7 +197,7 @@ const ProtectedLayout = () => {
                 <Sidebar />
 
                 {/* Main Content Area */}
-                <main className="flex-grow p-4 flex flex-col gap-4 bg-white shadow-md bg-gray-50">
+                <main className="flex-grow p-4 flex flex-col gap-4 bg-[#f9f9fb]">
                     {/* Statistic section */}
                     {["admin", "business"].includes(authUserInfo.role) && (
                         <StatisticSection />
@@ -159,15 +211,15 @@ const ProtectedLayout = () => {
 
                 {/* Activity Logs Section */}
                 {["admin"].includes(authUserInfo.role) && (
-                    <aside className="w-60 bg-gray-200 p-4 shadow-md">
+                    <aside className="w-60 bg-white p-4 shadow-xl">
                         <ActivitySection />
                     </aside>
                 )}
             </div>
 
             {/* Footer */}
-            <footer className="bg-blue-800 text-white text-center p-4">
-                © 2024 MyApp. Dashboard.
+            <footer className="bg-[#232323] text-white text-center text-sm p-4">
+                © 2025 Kiwi Explorer.
             </footer>
         </div>
     );

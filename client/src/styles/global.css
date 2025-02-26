@@ -63,3 +63,21 @@ html,
 body {
     font-family: 'LatoRegular', sans-serif !important;
 }
+
+html, div::-webkit-scrollbar {
+    width: 8px;
+}
+  
+html, div::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+  
+html, div::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+  
+html, div::-webkit-scrollbar-thumb:hover {
+    background: #bbb;
+}
