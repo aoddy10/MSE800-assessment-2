@@ -15,19 +15,37 @@ export const getUsers = async (token) => {
 
 // toggle user suspended
 export const toggleUserSuspended = async (token, userId) => {
-    console.log(token, userId);
     try {
         const response = await axiosInstance.patch(
             `/users/${userId}/toggle-suspended/`,
+            {}, // Axios requires a payload (even empty) for PATCH
             {
                 headers: { Authorization: `Token ${token}` },
             }
         );
-        console.log("here");
-        console.log(response);
         return response.data;
     } catch (error) {
-        console.error("Error toggleUserSuspended:", error);
+        console.error(
+            "Error toggleUserSuspended:",
+            error.response?.data || error
+        );
+        throw error;
+    }
+};
+
+// update user
+export const updateUser = async (token, userId, userData) => {
+    try {
+        const response = await axiosInstance.put(
+            `/users/${userId}/update/`,
+            userData,
+            {
+                headers: { Authorization: `Token ${token}` },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error updateUser:", error.response?.data || error);
         throw error;
     }
 };

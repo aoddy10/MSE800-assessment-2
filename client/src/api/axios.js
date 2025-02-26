@@ -1,12 +1,28 @@
 import axios from "axios";
+import { useAuth } from "../context/AuthContext"; // Import AuthContext
 
-const API_BASE_URL = "http://localhost:8000/api";
-
-const apiClient = axios.create({
-    baseURL: API_BASE_URL,
+const axiosInstance = axios.create({
+    baseURL: "http://localhost:8000/api",
     headers: {
         "Content-Type": "application/json",
     },
 });
 
-export default apiClient;
+// Wrap the request interceptor inside a function that React components can call
+export const useAxiosInstance = () => {
+    const { token } = useAuth(); // Get token from context
+
+    axiosInstance.interceptors.request.use(
+        (config) => {
+            if (token) {
+                config.headers["Authorization"] = `Token ${token}`;
+            }
+            return config;
+        },
+        (error) => Promise.reject(error)
+    );
+
+    return axiosInstance;
+};
+
+export default axiosInstance;

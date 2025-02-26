@@ -155,6 +155,8 @@ def password_reset_request(request):
 def password_reset_confirm(request):
     reset_token = request.data.get("reset_token")
     new_password = request.data.get("new_password")
+    
+    print(reset_token, new_password)
 
     # check if Token is correct
     user = User.objects.filter(reset_token=reset_token).first()
@@ -242,7 +244,8 @@ def get_user(request, user_id):
 @api_view(["PUT"])
 @permission_classes([IsAuthenticated])
 def update_user(request, user_id):
-    if not is_admin_role(request.user):
+    # Allow admin to update any user, but users can only update their own data
+    if not is_admin_role(request.user) and request.user.id != user_id:
         return Response({"error": "Permission denied"}, status=403)
 
     try:
@@ -293,20 +296,15 @@ def delete_user(request, user_id):
 @permission_classes([IsAuthenticated])
 def toggle_suspend_user(request, user_id):
     """
-    Toggle the suspension and active status of a user (Only accessible by admin role).
-    
-    - Admin users can suspend or unsuspend other users.
-    - If a user is suspended, they are also deactivated (`is_active=False`).
-    - If a user is unsuspended, they are reactivated (`is_active=True`).
-    - A log entry is created for every action performed.
+    Allow admin users to suspend or unsuspend other users,
+    even if they are not system admins.
     """
-    if not is_admin_role(request.user):
+    if not is_admin_or_business(request.user):  # Allow both admin and business users
         return Response({"error": "Permission denied"}, status=403)
 
     try:
-        # Retrieve user from the database
         user = User.objects.get(id=user_id)
-
+        
         # Toggle suspension status
         user.is_suspended = not user.is_suspended
         user.is_active = not user.is_suspended  # Deactivate if suspended, activate if unsuspended
@@ -332,7 +330,6 @@ def toggle_suspend_user(request, user_id):
             },
             status=200,
         )
-
     except User.DoesNotExist:
         return Response({"error": "User not found"}, status=404)
     
@@ -352,8 +349,6 @@ def upload_image(request):
     API endpoint to upload an image (Only admin or business users, Max size: 10MB).
     Generates a unique filename using UUID to prevent duplicate file names.
     """
-    if not is_admin_or_business(request.user):
-        return Response({"error": "Permission denied"}, status=403)
 
     image = request.FILES.get("image")
     if not image:
@@ -395,8 +390,6 @@ def delete_uploaded_image(request):
     API endpoint to delete an uploaded image (Only admin or business users).
     Requires the image URL in the request body.
     """
-    if not is_admin_or_business(request.user):
-        return Response({"error": "Permission denied"}, status=403)
 
     image_url = request.data.get("image_url")
 
