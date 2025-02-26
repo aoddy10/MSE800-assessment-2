@@ -102,7 +102,7 @@ const ProtectedLayout = () => {
                                 lastName={authUserInfo.last_name}
                             />
                             <div>
-                                <p className="text-sm">
+                                <p className="text-sm font-bold">
                                     {authUserInfo.first_name}{" "}
                                     {authUserInfo.last_name}
                                 </p>

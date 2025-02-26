@@ -15,7 +15,7 @@ export const Modal = ({ title, children, onClose, onConfirm }) => {
                     </button>
                     {onConfirm && (
                         <button
-                            className="px-4 py-2 w-full bg-[#31AAB7] rounded text-white rounded"
+                            className="px-4 py-2 w-full bg-[#31AAB7] rounded text-white"
                             onClick={onConfirm}
                         >
                             Confirm

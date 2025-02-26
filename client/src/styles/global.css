@@ -65,17 +65,19 @@ body {
 }
 
 html, div::-webkit-scrollbar {
-    @apply w-2;
+    width: 8px;
 }
   
 html, div::-webkit-scrollbar-track {
-    @apply bg-gray-200;
+    background: #f1f1f1;
+    border-radius: 4px;
 }
   
 html, div::-webkit-scrollbar-thumb {
-    @apply bg-gray-500 rounded-full;
+    background: #ccc;
+    border-radius: 4px;
 }
   
 html, div::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-700;
+    background: #bbb;
 }
