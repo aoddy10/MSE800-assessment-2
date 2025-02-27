@@ -5,11 +5,13 @@ FROM node:18
 WORKDIR /app
 
 # Copy package.json and install dependencies
-COPY package.json package-lock.json ./
-RUN npm install
+# COPY package.json package-lock.json ./
+COPY package.json ./
 
 # Copy all project files into the container
 COPY . .
+RUN npm install
+
 
 # Start the development server
 CMD ["npm", "run", "dev"]

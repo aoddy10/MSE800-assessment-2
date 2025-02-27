@@ -690,72 +690,62 @@ curl -X DELETE http://localhost:8000/api/locations/gallery/5/delete/ \
 
 ---
 
-# 📝 **Review Management**
+# 📝 **Reviews Management**
 
 ## **1. Get Reviews**
 
-```http
+### **Endpoint:**
+
+```
 GET /api/reviews/
 ```
 
-### **Query Parameters**
+### **Description:**
 
-| Parameter  | Type | Description                                                     |
-| ---------- | ---- | --------------------------------------------------------------- |
-| `user`     | int  | Filter reviews by user ID.                                      |
-| `location` | int  | Filter reviews by location ID.                                  |
-| `city`     | int  | Filter reviews by city ID.                                      |
-| `limit`    | int  | Number of reviews to return (sorted by newest first). Optional. |
+Retrieve a list of reviews with optional filters and sorting.
 
-### **Example Requests:**
+### **Query Parameters:**
 
-#### **1️⃣ Get All Reviews (Sorted by Newest)**
+| Parameter    | Type    | Required | Description                                                                      |
+| ------------ | ------- | -------- | -------------------------------------------------------------------------------- |
+| `user`       | `int`   | No       | Filter reviews by user ID                                                        |
+| `location`   | `int`   | No       | Filter reviews by location ID                                                    |
+| `city`       | `int`   | No       | Filter reviews by city ID                                                        |
+| `min_rating` | `float` | No       | Filter reviews with a rating greater than or equal to this value                 |
+| `limit`      | `int`   | No       | Number of reviews to return (default: all)                                       |
+| `sort_order` | `str`   | No       | Sorting order (`asc` for oldest first, `desc` for newest first, default: `desc`) |
 
-```http
-GET /api/reviews/
+### **Example Request:**
+
+```
+GET /api/reviews/?limit=5&sort_order=desc&min_rating=4.0
 ```
 
-#### **2️⃣ Filter by User ID**
-
-```http
-GET /api/reviews/?user=1
-```
-
-#### **3️⃣ Filter by Location ID**
-
-```http
-GET /api/reviews/?location=2
-```
-
-#### **4️⃣ Filter by City ID**
-
-```http
-GET /api/reviews/?city=3
-```
-
-#### **5️⃣ Get the Latest 5 Reviews**
-
-```http
-GET /api/reviews/?limit=5
-```
-
-#### **6️⃣ Get the Latest 3 Reviews for a Specific Location**
-
-```http
-GET /api/reviews/?location=2&limit=3
-```
-
-### **Response Example (200 OK)**
+### **Example Response:**
 
 ```json
 [
     {
         "id": 1,
-        "user": 1,
-        "location": 2,
-        "review": "Amazing experience!",
-        "rating": 5,
-        "created_at": "2024-02-10T15:30:00Z"
+        "user": {
+            "first_name": "John",
+            "last_name": "Doe"
+        },
+        "location": 5,
+        "review": "Great experience!",
+        "rating": 4.5,
+        "created_at": "2024-02-21T12:00:00Z"
+    },
+    {
+        "id": 2,
+        "user": {
+            "first_name": "Jane",
+            "last_name": "Smith"
+        },
+        "location": 3,
+        "review": "Food was amazing.",
+        "rating": 5.0,
+        "created_at": "2024-02-20T15:30:00Z"
     }
 ]
 ```
@@ -764,41 +754,85 @@ GET /api/reviews/?location=2&limit=3
 
 ## **2. Create a Review**
 
-```http
+### **Endpoint:**
+
+```
 POST /api/reviews/create/
 ```
 
-### **Request Body**
+### **Description:**
+
+Create a new review for a location. This action is only available for **authenticated users**.
+
+### **Headers:**
+
+| Key           | Value                |
+| ------------- | -------------------- |
+| Authorization | `Token <your_token>` |
+
+### **Request Body (JSON):**
+
+| Field      | Type    | Required | Description                              |
+| ---------- | ------- | -------- | ---------------------------------------- |
+| `location` | `int`   | Yes      | ID of the location being reviewed        |
+| `review`   | `str`   | Yes      | The text content of the review           |
+| `rating`   | `float` | Yes      | The rating score (between `1.0` - `5.0`) |
+
+### **Example Request:**
 
 ```json
 {
-    "user": 1,
-    "location": 2,
-    "review": "Amazing experience!",
-    "rating": 5
+    "location": 5,
+    "review": "Amazing place, great service!",
+    "rating": 4.8
 }
 ```
 
-### **Response Example (201 Created)**
+### **Example Response:**
 
 ```json
 {
-    "id": 2,
-    "user": 1,
-    "location": 2,
-    "review": "Amazing experience!",
-    "rating": 5,
-    "created_at": "2024-02-10T16:00:00Z"
+    "id": 3,
+    "user": {
+        "first_name": "Alice",
+        "last_name": "Johnson"
+    },
+    "location": 5,
+    "review": "Amazing place, great service!",
+    "rating": 4.8,
+    "created_at": "2024-02-22T14:10:00Z"
 }
 ```
 
-## **Response Codes:**
+---
 
-| Status Code       | Description                     |
-| ----------------- | ------------------------------- |
-| `200 OK`          | Successfully retrieved reviews. |
-| `201 Created`     | Review successfully created.    |
-| `400 Bad Request` | Invalid request data.           |
+## **Permissions:**
+
+-   **`GET /api/reviews/`** - Publicly accessible.
+-   **`POST /api/reviews/create/`** - Requires authentication.
+
+---
+
+## **Errors & Status Codes:**
+
+| Status Code        | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| `200 OK`           | Successfully retrieved reviews                            |
+| `201 Created`      | Successfully created a review                             |
+| `400 Bad Request`  | Invalid data (e.g., missing fields, invalid rating range) |
+| `401 Unauthorized` | User is not authenticated (for `POST` requests)           |
+| `403 Forbidden`    | Action not allowed                                        |
+
+---
+
+### **📌 Notes:**
+
+-   Ratings should be between **1.0 and 5.0**.
+-   Sorting defaults to `desc` (newest first).
+-   User's `first_name` and `last_name` are included in responses.
+-   System logs track all review creations.
+
+---
 
 ---
 
@@ -895,6 +929,151 @@ GET /api/newsletter/list/
 | `404 Not Found`   | Email not found in subscription list.   |
 
 ---
+
+# 📝 **System Logs API Documentation**
+
+## Overview
+
+The **System Logs API** provides access to system logs with filtering, sorting, and pagination capabilities. It allows retrieving logs based on user, location, and date range, with control over the number of logs returned and sorting order.
+
+## Endpoints
+
+### 1. **Get System Logs**
+
+#### `GET /api/system-logs/`
+
+Retrieve system logs with optional filters.
+
+#### **Query Parameters**
+
+| Parameter     | Type   | Required | Description                                                                      |
+| ------------- | ------ | -------- | -------------------------------------------------------------------------------- |
+| `limit`       | int    | No       | Number of logs to retrieve.                                                      |
+| `sort_order`  | string | No       | Sorting order: `asc` (oldest first) or `desc` (newest first). Default is `desc`. |
+| `user_id`     | int    | No       | Filter logs by user ID.                                                          |
+| `location_id` | int    | No       | Filter logs by location ID.                                                      |
+| `date_range`  | string | No       | Filter logs by time period. Allowed values: `today`, `week`, `month`.            |
+
+#### **Example Requests**
+
+1. **Get the last 10 logs sorted by newest first:**
+    ```http
+    GET /api/system-logs/?limit=10&sort_order=desc
+    ```
+2. **Get logs for user ID 5 from today:**
+    ```http
+    GET /api/system-logs/?user_id=5&date_range=today
+    ```
+3. **Get logs for location ID 10 from the last month:**
+    ```http
+    GET /api/system-logs/?location_id=10&date_range=month
+    ```
+4. **Get logs sorted from oldest to newest:**
+    ```http
+    GET /api/system-logs/?sort_order=asc
+    ```
+
+#### **Example Response**
+
+```json
+[
+    {
+        "id": 1,
+        "user": {
+            "id": 5,
+            "username": "admin_user"
+        },
+        "module": "Location",
+        "relate_id": 10,
+        "description": "Updated location details",
+        "created_at": "2024-02-21T12:00:00Z"
+    },
+    {
+        "id": 2,
+        "user": {
+            "id": 3,
+            "username": "business_owner"
+        },
+        "module": "User",
+        "relate_id": 3,
+        "description": "Suspended user: john_doe",
+        "created_at": "2024-02-20T15:30:00Z"
+    }
+]
+```
+
+### 2. **Create a System Log**
+
+#### `POST /api/system-logs/`
+
+Create a new system log entry.
+
+#### **Request Body**
+
+| Field         | Type   | Required | Description                                                     |
+| ------------- | ------ | -------- | --------------------------------------------------------------- |
+| `module`      | string | Yes      | The module related to the log entry (e.g., `User`, `Location`). |
+| `relate_id`   | int    | Yes      | The ID of the related object.                                   |
+| `description` | string | Yes      | Description of the activity.                                    |
+
+#### **Example Request**
+
+```json
+{
+    "module": "User",
+    "relate_id": 3,
+    "description": "User logged in successfully"
+}
+```
+
+#### **Example Response**
+
+```json
+{
+    "id": 15,
+    "user": {
+        "id": 2,
+        "username": "admin"
+    },
+    "module": "User",
+    "relate_id": 3,
+    "description": "User logged in successfully",
+    "created_at": "2024-02-21T13:45:00Z"
+}
+```
+
+## Authentication
+
+-   All endpoints **require authentication** using a valid token.
+-   Provide the token in the `Authorization` header:
+    ```http
+    Authorization: Token your-auth-token
+    ```
+
+## Error Handling
+
+| Status Code       | Meaning                                                    |
+| ----------------- | ---------------------------------------------------------- |
+| `400` Bad Request | Invalid request format (e.g., invalid `date_range` value). |
+| `403` Forbidden   | User does not have permission.                             |
+| `404` Not Found   | Requested resource does not exist.                         |
+
+## Notes
+
+-   `date_range` supports only `today`, `week`, and `month`.
+-   Only **admin** or **authorized users** can create system logs.
+-   Logs **cannot be updated or deleted**.
+
+---
+
+### **🚀 Summary**
+
+-   **Retrieve system logs** with filters for **user, location, sorting, and time range**.
+-   **Create system logs** to track user activities.
+-   **Secure endpoints** requiring authentication.
+-   **No updates or deletions allowed** for logs.
+
+This documentation provides all necessary details to interact with the **System Logs API** efficiently. 🚀
 
 ## 🎯 **Notes**
 

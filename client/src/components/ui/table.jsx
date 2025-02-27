@@ -3,30 +3,30 @@ import React from "react";
 export const Table = ({ data, columns }) => {
     return (
         <div className="overflow-x-auto">
-            <table className="min-w-full border-collapse border border-gray-300">
-                <thead className="bg-gray-100">
+            <table className="min-w-full border-collapse">
+                <thead className="bg-gray-100 rounded-xl overflow-hidden">
                     <tr>
                         {columns.map((col) => (
                             <th
                                 key={col.key}
-                                className="border border-gray-300 px-4 py-2 text-left"
+                                className="px-4 py-3 text-left font-semibold text-sm text-gray-700"
                             >
                                 {col.label}
                             </th>
                         ))}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="">
                     {data && data.length > 0 ? (
                         data.map((row, rowIndex) => (
                             <tr
                                 key={rowIndex}
-                                className="border border-gray-300 hover:bg-gray-50"
+                                className="hover:bg-gray-50 border-b border-gray-200"
                             >
                                 {columns.map((col) => (
                                     <td
                                         key={col.key}
-                                        className="border border-gray-300 px-4 py-2"
+                                        className="px-4 py-3 text-sm text-gray-500"
                                     >
                                         {col.render
                                             ? col.render(row)
@@ -39,7 +39,7 @@ export const Table = ({ data, columns }) => {
                         <tr>
                             <td
                                 colSpan={columns.length}
-                                className="text-center py-4"
+                                className="text-center py-4 text-sm text-gray-500"
                             >
                                 No data available.
                             </td>

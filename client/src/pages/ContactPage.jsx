@@ -1,89 +1,73 @@
 import React from 'react';
 import '../styles/ContactPage.css';
+import aod from "../assets/aod01.jpg";
+import terence from "../assets/0001.jpg";
+import wan from "../assets/about1.jpg";
 
 const ContactPage = () => {
+
+    const team = [
+        {
+          name: "Anirut Puangkingkaew",
+        email:"270566348@yoobeestudent.ac.nz",
+          image: aod,
+        },
+        {
+          name: "Terence Lyle Borromeo",
+        
+          email:"270601416@yoobeestudent.ac.nz",
+          image: terence,
+        },
+        {
+          name: "Phyo Maung Maung Wan",
+          email:"270530732@yoobeestudent.ac.nz",
+          image: wan,
+        }
+      ];
+
     return (
         <div className="contact-page">
             <div className="contact-content">
                 <div className="contact-txt">
                     <div className="contact-text">
-                        <h1>Lorem Ipsum<br /><b>Dolor Sit Amet Cons</b></h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In laoreet elit posuere odio rutrum, eu vulputate magna fringilla. Curabitur ornare consequat ex, et interdum nibh aliquet vitae.</p>
+                        <h1>Contact Us</h1>
+                      
                     </div>
                 </div>
                 <div className="contact-form-details-box">
-                    <div className="contact-box">
-                        <div className="contact-box-form">
-                            <h1>01</h1>
-                            <div className="contact-form">
-                                <label htmlFor="fname">What’s your name?</label>
-                                <input
-                                    type="text"
-                                    id="fname"
-                                    name="fname"
-                                    placeholder="James Smith"
-                                />
-                            </div>
-                        </div>
-                        <div className="contact-box-form">
-                            <h1>02</h1>
-                            <div className="contact-form">
-                                <label htmlFor="email">What's your email?</label>
-                                <input
-                                    type="text"
-                                    id="email"
-                                    name="email"
-                                    placeholder="james@smith.com"
-                                />
-                            </div>
-                        </div>
-                        <div className="contact-box-form">
-                            <h1>03</h1>
-                            <div className="contact-form">
-                                <label htmlFor="orgName">What's the name of your organization?</label>
-                                <input
-                                    type="text"
-                                    id="orgName"
-                                    name="orgName"
-                                    placeholder="James & Smith Ltd"
-                                />
-                            </div>
-                        </div>
-                        <div className="contact-box-form">
-                            <h1>04</h1>
-                            <div className="contact-form">
-                                <label htmlFor="subject">What’s the subject of your inquiry?</label>
-                                <input
-                                    type="text"
-                                    id="subject"
-                                    name="subject"
-                                    placeholder="Customer Service, Feedbacks..."
-                                />
-                            </div>
-                        </div>
-                        <div className="contact-box-form">
-                            <h1>05</h1>
-                            <div className="contact-form">
-                                <label htmlFor="message">Your message</label>
-                                <input
-                                    type="text"
-                                    id="message"
-                                    name="message"
-                                    placeholder="Hi Kiwi Explorer! I would like to..."
-                                />
-                            </div>
-                        </div>
-                        
-                    </div>
+                   
+
+
+<section className="py-12 bg-gray-100">
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className="text-3xl font-bold text-gray-800">Our  Team</h2>
+        
+
+        <div className="flex overflow-x-auto space-x-6 mt-8">
+          {team.map((member, index) => (
+            <div key={index} className="bg-white rounded-xl shadow-md p-6 text-center">
+              <img
+                src={member.image}
+                alt=""
+                style={{ width: '350px', height: '350px', objectFit: 'cover' }}
+              />
+              <h3 className="mt-4 text-lg font-semibold text-gray-800">{member.name}</h3>
+              <p className="text-gray-500">{member.email}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
                     <div className="details-box">
-                        <div className="details">
+                        {/* <div className="details">
                             <h1>Contact Details</h1>
-                            <p>info@kiwiexplorer.com <br/>+64 20 123 4567</p>
-                        </div>
-                        <div className="details">
+                            <p>If you have any query, you can email to info@kiwiexplorer.com <br/>or give us a call on +64 20 123 4567</p>
+                        </div> */}
+                        {/* <div className="details">
                             <h1>Project Details</h1>
                             <p>MSE800 - Assessment 2 <br/>Auckland, New Zealand</p>
-                        </div>
+                        </div> */}
                         <div className="details">
                             <h1>Socials</h1>
                             <div className="icons-container">

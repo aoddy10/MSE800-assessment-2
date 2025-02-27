@@ -72,16 +72,37 @@ const AdminLocationPage = () => {
     };
 
     return (
-        <div className="p-6">
+        <div className="p-6 rounded-xl">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold">Manage Locations</h1>
-                <Button onClick={handleCreate}>+ Add Location</Button>
+                <button
+                    onClick={handleCreate}
+                    className="px-4 py-2 rounded text-[#31AAB7] font-semibold transition hover:bg-[#f9f9fb]"
+                >
+                    + Add Location
+                </button>
             </div>
 
             <Table
                 data={locations}
                 columns={[
                     { key: "title", label: "Title" },
+                    {
+                        key: "image",
+                        label: "Image",
+                        render: (location) =>
+                            location.cover_image_url ? (
+                                <img
+                                    src={location.cover_image_url}
+                                    alt={location.title}
+                                    className="h-20 w-32 object-cover rounded-md"
+                                />
+                            ) : (
+                                <div className="h-20 w-32 rounded-md bg-gray-300 flex justify-center items-center">
+                                    No Image
+                                </div>
+                            ),
+                    },
                     { key: "type", label: "Type" },
                     { key: "city", label: "City" },
                     { key: "avg_rating", label: "Rating" },
@@ -90,8 +111,11 @@ const AdminLocationPage = () => {
                         key: "actions",
                         label: "Actions",
                         render: (location) => (
-                            <div className="flex gap-2">
-                                <Button onClick={() => handleEdit(location)}>
+                            <div className="flex gap-4">
+                                <Button
+                                    variant="edit"
+                                    onClick={() => handleEdit(location)}
+                                >
                                     Edit
                                 </Button>
                                 <Button

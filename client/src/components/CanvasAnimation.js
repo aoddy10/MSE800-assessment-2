@@ -163,24 +163,17 @@ const CanvasAnimation = () => {
 
                 <div id="page2">
                     <div id="text1">
-                        <h3>Lorem Ipsum Dolor Sit Amet</h3>
+                        <h3>The world is a book</h3>
                         <h1>
-                            Consectetur
+                             and those who do not travel 
                             <br />
-                            Dolor Sit
-                            <br />
-                            Lorem Ipsum Dolor
+                            read only one page
+                            
                         </h1>
                     </div>
                     <div id="text2">
-                        <h3>Lorem Ipsum Dolor Sit Amet</h3>
-                        <h1>
-                            Consectetur
-                            <br />
-                            Dolor Sit
-                            <br />
-                            Lorem Ipsum Dolor
-                        </h1>
+                        <h3>Take only memories, leave only footprints.</h3>
+                        
                     </div>
                 </div>
 

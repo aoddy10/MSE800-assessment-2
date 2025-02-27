@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getCityById } from "../services/city.services";
-import { getLocationByCityId } from "../services/location.services";
+import { getLocationByCityId, getReviews } from "../services/location.services";
+import LocationCard from "../components/LocationCard";
+import ReviewSection from "../components/ReviewSection";
 
 const CityPage = () => {
     const { id } = useParams(); // Get city ID from URL
     const [city, setCity] = useState([]);
     const [locations, setLocations] = useState([]);
+    const [reviews, setReviews] = useState([]);
+    const navigate = useNavigate();
+    
 
     useEffect(() => {
         const fetch_cityinfo = async () => {
@@ -34,6 +39,7 @@ const CityPage = () => {
         };
 
         fetch_locationinfo();
+        fetch_reviews();
     }, [id]);
 
     const fetch_locationinfoByID = async (param) => {
@@ -54,8 +60,23 @@ const CityPage = () => {
         }
     };
 
+    
+    const fetch_reviews = async () => {
+        try {
+            const result = await getReviews({city:id,limit:3})
+           
+            setReviews(result);
+        } catch (error) {
+            
+        }
+    }
+
     const handlebuttonClick = (param) => {
         fetch_locationinfoByID(param);
+    };
+
+    const handleLocationCardClick = (location) => {
+        navigate(`/location/${location.id}`);
     };
 
     return (
@@ -80,60 +101,8 @@ const CityPage = () => {
                     </div>
 
                     {/* Right Section - Reviews */}
-                    <div className="lg:w-1/3 bg-white p-6 rounded-xl shadow-lg">
-                        <h2 className="text-xl font-semibold">Reviews</h2>
-                        <div className="mt-4 space-y-4">
-                            {/* Review 1 */}
-                            <div className="p-4 bg-gray-50 rounded-lg shadow">
-                                <div className="flex items-center space-x-3">
-                                    <img
-                                        src="/user1.jpg"
-                                        alt="James Smith"
-                                        className="w-10 h-10 rounded-full"
-                                    />
-                                    <div>
-                                        <h3 className="font-medium">
-                                            James Smith
-                                        </h3>
-                                        <p className="text-sm text-gray-500">
-                                            Tourist
-                                        </p>
-                                    </div>
-                                    <span className="ml-auto text-yellow-500 font-bold">
-                                        4.9 ⭐
-                                    </span>
-                                </div>
-                                <p className="text-gray-600 mt-2 text-sm">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Duis sed erat nisl.
-                                </p>
-                            </div>
-                            {/* Review 2 */}
-                            <div className="p-4 bg-gray-50 rounded-lg shadow">
-                                <div className="flex items-center space-x-3">
-                                    <img
-                                        src="/user2.jpg"
-                                        alt="John Doe"
-                                        className="w-10 h-10 rounded-full"
-                                    />
-                                    <div>
-                                        <h3 className="font-medium">
-                                            John Doe
-                                        </h3>
-                                        <p className="text-sm text-gray-500">
-                                            Traveler
-                                        </p>
-                                    </div>
-                                    <span className="ml-auto text-yellow-500 font-bold">
-                                        4.9 ⭐
-                                    </span>
-                                </div>
-                                <p className="text-gray-600 mt-2 text-sm">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Duis sed erat nisl.
-                                </p>
-                            </div>
-                        </div>
+                    <div className="flex-grow">
+                        <ReviewSection reviews={reviews} />
                     </div>
                 </div>
 
@@ -141,10 +110,7 @@ const CityPage = () => {
                     <h2 className="text-2xl font-bold mb-2">
                         Things to do in {city.title}
                     </h2>
-                    <p className="text-gray-600 mb-6">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras iaculis consectetur nisi sagittis.
-                    </p>
+                    
                     <div>
                         <button
                             onClick={() => handlebuttonClick("All")}
@@ -167,31 +133,12 @@ const CityPage = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {locations && locations.length > 0
-                            ? locations.map((location, index) => (
-                                  <div
+                            ? locations.map((location) => (
+                                  <LocationCard
                                       key={`location-${location.id}`}
-                                      className="bg-white rounded-lg shadow-lg p-4"
-                                  >
-                                      <img
-                                          src={location.cover_image_url}
-                                          alt={location.description}
-                                          className="w-full h-48 object-cover rounded-lg"
-                                      />
-                                      <div className="flex justify-between items-center mt-3">
-                                          <h3 className="text-lg font-semibold">
-                                              {location.title}
-                                          </h3>
-                                          <div className="flex items-center gap-1 text-yellow-500 text-sm">
-                                              <span className="font-semibold">
-                                                  {location.avg_rating}
-                                              </span>
-                                              <span>⭐</span>
-                                          </div>
-                                      </div>
-                                      <p className="text-gray-600 text-sm mt-2">
-                                          {location.description}
-                                      </p>
-                                  </div>
+                                      location={location}
+                                      onClick={handleLocationCardClick}
+                                  />
                               ))
                             : "No Data"}
                     </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import bgImage from 'assets/0001.jpg'; //'../assets/0001.jpg';
 
 const HomeBanner = ({ cities, onSearchClick }) => {
     const [city, setCity] = useState("");
@@ -15,7 +16,7 @@ const HomeBanner = ({ cities, onSearchClick }) => {
             <div className="relative w-full h-[350px] rounded-xl overflow-hidden">
                 <div
                     className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: "url('/path-to-image.jpg')" }}
+                    style={{ backgroundImage: `url(${bgImage})` }}
                 ></div>
 
                 <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-center px-6">
@@ -24,9 +25,7 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                         <span className="block font-bold">New Zealand</span>
                     </h1>
                     <p className="text-white text-sm mt-2 max-w-lg">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras iaculis consectetur nisi. Aliquam sagittis lobortis
-                        auctor. Ut pulvinar.
+                    Traveling – it leaves you speechless, then turns you into a storyteller.
                     </p>
                 </div>
 

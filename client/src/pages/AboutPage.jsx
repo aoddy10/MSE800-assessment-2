@@ -36,13 +36,13 @@ const AboutPage = () => {
                 <div className="about-content">
                     <div className="about-txt">
                         <div className="about-text">
-                            <h1>Lorem Ipsum<br /><span className="bold-text">Dolor Sit Amet Cons</span></h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In laoreet elit posuere odio rutrum, eu vulputate magna fringilla. Curabitur ornare consequat ex, et interdum nibh aliquet vitae.</p>
+                            <h2>This website is created by Yoobee students, Anirut Puangkingkaew, Terence Lyle Borromeo and Phyo Wan</h2>
+                       
                         </div>
                     </div>
                     <div className="about-hero">
                         <div className="about-column-1">
-                            <div className="about-row-1"></div>
+                            {/* <div className="about-row-1"></div> */}
                             <div
                                 className="about-row-2"
                                 style={{
@@ -72,13 +72,13 @@ const AboutPage = () => {
                                     backgroundSize: 'cover'
                                 }}
                             ></div>
-                            <div className="about-row-4"></div>
+                            {/* <div className="about-row-4"></div> */}
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="about-section2">
+            {/* <div className="about-section2">
                 <div className="about-content">
                     <div className="faq-container">
                         <h2>Frequently Asked Questions</h2>
@@ -100,14 +100,14 @@ const AboutPage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="about-section3">
                 <div className="about-content">
                     <div className="subscription-container">
                         <h2>Start Your</h2>
                         <h2 className="adventure-text"><b>Adventure</b> with Us</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia consectetur nisi. Aliquam sagittis lobortis auctor. Ut pulvinar</p>
+                        
                         <div className="subscription-form">
                             <input type="email" placeholder="Enter your email address..." />
                             <button className="subscribe-btn">SUBSCRIBE</button>

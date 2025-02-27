@@ -15,9 +15,12 @@ export const createUploadImage = async (image, token) => {
 
 // delete upload image
 export const deleteUploadImage = async (image_url, token) => {
+    console.log(image_url);
     const response = await axiosInstance.delete("/upload-image/delete/", {
         headers: { Authorization: `Token ${token}` },
         data: { image_url },
     });
+
+    console.log(response.data);
     return response.data;
 };

@@ -1,4 +1,10 @@
-import { createContext, useState, useEffect, useCallback } from "react";
+import {
+    createContext,
+    useState,
+    useEffect,
+    useCallback,
+    useContext,
+} from "react";
 import apiClient from "../api/axios";
 
 const AuthContext = createContext();
@@ -64,3 +70,8 @@ export const AuthProvider = ({ children }) => {
 };
 
 export default AuthContext;
+
+// Custom hook to use the AuthContext
+export const useAuth = () => {
+    return useContext(AuthContext);
+};
