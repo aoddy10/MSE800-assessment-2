@@ -1,4 +1,6 @@
 import React, { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import i18n from "../utils/i18n";
 import "../styles/NavigationWhite.css";
 import logo from "../assets/logo-black.png";
 import AuthContext from "../context/AuthContext";
@@ -9,6 +11,12 @@ import { UserAvatar } from "./UserAvatar";
 const NavigationMain = () => {
     const { token, authUserInfo, setAuthUserInfo } = useContext(AuthContext);
     const logout = useLogout();
+    const { t } = useTranslation(); // Access translations
+
+    // Function to change language
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+    };
 
     useEffect(() => {
         // Fetch user details
@@ -73,6 +81,22 @@ const NavigationMain = () => {
                             )}
                         </>
                     )}
+                </div>
+
+                {/* Language Switcher */}
+                <div className="flex items-center gap-4">
+                    <button
+                        onClick={() => changeLanguage("en")}
+                        className="px-2 py-1 border border-white rounded"
+                    >
+                        🇬🇧 English
+                    </button>
+                    <button
+                        onClick={() => changeLanguage("mi")}
+                        className="px-2 py-1 border border-white rounded"
+                    >
+                        🇳🇿 Māori
+                    </button>
                 </div>
 
                 {token ? (
