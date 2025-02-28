@@ -1,5 +1,19 @@
 import axiosInstance from "../api/axios";
 
+// login user
+export const login = async (username, password) => {
+    try {
+        const response = await axiosInstance.post(`/login/`, {
+            username,
+            password,
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error login:", error);
+        throw error;
+    }
+};
+
 // get current login user detail
 export const getMe = async (token) => {
     try {
@@ -29,8 +43,6 @@ export const forgotPassword = async (email) => {
 // confirm reset password
 export const resetPassword = async (data) => {
     const { resetToken, newPassword } = data;
-    console.log("resetToken", resetToken);
-    console.log("new password", newPassword);
 
     try {
         const response = await axiosInstance.post(`/password-reset-confirm/`, {

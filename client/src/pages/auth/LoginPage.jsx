@@ -8,12 +8,12 @@ import AuthRightSideSection from "../../components/AuthRightSideSection";
 
 import blackLogo from "../../assets/logo-black.png";
 import arrowleft from "../../assets/arrow-left.svg";
-import { getMe } from "../../services/auth.service.s";
+import { getMe, login } from "../../services/auth.service.s";
 
 // LoginPage component handles user authentication
 const LoginPage = () => {
     // Access the login function from AuthContext
-    const { login } = useContext(AuthContext);
+    const { setToken } = useContext(AuthContext);
 
     // State variables to store user input and error messages
     const [username, setUsername] = useState("");
@@ -27,31 +27,23 @@ const LoginPage = () => {
     const handleLogin = async () => {
         try {
             // Send login request to API with username and password
-            const response = await apiClient.post("/login/", {
-                username,
-                password,
-            });
+            const response = await login(username, password);
 
             // Store the authentication token in context
-            login(response.data.token);
+            setToken(response.token);
 
-            const authUser = await getMe(response.data.token);
+            const authUser = await getMe(response.token);
 
-            if (authUser.role === "user") {
-                navigate("/explore");
-            } else {
-                // Redirect user to the dashboard after successful login
+            if (authUser && ["admin", "business"].includes(authUser.role)) {
                 navigate("/admin/locations");
+            } else {
+                navigate("/explore");
             }
         } catch (error) {
             // Set an error message if login fails
             setError(
                 error.response?.data?.error ||
-                    "Incorrect email or password. Please try again."
-            );
-            setError(
-                error.response?.data?.error ||
-                    "Incorrect email or password. Please try again."
+                    "Incorrect username/email or password. Please try again."
             );
         }
     };
@@ -79,12 +71,12 @@ const LoginPage = () => {
                     <h2>Nice to see you again</h2>
 
                     <div className="input-group">
-                        <label htmlFor="email">Login</label>
+                        <label htmlFor="username">Username/Email</label>
                         <input
                             type="text"
-                            id="email"
-                            name="email"
-                            placeholder="Enter your email"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username or email"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
