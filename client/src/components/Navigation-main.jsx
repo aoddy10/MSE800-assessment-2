@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import "../styles/NavigationWhite.css";
 import logo from "../assets/logo-black.png";
 import AuthContext from "../context/AuthContext";
@@ -9,6 +9,21 @@ import { UserAvatar } from "./UserAvatar";
 const NavigationMain = () => {
     const { token, authUserInfo, setAuthUserInfo } = useContext(AuthContext);
     const logout = useLogout();
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     useEffect(() => {
         // Fetch user details
@@ -48,39 +63,17 @@ const NavigationMain = () => {
                     <a href="/contact" className="navbar-link-white">
                         CONTACT
                     </a>
-                    {token && (
-                        <>
-                            {authUserInfo &&
-                            ["admin", "business"].includes(
-                                authUserInfo.role
-                            ) ? (
-                                <a
-                                    href="/admin/locations"
-                                    className="navbar-link-white"
-                                >
-                                    DASHBOARD
-                                </a>
-                            ) : (
-                                authUserInfo &&
-                                ["user"].includes(authUserInfo.role) && (
-                                    <a
-                                        href="/admin/profile"
-                                        className="navbar-link-white"
-                                    >
-                                        PROFILE
-                                    </a>
-                                )
-                            )}
-                        </>
-                    )}
                 </div>
 
                 {token ? (
                     <div>
                         {/* User Info & Logout */}
-                        <div className="flex items-center gap-4">
+                        <div className="relative min-w-max" ref={dropdownRef}>
                             {authUserInfo && (
-                                <div className="flex items-center gap-2">
+                                <div 
+                                    className="flex items-center gap-2 cursor-pointer"
+                                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                >
                                     <UserAvatar
                                         profileImageUrl={
                                             authUserInfo.profile_image_url
@@ -99,12 +92,28 @@ const NavigationMain = () => {
                                     </div>
                                 </div>
                             )}
-                            <button
-                                className=" bg-accent px-3 py-1 rounded"
-                                onClick={logout}
-                            >
-                                Logout
-                            </button>
+                            
+                            {/* Dropdown Menu */}
+                            {isDropdownOpen && (
+                                <div className="absolute right-0 mt-8 min-w-[75px] bg-white rounded-md shadow-lg py-2 px-2 z-50">
+                                    <a
+                                        href={authUserInfo && ["admin", "business"].includes(authUserInfo.role) 
+                                            ? "/admin/locations" 
+                                            : "/admin/profile"}
+                                        className="block px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
+                                    >
+                                        {authUserInfo && ["admin", "business"].includes(authUserInfo.role) 
+                                            ? "Dashboard" 
+                                            : "Profile"}
+                                    </a>
+                                    <button
+                                        onClick={logout}
+                                        className="block w-full text-left px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
+                                    >
+                                        Logout
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 ) : (

@@ -115,15 +115,6 @@
     margin-bottom: 10px;
 }
 
-.maori-text p {
-    width: 50%;
-    font-size: 1em;
-    line-height: 1.3em;
-    color: #767676;
-    font-family: 'LatoRegular';
-    font-weight: 400;
-}
-
 .maori-container {
     width: 100%;
     height: max-content;

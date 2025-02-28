@@ -39,12 +39,12 @@ const MaoriPage = () => {
                     }}>
                     <div className="hero-content">
                         <div className="blur-container">
-                            <p>Experience the <span className="bold-text">Magic</span> of <span className="bold-text">New Zealand</span></p>
+                            <p>Experience the <span className="font-bold">Magic</span> of <span className="font-bold">New Zealand</span></p>
                         </div>
 
                         <div className="hero-text">
                             <h1>Discover maori-culture <br />
-                                in <span className="bold-text">New Zealand</span></h1>
+                                in <span className="font-bold">New Zealand</span></h1>
                         </div>
 
                         <div className="scroll-container">
@@ -61,8 +61,8 @@ const MaoriPage = () => {
                 <div className="maori-content2">
                     <div className="maori-txt">
                         <div className="maori-text">
-                            
-                            <p>Māori culture is an integral part of life in Aotearoa, New Zealand</p>
+                            <h1>Explore the <br/><span className='font-bold'>Māori culture</span></h1>
+                            <p className='text-lg text-[#232323]'>Māori culture is the indigenous culture of <br/>New Zealand, with a rich history and tradition that continues to thrive today.</p>
                         </div>
                     </div>
 
@@ -78,8 +78,8 @@ const MaoriPage = () => {
                                 }}
                             ></div>
                             <div className="maori-card-txt">
-                               
-                                <p>Māori legend says New Zealand was fished from the sea by the daring demigod Māui.</p>
+                                <h1>Demigod Māui</h1>
+                                <p className='text-md'>Māori legend says New Zealand was fished from the sea by the daring demigod Māui.</p>
                             </div>
                         </div>
 
@@ -95,7 +95,7 @@ const MaoriPage = () => {
                             ></div>
                             <div className="maori-card-txt">
                                 <h1>Treaty of Waitangi</h1>
-                                <p>The Treaty of Waitangi was signed in 1840 and was an agreement between the British Crown and a large number of Māori chiefs.</p>
+                                <p className='text-md'>The Treaty of Waitangi was signed in 1840 and was an agreement between the British Crown and a large number of Māori chiefs.</p>
                             </div>
                         </div>
 
@@ -111,7 +111,7 @@ const MaoriPage = () => {
                             ></div>
                             <div className="maori-card-txt">
                                 <h1>Tāmoko Māori tattoo</h1>
-                                <p>The centuries old tradition of tāmoko (Māori tattoo) is an important custom that is still practised today. </p>
+                                <p className='text-md'>The centuries old tradition of tāmoko (Māori tattoo) is an important custom that is still practised today. </p>
                             </div>
                         </div>
                     </div>
@@ -132,17 +132,25 @@ const MaoriPage = () => {
                             }}
                         ></div>
                         <div class="box2">
+
                             <div className="maori">
                                 <div className="maori-items">
                                     <h1 className="maori-title">01</h1>
-                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Early settlement</b><br />The ancestors of Māori arrived on canoes from Pacific islands before 1300 CE. Settling first on the coast, they hunted seals and moas. They also began to grow food, and some moved to the forests. They lived in small tribal groups, with a rich culture of spoken stories, and strong traditions of warfare. Their ancestors, and the gods of the natural world, were very important.</h2>
+                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>The Heart of Māori New Zealand</b><br />Unlock the secrets of Aotearoa's indigenous heritage, from ancient roots to modern expressions.</h2>
+                                </div>
+                            </div>
+
+                            <div className="maori">
+                                <div className="maori-items">
+                                    <h1 className="maori-title">02</h1>
+                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Early settlement</b><br />The ancestors of Māori arrived on canoes from Pacific islands before 1300 CE. Settling first on the coast, they hunted seals and moas.</h2>
                                 </div>
                             </div>
                             
                             <div className="maori">
                                 <div className="maori-items">
-                                    <h1 className="maori-title">02</h1>
-                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Māori today</b><br />In 2019 there were nearly 800,000 Māori people, with most living in cities. There were kōhanga reo (preschool language nests) and schools using the Māori language, two Māori television channels and 21 radio stations, 29 members of Parliament who identified as Māori, and many creative projects in film, music and art.</h2>
+                                    <h1 className="maori-title">03</h1>
+                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Māori today</b><br />In 2019 there were nearly 800,000 Māori people, with most living in cities.</h2>
                                 </div>
                             </div>
                         </div>

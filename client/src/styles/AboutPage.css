@@ -36,8 +36,8 @@
 .about-text h1 {
     font-size: 64px;
     color: #232323;
-    font-family: 'LatoThin' !important;
-    font-weight: 600;
+    font-family: 'LatoThin';
+    font-weight: 500;
     margin-bottom: 10px;
 }
 
@@ -95,7 +95,8 @@
     display: grid;
     grid-template-columns: 1fr;
     column-gap: 10px;
-    padding: 20px;
+    padding: 30px;
+    text-align: left;
 }
 
 .about-row-2 {
@@ -119,7 +120,8 @@
     display: grid;
     grid-template-columns: 1fr;
     column-gap: 10px;
-    padding: 20px;
+    padding: 30px;
+    text-align: left;
 }
 
 /* ------------------- Section 2  ---------------- */
@@ -226,8 +228,7 @@
 .subscription-container h2 {
     font-size: 48px;
     color: #232323;
-    font-family: 'LatoThin' !important;
-    font-weight: 600;
+    font-family: 'LatoThin';
     margin: 0;
     line-height: 1.2;
 }

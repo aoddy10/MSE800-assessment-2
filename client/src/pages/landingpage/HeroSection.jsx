@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom"
 
 const HeroSection = () => {
 
-     const navigate = useNavigate();
+    const navigate = useNavigate();
 
-     const handleClick = () => {
+    const handleClick = () => {
         navigate(`/explore`);
     };
 
@@ -16,6 +16,11 @@ const HeroSection = () => {
             <div className="boxing">
                 <div className="landing-text-content">
                     <h2>Welcome to kiwi explorer</h2>
+                    <p>Your Gateway to Authentic New Zealand. We <br/>
+                        specialize in crafting immersive journeys that go beyond <br/>
+                        the tourist trail. Discover the breathtaking beauty <br/>
+                        of Aotearoa, from rugged coastlines to lush rainforests, <br/>
+                        with our expert local guides.</p>
                  
                     <div className="landing-active-users-container">
                         <img src={activeUsers} alt="activeUsers" />

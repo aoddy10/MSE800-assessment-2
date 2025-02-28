@@ -9,7 +9,7 @@ const MainLayout = () => {
             <NavigationMain />
 
             {/* Page Content */}
-            <div className="flex-grow p-6">
+            <div className="flex-grow p-0 bg-none">
                 <Outlet /> {/* Renders the current page */}
             </div>
 
