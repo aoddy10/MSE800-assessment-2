@@ -21,7 +21,7 @@
     width: 100%;
     height: 90%;
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
 
 }
 
@@ -29,6 +29,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 20px;
+    width: 80%;
 }
 
 .landing-column-1 p {
@@ -51,7 +52,7 @@
 }
 
 .landing-footer-logo {
-    width: 60%;
+    width: 75%;
     height: max-content;
 }
 
@@ -73,7 +74,7 @@
 .landing-column a {
     color: #fff;
     font-family: 'LatoThin';
-    font-size: 1.2em;
+    font-size: 1em;
     line-height: 1.3em;
     transition: color 0.3s ease;
     text-decoration: none;

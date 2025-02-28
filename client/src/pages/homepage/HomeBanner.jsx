@@ -12,8 +12,8 @@ const HomeBanner = ({ cities, onSearchClick }) => {
     };
 
     return (
-        <div className="max-w-6xl mx-auto px-6 py-10">
-            <div className="relative w-full h-[350px] rounded-xl overflow-hidden">
+        <div className="w-[70%] mx-auto mt-[100px]">
+            <div className="relative w-full h-[425px] rounded-xl overflow-hidden">
                 <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url(${bgImage})` }}
@@ -25,7 +25,8 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                         <span className="block font-bold">New Zealand</span>
                     </h1>
                     <p className="text-white text-sm mt-2 max-w-lg">
-                    Traveling – it leaves you speechless, then turns you into a storyteller.
+                        Kiwi Explorer offers a range of tailored tours to suit your interests.  Browse our experiences, or contact us to create 
+                        your personalized Kiwi adventure. Let us guide you on a journey you'll never forget.
                     </p>
                 </div>
 

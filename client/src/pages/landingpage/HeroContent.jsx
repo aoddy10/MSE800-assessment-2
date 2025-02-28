@@ -7,15 +7,15 @@ const HeroContent = () => {
         <div className="hero-content">
             <div className="blur-container">
                 <p>
-                    Experience the <span className="bold-text">Magic</span> of{" "}
-                    <span className="bold-text">New Zealand</span>
+                    Experience the <span className="font-bold">Magic</span> of{" "}
+                    <span className="font-bold">New Zealand</span>
                 </p>
             </div>
 
             <div className="hero-text">
                 <h1>
-                    Unforgettable Moments <br />
-                    in <span className="bold-text">New Zealand</span>
+                    <span className="font-thin">Unforgettable Moments <br />
+                    in </span><span className="font-bold">New Zealand</span>
                 </h1>
             </div>
 
