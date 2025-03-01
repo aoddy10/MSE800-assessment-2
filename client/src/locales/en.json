@@ -1,9 +1,37 @@
 {
+    "nav": {
+        "navLink": {
+            "explore": "Explore",
+            "about": "About",
+            "maori": "Maori",
+            "contact": "Contact",
+            "register": "Register",
+            "login": "Login",
+            "logout": "Logout"
+        }
+    },
     "landingPage": {
         "heroContent": {
             "button": "Experience the Magic of New Zealand",
             "title": "Unforgettable Moments in New Zealand",
             "scrollButton": "Scroll Down"
+        }
+    },
+    "home": {
+        "heroContent": {
+            "title": "Explore the Wonders of New Zealand",
+            "subtitle": "Kiwi Explorer offers a range of tailored tours to suit your interests. Browse our experiences, or contact us to create your personalized Kiwi adventure. Let us guide you on a journey you'll never forget.",
+            "searchBox": {
+                "city": "City",
+                "type": "Type",
+                "priceRange": "Price range",
+                "button": "Search"
+            }
+        },
+        "sectionName": {
+            "city": "Featured Cities",
+            "restaurant": "Featured Restaurants",
+            "activity": "Featured Activities"
         }
     }
 }

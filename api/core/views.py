@@ -76,40 +76,42 @@ def register(request):
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def login(request):
-    username = request.data.get("username")
+    """
+    Allow users to login using either username or email.
+    """
+    login_identifier = request.data.get("username")  # Can be username or email
     password = request.data.get("password")
 
-    # get user authentication
-    user = authenticate(username=username, password=password)
+    # Validate input
+    if not login_identifier or not password:
+        return Response({"error": "Username/Email and password are required"}, status=400)
+
+    # Find user by email or username
+    user = User.objects.filter(email=login_identifier).first() or User.objects.filter(username=login_identifier).first()
+
     if not user:
         return Response({"error": "Invalid credentials"}, status=400)
 
-    # check if user is suspended
+    # Authenticate user using username (Django requires username for authentication)
+    user = authenticate(username=user.username, password=password)
+
+    if not user:
+        return Response({"error": "Invalid credentials"}, status=400)
+
+    # Check if user is suspended
     if user.is_suspended:
         return Response({"error": "Your account is suspended"}, status=403)
 
-    # update last_login
+    # Update last_login timestamp
     user.last_login = now()
     user.save()
 
-    # create or pull Token ของ User
+    # Generate or get existing Token
     token, _ = Token.objects.get_or_create(user=user)
 
-    # send User detail with Token
+    # Send user details with token
     return Response({
         "token": token.key,
-        "user": {
-            "id": user.id,
-            "username": user.username,
-            "email": user.email,
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-            "phone": user.phone,
-            "role": user.role,
-            "profile_image_url": user.profile_image_url,
-            "is_suspended": user.is_suspended,
-            "last_login": user.last_login.strftime("%Y-%m-%d %H:%M:%S") if user.last_login else None
-        }
     }, status=200)
 
 @api_view(["POST"])

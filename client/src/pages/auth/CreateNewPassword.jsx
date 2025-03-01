@@ -69,7 +69,6 @@ const CreateNewPassword = () => {
 
             navigate("/login"); // Redirect to login page
         } catch (error) {
-            console.log(error);
             setError(error.response?.data?.error || "Password reset failed.");
         } finally {
             setLoading(false);

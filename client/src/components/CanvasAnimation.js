@@ -7,6 +7,7 @@ import "../styles/CanvasAnimation.css";
 
 import HeroContent from "../pages/landingpage/HeroContent";
 import HeroSection from "../pages/landingpage/HeroSection";
+import HeroSection2 from "../pages/landingpage/HeroSection2";
 import FooterLandingpage from "../pages/landingpage/FooterLandingpage";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -162,19 +163,7 @@ const CanvasAnimation = () => {
                 </div>
 
                 <div id="page2">
-                    <div id="text1">
-                        <h3>The world is a book</h3>
-                        <h1>
-                             and those who do not travel 
-                            <br />
-                            read only one page
-                            
-                        </h1>
-                    </div>
-                    <div id="text2">
-                        <h3>Take only memories, leave only footprints.</h3>
-                        
-                    </div>
+                    <HeroSection2 />
                 </div>
 
                 <div id="page3">
