@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import "./utils/i18n";
+
 import { AuthProvider } from "./context/AuthContext";
 import LandingPage from "./pages/landingpage/LandingPage";
 

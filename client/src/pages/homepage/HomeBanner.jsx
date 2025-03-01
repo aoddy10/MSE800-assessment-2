@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import bgImage from 'assets/0001.jpg'; //'../assets/0001.jpg';
+import bgImage from "assets/0001.jpg"; //'../assets/0001.jpg';
+import { useTranslation } from "react-i18next";
 
 const HomeBanner = ({ cities, onSearchClick }) => {
+    const { t } = useTranslation();
+
     const [city, setCity] = useState("");
     const [type, setType] = useState("");
     const [price, setPrice] = useState("");
@@ -19,14 +22,12 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                     style={{ backgroundImage: `url(${bgImage})` }}
                 ></div>
 
-                <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-center px-6">
+                <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-center px-40">
                     <h1 className="text-white text-4xl font-light">
-                        Explore the Wonders of{" "}
-                        <span className="block font-bold">New Zealand</span>
+                        {t("home.heroContent.title")}
                     </h1>
                     <p className="text-white text-sm mt-2 max-w-lg">
-                        Kiwi Explorer offers a range of tailored tours to suit your interests.  Browse our experiences, or contact us to create 
-                        your personalized Kiwi adventure. Let us guide you on a journey you'll never forget.
+                        {t("home.heroContent.subtitle")}
                     </p>
                 </div>
 
@@ -34,7 +35,9 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                     <div className="flex items-center gap-2">
                         <span className="bg-blue-100 p-2 rounded-lg">🏢</span>
                         <div>
-                            <p className="text-gray-500 text-sm">City</p>
+                            <p className="text-gray-500 text-sm">
+                                {t("home.heroContent.searchBox.city")}
+                            </p>
                             <select
                                 value={city}
                                 onChange={(e) => {
@@ -53,9 +56,6 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                                 ) : (
                                     <option>Auckland</option>
                                 )}
-                                {/* <option>Auckland</option>
-                <option>Wellington</option>
-                <option>Christchurch</option> */}
                             </select>
                         </div>
                     </div>
@@ -63,7 +63,9 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                     <div className="flex items-center gap-2">
                         <span className="bg-blue-100 p-2 rounded-lg">🎩</span>
                         <div>
-                            <p className="text-gray-500 text-sm">Type</p>
+                            <p className="text-gray-500 text-sm">
+                                {t("home.heroContent.searchBox.type")}
+                            </p>
                             <select
                                 value={type}
                                 onChange={(e) => setType(e.target.value)}
@@ -79,7 +81,9 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                     <div className="flex items-center gap-2">
                         <span className="bg-blue-100 p-2 rounded-lg">💲</span>
                         <div>
-                            <p className="text-gray-500 text-sm">Price range</p>
+                            <p className="text-gray-500 text-sm">
+                                {t("home.heroContent.searchBox.priceRange")}
+                            </p>
                             <select
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
@@ -95,9 +99,9 @@ const HomeBanner = ({ cities, onSearchClick }) => {
 
                     <button
                         onClick={HandleSearchClick}
-                        className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded"
+                        className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded uppercase"
                     >
-                        SEARCH
+                        {t("home.heroContent.searchBox.button")}
                     </button>
                 </div>
             </div>
