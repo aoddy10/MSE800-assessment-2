@@ -1,17 +1,5 @@
 import axiosInstance from "../api/axios";
 
-// get locations
-// export const getLocations = async () => {
-//     try {
-//         const response = await axiosInstance.get("/locations/");
-//         //console.log(response.data);
-//         return response.data;
-//     } catch (error) {
-//         console.error("Error fetching locations:", error);
-//         throw error;
-//     }
-// };
-
 // get restaurant
 export const getRestaurants = async () => {
     try {
