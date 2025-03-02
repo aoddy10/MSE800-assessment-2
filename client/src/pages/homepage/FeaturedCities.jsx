@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "../../components/ui/Skeleton";
 
 const FeaturedCities = ({ cities }) => {
+    const { t } = useTranslation();
+
     const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
@@ -18,7 +21,10 @@ const FeaturedCities = ({ cities }) => {
             setIsAnimating(true);
             setCurrentIndex((prevIndex) => {
                 const nextIndex = prevIndex + 1;
-                return nextIndex > Math.floor((cities.length - 1) / itemsPerSlide) ? 0 : nextIndex;
+                return nextIndex >
+                    Math.floor((cities.length - 1) / itemsPerSlide)
+                    ? 0
+                    : nextIndex;
             });
             setTimeout(() => setIsAnimating(false), 500);
         }
@@ -29,7 +35,9 @@ const FeaturedCities = ({ cities }) => {
             setIsAnimating(true);
             setCurrentIndex((prevIndex) => {
                 const nextIndex = prevIndex - 1;
-                return nextIndex < 0 ? Math.floor((cities.length - 1) / itemsPerSlide) : nextIndex;
+                return nextIndex < 0
+                    ? Math.floor((cities.length - 1) / itemsPerSlide)
+                    : nextIndex;
             });
             setTimeout(() => setIsAnimating(false), 500);
         }
@@ -50,14 +58,13 @@ const FeaturedCities = ({ cities }) => {
                     <span className="mb-6">
 
                         <h2 className="text-2xl font-bold">
-                            Featured Cities
+                            {t("home.sectionName.city")}
                         </h2>
                         <p className="text-md text-[#767676]">Explore New Zealand's urban gems, from bustling hubs to charming locales.</p>
 
                     </span>
 
                     <div className="flex gap-2">
-
                         {/* Navigation Arrows */}
                         <button
                             onClick={prevSlide}
@@ -65,8 +72,19 @@ const FeaturedCities = ({ cities }) => {
                             className="bg-none p-0 z-10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="Previous slide"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#232323] hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 text-[#232323] hover:text-gray-500"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2.5}
+                                    d="M15 19l-7-7 7-7"
+                                />
                             </svg>
                         </button>
 
@@ -76,8 +94,19 @@ const FeaturedCities = ({ cities }) => {
                             className="bg-none p-0 z-10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="Next slide"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#232323] hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 text-[#232323] hover:text-gray-500"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2.5}
+                                    d="M9 5l7 7-7 7"
+                                />
                             </svg>
                         </button>
                     </div>
@@ -91,7 +120,9 @@ const FeaturedCities = ({ cities }) => {
                         <div
                             className="flex transition-transform duration-500 ease-out"
                             style={{
-                                transform: `translateX(-${currentIndex * 100}%)`,
+                                transform: `translateX(-${
+                                    currentIndex * 100
+                                }%)`,
                             }}
                         >
                             {cities && cities.length > 0 ?
@@ -118,25 +149,33 @@ const FeaturedCities = ({ cities }) => {
                                                                 />
                                                             </div>
 
-                                                            <div className="flex justify-between items-center mt-3">
-                                                                <h3 className="text-lg font-semibold text-gray-800 leading-normal">
-                                                                    {city.title}
-                                                                </h3>
-                                                                <div className="flex items-center gap-1 text-yellow-500">
-                                                                    <span className="font-semibold">
-                                                                        {city.rating}
-                                                                    </span>
-                                                                    <span>⭐</span>
-                                                                </div>
-                                                            </div>
-                                                            <p className="text-gray-600 text-sm leading-normal">
-                                                                {city.description}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                        </div>
-                                    ))
+                                                              <div className="flex justify-between items-center mt-3">
+                                                                  <h3 className="text-lg font-semibold text-gray-800 leading-normal">
+                                                                      {
+                                                                          city.title
+                                                                      }
+                                                                  </h3>
+                                                                  <div className="flex items-center gap-1 text-yellow-500">
+                                                                      <span className="font-semibold">
+                                                                          {
+                                                                              city.rating
+                                                                          }
+                                                                      </span>
+                                                                      <span>
+                                                                          ⭐
+                                                                      </span>
+                                                                  </div>
+                                                              </div>
+                                                              <p className="text-gray-600 text-sm leading-normal">
+                                                                  {
+                                                                      city.description
+                                                                  }
+                                                              </p>
+                                                          </div>
+                                                      </div>
+                                                  ))}
+                                          </div>
+                                      ))
                                 : "No Data"}
                         </div>
 }

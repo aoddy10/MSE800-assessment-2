@@ -3,8 +3,11 @@ import bgImage from 'assets/0001.jpg';
 import searchCityIcon from 'assets/search-city.png';
 import searchActivityIcon from 'assets/search-activity.png';
 import searchPriceIcon from 'assets/search-price.png';
+import { useTranslation } from "react-i18next";
 
 const HomeBanner = ({ cities, onSearchClick }) => {
+    const { t } = useTranslation();
+
     const [city, setCity] = useState("");
     const [type, setType] = useState("");
     const [price, setPrice] = useState("");
@@ -22,10 +25,9 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                     style={{ backgroundImage: `url(${bgImage})` }}
                 ></div>
 
-                <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-center px-6">
+                <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-center px-40">
                     <h1 className="text-white text-4xl font-light">
-                        Explore the Wonders of{" "}
-                        <span className="block font-bold">New Zealand</span>
+                        {t("home.heroContent.title")}
                     </h1>
                     <p className="text-white text-sm mt-2 max-w-lg">
                         Kiwi Explorer offers a range of tailored tours to suit your interests.  Browse our experiences, or contact us to create
