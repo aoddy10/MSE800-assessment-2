@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React from 'react'
 
-function ReviewSection({ reviews }) {
+function ReviewSection({ reviews, user, onReviewClick }) {
 
     // random color
     const getRandomColor = () => {
@@ -26,7 +26,7 @@ function ReviewSection({ reviews }) {
 
     return (
 
-        <div className="bg-white p-6 rounded-xl shadow-xl">
+        <div className="bg-white p-6 rounded-xl shadow-sm">
             <h2 className="text-xl font-semibold">Reviews</h2>
             <div className="mt-4 space-y-4 bg-[#f9f9fb] p-3 rounded-xl">
                 {/* Review 1 */}
@@ -35,11 +35,11 @@ function ReviewSection({ reviews }) {
                         return (
                             <div key={`review-${review.id}`} className="p-4 bg-gray-50 rounded-lg shadow">
                                 <div className="flex items-center space-x-3">
-                                    {/* <img
+                                    <img
                                         src="/user1.jpg"
                                         alt={review.id}
                                         className="w-10 h-10 rounded-full"
-                                    /> */}
+                                    />
                                     {review.user && (
                                         <div className="flex items-center gap-2">
                                             {review.user.profile_image_url ? (
@@ -79,10 +79,17 @@ function ReviewSection({ reviews }) {
 
                     })
 
-                ) : "No review"}
+                ) : "No reviews"}
             </div>
+            {user && (
+                <button 
+                    className="border-[1px] border-[#31AAB7] text-[#31AAB7] bg-[#31AAB7] bg-opacity-25 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 w-full mt-4"
+                    onClick={onReviewClick}
+                >
+                    Write Review
+                </button>
+            )}
         </div>
-
     )
 }
 

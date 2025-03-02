@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Skeleton from "../../components/ui/Skeleton";
 
 const FeaturedCities = ({ cities }) => {
     const { t } = useTranslation();
@@ -8,7 +9,14 @@ const FeaturedCities = ({ cities }) => {
     const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [loading, setLoading] = useState(true);
     const itemsPerSlide = 3;
+
+    useEffect(() => {
+        if (cities && cities.length > 0) {
+            setLoading(false);
+        }
+    }, [cities]);
 
     const handleImageClick = ({ city }) => {
         const paramValue = city.id;
@@ -46,9 +54,16 @@ const FeaturedCities = ({ cities }) => {
         <section id="FeaturedCities" className="py-12 w-[100%] bg-[#f9f9fb]">
             <div className="w-[70%] m-auto">
                 <div className="flex justify-between">
-                    <h2 className="text-2xl font-bold mb-6">
-                        {t("home.sectionName.city")}
-                    </h2>
+                    <span className="mb-6">
+                        <h2 className="text-2xl font-bold">
+                            {t("home.sectionName.city")}
+                        </h2>
+                        <p className="text-md text-[#767676]">
+                            Explore New Zealand's urban gems, from bustling hubs
+                            to charming locales.
+                        </p>
+                    </span>
+
                     <div className="flex gap-2">
                         {/* Navigation Arrows */}
                         <button
@@ -99,86 +114,94 @@ const FeaturedCities = ({ cities }) => {
 
                 <div className="relative">
                     <div className="overflow-hidden">
-                        <div
-                            className="flex transition-transform duration-500 ease-out"
-                            style={{
-                                transform: `translateX(-${
-                                    currentIndex * 100
-                                }%)`,
-                            }}
-                        >
-                            {cities && cities.length > 0
-                                ? Array(
-                                      Math.ceil(cities.length / itemsPerSlide)
-                                  )
-                                      .fill()
-                                      .map((_, slideIndex) => (
-                                          <div
-                                              key={slideIndex}
-                                              className="flex w-full flex-shrink-0 gap-8"
-                                          >
-                                              {cities
-                                                  .slice(
-                                                      slideIndex *
-                                                          itemsPerSlide,
-                                                      slideIndex *
-                                                          itemsPerSlide +
-                                                          itemsPerSlide
-                                                  )
-                                                  .map((city) => (
-                                                      <div
-                                                          key={city.id}
-                                                          className="w-1/3"
-                                                      >
+                        {loading ? (
+                            <Skeleton />
+                        ) : (
+                            <div
+                                className="flex transition-transform duration-500 ease-out"
+                                style={{
+                                    transform: `translateX(-${
+                                        currentIndex * 100
+                                    }%)`,
+                                }}
+                            >
+                                {cities && cities.length > 0
+                                    ? Array(
+                                          Math.ceil(
+                                              cities.length / itemsPerSlide
+                                          )
+                                      )
+                                          .fill()
+                                          .map((_, slideIndex) => (
+                                              <div
+                                                  key={slideIndex}
+                                                  className="flex w-full flex-shrink-0 gap-8"
+                                              >
+                                                  {cities
+                                                      .slice(
+                                                          slideIndex *
+                                                              itemsPerSlide,
+                                                          slideIndex *
+                                                              itemsPerSlide +
+                                                              itemsPerSlide
+                                                      )
+                                                      .map((city) => (
                                                           <div
-                                                              className="cursor-pointer flex flex-col gap-3 justify-start"
-                                                              onClick={() =>
-                                                                  handleImageClick(
-                                                                      { city }
-                                                                  )
-                                                              }
+                                                              key={city.id}
+                                                              className="w-1/3"
                                                           >
-                                                              <div className="overflow-hidden rounded-xl shadow-md">
-                                                                  <img
-                                                                      src={
-                                                                          city.image_url
-                                                                      }
-                                                                      alt={
-                                                                          city.name
-                                                                      }
-                                                                      className="w-full h-[300px] object-cover transition-transform duration-300 hover:scale-110"
-                                                                  />
-                                                              </div>
-
-                                                              <div className="flex justify-between items-center mt-3">
-                                                                  <h3 className="text-lg font-semibold text-gray-800 leading-normal">
-                                                                      {
-                                                                          city.title
-                                                                      }
-                                                                  </h3>
-                                                                  <div className="flex items-center gap-1 text-yellow-500">
-                                                                      <span className="font-semibold">
+                                                              <div
+                                                                  className="group cursor-pointer flex flex-col gap-3 justify-start"
+                                                                  onClick={() =>
+                                                                      handleImageClick(
                                                                           {
-                                                                              city.rating
+                                                                              city,
                                                                           }
-                                                                      </span>
-                                                                      <span>
-                                                                          ⭐
-                                                                      </span>
-                                                                  </div>
-                                                              </div>
-                                                              <p className="text-gray-600 text-sm leading-normal">
-                                                                  {
-                                                                      city.description
+                                                                      )
                                                                   }
-                                                              </p>
+                                                              >
+                                                                  <div className="overflow-hidden rounded-xl shadow-md">
+                                                                      <img
+                                                                          src={
+                                                                              city.image_url
+                                                                          }
+                                                                          alt={
+                                                                              city.name
+                                                                          }
+                                                                          className="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-110"
+                                                                      />
+                                                                  </div>
+
+                                                                  <div className="flex justify-between items-center mt-3">
+                                                                      <h3 className="text-lg font-semibold text-gray-800 leading-normal">
+                                                                          {
+                                                                              city.title
+                                                                          }
+                                                                      </h3>
+                                                                      <div className="flex items-center gap-1 text-yellow-500">
+                                                                          <span className="font-semibold">
+                                                                              {
+                                                                                  city.rating
+                                                                              }
+                                                                          </span>
+                                                                          <span>
+                                                                              ⭐
+                                                                          </span>
+                                                                      </div>
+                                                                  </div>
+                                                                  <p className="text-gray-600 text-sm leading-normal">
+                                                                      {
+                                                                          city.description
+                                                                      }
+                                                                  </p>
+                                                              </div>
                                                           </div>
-                                                      </div>
-                                                  ))}
-                                          </div>
-                                      ))
-                                : "No Data"}
-                        </div>
+                                                      ))}
+                                              </div>
+                                          ))
+                                    : "No Data"}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

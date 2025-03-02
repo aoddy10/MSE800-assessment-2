@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LocationCard from "../../components/LocationCard";
+import Skeleton from "../../components/ui/Skeleton";
+
 import { useTranslation } from "react-i18next";
 
 const FeaturedActivities = ({ activities }) => {
@@ -10,6 +12,7 @@ const FeaturedActivities = ({ activities }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
     const itemsPerSlide = 3;
+    const [loading, setLoading] = useState(true);
 
     const handleActivityClick = (activity) => {
         navigate(`/location/${activity.id}`);
@@ -42,6 +45,12 @@ const FeaturedActivities = ({ activities }) => {
         }
     };
 
+    useEffect(() => {
+        if (activities && activities.length > 0) {
+            setLoading(false);
+        }
+    }, [activities]);
+
     return (
         <section
             id="FeaturedActivities"
@@ -49,9 +58,15 @@ const FeaturedActivities = ({ activities }) => {
         >
             <div className="w-[70%] m-auto">
                 <div className="flex justify-between">
-                    <h2 className="text-2xl font-bold mb-6">
-                        {t("home.sectionName.activity")}
-                    </h2>
+                    <span className="mb-6">
+                        <h2 className="text-2xl font-bold">
+                            {t("home.sectionName.activity")}
+                        </h2>
+                        <p className="text-md text-[#767676]">
+                            Uncover the must-see tourist attractions that make
+                            New Zealand a world-renowned destination.
+                        </p>
+                    </span>
 
                     <div className="flex gap-2">
                         {/* Navigation Arrows */}
@@ -102,52 +117,61 @@ const FeaturedActivities = ({ activities }) => {
                 </div>
                 <div className="relative">
                     <div className="overflow-hidden">
-                        <div
-                            className="flex transition-transform duration-500 ease-out"
-                            style={{
-                                transform: `translateX(-${
-                                    currentIndex * 100
-                                }%)`,
-                            }}
-                        >
-                            {activities && activities.length > 0
-                                ? Array(
-                                      Math.ceil(
-                                          activities.length / itemsPerSlide
-                                      )
-                                  )
-                                      .fill()
-                                      .map((_, slideIndex) => (
-                                          <div
-                                              key={slideIndex}
-                                              className="flex w-full flex-shrink-0 gap-8"
-                                          >
-                                              {activities
-                                                  .slice(
-                                                      slideIndex *
-                                                          itemsPerSlide,
-                                                      slideIndex *
-                                                          itemsPerSlide +
-                                                          itemsPerSlide
-                                                  )
-                                                  .map((activity) => (
-                                                      <div
-                                                          key={activity.id}
-                                                          className="w-1/3"
-                                                      >
-                                                          <LocationCard
-                                                              location={
-                                                                  activity
-                                                              }
-                                                              onClick={
-                                                                  handleActivityClick
-                                                              }
-                                                          />
-                                                      </div>
-                                                  ))}
-                                          </div>
-                                      ))
-                                : "No Data"}
+                        <div>
+                            {loading ? (
+                                <Skeleton />
+                            ) : (
+                                <div
+                                    className="flex transition-transform duration-500 ease-out"
+                                    style={{
+                                        transform: `translateX(-${
+                                            currentIndex * 100
+                                        }%)`,
+                                    }}
+                                >
+                                    {activities && activities.length > 0
+                                        ? Array(
+                                              Math.ceil(
+                                                  activities.length /
+                                                      itemsPerSlide
+                                              )
+                                          )
+                                              .fill()
+                                              .map((_, slideIndex) => (
+                                                  <div
+                                                      key={slideIndex}
+                                                      className="flex w-full flex-shrink-0 gap-8"
+                                                  >
+                                                      {activities
+                                                          .slice(
+                                                              slideIndex *
+                                                                  itemsPerSlide,
+                                                              slideIndex *
+                                                                  itemsPerSlide +
+                                                                  itemsPerSlide
+                                                          )
+                                                          .map((activity) => (
+                                                              <div
+                                                                  key={
+                                                                      activity.id
+                                                                  }
+                                                                  className="w-1/3"
+                                                              >
+                                                                  <LocationCard
+                                                                      location={
+                                                                          activity
+                                                                      }
+                                                                      onClick={
+                                                                          handleActivityClick
+                                                                      }
+                                                                  />
+                                                              </div>
+                                                          ))}
+                                                  </div>
+                                              ))
+                                        : "No Data"}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

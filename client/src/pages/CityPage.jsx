@@ -5,6 +5,7 @@ import { getLocationByCityId, getReviews } from "../services/location.services";
 import LocationCard from "../components/LocationCard";
 import ReviewSection from "../components/ReviewSection";
 
+
 const CityPage = () => {
     const [selectedFilter, setSelectedFilter] = useState("All"); // New state for selected filter
     const { id } = useParams(); // Get city ID from URL
