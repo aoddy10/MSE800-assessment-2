@@ -8,7 +8,7 @@ import about3 from "../assets/about3.jpg";
 import CompanyStats1 from "../assets/company-stats-user.png";
 import CompanyStats2 from "../assets/company-stats-bldg.png";
 import { isValidEmail } from "../utils/libs";
-import { subscribeNewsletter } from "../services/subscribe.service";
+import { subscribeNewsletter } from "../services/subscribe.services";
 
 const FAQData = [
     {
