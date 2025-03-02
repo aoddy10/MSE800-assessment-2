@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LocationCard from "../../components/LocationCard";
+import Skeleton from "../../components/ui/Skeleton";
+
 
 const FeaturedActivities = ({ activities }) => {
     const navigate = useNavigate();
@@ -34,13 +36,24 @@ const FeaturedActivities = ({ activities }) => {
         }
     };
 
+    const [loading, setLoading] = useState(true);
+    
+        useEffect(() => {
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
+        }, []);
+
     return (
         <section id="FeaturedActivities" className="py-12 w-[100%] bg-[#f9f9fb]">
             <div className="w-[70%] m-auto">
                 <div className="flex justify-between">
-                    <h2 className="text-2xl font-bold mb-6">
-                        Featured Activities
-                    </h2>
+                    <span className="mb-6">
+                        <h2 className="text-2xl font-bold">
+                            Featured Tourists Attractions
+                        </h2>
+                        <p className="text-md text-[#767676]">Uncover the must-see tourist attractions that make New Zealand a world-renowned destination.</p>
+                    </span>
 
                     <div className="flex gap-2">
                         {/* Navigation Arrows */}
@@ -70,6 +83,7 @@ const FeaturedActivities = ({ activities }) => {
                 </div>
                 <div className="relative">
                     <div className="overflow-hidden">
+                    {loading ? <Skeleton /> :
                         <div 
                             className="flex transition-transform duration-500 ease-out"
                             style={{
@@ -95,6 +109,7 @@ const FeaturedActivities = ({ activities }) => {
                                     ))
                                 : "No Data"}
                         </div>
+}
                     </div>
                 </div>
             </div>

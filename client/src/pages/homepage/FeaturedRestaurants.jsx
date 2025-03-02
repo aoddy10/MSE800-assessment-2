@@ -1,6 +1,9 @@
 import LocationCard from "../../components/LocationCard";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import Skeleton from "../../components/ui/Skeleton";
+
 
 const FeaturedRestaurants = ({ restaurants }) => {
     const navigate = useNavigate();
@@ -34,13 +37,25 @@ const FeaturedRestaurants = ({ restaurants }) => {
         }
     };
 
+    const [loading, setLoading] = useState(true);
+    
+        useEffect(() => {
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
+        }, []);
+
     return (
         <section id="FeaturedRestaurants" className="py-12 w-[100%] bg-[#fff]">
             <div className="w-[70%] m-auto">
                 <div className="flex justify-between">
-                    <h2 className="text-2xl font-bold mb-6">
-                        Featured Restaurants
-                    </h2>
+                    <span className="mb-6">
+                        <h2 className="text-2xl font-bold">
+                            Featured Restaurants
+                        </h2>
+
+                        <p className="text-md text-[#767676]">Taste New Zealand's culinary scene with our featured restaurant picks.</p>
+                    </span>
 
                     <div className="flex gap-2">
                         {/* Navigation Arrows */}
@@ -73,6 +88,7 @@ const FeaturedRestaurants = ({ restaurants }) => {
                     
 
                     <div className="overflow-hidden">
+                    {loading ? <Skeleton /> :
                         <div 
                             className="flex transition-transform duration-500 ease-out"
                             style={{
@@ -98,6 +114,7 @@ const FeaturedRestaurants = ({ restaurants }) => {
                                     ))
                                 : "No Data"}
                         </div>
+}
                     </div>
                 </div>
             </div>

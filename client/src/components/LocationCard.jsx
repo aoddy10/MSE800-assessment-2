@@ -3,16 +3,19 @@ import React from "react";
 function LocationCard({ location, onClick }) {
     return (
         <div
-            className="bg-none cursor-pointer flex flex-col gap-4 justify-between min-h-[375px]"
+            className="group bg-none cursor-pointer flex flex-col gap-4 justify-between min-h-[375px]"
             onClick={() => onClick(location)}
         >
             <div className="flex flex-col gap-2">
-                <img
-                    src={location.cover_image_url}
-                    alt={location.description}
-                    onClick={() => onClick(location)}
-                    className="w-full h-[300px] object-cover rounded-lg"
-                />
+                <div className="overflow-hidden rounded-xl shadow-md">
+                    <img
+                        src={location.cover_image_url}
+                        alt={location.description}
+                        onClick={() => onClick(location)}
+                        className="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                </div>
+                    
                 <div className="flex flex-col mt-3">
                     <div className="flex justify-between">
                         <h3 className="text-lg font-semibold leading-normal">
@@ -30,6 +33,7 @@ function LocationCard({ location, onClick }) {
                     </p>
                 </div>
             </div>
+
             <div className="flex justify-between">
                 <div className=" font-extrabold text-lg">
                     $ {location.price_per_person}

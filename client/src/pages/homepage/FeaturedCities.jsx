@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Skeleton from "../../components/ui/Skeleton";
 
 const FeaturedCities = ({ cities }) => {
     const navigate = useNavigate();
@@ -34,17 +35,31 @@ const FeaturedCities = ({ cities }) => {
         }
     };
 
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    }, []);
+
     return (
         <section id="FeaturedCities" className="py-12 w-[100%] bg-[#f9f9fb]">
             <div className="w-[70%] m-auto">
                 <div className="flex justify-between">
-                    <h2 className="text-2xl font-bold mb-6">
-                        Featured Cities
-                    </h2>
+                    <span className="mb-6">
+
+                        <h2 className="text-2xl font-bold">
+                            Featured Cities
+                        </h2>
+                        <p className="text-md text-[#767676]">Explore New Zealand's urban gems, from bustling hubs to charming locales.</p>
+
+                    </span>
+
                     <div className="flex gap-2">
 
                         {/* Navigation Arrows */}
-                        <button 
+                        <button
                             onClick={prevSlide}
                             disabled={isAnimating}
                             className="bg-none p-0 z-10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -55,7 +70,7 @@ const FeaturedCities = ({ cities }) => {
                             </svg>
                         </button>
 
-                        <button 
+                        <button
                             onClick={nextSlide}
                             disabled={isAnimating}
                             className="bg-none p-0 z-10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -64,21 +79,22 @@ const FeaturedCities = ({ cities }) => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#232323] hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                             </svg>
-                        </button> 
+                        </button>
                     </div>
                 </div>
 
                 <div className="relative">
-                    
+
 
                     <div className="overflow-hidden">
-                        <div 
+                    {loading ? <Skeleton /> :
+                        <div
                             className="flex transition-transform duration-500 ease-out"
                             style={{
                                 transform: `translateX(-${currentIndex * 100}%)`,
                             }}
                         >
-                            {cities && cities.length > 0 ? 
+                            {cities && cities.length > 0 ?
                                 Array(Math.ceil(cities.length / itemsPerSlide))
                                     .fill()
                                     .map((_, slideIndex) => (
@@ -90,15 +106,15 @@ const FeaturedCities = ({ cities }) => {
                                                         key={city.id}
                                                         className="w-1/3"
                                                     >
-                                                        <div 
-                                                            className="cursor-pointer flex flex-col gap-3 justify-start"
+                                                        <div
+                                                            className="group cursor-pointer flex flex-col gap-3 justify-start"
                                                             onClick={() => handleImageClick({ city })}
                                                         >
                                                             <div className="overflow-hidden rounded-xl shadow-md">
                                                                 <img
                                                                     src={city.image_url}
                                                                     alt={city.name}
-                                                                    className="w-full h-[300px] object-cover transition-transform duration-300 hover:scale-110"
+                                                                    className="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-110"
                                                                 />
                                                             </div>
 
@@ -123,9 +139,10 @@ const FeaturedCities = ({ cities }) => {
                                     ))
                                 : "No Data"}
                         </div>
+}
                     </div>
 
-                    
+
                 </div>
             </div>
         </section>
