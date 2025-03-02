@@ -26,7 +26,8 @@ urlpatterns = [
     path("api/city/", include("city.urls")),
     path("api/locations/", include("location.urls")),
     path("api/reviews/", include("review.urls")),
-    path("api/newsletter/", include("newsletter.urls"))
+    path("api/newsletter/", include("newsletter.urls")),
+    path("api/contact/", include("contact.urls"))
 ]
 
 # Serve media files in development
