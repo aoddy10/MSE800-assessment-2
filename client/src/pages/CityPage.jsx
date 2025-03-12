@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import useScreenSize from "../hooks/useScreenSize";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { getCityById } from "../services/city.services";
 import { getLocationByCityId, getReviews } from "../services/location.services";
@@ -79,10 +81,13 @@ const CityPage = () => {
         navigate(`/location/${location.id}`);
     };
 
+    const { isMobile } = useScreenSize();
     return (
         <div className="bg-none p-0 m-0">
-            <div className="w-[70%] mx-auto p-0 mt-[150px]">
-                <div className="w-full h-[500px] rounded-xl overflow-hidden">
+            <div className={`${isMobile ? 'w-[90%]' : 'w-[70%]'} mx-auto p-0 mt-[150px]`}>
+
+                <div className={`w-full ${isMobile ? 'h-[300px]' : 'h-[500px]'} rounded-xl overflow-hidden`}>
+
                     <img
                         src={city.image_url}
                         alt={city.title}
@@ -90,7 +95,8 @@ const CityPage = () => {
                     />
                 </div>
 
-                <div className="p-0 flex flex-col lg:flex-row gap-3 mt-[50px]">
+                <div className={`p-0 flex flex-col ${isMobile ? '' : 'lg:flex-row'} gap-3 mt-[50px]`}>
+
                     <div className="lg:w-2/3">
                         <h1 className="text-2xl font-bold">{city.title}</h1>
                         <p className="text-gray-600 mt-2">{city.description}</p>
@@ -102,7 +108,8 @@ const CityPage = () => {
                 </div>
             </div>
 
-            <section className="w-[70%] mx-auto p-0 mt-[50px]">
+            <section className={`${isMobile ? 'w-[90%]' : 'w-[70%]'} mx-auto p-0 mt-[50px]`}>
+
                 <h2 className="text-2xl font-bold mb-2">
                     Things to do in {city.title}
                 </h2>
@@ -129,8 +136,10 @@ const CityPage = () => {
                 </div>
             </section>
 
-            <section className="w-[70%] mx-auto p-0 mt-[20px] mb-[50px] min-h-[400px]">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <section className={`${isMobile ? 'w-[90%]' : 'w-[70%]'} mx-auto p-0 mt-[20px] mb-[50px] min-h-[400px]`}>
+
+                <div className={`grid grid-cols-1 ${isMobile ? '' : 'md:grid-cols-3'} gap-6`}>
+
                     {locations && locations.length > 0
                         ? locations.map((location) => (
                             <LocationCard

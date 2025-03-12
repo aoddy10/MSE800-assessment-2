@@ -2,8 +2,10 @@ import LocationCard from "../../components/LocationCard";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import useScreenSize from "../../hooks/useScreenSize";
 
 import Skeleton from "../../components/ui/Skeleton";
+
 
 
 const FeaturedRestaurants = ({ restaurants }) => {
@@ -12,7 +14,9 @@ const FeaturedRestaurants = ({ restaurants }) => {
     const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
-    const itemsPerSlide = 3;
+    const { isMobile } = useScreenSize();
+    const itemsPerSlide = isMobile ? 1 : 3;
+
 
     const handleRestaurantClick = (restaurant) => {
         navigate(`/location/${restaurant.id}`);
@@ -55,7 +59,8 @@ const FeaturedRestaurants = ({ restaurants }) => {
 
     return (
         <section id="FeaturedRestaurants" className="py-12 w-[100%] bg-[#fff]">
-            <div className="w-[70%] m-auto">
+            <div className="w-[90%] md:w-[70%] m-auto">
+
                 <div className="flex justify-between">
                     <span className="mb-6">
                         <h2 className="text-2xl font-bold">
@@ -147,8 +152,9 @@ const FeaturedRestaurants = ({ restaurants }) => {
                                                   .map((restaurant) => (
                                                       <div
                                                           key={restaurant.id}
-                                                          className="w-1/3"
+                                                          className="w-full md:w-1/3"
                                                       >
+
                                                           <LocationCard
                                                               location={
                                                                   restaurant

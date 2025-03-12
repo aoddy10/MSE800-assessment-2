@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "../../components/ui/Skeleton";
+import useScreenSize from "../../hooks/useScreenSize";
 
 const FeaturedCities = ({ cities }) => {
     const { t } = useTranslation();
@@ -9,7 +10,8 @@ const FeaturedCities = ({ cities }) => {
     const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
-    const itemsPerSlide = 3;
+    const { isMobile } = useScreenSize();
+    const itemsPerSlide = isMobile ? 1 : 3;
 
     const handleImageClick = ({ city }) => {
         const paramValue = city.id;
@@ -52,16 +54,14 @@ const FeaturedCities = ({ cities }) => {
     }, []);
 
     return (
-        <section id="FeaturedCities" className="py-12 w-[100%] bg-[#f9f9fb]">
-            <div className="w-[70%] m-auto">
+        <section id="FeaturedCities" className="py-12 w-[100%] bg-[#f9f9fb] relative">
+            <div className="w-[90%] md:w-[70%] m-auto relative">
                 <div className="flex justify-between">
                     <span className="mb-6">
-
                         <h2 className="text-2xl font-bold">
                             {t("home.sectionName.city")}
                         </h2>
                         <p className="text-md text-[#767676]">Explore New Zealand's urban gems, from bustling hubs to charming locales.</p>
-
                     </span>
 
                     <div className="flex gap-2">
@@ -69,7 +69,7 @@ const FeaturedCities = ({ cities }) => {
                         <button
                             onClick={prevSlide}
                             disabled={isAnimating}
-                            className="bg-none p-0 z-10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="bg-none p-0 z-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="Previous slide"
                         >
                             <svg
@@ -91,7 +91,7 @@ const FeaturedCities = ({ cities }) => {
                         <button
                             onClick={nextSlide}
                             disabled={isAnimating}
-                            className="bg-none p-0 z-10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="bg-none p-0 z-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="Next slide"
                         >
                             <svg
@@ -113,75 +113,61 @@ const FeaturedCities = ({ cities }) => {
                 </div>
 
                 <div className="relative">
-
-
                     <div className="overflow-hidden">
-                    {loading ? <Skeleton /> :
-                        <div
-                            className="flex transition-transform duration-500 ease-out"
-                            style={{
-                                transform: `translateX(-${
-                                    currentIndex * 100
-                                }%)`,
-                            }}
-                        >
-                            {cities && cities.length > 0 ?
-                                Array(Math.ceil(cities.length / itemsPerSlide))
-                                    .fill()
-                                    .map((_, slideIndex) => (
-                                        <div key={slideIndex} className="flex w-full flex-shrink-0 gap-8">
-                                            {cities
-                                                .slice(slideIndex * itemsPerSlide, (slideIndex * itemsPerSlide) + itemsPerSlide)
-                                                .map((city) => (
-                                                    <div
-                                                        key={city.id}
-                                                        className="w-1/3"
-                                                    >
+                        {loading ? <Skeleton /> :
+                            <div
+                                className="flex transition-transform duration-500 ease-out"
+                                style={{
+                                    transform: `translateX(-${currentIndex * 100}%)`,
+                                }}
+                            >
+                                {cities && cities.length > 0 ?
+                                    Array(Math.ceil(cities.length / itemsPerSlide))
+                                        .fill()
+                                        .map((_, slideIndex) => (
+                                            <div key={slideIndex} className="flex w-full flex-shrink-0 gap-8">
+                                                {cities
+                                                    .slice(slideIndex * itemsPerSlide, (slideIndex * itemsPerSlide) + itemsPerSlide)
+                                                    .map((city) => (
                                                         <div
-                                                            className="group cursor-pointer flex flex-col gap-3 justify-start"
-                                                            onClick={() => handleImageClick({ city })}
+                                                            key={city.id}
+                                                            className="w-full md:w-1/3"
                                                         >
-                                                            <div className="overflow-hidden rounded-xl shadow-md">
-                                                                <img
-                                                                    src={city.image_url}
-                                                                    alt={city.name}
-                                                                    className="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-110"
-                                                                />
+                                                            <div
+                                                                className="group cursor-pointer flex flex-col gap-3 justify-start"
+                                                                onClick={() => handleImageClick({ city })}
+                                                            >
+                                                                <div className="overflow-hidden rounded-xl shadow-md">
+                                                                    <img
+                                                                        src={city.image_url}
+                                                                        alt={city.name}
+                                                                        className="w-full h-[200px] md:h-[300px] object-cover transition-transform duration-300 group-hover:scale-110"
+                                                                    />
+                                                                </div>
+
+                                                                <div className="flex justify-between items-center mt-3">
+                                                                    <h3 className="text-lg font-semibold text-gray-800 leading-normal">
+                                                                        {city.title}
+                                                                    </h3>
+                                                                    <div className="flex items-center gap-1 text-yellow-500">
+                                                                        <span className="font-semibold">
+                                                                            {city.rating}
+                                                                        </span>
+                                                                        <span>⭐</span>
+                                                                    </div>
+                                                                </div>
+                                                                <p className="text-gray-600 text-sm leading-normal">
+                                                                    {city.description}
+                                                                </p>
                                                             </div>
-
-                                                              <div className="flex justify-between items-center mt-3">
-                                                                  <h3 className="text-lg font-semibold text-gray-800 leading-normal">
-                                                                      {
-                                                                          city.title
-                                                                      }
-                                                                  </h3>
-                                                                  <div className="flex items-center gap-1 text-yellow-500">
-                                                                      <span className="font-semibold">
-                                                                          {
-                                                                              city.rating
-                                                                          }
-                                                                      </span>
-                                                                      <span>
-                                                                          ⭐
-                                                                      </span>
-                                                                  </div>
-                                                              </div>
-                                                              <p className="text-gray-600 text-sm leading-normal">
-                                                                  {
-                                                                      city.description
-                                                                  }
-                                                              </p>
-                                                          </div>
-                                                      </div>
-                                                  ))}
-                                          </div>
-                                      ))
-                                : "No Data"}
-                        </div>
-}
+                                                        </div>
+                                                    ))}
+                                            </div>
+                                        ))
+                                    : "No Data"}
+                            </div>
+                        }
                     </div>
-
-
                 </div>
             </div>
         </section>

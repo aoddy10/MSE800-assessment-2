@@ -8,12 +8,14 @@ import arrowleft from "../../assets/arrow-left.svg";
 import AuthContext from "../../context/AuthContext";
 import useLogout from "../../hooks/useLogout";
 import AuthRightSideSection from "../../components/AuthRightSideSection";
+import useScreenSize from "../../hooks/useScreenSize";
 
 const CreateNewPassword = () => {
     const { token } = useContext(AuthContext);
     const logout = useLogout();
     const { resetToken } = useParams(); // Get reset token from URL
     const navigate = useNavigate();
+    const { isMobile } = useScreenSize(); // Hook for Mobile Responsiveness
 
     const [formData, setFormData] = useState({
         newPassword: "",
@@ -76,7 +78,7 @@ const CreateNewPassword = () => {
     };
 
     return (
-        <div className="login-container">
+        <div className={`login-container ${isMobile ? 'mobile' : ''}`}>
             <div className="back-btn">
                 <a href="/" className="back-link">
                     <img className="arrow-left" src={arrowleft} alt="arrow" />
@@ -84,7 +86,7 @@ const CreateNewPassword = () => {
                 </a>
             </div>
 
-            <div className="left-container">
+            <div className={`left-container ${isMobile ? 'w-full' : ''}`}>
                 <div className="form-container">
                     <img
                         src={blackLogo}
@@ -155,7 +157,7 @@ const CreateNewPassword = () => {
             </div>
 
             {/* Right Side UI */}
-            <AuthRightSideSection />
+            {!isMobile && <AuthRightSideSection />}
         </div>
     );
 };

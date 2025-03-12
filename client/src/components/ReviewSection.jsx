@@ -83,7 +83,7 @@ function ReviewSection({ reviews, user, onReviewClick }) {
             </div>
             {user && (
                 <button 
-                    className="border-[1px] border-[#31AAB7] text-[#31AAB7] bg-[#31AAB7] bg-opacity-25 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 w-full mt-4"
+                    className="text-white bg-[#31AAB7] focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 w-full mt-4"
                     onClick={onReviewClick}
                 >
                     Write Review

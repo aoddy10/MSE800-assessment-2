@@ -29,6 +29,7 @@
     margin: 0;
     font-family: 'LatoBold', sans-serif;
     font-size: 1.9em;
+    font-weight: 600;
     color: #fff;
 }
 
@@ -53,6 +54,7 @@
     font-family: 'LatoRegular', sans-serif;
     font-size: 1.2em;
     line-height: 1.3em;
+    font-weight: 300;
     color: #fff;
 }
 
@@ -82,14 +84,56 @@
     background: rgba(200, 200, 200, 0.5);
     backdrop-filter: blur(1px);
     border-radius: 10px;
-    padding: 15px 25px;
+    padding: 15px 15px;
+}
+
+@media (max-width: 430px) {
+    .hero-content1 {
+        width: 90%;
+    }
+
+    .boxing {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 30px;
+    }
+
+    .landing-text-content h2 {
+        font-size: 1.5em;
+        font-weight: 600;
+    }
+
+    .landing-text-content p {
+        font-size: medium;
+    }
+
+    .landing-active-users-container {
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }
+    
+    .landing-active-users-container img {
+        width: 40vw;
+        height: auto;
+        margin-right: 10px;
+    }
+    
+    .landing-active-users-container p {
+        font-size: medium;
+        margin: 0;
+    }
+
+    .landing-exploreBtn {
+        margin-top: 20px;
+    }
+
+    .location-gallery {
+        width: 100%;
+        height: 60vw;
+    }
 }
 
 /* ---------------------- HeroSection2 style----------------------- */
-
-.boxing {
-    
-}
 
 .box1 {
     width: 47.5%;
@@ -142,4 +186,42 @@
     font-size: 1.2em;
     line-height: 1.3em;
     font-family: 'LatoRegular';
+}
+
+@media (max-width: 430px) {
+    .box1 {
+        width: 100%;
+        height: 60vw;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(200, 200, 200, 0.5);
+        backdrop-filter: blur(1px);
+        border-radius: 10px;
+        padding: 15px 15px;
+    }
+    
+    .box2 {
+        width: 100%;
+        height: max-content;
+    }
+
+    .accordion-items {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        column-gap: 15px;
+        padding-right: 0px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    
+    .accordion-title {
+        font-size: medium;
+    }
+    
+    .accordion-txt {
+        font-size: medium;
+    }
 }

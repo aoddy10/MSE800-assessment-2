@@ -1,12 +1,13 @@
 import React from 'react';
 import "../../styles/HeroSection.css";
+import heroPic2 from "../../assets/about1.jpg"
 
 const HeroSection2 = () => {
     return (
         <div className="hero-content1">
             <div className="boxing">
                 <div class="box1">
-
+                    <img src={heroPic2} alt="NZ" className="w-full h-full object-cover rounded-md"/>
                 </div>
                 <div class="box2">
                     <div className="accordion">

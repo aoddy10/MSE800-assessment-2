@@ -37,12 +37,12 @@ const MaoriPage = () => {
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat'
                     }}>
-                    <div className="hero-content">
-                        <div className="blur-container">
+                    <div className="hero-content-maori">
+                        <div className="blur-container-maori">
                             <p>Experience the <span className="font-bold">Magic</span> of <span className="font-bold">New Zealand</span></p>
                         </div>
 
-                        <div className="hero-text">
+                        <div className="hero-text-maori">
                             <h1>Discover maori-culture <br />
                                 in <span className="font-bold">New Zealand</span></h1>
                         </div>
@@ -123,7 +123,7 @@ const MaoriPage = () => {
                 <div className="maori-content2">
                     <div className="boxing">
                         <div
-                            className="box1"
+                            className="box1-maori"
                             style={{
                                 backgroundImage: `url(${about3})`,
                                 backgroundPosition: 'center',
@@ -131,7 +131,7 @@ const MaoriPage = () => {
                                 backgroundSize: 'cover'
                             }}
                         ></div>
-                        <div class="box2">
+                        <div class="box2-maori">
 
                             <div className="maori">
                                 <div className="maori-items">
@@ -161,19 +161,19 @@ const MaoriPage = () => {
 
             <div className="maori-section4">
                 <div className="maori-content2">
-                <div className="faq-container">
+                <div className="faq-container-maori">
                         <h2>Frequently Asked Questions</h2>
-                        <div className="faq-list">
+                        <div className="faq-list-maori">
                             {FAQData.map((faq, index) => (
-                                <div className="faq-item" key={index}>
+                                <div className="faq-item-maori" key={index}>
                                     <button 
-                                        className={`faq-question ${openIndex === index ? 'active' : ''}`}
+                                        className={`faq-question-maori ${openIndex === index ? 'active' : ''}`}
                                         onClick={() => setOpenIndex(openIndex === index ? null : index)}
                                     >
                                         {faq.question}
-                                        <span className="faq-icon">{openIndex === index ? '−' : '+'}</span>
+                                        <span className="faq-icon-maori">{openIndex === index ? '−' : '+'}</span>
                                     </button>
-                                    <div className={`faq-answer ${openIndex === index ? 'active' : ''}`}>
+                                    <div className={`faq-answer-maori ${openIndex === index ? 'active' : ''}`}>
                                         {faq.answer}
                                     </div>
                                 </div>
