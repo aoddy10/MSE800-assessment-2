@@ -64,7 +64,11 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                         {/* City Select */}
                         <div className="flex items-center space-x-3">
                             <span className="bg-[#E0F2F4] p-2 rounded-lg">
-                                <img src={searchCityIcon} alt="City" className="w-7 h-7" />
+                                <img
+                                    src={searchCityIcon}
+                                    alt="City"
+                                    className="w-7 h-7"
+                                />
                             </span>
                             <div className="w-full flex-1">
                                 <p className="text-[#232323] text-sm font-bold">
@@ -84,7 +88,10 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                                     <option value="">All</option>
                                     {cities && cities.length > 0 ? (
                                         cities.map((city, idx) => (
-                                            <option value={city.id} key={city.id}>
+                                            <option
+                                                value={city.id}
+                                                key={city.id}
+                                            >
                                                 {city.title}
                                             </option>
                                         ))

@@ -930,6 +930,137 @@ GET /api/newsletter/list/
 
 ---
 
+# 📝 **Contact API Documentation**
+
+## **Contact Form Submission**
+
+This API endpoint allows users to submit a contact form inquiry. The submitted form data is validated, stored in the database, and emails are sent to both the user and the administrator.
+
+---
+
+### **📌 Endpoint**
+
+`POST /api/contact/submit/`
+
+---
+
+### **📥 Request Body (JSON)**
+
+| Parameter           | Type     | Required | Description                     |
+| ------------------- | -------- | -------- | ------------------------------- |
+| `name`              | `string` | ✅ Yes   | Full name of the sender         |
+| `email`             | `string` | ✅ Yes   | Contact email address           |
+| `organization_name` | `string` | ✅ Yes   | Organization name of the sender |
+| `subject`           | `string` | ✅ Yes   | Subject of the message          |
+| `message`           | `string` | ✅ Yes   | Detailed message content        |
+
+#### **📝 Example Request**
+
+```json
+{
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "organization_name": "Doe Inc.",
+    "subject": "Inquiry about your services",
+    "message": "Hello, I would like to know more about your services. Please get in touch!"
+}
+```
+
+---
+
+### **📤 Response**
+
+#### **✅ Success Response (`201 Created`)**
+
+```json
+{
+    "message": "Contact request submitted successfully"
+}
+```
+
+#### **❌ Error Responses (`400 Bad Request`)**
+
+-   If any required field is missing:
+
+```json
+{
+    "name": ["This field is required."]
+}
+```
+
+-   If email format is invalid:
+
+```json
+{
+    "email": ["Enter a valid email address."]
+}
+```
+
+---
+
+### **🔐 Permissions**
+
+-   **Public Access**: No authentication required.
+
+---
+
+### **📧 Email Notifications**
+
+-   A confirmation email is sent to the user.
+-   An admin notification email is sent to the administrator.
+
+**Email Example Sent to User:**
+
+```
+Subject: Your contact request has been received
+Hello John Doe,
+
+Thank you for reaching out. We have received your message:
+
+"Hello, I would like to know more about your services. Please get in touch!"
+
+We will get back to you as soon as possible.
+
+Best Regards,
+Kiwi Explorer Team
+```
+
+---
+
+### **📝 System Logging**
+
+-   Every contact form submission is logged in the **System Log**.
+-   Example log entry:
+    ```
+    New contact request from John Doe (johndoe@example.com)
+    ```
+
+---
+
+### **💻 Notes**
+
+-   This API ensures **data validation** before storing.
+-   Emails are sent using Django’s `send_mail()` function.
+-   Admin email should be set in `settings.ADMIN_EMAIL`.
+
+---
+
+### **📼 Example cURL Request**
+
+```sh
+curl -X POST "https://yourdomain.com/api/contact/submit/" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "name": "John Doe",
+           "email": "johndoe@example.com",
+           "organization_name": "Doe Inc.",
+           "subject": "Inquiry about your services",
+           "message": "Hello, I would like to know more about your services. Please get in touch!"
+         }'
+```
+
+---
+
 # 📝 **System Logs API Documentation**
 
 ## Overview

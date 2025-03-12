@@ -2,67 +2,59 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LocationCard from "../../components/LocationCard";
 import Skeleton from "../../components/ui/Skeleton";
-import { useTranslation } from "react-i18next";
-import useScreenSize from "../../hooks/useScreenSize";
-
 
 
 const FeaturedActivities = ({ activities }) => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const { isMobile } = useScreenSize();
+  const itemsPerSlide = isMobile ? 1 : 3;
+  const [loading, setLoading] = useState(true); // Added loading state
 
-    const navigate = useNavigate();
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isAnimating, setIsAnimating] = useState(false);
-    const { isMobile } = useScreenSize();
-    const itemsPerSlide = isMobile ? 1 : 3;
+  const handleActivityClick = (activity) => {
+    navigate(`/location/${activity.id}`);
+  };
 
+  const nextSlide = () => {
+    if (activities && activities.length > 0 && !isAnimating) {
+      setIsAnimating(true);
+      setCurrentIndex((prevIndex) => {
+        const nextIndex = prevIndex + 1;
+        return nextIndex > Math.floor((activities.length - 1) / itemsPerSlide)
+          ? 0
+          : nextIndex;
+      });
+      setTimeout(() => setIsAnimating(false), 500);
+    }
+  };
 
-    const handleActivityClick = (activity) => {
-        navigate(`/location/${activity.id}`);
-    };
+  const prevSlide = () => {
+    if (activities && activities.length > 0 && !isAnimating) {
+      setIsAnimating(true);
+      setCurrentIndex((prevIndex) => {
+        const nextIndex = prevIndex - 1;
+        return nextIndex < 0
+          ? Math.floor((activities.length - 1) / itemsPerSlide)
+          : nextIndex;
+      });
+      setTimeout(() => setIsAnimating(false), 500);
+    }
+  };
 
-    const nextSlide = () => {
-        if (activities && activities.length > 0 && !isAnimating) {
-            setIsAnimating(true);
-            setCurrentIndex((prevIndex) => {
-                const nextIndex = prevIndex + 1;
-                return nextIndex >
-                    Math.floor((activities.length - 1) / itemsPerSlide)
-                    ? 0
-                    : nextIndex;
-            });
-            setTimeout(() => setIsAnimating(false), 500);
-        }
-    };
-
-    const prevSlide = () => {
-        if (activities && activities.length > 0 && !isAnimating) {
-            setIsAnimating(true);
-            setCurrentIndex((prevIndex) => {
-                const nextIndex = prevIndex - 1;
-                return nextIndex < 0
-                    ? Math.floor((activities.length - 1) / itemsPerSlide)
-                    : nextIndex;
-            });
-            setTimeout(() => setIsAnimating(false), 500);
-        }
-    };
-
-    const [loading, setLoading] = useState(true);
-    
-        useEffect(() => {
-            setTimeout(() => {
-                setLoading(false);
-            }, 2000);
-        }, []);
+  useEffect(() => {
+    if (activities && activities.length > 0) {
+      setLoading(false);
+    }
+  }, [activities]);
 
     return (
         <section
             id="FeaturedActivities"
             className="py-12 w-[100%] bg-[#f9f9fb]"
         >
-            <div className="w-[90%] md:w-[70%] m-auto">
-
+            <div className="w-[70%] m-auto">
                 <div className="flex justify-between">
                     <span className="mb-6">
                         <h2 className="text-2xl font-bold">
@@ -120,8 +112,12 @@ const FeaturedActivities = ({ activities }) => {
                 </div>
                 <div className="relative">
                     <div className="overflow-hidden">
+<<<<<<<<< Temporary merge branch 1
+                        <div
+=========
                     {loading ? <Skeleton /> :
                         <div 
+>>>>>>>>> Temporary merge branch 2
                             className="flex transition-transform duration-500 ease-out"
                             style={{
                                 transform: `translateX(-${
@@ -152,9 +148,8 @@ const FeaturedActivities = ({ activities }) => {
                                                   .map((activity) => (
                                                       <div
                                                           key={activity.id}
-                                                          className="w-full md:w-1/3"
+                                                          className="w-1/3"
                                                       >
-
                                                           <LocationCard
                                                               location={
                                                                   activity

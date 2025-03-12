@@ -36,7 +36,7 @@ const ContactPage = () => {
   ];
 
   const { isMobile } = useScreenSize();
-  
+
   return (
     <div className="contact-page">
 
@@ -147,34 +147,71 @@ const ContactPage = () => {
 
             <div className={`flex ${isMobile ? 'flex-col space-y-8' : 'justify-between'} mt-8`}>
               {team.map((member, index) => (
-                <div key={index} className="bg-none rounded-xl p-6 border-1 border-black/10">
-                  <img
-                    src={member.image}
-                    alt=""
-                    className={`rounded-md m-auto ${isMobile ? 'w-64 h-64' : 'w-[350px] h-[350px]'}`}
-                    style={{ objectFit: 'cover' }}
-                  />
+                <React.Fragment key={index}>
 
-                  <h3 className={`mt-4 ${isMobile ? 'text-xl' : 'text-lg'} font-semibold text-gray-800`}>{member.name}</h3>
-                  <p className={`text-gray-500 ${isMobile ? 'text-base' : 'text-sm'}`}>{member.role}</p>
+                  <div className="bg-none rounded-xl p-6 border-1 border-black/10">
+                    <img
+                      src={member.image}
+                      alt=""
+                      className={`rounded-md m-auto ${isMobile ? 'w-64 h-64' : 'w-[350px] h-[350px]'}`}
+                      style={{ objectFit: 'cover' }}
+                    />
 
-                  <div className="m-auto w-max flex gap-3 mt-4">
-                    <a href={member.linkedin} className="text-black hover:text-[#31AAB7]">
-                      <FaLinkedin size={16} />
-                    </a>
-                    <a href={`mailto:${member.email}`} className="text-black hover:text-[#31AAB7]">
-                      <FaEnvelope size={16} />
-                    </a>
-                    <a href={`tel:${member.phone}`} className="text-black hover:text-[#31AAB7]">
-                      <FaPhone size={16} />
-                    </a>
+                    <h3 className={`mt-4 ${isMobile ? 'text-xl' : 'text-lg'} font-semibold text-gray-800`}>{member.name}</h3>
+                    <p className={`text-gray-500 ${isMobile ? 'text-base' : 'text-sm'}`}>{member.role}</p>
+
+                    <div className="m-auto w-max flex gap-3 mt-4">
+                      <a href={member.linkedin} className="text-black hover:text-[#31AAB7]">
+                        <FaLinkedin size={16} />
+                      </a>
+                      <a href={`mailto:${member.email}`} className="text-black hover:text-[#31AAB7]">
+                        <FaEnvelope size={16} />
+                      </a>
+                      <a href={`tel:${member.phone}`} className="text-black hover:text-[#31AAB7]">
+                        <FaPhone size={16} />
+                      </a>
+                    </div>
                   </div>
-                </div>
+
+                  <section className="w-full p-0">
+                    <div className="w-full mt-[100px] mx-auto text-center">
+                      <h2 className="text-3xl font-bold text-gray-800">
+                        Our Team
+                      </h2>
+
+                      <div className="flex overflow-x-auto space-x-6 mt-8">
+                        {team.map((member, index) => (
+                          <div
+                            key={index}
+                            className="bg-white rounded-xl shadow-md p-6 text-center"
+                          >
+                            <img
+                              src={member.image}
+                              alt=""
+                              style={{
+                                width: "350px",
+                                height: "350px",
+                                objectFit: "cover",
+                              }}
+                            />
+                            <h3 className="mt-4 text-lg font-semibold text-gray-800">
+                              {member.name}
+                            </h3>
+                            <p className="text-gray-500">
+                              {member.email}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </section>
+                </React.Fragment>
               ))}
             </div>
           </div>
         </section>
       </div>
+
     </div>
   );
 };
