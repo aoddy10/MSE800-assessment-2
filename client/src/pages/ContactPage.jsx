@@ -173,38 +173,6 @@ const ContactPage = () => {
                     </div>
                   </div>
 
-                  <section className="w-full p-0">
-                    <div className="w-full mt-[100px] mx-auto text-center">
-                      <h2 className="text-3xl font-bold text-gray-800">
-                        Our Team
-                      </h2>
-
-                      <div className="flex overflow-x-auto space-x-6 mt-8">
-                        {team.map((member, index) => (
-                          <div
-                            key={index}
-                            className="bg-white rounded-xl shadow-md p-6 text-center"
-                          >
-                            <img
-                              src={member.image}
-                              alt=""
-                              style={{
-                                width: "350px",
-                                height: "350px",
-                                objectFit: "cover",
-                              }}
-                            />
-                            <h3 className="mt-4 text-lg font-semibold text-gray-800">
-                              {member.name}
-                            </h3>
-                            <p className="text-gray-500">
-                              {member.email}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </section>
                 </React.Fragment>
               ))}
             </div>
