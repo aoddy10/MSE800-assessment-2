@@ -28,7 +28,7 @@ const HeroSection = () => {
     return (
         <div className="hero-content1">
             <div className="boxing">
-                <div className="landing-text-content">
+                <div className="landing-text-content !w-fit">
                     <h2 className="animate-fade-in-up">
                         Welcome to kiwi explorer
                     </h2>
@@ -80,6 +80,7 @@ const HeroSection = () => {
                         Explore Now
                     </button>
                 </div>
+
                 <div className="location-gallery animate-fade-in-up">
                     <img
                         src={heroPic1}
