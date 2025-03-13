@@ -1,32 +1,50 @@
 import React, { useState } from "react";
+import useScreenSize from "../hooks/useScreenSize";
+
 import "../styles/ContactPage.css";
 import aod from "../assets/aod01.jpg";
-import terence from "../assets/0001.jpg";
+import terence from "../assets/terence.jpeg";
 import wan from "../assets/about1.jpg";
+import {
+    FaLinkedin,
+    FaEnvelope,
+    FaPhone,
+    FaFacebook,
+    FaInstagram,
+    FaTwitter,
+} from "react-icons/fa";
 import { submitContact } from "../services/contact.services";
 import { Button } from "../components/ui/button";
 import { isValidEmail } from "../utils/libs";
 
+const team = [
+    {
+        name: "Anirut Puangkingkaew",
+        role: "Project Leader/Full stack Developer",
+        image: aod,
+        linkedin: "#",
+        email: "270566348@yoobeestudent.ac.nz",
+        phone: "#",
+    },
+    {
+        name: "Terence Lyle Borromeo",
+        role: "UI/UX Designer/Front end Developer",
+        image: terence,
+        linkedin: "#",
+        email: "270601416@yoobeestudent.ac.nz",
+        phone: "#",
+    },
+    {
+        name: "Phyo Maung Maung Wan",
+        role: "Front end Developer",
+        image: wan,
+        linkedin: "#",
+        email: "270530732@yoobeestudent.ac.nz",
+        phone: "#",
+    },
+];
+
 const ContactPage = () => {
-    const team = [
-        {
-            name: "Anirut Puangkingkaew",
-            email: "270566348@yoobeestudent.ac.nz",
-            image: aod,
-        },
-        {
-            name: "Terence Lyle Borromeo",
-
-            email: "270601416@yoobeestudent.ac.nz",
-            image: terence,
-        },
-        {
-            name: "Phyo Maung Maung Wan",
-            email: "270530732@yoobeestudent.ac.nz",
-            image: wan,
-        },
-    ];
-
     const [error, setError] = useState({});
     const [successMessage, setSuccessMessage] = useState("");
     const [loading, setLoading] = useState(false);
@@ -92,24 +110,23 @@ const ContactPage = () => {
             <div className="contact-content">
                 <div className="contact-txt">
                     <div className="contact-text">
-                        <h1>
-                            Lorem Ipsum
-                            <br />
-                            <span className="bold-text">
-                                Dolor Sit Amet Cons
-                            </span>
-                        </h1>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. In laoreet elit posuere odio rutrum, eu
-                            vulputate magna fringilla. Curabitur ornare
-                            consequat ex, et interdum nibh aliquet vitae.
+                        <h1 className="!text-3xl">Let’s Connect!</h1>
+                        <h2 className="bold-text !text-4xl">
+                            Have Questions or Suggestions? <br /> We’d Love to
+                            Hear from You!
+                        </h2>
+                        <p className="!pt-4">
+                            Whether you have travel inquiries, partnership
+                            opportunities, or feedback about Kiwi Explorer,
+                            we’re here to help! Get in touch with us through the
+                            form below or reach out via email and social media.
+                            Let’s make exploring New Zealand even more exciting
+                            together!
                         </p>
                     </div>
                 </div>
                 <div className="contact-form-details-box">
-                    <div className="bg-gray-200/30 flex flex-col p-10 rounded-xl">
-                        <h1 className="p-4 text-2xl font-bold">Contact Form</h1>
+                    <div className="contact-box p-4">
                         <div className="contact-box-form">
                             <h1>01</h1>
                             <div className="contact-form">
@@ -211,7 +228,6 @@ const ContactPage = () => {
                                 )}
                             </div>
                         </div>
-
                         {successMessage && (
                             <p className="text-green-500 text-sm">
                                 {successMessage}
@@ -254,67 +270,38 @@ const ContactPage = () => {
                         <div className="details">
                             <h1>Socials</h1>
                             <div className="icons-container">
-                                {/* Facebook */}
-                                <svg
-                                    className="socmed-icons"
-                                    viewBox="0 0 20 20"
+                                <a
+                                    href="https://facebook.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-500 hover:text-gray-700"
                                 >
-                                    <path
-                                        fill="#767676"
-                                        d="M11.6,18.8v-7.9h2.4l.4-3.5h-2.8v-1.7c0-.9,
-                                        0-1.8,1.3-1.8h1.3V1.4s-1.1-.1-2.2-.1c-2.3,0-3.8
-                                        ,1.5-3.8,4.1v2h-2.6v3.5h2.6v7.9h3.4Z"
-                                    />
-                                </svg>
-
-                                {/* Twitter */}
-                                <svg
-                                    className="socmed-icons"
-                                    viewBox="0 0 20 20"
+                                    <FaFacebook size={24} />
+                                </a>
+                                <a
+                                    href="https://instagram.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-500 hover:text-gray-700"
                                 >
-                                    <path
-                                        fill="#767676"
-                                        d="M17.9,5.9c0,.2,0,.4,0,.5,0,5.4-4.1,11.7-11.7
-                                        ,11.7S1.8,17.4,0,16.3c.3,0,.6,0,1,0,1.9,0,3.7-.7,
-                                        5.1-1.8-1.8,0-3.3-1.2-3.8-2.8.3,0,.5,0,.8,0s.7,0,
-                                        1.1-.1c-1.9-.4-3.3-2-3.3-4s0,0,0,0c.6.3,1.2.5,
-                                        1.9.5-1.1-.7-1.8-2-1.8-3.4s.2-1.5.6-2.1c2,2.5,5,
-                                        4.1,8.4,4.3,0-.3-.1-.6-.1-.9,0-2.3,1.8-4.1,
-                                        4.1-4.1s2.2.5,3,1.3c.9-.2,1.8-.5,2.6-1-.3,1-1,
-                                        1.8-1.8,2.3.8,0,1.6-.3,2.4-.6-.5.8-1.2,1.5-2,
-                                        2.1Z"
-                                    />
-                                </svg>
-
-                                {/* Instagram */}
-                                <svg
-                                    className="socmed-icons"
-                                    viewBox="0 0 20 20"
+                                    <FaInstagram size={24} />
+                                </a>
+                                <a
+                                    href="https://twitter.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-500 hover:text-gray-700"
                                 >
-                                    <path
-                                        fill="#767676"
-                                        d="M15,1.7H5c-1.8,0-3.3,1.5-3.3,3.3v10c0,1.8,1.5,
-                                        3.3,3.3,3.3h10c1.8,0,3.3-1.5,3.3-3.3V5c0-1.8-1.5-3.3-3.3-3.3ZM10,
-                                        14.2c-2.3,0-4.2-1.9-4.2-4.2s1.9-4.2,4.2-4.2,4.2,
-                                        1.9,4.2,4.2-1.9,4.2-4.2,4.2ZM14.6,
-                                        6.3c-.5,0-.8-.4-.8-.8s.4-.8.8-.8.8.4.8.8-.4.8-.8.8Z"
-                                    />
-                                </svg>
-
-                                {/* LinkedIn */}
-                                <svg
-                                    className="socmed-icons"
-                                    viewBox="0 0 20 20"
+                                    <FaTwitter size={24} />
+                                </a>
+                                <a
+                                    href="https://linkedin.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-500 hover:text-gray-700"
                                 >
-                                    <path
-                                        fill="#767676"
-                                        d="M4.9,7H1.4v11.3h3.5V7Z M3.1,1.7c-1.3,0-2.2.8-2.2,
-                                        2s.8,2,2.1,2h0c1.3,0,2.2-.9,2.2-2,0-1.1-.8-2-2.1-2Z M14.6,
-                                        6.9c-2,0-3.3,1.1-3.5,1.9v-1.8h-4c0,.9,0,11.3,0,
-                                        11.3h4v-6.1c0-.3,0-.7,0-.9.3-.7.9-1.4,1.9-1.4s2,1,2,
-                                        2.6v5.8h4v-6.3c0-3.5-2-5.1-4.5-5.1Z"
-                                    />
-                                </svg>
+                                    <FaLinkedin size={24} />
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -326,7 +313,7 @@ const ContactPage = () => {
                             Our Team
                         </h2>
 
-                        <div className="flex overflow-x-auto space-x-6 mt-8">
+                        <div className="flex overflow-x-auto space-x-6 mt-8 p-2">
                             {team.map((member, index) => (
                                 <div
                                     key={index}
@@ -340,6 +327,7 @@ const ContactPage = () => {
                                             height: "350px",
                                             objectFit: "cover",
                                         }}
+                                        className="rounded-lg"
                                     />
                                     <h3 className="mt-4 text-lg font-semibold text-gray-800">
                                         {member.name}

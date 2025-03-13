@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useScreenSize from "../../hooks/useScreenSize";
+
 
 import apiClient from "../../api/axios";
 import AuthContext from "../../context/AuthContext";
@@ -22,6 +24,8 @@ const LoginPage = () => {
 
     // useNavigate hook for redirection after login
     const navigate = useNavigate();
+    const { isMobile } = useScreenSize();
+
 
     // Function to handle login when the user clicks the login button
     const handleLogin = async () => {
@@ -49,7 +53,8 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="login-container">
+        <div className={`login-container ${isMobile ? 'mobile' : ''}`}>
+
             <div className="back-btn">
                 <a href="/" className="back-link">
                     <img className="arrow-left" src={arrowleft} alt="arrow" />
@@ -57,7 +62,8 @@ const LoginPage = () => {
                 </a>
             </div>
 
-            <div className="left-container">
+            <div className={`left-container ${isMobile ? 'w-full' : ''}`}>
+
                 <div className="form-container">
                     <a href="/">
                         <img
@@ -129,7 +135,8 @@ const LoginPage = () => {
             </div>
 
             {/* --------------------------------------------------- */}
-            <AuthRightSideSection />
+            {!isMobile && <AuthRightSideSection />}
+
         </div>
     );
 };

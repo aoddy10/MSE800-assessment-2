@@ -65,7 +65,7 @@ body {
 }
 
 .form-container {
-  width: 70%;
+  width: 55%;
   height: max-content;
   display: flex;
   flex-direction: column;
@@ -95,6 +95,7 @@ body {
 }
 
 .input-group input[type="text"],
+.input-group input[type="email"],
 .input-group input[type="password"] {
   width: calc(100% - 0px);
   padding: 15px 15px;
@@ -109,12 +110,14 @@ body {
 }
 
 .input-group input[type="text"]:focus,
+.input-group input[type="email"]:focus,
 .input-group input[type="password"]:focus {
   border-color: #31aab7;
   outline: none;
 }
 
 .input-group input[type="text"]::placeholder,
+.input-group input[type="email"]::placeholder,
 .input-group input[type="password"]::placeholder {
   color: #808080;
 }
@@ -370,7 +373,6 @@ body {
 .text-content h2 {
   margin: 0;
   font-family: "LatoBold", sans-serif;
-  font-weight: 600;
   font-size: 1.9em;
   color: #fff;
 }

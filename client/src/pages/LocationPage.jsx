@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import useScreenSize from "../hooks/useScreenSize";
+
 import {
     getLocationByCityId,
     getLocationByLocationId,
@@ -19,6 +21,8 @@ const LocationPage = () => {
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [activeTab, setActiveTab] = useState('description'); // Add tab state with default value
     const navigate = useNavigate();
+    const { isMobile } = useScreenSize();
+
 
     useEffect(() => {
         const fetchLocationInfo = async () => {
@@ -79,8 +83,10 @@ const LocationPage = () => {
     };
 
     return (
-        <div className="w-[70%] mx-auto mt-[150px]">
-            <div className="w-full h-[500px] rounded-xl overflow-hidden">
+        <div className={`${isMobile ? 'w-[90%]' : 'w-[70%]'} mx-auto mt-[150px]`}>
+
+            <div className={`w-full ${isMobile ? 'h-[300px]' : 'h-[500px]'} rounded-xl overflow-hidden`}>
+
                 <img
                     src={location.cover_image_url}
                     alt={location.title}
@@ -91,9 +97,10 @@ const LocationPage = () => {
             <div className="mt-[50px]">
                 <h1 className="text-2xl font-bold mb-6">{location.title}</h1>
                 
-                <div className="flex gap-6">
+                <div className={`flex ${isMobile ? 'flex-col' : 'gap-6'}`}>
                     {/* Left side - Tabs Container (70%) */}
-                    <div className="w-[70%]">
+                    <div className={`${isMobile ? 'w-full' : 'w-[70%]'}`}>
+
                         {/* Tabs */}
                         <div>
                             <nav className="flex space-x-2" aria-label="Tabs">
@@ -123,7 +130,7 @@ const LocationPage = () => {
                         {/* Tab Panels */}
                         <div className="mt-3">
                             {activeTab === 'description' && (
-                                <div className="flex flex-col flex-grow bg-white p-6 rounded-xl shadow-sm">
+                                <div className="flex flex-col flex-grow bg-none">
                                     <p className="text-gray-600">
                                         {location.description}
                                     </p>
@@ -152,7 +159,8 @@ const LocationPage = () => {
                     </div>
 
                     {/* Right side - Reviews Container (30%) */}
-                    <div className="w-[30%]">
+                    <div className={`${isMobile ? 'w-full mt-6' : 'w-[30%]'}`}>
+
                             <ReviewSection 
                                 reviews={reviews}
                                 user={location.user}
@@ -168,7 +176,8 @@ const LocationPage = () => {
                 </h2>
 
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-3'} gap-6`}>
+
                     {locations && locations.length > 0
                         ? locations.map((location, index) => (
                             <LocationCard

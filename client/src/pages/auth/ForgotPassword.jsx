@@ -7,9 +7,12 @@ import { isValidEmail } from "../../utils/libs";
 import { forgotPassword } from "../../services/auth.service.s";
 import { useNavigate } from "react-router-dom";
 import AuthRightSideSection from "../../components/AuthRightSideSection";
+import useScreenSize from "../../hooks/useScreenSize";
+
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
+    const { isMobile } = useScreenSize(); // Hook for Mobile Responsiveness
     const [formData, setFormData] = useState({
         email: "",
     });
@@ -57,7 +60,7 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div className="login-container">
+        <div className={`login-container ${isMobile ? 'mobile' : ''}`}>
             <div className="back-btn">
                 <a href="/" className="back-link">
                     <img className="arrow-left" src={arrowleft} alt="arrow" />
@@ -65,7 +68,7 @@ const ForgotPassword = () => {
                 </a>
             </div>
 
-            <div className="left-container">
+            <div className={`left-container ${isMobile ? 'w-full' : ''}`}>
                 <div className="form-container">
                     <img
                         src={blackLogo}
@@ -120,7 +123,7 @@ const ForgotPassword = () => {
             </div>
 
             {/* --------------------------------------------------- */}
-            <AuthRightSideSection />
+            {!isMobile && <AuthRightSideSection />}
         </div>
     );
 };

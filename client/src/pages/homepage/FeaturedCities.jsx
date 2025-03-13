@@ -2,15 +2,22 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "../../components/ui/Skeleton";
+import useScreenSize from "../../hooks/useScreenSize";
 
 const FeaturedCities = ({ cities }) => {
     const { t } = useTranslation();
-
     const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const itemsPerSlide = 3;
+    const { isMobile } = useScreenSize();
+    const itemsPerSlide = isMobile ? 1 : 3;
+    const [loading, setLoading] = useState(true); // Added loading state
+
+    useEffect(() => {
+        if (cities && cities.length > 0) {
+            setLoading(false);
+        }
+    }, [cities]);
 
     useEffect(() => {
         if (cities && cities.length > 0) {
@@ -51,8 +58,11 @@ const FeaturedCities = ({ cities }) => {
     };
 
     return (
-        <section id="FeaturedCities" className="py-12 w-[100%] bg-[#f9f9fb]">
-            <div className="w-[70%] m-auto">
+        <section
+            id="FeaturedCities"
+            className="py-12 w-[100%] bg-[#f9f9fb] relative"
+        >
+            <div className="w-[90%] md:w-[70%] m-auto relative">
                 <div className="flex justify-between">
                     <span className="mb-6">
                         <h2 className="text-2xl font-bold">
@@ -69,7 +79,7 @@ const FeaturedCities = ({ cities }) => {
                         <button
                             onClick={prevSlide}
                             disabled={isAnimating}
-                            className="bg-none p-0 z-10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="bg-none p-0 z-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="Previous slide"
                         >
                             <svg
@@ -91,7 +101,7 @@ const FeaturedCities = ({ cities }) => {
                         <button
                             onClick={nextSlide}
                             disabled={isAnimating}
-                            className="bg-none p-0 z-10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="bg-none p-0 z-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="Next slide"
                         >
                             <svg
@@ -148,7 +158,7 @@ const FeaturedCities = ({ cities }) => {
                                                       .map((city) => (
                                                           <div
                                                               key={city.id}
-                                                              className="w-1/3"
+                                                              className="w-full md:w-1/3"
                                                           >
                                                               <div
                                                                   className="group cursor-pointer flex flex-col gap-3 justify-start"
@@ -168,7 +178,7 @@ const FeaturedCities = ({ cities }) => {
                                                                           alt={
                                                                               city.name
                                                                           }
-                                                                          className="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-110"
+                                                                          className="w-full h-[200px] md:h-[300px] object-cover transition-transform duration-300 group-hover:scale-110"
                                                                       />
                                                                   </div>
 

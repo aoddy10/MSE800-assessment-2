@@ -12,8 +12,8 @@
     },
     "landingPage": {
         "heroContent": {
-            "button": "Experience the Magic of New Zealand",
-            "title": "Unforgettable Moments in New Zealand",
+            "button": "Experience the <span className='font-bold'>Magic</span> of <span className='font-bold'>New Zealand</span>",
+            "title": "Unforgettable Moments<br>in <span>New Zealand</span>",
             "scrollButton": "Scroll Down"
         }
     },
@@ -25,6 +25,7 @@
                 "city": "City",
                 "type": "Type",
                 "priceRange": "Price range",
+                "filterButton": "Filters",
                 "button": "Search"
             }
         },
