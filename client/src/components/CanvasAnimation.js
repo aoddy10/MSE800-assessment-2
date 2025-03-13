@@ -7,6 +7,7 @@ import "../styles/CanvasAnimation.css";
 
 import HeroContent from "../pages/landingpage/HeroContent";
 import HeroSection from "../pages/landingpage/HeroSection";
+import HeroSection2 from "../pages/landingpage/HeroSection2";
 import FooterLandingpage from "../pages/landingpage/FooterLandingpage";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -162,26 +163,7 @@ const CanvasAnimation = () => {
                 </div>
 
                 <div id="page2">
-                    <div id="text1">
-                        <h3>Lorem Ipsum Dolor Sit Amet</h3>
-                        <h1>
-                            Consectetur
-                            <br />
-                            Dolor Sit
-                            <br />
-                            Lorem Ipsum Dolor
-                        </h1>
-                    </div>
-                    <div id="text2">
-                        <h3>Lorem Ipsum Dolor Sit Amet</h3>
-                        <h1>
-                            Consectetur
-                            <br />
-                            Dolor Sit
-                            <br />
-                            Lorem Ipsum Dolor
-                        </h1>
-                    </div>
+                    <HeroSection2 />
                 </div>
 
                 <div id="page3">

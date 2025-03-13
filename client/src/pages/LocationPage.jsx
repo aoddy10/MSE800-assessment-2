@@ -3,34 +3,43 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
     getLocationByCityId,
     getLocationByLocationId,
+    getReviews
 } from "../services/location.services";
+import LocationCard from "../components/LocationCard";
+import ReviewSection from "../components/ReviewSection";
+import { Modal } from "../components/ui/modal";
+import ReviewForm from "../components/forms/ReviewForm";
 
 const LocationPage = () => {
     const { id } = useParams(); // Get location ID from URL
     const [location, setLocation] = useState([]);
     const [locations, setLocations] = useState([]);
     const [type, setType] = useState("");
+    const [reviews, setReviews] = useState([]);
+    const [showReviewForm, setShowReviewForm] = useState(false);
+    const [activeTab, setActiveTab] = useState('description'); // Add tab state with default value
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetch_locationinfo = async () => {
+        const fetchLocationInfo = async () => {
             try {
                 const result = await getLocationByLocationId(id);
                 setLocation(result);
 
                 if (result) {
                     setType(result.type);
-                    fetch_locationinfoByCityIDAndType(result.city, result.type);
+                    fetchLocationInfoByCityIDAndType(result.city, result.type);
                 }
             } catch (error) {
                 console.log(error);
             }
         };
 
-        fetch_locationinfo();
+        fetchLocationInfo();
+        fetch_reviews();
     }, [id]);
 
-    const fetch_locationinfoByCityIDAndType = async (cityid, param) => {
+    const fetchLocationInfoByCityIDAndType = async (cityid, param) => {
         try {
             const result = await getLocationByCityId(cityid);
             if (param === "restaurant" || param === "activity") {
@@ -39,118 +48,146 @@ const LocationPage = () => {
                 );
 
                 setLocations(rresult);
+
             }
         } catch (error) {
             console.log(error);
         }
     };
 
-    const handleClick = ({ location }) => {
-        const paramValue = location.id;
+    const fetch_reviews = async () => {
+        try {
+            const result = await getReviews({ location: id, limit: 3 })
 
-        navigate(`/location/${paramValue}`);
+            setReviews(result);
+        } catch (error) {
+
+        }
+    }
+
+    const handleClick = (location) => {
+        navigate(`/location/${location.id}`);
+    };
+
+    const handleReviewClick = () => {
+        setShowReviewForm(true);
+    };
+
+    const handleCityClick = ({ location }) => {
+        const paramValue = location.city;
+        navigate(`/city/${paramValue}`);
     };
 
     return (
-        <>
-            {/* <div className="bg-gray-100 min-h-screen p-6"> */}
-            <div className="container mx-auto p-6">
-                {/* Banner Image */}
-                <div className="w-full h-80 rounded-xl overflow-hidden">
-                    <img
-                        src={location.cover_image_url}
-                        alt={location.title}
-                        className="w-full h-full object-cover"
-                    />
-                </div>
+        <div className="w-[70%] mx-auto mt-[150px]">
+            <div className="w-full h-[500px] rounded-xl overflow-hidden">
+                <img
+                    src={location.cover_image_url}
+                    alt={location.title}
+                    className="w-full h-full object-cover"
+                />
+            </div>
 
-                <div className="bg-gray-100 p-6 flex flex-col lg:flex-row gap-3">
-                    {/* Left Section */}
+            <div className="mt-[50px]">
+                <h1 className="text-2xl font-bold mb-6">{location.title}</h1>
+                
+                <div className="flex gap-6">
+                    {/* Left side - Tabs Container (70%) */}
+                    <div className="w-[70%]">
+                        {/* Tabs */}
+                        <div>
+                            <nav className="flex space-x-2" aria-label="Tabs">
+                                <button
+                                    onClick={() => setActiveTab('description')}
+                                    className={`${
+                                        activeTab === 'description'
+                                            ? "border-[1px] border-[#31AAB7] text-[#31AAB7] bg-[#31AAB7] bg-opacity-25 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                                            : "border-[1px] border-[#767676] text-[#767676] bg-none hover:bg-[#31AAB7] hover:bg-opacity-25 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                                    }`}
+                                >
+                                    Overview
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('contact')}
+                                    className={`${
+                                        activeTab === 'contact'
+                                            ? "border-[1px] border-[#31AAB7] text-[#31AAB7] bg-[#31AAB7] bg-opacity-25 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                                            : "border-[1px] border-[#767676] text-[#767676] bg-none hover:bg-[#31AAB7] hover:bg-opacity-25 focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                                    }`}
+                                >
+                                    Contact Information
+                                </button>
+                            </nav>
+                        </div>
 
-                    <div className="lg:w-2/3 bg-white p-6 rounded-xl shadow-lg">
-                        <h1 className="text-2xl font-bold">{location.title}</h1>
-                        <p className="text-gray-600 mt-2">
-                            {location.description}
-                        </p>
-                    </div>
+                        {/* Tab Panels */}
+                        <div className="mt-3">
+                            {activeTab === 'description' && (
+                                <div className="flex flex-col flex-grow bg-white p-6 rounded-xl shadow-sm">
+                                    <p className="text-gray-600">
+                                        {location.description}
+                                    </p>
+                                </div>
+                            )}
 
-                    <div className="lg:w-1/3 bg-white p-6 rounded-xl shadow-lg">
-                        <h2 className="text-xl font-semibold">
-                            Contact Information
-                        </h2>
-                        <div className="mt-4 space-y-4">
-                            <div className="flex flex-col bold">
-                                <b>Telephone</b>
-                            </div>
-                            <div className="flex flex-col">
-                                {location.contact_phone}
-                            </div>
-                            <div className="flex flex-col bold">
-                                <b>Email</b>
-                            </div>
-                            <div className="flex flex-col">
-                                {location.contact_email}
-                            </div>
-
-                            <div className="flex flex-col bold">
-                                <b>Opening Hours</b>
-                            </div>
-                            <div className="flex flex-col">
-                                {location.open_hour_detail}
-                            </div>
+                            {activeTab === 'contact' && (
+                                <div className="flex flex-col flex-grow">
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex flex-col bold">
+                                            <b>Telephone</b>
+                                            {location.contact_phone}
+                                        </div>
+                                        <div className="flex flex-col bold">
+                                            <b>Email</b>
+                                            {location.contact_email}
+                                        </div>
+                                        <div className="flex flex-col bold">
+                                            <b>Opening Hours</b>
+                                            {location.open_hour_detail}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
-                </div>
 
-                <section className="my-12">
-                    <h2 className="text-2xl font-bold mb-2">
-                        Browse Other {type} in {location.city_name}{" "}
-                    </h2>
-                    <p className="text-gray-600 mb-6">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras iaculis consectetur nisi sagittis.
-                    </p>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {locations && locations.length > 0
-                            ? locations.map((location, index) => (
-                                  <div
-                                      key={`location-${location.id}`}
-                                      className="bg-white rounded-lg shadow-lg p-4"
-                                  >
-                                      <img
-                                          src={location.cover_image_url}
-                                          alt={location.description}
-                                          onClick={() =>
-                                              handleClick({ location })
-                                          }
-                                          style={{
-                                              cursor: "pointer",
-                                              margin: 10,
-                                          }}
-                                          className="w-full h-48 object-cover rounded-lg"
-                                      />
-                                      <div className="flex justify-between items-center mt-3">
-                                          <h3 className="text-lg font-semibold">
-                                              {location.title}
-                                          </h3>
-                                          <div className="flex items-center gap-1 text-yellow-500 text-sm">
-                                              <span className="font-semibold">
-                                                  {location.avg_rating}
-                                              </span>
-                                              <span>⭐</span>
-                                          </div>
-                                      </div>
-                                      <p className="text-gray-600 text-sm mt-2">
-                                          {location.description}
-                                      </p>
-                                  </div>
-                              ))
-                            : "No Data"}
+                    {/* Right side - Reviews Container (30%) */}
+                    <div className="w-[30%]">
+                            <ReviewSection 
+                                reviews={reviews}
+                                user={location.user}
+                                onReviewClick={handleReviewClick}
+                            />
                     </div>
-                </section>
+                </div>
             </div>
-        </>
+
+            <section className="my-12">
+                <h2 className="text-2xl font-bold mb-2" style={{ cursor: "pointer", margin: 10 }} onClick={() => handleCityClick({ location })}>
+                    Browse Other {type} in  {location.city_name}{" "}
+                </h2>
+
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {locations && locations.length > 0
+                        ? locations.map((location, index) => (
+                            <LocationCard
+                                key={`location-${location.id}`}
+                                location={location}
+                                onClick={handleClick}
+                            />
+                        ))
+                        : "No Data"}
+                </div>
+            </section>
+            {showReviewForm && (
+                <Modal title="Review Form" onClose={() => setShowReviewForm(false)} >
+
+                    <ReviewForm locationId={id} onClose={() => setShowReviewForm(false)} onRefresh={fetch_reviews} />
+                </Modal>
+            )}
+
+        </div>
     );
 };
 

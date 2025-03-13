@@ -1,22 +1,18 @@
 import React from "react";
 import "../../styles/HeroContent.css";
 import scrollIcon from "../../assets/scroll-down-v2.gif";
+import { useTranslation } from "react-i18next";
 
 const HeroContent = () => {
+    const { t } = useTranslation();
     return (
         <div className="hero-content">
             <div className="blur-container">
-                <p>
-                    Experience the <span className="bold-text">Magic</span> of{" "}
-                    <span className="bold-text">New Zealand</span>
-                </p>
+                <p>{t("landingPage.heroContent.button")}</p>
             </div>
 
             <div className="hero-text">
-                <h1>
-                    Unforgettable Moments <br />
-                    in <span className="bold-text">New Zealand</span>
-                </h1>
+                <h1>{t("landingPage.heroContent.title")}</h1>
             </div>
 
             <div className="scroll-container">
@@ -25,7 +21,9 @@ const HeroContent = () => {
                     src={scrollIcon}
                     alt="scroll icon"
                 />
-                <p className="scroll-txt">Scroll Down</p>
+                <p className="scroll-txt">
+                    {t("landingPage.heroContent.scrollButton")}
+                </p>
             </div>
         </div>
     );

@@ -1,22 +1,10 @@
 import axiosInstance from "../api/axios";
 
-// get locations
-// export const getLocations = async () => {
-//     try {
-//         const response = await axiosInstance.get("/locations/");
-//         //console.log(response.data);
-//         return response.data;
-//     } catch (error) {
-//         console.error("Error fetching locations:", error);
-//         throw error;
-//     }
-// };
-
 // get restaurant
 export const getRestaurants = async () => {
     try {
         const response = await axiosInstance.get("/locations/?type=restaurant");
-       
+
         return response.data;
     } catch (error) {
         console.error("Error fetching cities:", error);
@@ -28,7 +16,7 @@ export const getRestaurants = async () => {
 export const getActivity = async () => {
     try {
         const response = await axiosInstance.get("/locations/?type=activity");
-       
+
         return response.data;
     } catch (error) {
         console.error("Error fetching activity:", error);
@@ -38,7 +26,6 @@ export const getActivity = async () => {
 
 // get location by city id
 export const getLocationByCityId = async (cityId) => {
-
     try {
         const response = await axiosInstance.get(`/locations/?city=${cityId}`);
         return response.data;
@@ -130,31 +117,82 @@ export const deleteLocation = async (id, token) => {
 };
 
 //
-export const getLocations = async (cityid,type,pricerange) => {
+export const getLocations = async (filterAttribute = {}) => {
+    const { userId, cityId, type, priceRange } = filterAttribute;
+
     try {
-        let searchquery ="";
-        if (cityid) {
-            searchquery =`city=${cityid}`;
+        let searchQuery = "";
+        if (userId) {
+            searchQuery = `user=${userId}`;
         }
-        if(type){
-            if (searchquery){
-              searchquery+="&";     
+        if (cityId) {
+            searchQuery = `city=${cityId}`;
+        }
+        if (type) {
+            if (searchQuery) {
+                searchQuery += "&";
             }
-            searchquery +=`type=${type}`;
+            searchQuery += `type=${type}`;
         }
-        if(pricerange){
-            if (searchquery){
-                searchquery+="&";     
-              }
-            searchquery +=`price_range=${pricerange}`;
+        if (priceRange) {
+            if (searchQuery) {
+                searchQuery += "&";
+            }
+            searchQuery += `price_range=${priceRange}`;
         }
-                
 
-        const response=await axiosInstance.get(`/locations/?${searchquery}`);
+        const response = await axiosInstance.get(`/locations/?${searchQuery}`);
         return response.data;
-
     } catch (error) {
         console.error("Error getLocations:", error);
         throw error;
     }
-} 
+};
+
+export const getReviews = async (filterAttribute = {}) => {
+    const { cityId, locationId, userId, limit } = filterAttribute;
+
+    try {
+        let searchQuery = "";
+        if (cityId) {
+            searchQuery = `city=${cityId}`;
+        }
+        if (locationId) {
+            if (searchQuery) {
+                searchQuery += "&";
+            }
+            searchQuery += `location=${locationId}`;
+        }
+        if (userId) {
+            if (searchQuery) {
+                searchQuery += "&";
+            }
+            searchQuery += `user=${userId}`;
+        }
+
+        if (limit) {
+            if (searchQuery) {
+                searchQuery += "&";
+            }
+            searchQuery += `limit=${limit}`;
+        }
+        const response = await axiosInstance.get(`/reviews/?${searchQuery}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error reviews:", error);
+        throw error;
+    }
+};
+
+// create review
+export const createReview = async (data, token) => {
+    try {
+        const response = await axiosInstance.post("/reviews/create/", data, {
+            headers: { Authorization: `Token ${token}` },
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error creating review:", error);
+        throw error;
+    }
+};

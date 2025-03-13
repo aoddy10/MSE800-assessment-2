@@ -14,6 +14,7 @@ from .serializers import UserSerializer, SystemLogSerializer
 from .models import UploadedImage
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.utils.timezone import now, timedelta
 
 
 User = get_user_model()  # use custom Model User
@@ -75,40 +76,42 @@ def register(request):
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def login(request):
-    username = request.data.get("username")
+    """
+    Allow users to login using either username or email.
+    """
+    login_identifier = request.data.get("username")  # Can be username or email
     password = request.data.get("password")
 
-    # get user authentication
-    user = authenticate(username=username, password=password)
+    # Validate input
+    if not login_identifier or not password:
+        return Response({"error": "Username/Email and password are required"}, status=400)
+
+    # Find user by email or username
+    user = User.objects.filter(email=login_identifier).first() or User.objects.filter(username=login_identifier).first()
+
     if not user:
         return Response({"error": "Invalid credentials"}, status=400)
 
-    # check if user is suspended
+    # Authenticate user using username (Django requires username for authentication)
+    user = authenticate(username=user.username, password=password)
+
+    if not user:
+        return Response({"error": "Invalid credentials"}, status=400)
+
+    # Check if user is suspended
     if user.is_suspended:
         return Response({"error": "Your account is suspended"}, status=403)
 
-    # update last_login
+    # Update last_login timestamp
     user.last_login = now()
     user.save()
 
-    # create or pull Token ของ User
+    # Generate or get existing Token
     token, _ = Token.objects.get_or_create(user=user)
 
-    # send User detail with Token
+    # Send user details with token
     return Response({
         "token": token.key,
-        "user": {
-            "id": user.id,
-            "username": user.username,
-            "email": user.email,
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-            "phone": user.phone,
-            "role": user.role,
-            "profile_image_url": user.profile_image_url,
-            "is_suspended": user.is_suspended,
-            "last_login": user.last_login.strftime("%Y-%m-%d %H:%M:%S") if user.last_login else None
-        }
     }, status=200)
 
 @api_view(["POST"])
@@ -154,6 +157,8 @@ def password_reset_request(request):
 def password_reset_confirm(request):
     reset_token = request.data.get("reset_token")
     new_password = request.data.get("new_password")
+    
+    print(reset_token, new_password)
 
     # check if Token is correct
     user = User.objects.filter(reset_token=reset_token).first()
@@ -241,7 +246,8 @@ def get_user(request, user_id):
 @api_view(["PUT"])
 @permission_classes([IsAuthenticated])
 def update_user(request, user_id):
-    if not is_admin_role(request.user):
+    # Allow admin to update any user, but users can only update their own data
+    if not is_admin_role(request.user) and request.user.id != user_id:
         return Response({"error": "Permission denied"}, status=403)
 
     try:
@@ -292,20 +298,18 @@ def delete_user(request, user_id):
 @permission_classes([IsAuthenticated])
 def toggle_suspend_user(request, user_id):
     """
-    Toggle the suspension status of a user (Only accessible by admin role).
-    
-    - Admin users can suspend or unsuspend other users.
-    - A log entry is created for every action performed.
+    Allow admin users to suspend or unsuspend other users,
+    even if they are not system admins.
     """
-    if not is_admin_role(request.user):
+    if not is_admin_or_business(request.user):  # Allow both admin and business users
         return Response({"error": "Permission denied"}, status=403)
 
     try:
-        # Retrieve user from the database
         user = User.objects.get(id=user_id)
-
+        
         # Toggle suspension status
         user.is_suspended = not user.is_suspended
+        user.is_active = not user.is_suspended  # Deactivate if suspended, activate if unsuspended
         user.save()
 
         # Determine action performed
@@ -319,10 +323,45 @@ def toggle_suspend_user(request, user_id):
             description=f"{action.capitalize()} user: {user.username}"
         )
 
-        return Response({"message": f"User {action} successfully"}, status=200)
-
+        return Response(
+            {
+                "message": f"User {action} successfully",
+                "user_id": user.id,
+                "is_suspended": user.is_suspended,
+                "is_active": user.is_active,
+            },
+            status=200,
+        )
     except User.DoesNotExist:
         return Response({"error": "User not found"}, status=404)
+    
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def get_active_users(request):
+    """
+    Retrieve all active users sorted by last login date (descending).
+    
+    Returns:
+    - `first_name` (str): First name of the user.
+    - `last_name` (str): Last name of the user.
+    - `profile_image_url` (str): Profile image URL of the user.
+    - `last_login` (str): Last login of the user
+    """
+    # Query all active users and sort them by last_login (descending)
+    users = User.objects.filter(is_active=True).order_by("-last_login")
+
+    # Serialize only required fields
+    active_users_data = [
+        {
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "profile_image_url": request.build_absolute_uri(user.profile_image_url) if user.profile_image_url else None,
+            "last_login": user.last_login.strftime("%Y-%m-%d %H:%M:%S") if user.last_login else None,
+        }
+        for user in users
+    ]
+
+    return Response(active_users_data, status=200)
     
 
 # =============================================================
@@ -340,8 +379,6 @@ def upload_image(request):
     API endpoint to upload an image (Only admin or business users, Max size: 10MB).
     Generates a unique filename using UUID to prevent duplicate file names.
     """
-    if not is_admin_or_business(request.user):
-        return Response({"error": "Permission denied"}, status=403)
 
     image = request.FILES.get("image")
     if not image:
@@ -383,8 +420,6 @@ def delete_uploaded_image(request):
     API endpoint to delete an uploaded image (Only admin or business users).
     Requires the image URL in the request body.
     """
-    if not is_admin_or_business(request.user):
-        return Response({"error": "Permission denied"}, status=403)
 
     image_url = request.data.get("image_url")
 
@@ -426,21 +461,53 @@ def get_system_logs(request):
     - `limit` (int): Number of logs to retrieve.
     - `sort_order` (str): Sorting order ('asc' or 'desc').
     - `user_id` (int): Filter by user ID.
+    - `location_id` (int): Filter by Location ID.
+    - `date_range` (str): Filter logs within a time range (Only accepts: "today", "week", "month").
+    - `module` (str): Filter logs by module name (e.g., "User", "Review", "Location").
 
     Example:
-    `/api/system-logs/?limit=10&sort_order=desc&user_id=1&location_id=5&rating=4.5`
+    ```
+    /api/system-logs/?limit=10&sort_order=desc&user_id=1&location_id=5&date_range=week&module=Review
+    ```
     """
+
     # Retrieve query parameters
     limit = request.GET.get("limit")
     sort_order = request.GET.get("sort_order", "desc")
     user_id = request.GET.get("user_id")
+    location_id = request.GET.get("location_id")
+    date_range = request.GET.get("date_range")
+    module = request.GET.get("module")  # New filter
+
+    # Validate date_range
+    valid_date_ranges = ["today", "week", "month"]
+    if date_range and date_range not in valid_date_ranges:
+        return Response(
+            {"error": "Invalid date_range. Allowed values: 'today', 'week', 'month'"},
+            status=400
+        )
 
     # Start with all logs
-    logs = SystemLog.objects.all()
+    logs = SystemLog.objects.select_related("user").all()
 
     # Apply filters if provided
     if user_id:
         logs = logs.filter(user_id=user_id)
+
+    if location_id:
+        logs = logs.filter(relate_id=location_id, module="Location")  # Filter by location ID
+
+    if module:
+        logs = logs.filter(module=module)  # Filter by module
+
+    # Apply date range filtering
+    today = now().date()
+    if date_range == "today":
+        logs = logs.filter(created_at__date=today)
+    elif date_range == "week":
+        logs = logs.filter(created_at__gte=today - timedelta(days=7))
+    elif date_range == "month":
+        logs = logs.filter(created_at__gte=today - timedelta(days=30))
 
     # Apply sorting order
     if sort_order == "asc":
@@ -452,6 +519,24 @@ def get_system_logs(request):
     if limit:
         logs = logs[: int(limit)]
 
-    # Serialize and return logs
-    serializer = SystemLogSerializer(logs, many=True)
-    return Response(serializer.data)
+    # Serialize and return logs with user data
+    logs_data = [
+        {
+            "id": log.id,
+            "module": log.module,
+            "relate_id": log.relate_id,
+            "description": log.description,
+            "created_at": log.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+            "user": {
+                "id": log.user.id,
+                "first_name": log.user.first_name,
+                "last_name": log.user.last_name,
+                "email": log.user.email,
+            }
+            if log.user
+            else None,
+        }
+        for log in logs
+    ]
+
+    return Response(logs_data)

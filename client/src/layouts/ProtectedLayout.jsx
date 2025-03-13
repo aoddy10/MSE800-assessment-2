@@ -1,15 +1,22 @@
 import { Outlet, Navigate, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
-import useLogout from "../hooks/useLogout";
+
 import ActivitySection from "../components/ActivitySection";
 import StatisticSection from "../components/StatisticSection";
 import { getMe } from "../services/auth.service.s";
+import { UserAvatar } from "../components/UserAvatar";
+
+// assets
+import blackLogo from "../assets/logo-black.png";
+import AdminSidebar from "../components/AdminSidebar";
+
+const navHeight = 150;
+const footerHeight = 50;
 
 const ProtectedLayout = () => {
     const { token, authUserInfo, setAuthUserInfo } = useContext(AuthContext);
-    const [selectedMenu, setSelectedMenu] = useState("locations"); // Default menu
-    const logout = useLogout();
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,18 +33,7 @@ const ProtectedLayout = () => {
         };
 
         fetchUser();
-    }, [token, navigate]);
-
-    // Access Control: Only `admin` can see all menus, `business` can see `Locations`
-    const menuItems = [
-        {
-            name: "Locations",
-            path: "/admin/locations",
-            roles: ["admin", "business"],
-        },
-        { name: "Cities", path: "/admin/cities", roles: ["admin"] },
-        { name: "Users", path: "/admin/users", roles: ["admin"] },
-    ];
+    }, [token, navigate, setAuthUserInfo]);
 
     // Show loading state while checking token
     if (!authUserInfo) {
@@ -55,24 +51,31 @@ const ProtectedLayout = () => {
 
     const Navbar = () => {
         return (
-            <nav className="bg-blue-900 text-white p-4 flex justify-between items-center">
+            <nav
+                className={`p-6 h-full flex justify-between items-center bg-white border-b border-gray-200`}
+            >
                 {/* Logo */}
-                <h1 className="text-xl font-bold">MyAdmin Dashboard</h1>
+                <img
+                    src={blackLogo}
+                    alt="Kiwi Explorer Logo"
+                    onClick={() => navigate("/explore")}
+                    style={{
+                        cursor: "pointer",
+                        width: "10vw",
+                    }}
+                />
 
                 {/* User Info & Logout */}
                 <div className="flex items-center gap-4">
                     {authUserInfo && (
                         <div className="flex items-center gap-2">
-                            <img
-                                src={
-                                    authUserInfo.profile_image_url ||
-                                    "/default-avatar.png"
-                                }
-                                alt="authUserInfo Avatar"
-                                className="w-8 h-8 rounded-full border"
+                            <UserAvatar
+                                profileImageUrl={authUserInfo.profile_image_url}
+                                firstName={authUserInfo.first_name}
+                                lastName={authUserInfo.last_name}
                             />
                             <div>
-                                <p className="text-sm">
+                                <p className="text-sm font-bold">
                                     {authUserInfo.first_name}{" "}
                                     {authUserInfo.last_name}
                                 </p>
@@ -82,80 +85,57 @@ const ProtectedLayout = () => {
                             </div>
                         </div>
                     )}
-                    <button
-                        className="bg-red-500 px-3 py-1 rounded"
+                    {/* <button
+                        className=" bg-accent px-3 py-1 rounded"
                         onClick={logout}
                     >
                         Logout
-                    </button>
+                    </button> */}
                 </div>
             </nav>
         );
     };
 
-    const Sidebar = () => {
-        return (
-            <aside className="w-60 bg-white shadow-md p-4">
-                <h2 className="text-lg font-semibold mb-4">Menu</h2>
-                <ul className="space-y-2">
-                    {menuItems.map(
-                        (item) =>
-                            item.roles.includes(authUserInfo.role) && (
-                                <li key={item.path}>
-                                    <button
-                                        onClick={() => {
-                                            setSelectedMenu(
-                                                item.name.toLowerCase()
-                                            );
-                                            navigate(item.path);
-                                        }}
-                                        className={`w-full text-left px-4 py-2 rounded ${
-                                            selectedMenu ===
-                                            item.name.toLowerCase()
-                                                ? "bg-blue-500 text-white"
-                                                : "hover:bg-gray-200"
-                                        }`}
-                                    >
-                                        {item.name}
-                                    </button>
-                                </li>
-                            )
-                    )}
-                </ul>
-            </aside>
-        );
-    };
-
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100">
+        <div className="h-screen flex flex-col bg-gray-100 !overflow-hidden">
             {/* Navbar */}
-            <Navbar />
+            <div className={`h-[${navHeight}px]`}>
+                <Navbar user={authUserInfo} />
+            </div>
 
             {/* Main Content Layout */}
-            <div className="flex flex-grow">
+            <div className="flex flex-grow overflow-auto">
                 {/* Sidebar */}
-                <Sidebar />
+                <div>
+                    <AdminSidebar user={authUserInfo} />
+                </div>
 
                 {/* Main Content Area */}
-                <main className="flex-grow p-4 flex flex-col gap-4 bg-white shadow-md bg-gray-50">
+                <main className="p-4 flex-grow flex flex-col gap-4 bg-[#f9f9fb]">
                     {/* Statistic section */}
-                    <StatisticSection />
+                    {["admin", "business"].includes(authUserInfo.role) && (
+                        <StatisticSection />
+                    )}
 
                     {/* Content area */}
-                    <div className=" flex-grow bg-white shadow-md">
+                    <div className="bg-white shadow-md overflow-auto">
                         <Outlet />
                     </div>
                 </main>
 
                 {/* Activity Logs Section */}
-                <aside className="w-60 bg-gray-200 p-4 shadow-md">
-                    <ActivitySection />
-                </aside>
+                {["admin"].includes(authUserInfo.role) && (
+                    <aside className="w-60 bg-white p-4 shadow-xl h-full overflow-auto">
+                        <ActivitySection />
+                    </aside>
+                )}
             </div>
 
             {/* Footer */}
-            <footer className="bg-blue-800 text-white text-center p-4">
-                © 2024 MyApp. Dashboard.
+            <footer
+                className={`bg-[#232323] text-white text-center text-sm p-4 h-[${footerHeight}px]`}
+            >
+                © 2025 Kiwi Explorer.
             </footer>
         </div>
     );

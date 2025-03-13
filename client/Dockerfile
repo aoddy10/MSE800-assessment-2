@@ -4,8 +4,13 @@ FROM node:18
 # Set the working directory inside the container
 WORKDIR /app
 
+# Set environment variable to fix OpenSSL issue
+ENV NODE_OPTIONS="--openssl-legacy-provider"
+ENV CHOKIDAR_USEPOLLING=false
+
 # Copy package.json and install dependencies
-COPY package.json package-lock.json ./
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
 
 # Copy all project files into the container

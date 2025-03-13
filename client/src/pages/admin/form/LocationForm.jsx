@@ -13,6 +13,7 @@ import {
     createUploadImage,
     deleteUploadImage,
 } from "../../../services/upload-image.services";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 const LocationForm = ({ location, onClose, onRefresh }) => {
     const { token, authUserInfo } = useContext(AuthContext);
@@ -101,7 +102,7 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
             onClose();
             onRefresh();
         } catch (error) {
-            // set errors to for the reponse error
+            // set errors to for the response error
             setErrors(error.response.data);
 
             console.error("Failed to save location", error.response.data);
@@ -114,7 +115,6 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
 
         try {
             const result = await createUploadImage(image, token);
-            console.log(result.image_url);
             setFormData({
                 ...formData,
                 cover_image_url: result.image_url, // Store  URL
@@ -289,24 +289,25 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                             className="rounded-lg w-full object-cover"
                         />
                         <button
-                            className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                            className="absolute top-2 right-2 p-2"
                             onClick={handleRemoveMenuImage}
                         >
-                            ❌
+                            <XMarkIcon className="size-6 rounded-full bg-red-500 text-white" />
                         </button>
                     </div>
                 ) : (
-                    <div className="flex flex-col">
-                        <label className="text-gray-700">
-                            Upload Menu Image
-                        </label>
-                        <input
-                            type="file"
-                            onChange={(e) => setMenuFile(e.target.files[0])}
-                        />
+                    <div className="flex items-center">
+                        <div className="flex-1">
+                            <input
+                                type="file"
+                                onChange={(e) => setMenuFile(e.target.files[0])}
+                                className="w-full border rounded p-2 focus:outline-none"
+                            />
+                        </div>
                         <Button
                             onClick={handleUploadMenuImage}
-                            className="mt-2"
+                            variant="upload"
+                            className="ml-3"
                         >
                             Upload
                         </Button>
@@ -325,24 +326,23 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                             className="rounded-lg w-full object-cover"
                         />
                         <button
-                            className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+                            className="absolute top-2 right-2 p-2"
                             onClick={handleRemoveCoverImage}
                         >
-                            ❌
+                            <XMarkIcon className="size-6 rounded-full bg-red-500 text-white" />
                         </button>
                     </div>
                 ) : (
-                    <div className="flex flex-col">
-                        <label className="text-gray-700">
-                            Upload Cover Image
-                        </label>
+                    <div className="flex items-center">
                         <input
                             type="file"
                             onChange={(e) => setImage(e.target.files[0])}
+                            className="w-full border rounded p-2 focus:outline-none"
                         />
                         <Button
                             onClick={handleUploadCoverImage}
-                            className="mt-2"
+                            variant="upload"
+                            className="ml-3"
                         >
                             Upload
                         </Button>
@@ -350,8 +350,9 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                 )}
             </div>
 
-            <div>
-                {gallery.map((image) => (
+            {gallery &&
+                gallery.length > 0 &&
+                gallery.map((image) => (
                     <div
                         key={image.id}
                         className="relative border rounded-lg p-2"
@@ -369,13 +370,15 @@ const LocationForm = ({ location, onClose, onRefresh }) => {
                         </button> */}
                     </div>
                 ))}
-            </div>
 
             {/* Submit Button */}
-            <div className="flex justify-end mt-4">
-                <Button onClick={handleSubmit}>
+            <div className="flex w-full mt-4">
+                <button
+                    className="px-4 py-2 text-white rounded w-full bg-[#31AAB7] flex justify-center"
+                    onClick={handleSubmit}
+                >
                     {location ? "Save Changes" : "Create Location"}
-                </Button>
+                </button>
             </div>
         </Modal>
     );

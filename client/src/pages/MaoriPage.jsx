@@ -10,24 +10,16 @@ import about3 from '../assets/about3.jpg';
 
 const FAQData = [
     {
-        question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-        answer: "Curabitur sed finibus purus. Donec ut nulla eu lectus vehicula consectetur. Maecenas sit amet libero hendrerit elit convallis euismod. Donec auctor cursus suscipit. Etiam sed elementum nunc. Curabitur sed finibus purus. Donec ut nulla eu lectus vehicula consectetur. Maecenas sit amet libero hendrerit elit convallis euismod. Donec auctor cursus suscipit. Etiam sed elementum nunc."
+        question: "Our values, attitudes and lifestyle",
+        answer: "The New Zealand culture is open-minded and welcoming to people of all countries and cultures. As a country, we value kindness, tolerance and friendship. We’re open-minded and welcoming toward all religions and uphold the right to freedom of religion, worship and belief for all. Kiwis expect everyone to be treated fairly and they enjoy feeling safe in their homes and in public places"
     },
     {
-        question: "In suscipit rhoncus enim ac sodales?",
-        answer: "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam malesuada turpis nec dapibus dignissim."
+        question: "Our languages and accent",
+        answer: "New Zealand has three official languages: English, Te reo Māori (the Māori language) and New Zealand Sign Language."
     },
     {
-        question: "Vivamus erat nibh?",
-        answer: "In sit amet turpis eget ligula tincidunt tristique et quis arcu. Nam ultrices elit in magna cursus, nec hendrerit mauris suscipit."
-    },
-    {
-        question: "Maecenas varius tincidunt arcu eget aliquet?",
-        answer: "urabitur sed finibus purus. Donec ut nulla eu lectus vehicula consectetur. Maecenas sit amet libero hendrerit elit convallis euismod. Donec auctor cursus suscipit. Etiam sed elementum nunc."
-    },
-    {
-        question: "Curabitur ut finibus massa?",
-        answer: "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam malesuada turpis nec dapibus dignissim."
+        question: "Pōwhiri",
+        answer: "A Pōwhiri is a welcome ceremony that normally takes place on a marae, or Māori meeting grounds but can happen anywhere that hosts (tangata whenua) wish to formally greet a group of visitors (manuhiri). The pōwhiri process is tapu (sacred)."
     }
 ];
 
@@ -47,12 +39,12 @@ const MaoriPage = () => {
                     }}>
                     <div className="hero-content">
                         <div className="blur-container">
-                            <p>Experience the <span className="bold-text">Magic</span> of <span className="bold-text">New Zealand</span></p>
+                            <p>Experience the <span className="font-bold">Magic</span> of <span className="font-bold">New Zealand</span></p>
                         </div>
 
                         <div className="hero-text">
-                            <h1>Unforgettable Moments <br />
-                                in <span className="bold-text">New Zealand</span></h1>
+                            <h1>Discover maori-culture <br />
+                                in <span className="font-bold">New Zealand</span></h1>
                         </div>
 
                         <div className="scroll-container">
@@ -69,8 +61,8 @@ const MaoriPage = () => {
                 <div className="maori-content2">
                     <div className="maori-txt">
                         <div className="maori-text">
-                            <h1>Lorem Ipsum<br /><b>Dolor Sit Amet Cons</b></h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In laoreet elit posuere odio rutrum, eu vulputate magna fringilla. Curabitur ornare consequat ex, et interdum nibh aliquet vitae.</p>
+                            <h1>Explore the <br/><span className='font-bold'>Māori culture</span></h1>
+                            <p className='text-lg text-[#232323]'>Māori culture is the indigenous culture of <br/>New Zealand, with a rich history and tradition that continues to thrive today.</p>
                         </div>
                     </div>
 
@@ -86,8 +78,8 @@ const MaoriPage = () => {
                                 }}
                             ></div>
                             <div className="maori-card-txt">
-                                <h1>Lorem Ipsum Dolor</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed erat nisi. Nunc tellus sapien, suscipit.</p>
+                                <h1>Demigod Māui</h1>
+                                <p className='text-md'>Māori legend says New Zealand was fished from the sea by the daring demigod Māui.</p>
                             </div>
                         </div>
 
@@ -102,8 +94,8 @@ const MaoriPage = () => {
                                 }}
                             ></div>
                             <div className="maori-card-txt">
-                                <h1>Lorem Ipsum Dolor</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed erat nisi. Nunc tellus sapien, suscipit.</p>
+                                <h1>Treaty of Waitangi</h1>
+                                <p className='text-md'>The Treaty of Waitangi was signed in 1840 and was an agreement between the British Crown and a large number of Māori chiefs.</p>
                             </div>
                         </div>
 
@@ -118,8 +110,8 @@ const MaoriPage = () => {
                                 }}
                             ></div>
                             <div className="maori-card-txt">
-                                <h1>Lorem Ipsum Dolor</h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed erat nisi. Nunc tellus sapien, suscipit.</p>
+                                <h1>Tāmoko Māori tattoo</h1>
+                                <p className='text-md'>The centuries old tradition of tāmoko (Māori tattoo) is an important custom that is still practised today. </p>
                             </div>
                         </div>
                     </div>
@@ -140,28 +132,25 @@ const MaoriPage = () => {
                             }}
                         ></div>
                         <div class="box2">
+
                             <div className="maori">
                                 <div className="maori-items">
                                     <h1 className="maori-title">01</h1>
-                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b><br />Mauris
-                                        condimentum nibh ac luctus posuere. Mauris non tristique urna. Cras consectetur laoreet quam,
-                                        vel dignissim leo sodales vitae.</h2>
+                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>The Heart of Māori New Zealand</b><br />Unlock the secrets of Aotearoa's indigenous heritage, from ancient roots to modern expressions.</h2>
                                 </div>
                             </div>
+
                             <div className="maori">
                                 <div className="maori-items">
                                     <h1 className="maori-title">02</h1>
-                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b><br />Mauris
-                                        condimentum nibh ac luctus posuere. Mauris non tristique urna. Cras consectetur laoreet quam,
-                                        vel dignissim leo sodales vitae.</h2>
+                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Early settlement</b><br />The ancestors of Māori arrived on canoes from Pacific islands before 1300 CE. Settling first on the coast, they hunted seals and moas.</h2>
                                 </div>
                             </div>
+                            
                             <div className="maori">
                                 <div className="maori-items">
                                     <h1 className="maori-title">03</h1>
-                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b><br />Mauris
-                                        condimentum nibh ac luctus posuere. Mauris non tristique urna. Cras consectetur laoreet quam,
-                                        vel dignissim leo sodales vitae.</h2>
+                                    <h2 className="maori-txt-2"><b style={{color: '#232323'}}>Māori today</b><br />In 2019 there were nearly 800,000 Māori people, with most living in cities.</h2>
                                 </div>
                             </div>
                         </div>

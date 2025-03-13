@@ -1,0 +1,37 @@
+{
+    "nav": {
+        "navLink": {
+            "explore": "Tūhura",
+            "about": "Mō Mātou",
+            "maori": "Māori",
+            "contact": "Whakapā",
+            "register": "Rēhita",
+            "login": "Takiuru",
+            "logout": "Takiuru Mai"
+        }
+    },
+    "landingPage": {
+        "heroContent": {
+            "button": "Whakamātauria te Makutu o Aotearoa",
+            "title": "Ngā Wā Whakahirahira i Aotearoa",
+            "scrollButton": "Panuku Raro"
+        }
+    },
+    "home": {
+        "heroContent": {
+            "title": "Tūhuratia ngā Mīharotanga o Aotearoa",
+            "subtitle": "Ka tukuna e Kiwi Explorer he haerenga kua whakaritea kia rite ki ō hiahia. Tirohia ā mātou wheako, kāore rānei, whakapā mai kia waihangatia tō haerenga Kiwi ake. Mā mātou koe e ārahi i runga i tētahi haerenga kāore e warewaretia.",
+            "searchBox": {
+                "city": "Tāone",
+                "type": "Momo",
+                "priceRange": "Awhe utu",
+                "button": "Rapua"
+            }
+        },
+        "sectionName": {
+            "city": "Ngā Tāone Whakaaturia",
+            "restaurant": "Ngā Wharekai Whakaaturia",
+            "activity": "Ngā Mahi Whakaaturia"
+        }
+    }
+}
