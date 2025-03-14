@@ -9,14 +9,14 @@ const HeroSection2 = () => {
     return (
         <div className="hero-content1">
             <div className="boxing">
-                <div class="box1">
+                <div className="box1">
                     <img
                         src={heroPic2}
                         alt="NZ"
                         className="w-full h-full object-cover rounded-md"
                     />
                 </div>
-                <div class="box2">
+                <div className="box2">
                     <div className="accordion">
                         <div className="accordion-items">
                             <h1 className="accordion-title">01</h1>

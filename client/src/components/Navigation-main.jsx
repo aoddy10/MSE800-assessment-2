@@ -4,7 +4,11 @@ import AuthContext from "../context/AuthContext";
 import useLogout from "../hooks/useLogout";
 import { getMe } from "../services/auth.service.s";
 import { UserAvatar } from "./UserAvatar";
-import { GlobeAltIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+    GlobeAltIcon,
+    Bars3Icon,
+    XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { useTranslation } from "react-i18next";
 import i18n from "../utils/i18n";
 
@@ -25,17 +29,23 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
                 setIsDropdownOpen(false);
             }
-            if (langDropdownRef.current && !langDropdownRef.current.contains(event.target)) {
+            if (
+                langDropdownRef.current &&
+                !langDropdownRef.current.contains(event.target)
+            ) {
                 setIsLangDropdownOpen(false);
             }
         };
 
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
 
@@ -56,16 +66,41 @@ const Navbar = () => {
 
     const NavLinks = () => (
         <>
-            <a href="/explore" className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase">
+            <div
+                onClick={() => {
+                    console.log("explore click");
+                }}
+                className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
+            >
                 {t("nav.navLink.explore")}
-            </a>
-            <a href="/about" className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase">
+            </div>
+            {/* <a href="/explore" className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase">
+                {t("nav.navLink.explore")}
+            </a> */}
+            <div
+                onClick={() => {
+                    console.log("about click");
+                }}
+                className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
+            >
                 {t("nav.navLink.about")}
-            </a>
-            <a href="/maori" className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase">
+            </div>
+            {/* <a
+                href="/about"
+                className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
+            >
+                {t("nav.navLink.about")}
+            </a> */}
+            <a
+                href="/maori"
+                className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
+            >
                 {t("nav.navLink.maori")}
             </a>
-            <a href="/contact" className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase">
+            <a
+                href="/contact"
+                className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
+            >
                 {t("nav.navLink.contact")}
             </a>
         </>
@@ -74,13 +109,16 @@ const Navbar = () => {
     return (
         <nav className="fixed w-full top-0 z-50">
             <div className="bg-white shadow-md w-full py-7">
-
                 <div className="mx-auto lg:max-w-[70%] 430px:max-w-[90%]">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
                         <div className="flex-shrink-0">
                             <a href="/" className="flex items-center">
-                                <img src={logo} alt="Kiwi Explorer Logo" className="h-8 w-auto" />
+                                <img
+                                    src={logo}
+                                    alt="Kiwi Explorer Logo"
+                                    className="h-8 w-auto"
+                                />
                             </a>
                         </div>
 
@@ -94,7 +132,11 @@ const Navbar = () => {
                             {/* Language Switcher */}
                             <div className="relative" ref={langDropdownRef}>
                                 <button
-                                    onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+                                    onClick={() =>
+                                        setIsLangDropdownOpen(
+                                            !isLangDropdownOpen
+                                        )
+                                    }
                                     className="p-2 hover:bg-black/10 rounded-full transition-colors"
                                 >
                                     <GlobeAltIcon className="h-6 w-6 text-black" />
@@ -144,16 +186,27 @@ const Navbar = () => {
                                     {authUserInfo && (
                                         <div
                                             className="flex items-center gap-2 cursor-pointer"
-                                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                            onClick={() =>
+                                                setIsDropdownOpen(
+                                                    !isDropdownOpen
+                                                )
+                                            }
                                         >
                                             <UserAvatar
-                                                profileImageUrl={authUserInfo.profile_image_url}
-                                                firstName={authUserInfo.first_name}
-                                                lastName={authUserInfo.last_name}
+                                                profileImageUrl={
+                                                    authUserInfo.profile_image_url
+                                                }
+                                                firstName={
+                                                    authUserInfo.first_name
+                                                }
+                                                lastName={
+                                                    authUserInfo.last_name
+                                                }
                                             />
                                             <div className="hidden md:block">
                                                 <p className="text-sm text-black">
-                                                    {authUserInfo.first_name} {authUserInfo.last_name}
+                                                    {authUserInfo.first_name}{" "}
+                                                    {authUserInfo.last_name}
                                                 </p>
                                                 <p className="text-xs text-black/50">
                                                     {authUserInfo.email}
@@ -165,12 +218,23 @@ const Navbar = () => {
                                     {isDropdownOpen && (
                                         <div className="absolute right-0 mt-2 w-[150px] bg-white rounded-lg shadow-lg py-2 px-2 z-50">
                                             <a
-                                                href={authUserInfo && ["admin", "business"].includes(authUserInfo.role)
-                                                    ? "/admin/locations"
-                                                    : "/admin/profile"}
+                                                href={
+                                                    authUserInfo &&
+                                                    [
+                                                        "admin",
+                                                        "business",
+                                                    ].includes(
+                                                        authUserInfo.role
+                                                    )
+                                                        ? "/admin/locations"
+                                                        : "/admin/profile"
+                                                }
                                                 className="block px-4 py-2 text-sm text-black hover:text-[#2AA8B6] rounded-md"
                                             >
-                                                {authUserInfo && ["admin", "business"].includes(authUserInfo.role)
+                                                {authUserInfo &&
+                                                ["admin", "business"].includes(
+                                                    authUserInfo.role
+                                                )
                                                     ? "Dashboard"
                                                     : "Profile"}
                                             </a>
@@ -185,10 +249,16 @@ const Navbar = () => {
                                 </div>
                             ) : (
                                 <div className="hidden md:flex md:items-center md:space-x-4">
-                                    <a href="/register" className="text-black hover:text-[#2AA8B6] px-4 py-2 rounded-lg uppercase">
+                                    <a
+                                        href="/register"
+                                        className="text-black hover:text-[#2AA8B6] px-4 py-2 rounded-lg uppercase"
+                                    >
                                         {t("nav.navLink.register")}
                                     </a>
-                                    <a href="/login" className="text-black hover:text-[#2AA8B6] px-4 py-2 rounded-lg uppercase">
+                                    <a
+                                        href="/login"
+                                        className="text-black hover:text-[#2AA8B6] px-4 py-2 rounded-lg uppercase"
+                                    >
                                         {t("nav.navLink.login")}
                                     </a>
                                 </div>
@@ -196,7 +266,9 @@ const Navbar = () => {
 
                             {/* Mobile menu button */}
                             <button
-                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                onClick={() =>
+                                    setIsMobileMenuOpen(!isMobileMenuOpen)
+                                }
                                 className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-black hover:text-[#2AA8B6]"
                             >
                                 {isMobileMenuOpen ? (
@@ -208,7 +280,6 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
 
             {/* Mobile menu */}
@@ -219,10 +290,16 @@ const Navbar = () => {
                     </div>
                     {!token && (
                         <div className="pt-4 border-t border-black/10 mt-4 space-y-1">
-                            <a href="/register" className="block px-4 py-2 text-black hover:text-[#2AA8B6] rounded-lg uppercase">
+                            <a
+                                href="/register"
+                                className="block px-4 py-2 text-black hover:text-[#2AA8B6] rounded-lg uppercase"
+                            >
                                 {t("nav.navLink.register")}
                             </a>
-                            <a href="/login" className="block px-4 py-2 text-black hover:text-[#2AA8B6] rounded-lg uppercase">
+                            <a
+                                href="/login"
+                                className="block px-4 py-2 text-black hover:text-[#2AA8B6] rounded-lg uppercase"
+                            >
                                 {t("nav.navLink.login")}
                             </a>
                         </div>
