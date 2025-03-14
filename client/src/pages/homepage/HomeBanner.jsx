@@ -80,18 +80,15 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                                     className="text-[#767676] font-normal bg-transparent border-none focus:outline-none cursor-pointer appearance-none w-full hover:text-[#31AAB7] transition-colors relative pl-0 pr-6"
                                     style={{
                                         backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23767676' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-                                        backgroundRepeat: 'no-repeat',
-                                        backgroundPosition: 'right center',
-                                        backgroundSize: '16px'
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundPosition: "right center",
+                                        backgroundSize: "16px",
                                     }}
                                 >
                                     <option value="">All</option>
                                     {cities && cities.length > 0 ? (
-                                        cities.map((city, idx) => (
-                                            <option
-                                                value={city.id}
-                                                key={city.id}
-                                            >
+                                        cities.map((city) => (
+                                            <option value={city.id} key={city.id}>
                                                 {city.title}
                                             </option>
                                         ))
