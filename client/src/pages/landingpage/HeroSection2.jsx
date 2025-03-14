@@ -1,8 +1,11 @@
 import React from "react";
 import "../../styles/HeroSection.css";
 import heroPic2 from "../../assets/about1.jpg";
+import { useTranslation } from "react-i18next";
 
 const HeroSection2 = () => {
+    const { t } = useTranslation();
+
     return (
         <div className="hero-content1">
             <div className="boxing">
@@ -19,12 +22,11 @@ const HeroSection2 = () => {
                             <h1 className="accordion-title">01</h1>
                             <h2 className="accordion-txt">
                                 <span className="font-bold mb-3">
-                                    Discover New Zealand Like Never Before
+                                    {t("landingPage.section3.topic1.title")}
                                 </span>
                                 <br />
                                 <br />
-                                Explore hidden gems, must-visit spots, and local
-                                favorites across Aotearoa.
+                                {t("landingPage.section3.topic1.content")}
                             </h2>
                         </div>
                     </div>
@@ -33,12 +35,11 @@ const HeroSection2 = () => {
                             <h1 className="accordion-title">02</h1>
                             <h2 className="accordion-txt">
                                 <span className="font-bold mb-3">
-                                    Your Ultimate Travel Guide to New Zealand
+                                    {t("landingPage.section3.topic2.title")}
                                 </span>
                                 <br />
                                 <br />
-                                Find breathtaking destinations, travel tips, and
-                                insider recommendations—all in one place!
+                                {t("landingPage.section3.topic2.content")}
                             </h2>
                         </div>
                     </div>
@@ -47,12 +48,11 @@ const HeroSection2 = () => {
                             <h1 className="accordion-title">03</h1>
                             <h2 className="accordion-txt">
                                 <span className="font-bold mb-3">
-                                    Start Your Kiwi Adventure Today
+                                    {t("landingPage.section3.topic3.title")}
                                 </span>
                                 <br />
                                 <br />
-                                Plan, explore, and experience the best of New
-                                Zealand with Kiwi Explorer.
+                                {t("landingPage.section3.topic3.content")}
                             </h2>
                         </div>
                     </div>

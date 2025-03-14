@@ -15,6 +15,26 @@
             "button": "Experience the <span className='font-bold'>Magic</span> of <span className='font-bold'>New Zealand</span>",
             "title": "Unforgettable Moments<br>in <span>New Zealand</span>",
             "scrollButton": "Scroll Down"
+        },
+        "section2": {
+            "title": "Welcome to kiwi explorer",
+            "subtitle": "Your Gateway to Authentic New Zealand. We specialize in crafting immersive journeys that go beyond the tourist trail. Discover the breathtaking beauty of Aotearoa, from rugged coastlines to lush rainforests, with our expert local guides.",
+            "activeUser": "Active Users",
+            "button": "Explore now"
+        },
+        "section3": {
+            "topic1": {
+                "title": "Discover New Zealand Like Never Before",
+                "content": "Explore hidden gems, must-visit spots, and local favorites across Aotearoa."
+            },
+            "topic2": {
+                "title": "Your Ultimate Travel Guide to New Zealand",
+                "content": "Find breathtaking destinations, travel tips, and insider recommendations—all in one place!"
+            },
+            "topic3": {
+                "title": "Start Your Kiwi Adventure Today",
+                "content": "Plan, explore, and experience the best of New Zealand with Kiwi Explorer."
+            }
         }
     },
     "home": {

@@ -4,8 +4,10 @@ import heroPic1 from "../../assets/about3.jpg";
 import { useNavigate } from "react-router-dom";
 import { gethActiveUsers } from "../../services/user.services";
 import { UserAvatar } from "../../components/UserAvatar";
+import { useTranslation } from "react-i18next";
 
 const HeroSection = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [activeUsers, setActiveUsers] = useState([]);
 
@@ -30,17 +32,10 @@ const HeroSection = () => {
             <div className="boxing">
                 <div className="landing-text-content !w-fit">
                     <h2 className="animate-fade-in-up">
-                        Welcome to kiwi explorer
+                        {t("landingPage.section2.title")}
                     </h2>
-                    <p className="animate-fade-in-up">
-                        Your Gateway to Authentic New Zealand. We <br />
-                        specialize in crafting immersive journeys that go beyond{" "}
-                        <br />
-                        the tourist trail. Discover the breathtaking beauty{" "}
-                        <br />
-                        of Aotearoa, from rugged coastlines to lush rainforests,{" "}
-                        <br />
-                        with our expert local guides.
+                    <p className="animate-fade-in-up pr-20">
+                        {t("landingPage.section2.subtitle")}
                     </p>
 
                     {/* Active Users Section */}
@@ -70,14 +65,14 @@ const HeroSection = () => {
                                 </div>
                             )}
                         </div>
-                        <div>Active users</div>
+                        <div>{t("landingPage.section2.activeUser")}</div>
                     </div>
 
                     <button
                         onClick={handleClick}
                         className="landing-exploreBtn"
                     >
-                        Explore Now
+                        {t("landingPage.section2.button")}
                     </button>
                 </div>
 
