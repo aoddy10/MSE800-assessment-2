@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import useScreenSize from "../hooks/useScreenSize";
+import React, {useState} from 'react';
+import useScreenSize from '../hooks/useScreenSize';
 
-import "../styles/ContactPage.css";
+import '../styles/ContactPage.css';
 import aod from "../assets/aod01.jpg";
 import terence from "../assets/terence.jpeg";
 import wan from "../assets/about1.jpg";
@@ -14,7 +14,6 @@ import {
     FaTwitter,
 } from "react-icons/fa";
 import { submitContact } from "../services/contact.services";
-import { Button } from "../components/ui/button";
 import { isValidEmail } from "../utils/libs";
 
 const team = [
@@ -105,12 +104,14 @@ const ContactPage = () => {
         }
     };
 
+    const { isMobile } = useScreenSize();
+
     return (
         <div className="contact-page">
             <div className="contact-content">
                 <div className="contact-txt">
                     <div className="contact-text">
-                        <h1 className="!text-3xl">Let’s Connect!</h1>
+                        {/* <h1 className="!text-3xl">Let’s Connect!</h1> */}
                         <h2 className="bold-text !text-4xl">
                             Have Questions or Suggestions? <br /> We’d Love to
                             Hear from You!
@@ -120,8 +121,6 @@ const ContactPage = () => {
                             opportunities, or feedback about Kiwi Explorer,
                             we’re here to help! Get in touch with us through the
                             form below or reach out via email and social media.
-                            Let’s make exploring New Zealand even more exciting
-                            together!
                         </p>
                     </div>
                 </div>
@@ -140,7 +139,7 @@ const ContactPage = () => {
                                     value={formData.name}
                                 />
                                 {error.name && (
-                                    <p className="text-red-500 text-sm">
+                                    <p className="text-red-500 text-sm text-left">
                                         {error.name}
                                     </p>
                                 )}
@@ -161,7 +160,7 @@ const ContactPage = () => {
                                     value={formData.email}
                                 />
                                 {error.email && (
-                                    <p className="text-red-500 text-sm">
+                                    <p className="text-red-500 text-sm text-left">
                                         {error.email}
                                     </p>
                                 )}
@@ -182,7 +181,7 @@ const ContactPage = () => {
                                     value={formData.organization_name}
                                 />
                                 {error.organization_name && (
-                                    <p className="text-red-500 text-sm">
+                                    <p className="text-red-500 text-sm text-left">
                                         {error.organization_name}
                                     </p>
                                 )}
@@ -203,7 +202,7 @@ const ContactPage = () => {
                                     value={formData.subject}
                                 />
                                 {error.subject && (
-                                    <p className="text-red-500 text-sm">
+                                    <p className="text-red-500 text-sm text-left">
                                         {error.subject}
                                     </p>
                                 )}
@@ -222,19 +221,19 @@ const ContactPage = () => {
                                     value={formData.message}
                                 />
                                 {error.message && (
-                                    <p className="text-red-500 text-sm">
+                                    <p className="text-red-500 text-sm text-left">
                                         {error.message}
                                     </p>
                                 )}
                             </div>
                         </div>
                         {successMessage && (
-                            <p className="text-green-500 text-sm">
+                            <p className="text-green-500 text-sm text-left">
                                 {successMessage}
                             </p>
                         )}
                         {error.form && (
-                            <p className="text-red-500 text-sm">{error.form}</p>
+                            <p className="text-red-500 text-sm text-left">{error.form}</p>
                         )}
 
                         <button
@@ -308,38 +307,43 @@ const ContactPage = () => {
                 </div>
 
                 <section className="w-full p-0">
-                    <div className="w-full mt-[100px] mx-auto text-center">
-                        <h2 className="text-3xl font-bold text-gray-800">
-                            Our Team
-                        </h2>
+          <div className="w-full mt-[100px] mx-auto text-center">
+            <h2 className="text-4xl font-bold text-gray-800">Our Team</h2>
+            <p className="text-base text-[#767676] mt-2">Lorem Ipsum Dolor Sit Amet Consectetur</p>
 
-                        <div className="flex overflow-x-auto space-x-6 mt-8 p-2">
-                            {team.map((member, index) => (
-                                <div
-                                    key={index}
-                                    className="bg-white rounded-xl shadow-md p-6 text-center"
-                                >
-                                    <img
-                                        src={member.image}
-                                        alt=""
-                                        style={{
-                                            width: "350px",
-                                            height: "350px",
-                                            objectFit: "cover",
-                                        }}
-                                        className="rounded-lg"
-                                    />
-                                    <h3 className="mt-4 text-lg font-semibold text-gray-800">
-                                        {member.name}
-                                    </h3>
-                                    <p className="text-gray-500">
-                                        {member.email}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
+            <div className={`flex ${isMobile ? 'flex-col space-y-8' : 'justify-between'} mt-8`}>
+              {team.map((member, index) => (
+                <React.Fragment key={index}>
+
+                  <div className="bg-none rounded-xl p-6 border-1 border-black/10">
+                    <img
+                      src={member.image}
+                      alt=""
+                      className={`rounded-md m-auto ${isMobile ? 'w-64 h-64' : 'w-[350px] h-[350px]'}`}
+                      style={{ objectFit: 'cover' }}
+                    />
+
+                    <h3 className={`mt-4 ${isMobile ? 'text-xl' : 'text-lg'} font-semibold text-gray-800`}>{member.name}</h3>
+                    <p className={`text-gray-500 ${isMobile ? 'text-base' : 'text-sm'}`}>{member.role}</p>
+
+                    <div className="m-auto w-max flex gap-3 mt-4">
+                      <a href={member.linkedin} className="text-black hover:text-[#31AAB7]">
+                        <FaLinkedin size={16} />
+                      </a>
+                      <a href={`mailto:${member.email}`} className="text-black hover:text-[#31AAB7]">
+                        <FaEnvelope size={16} />
+                      </a>
+                      <a href={`tel:${member.phone}`} className="text-black hover:text-[#31AAB7]">
+                        <FaPhone size={16} />
+                      </a>
                     </div>
-                </section>
+                  </div>
+
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        </section>
             </div>
         </div>
     );

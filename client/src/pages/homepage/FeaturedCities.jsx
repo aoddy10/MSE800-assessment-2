@@ -13,22 +13,16 @@ const FeaturedCities = ({ cities }) => {
     const itemsPerSlide = isMobile ? 1 : 3;
     const [loading, setLoading] = useState(true); // Added loading state
 
-    useEffect(() => {
-        if (cities && cities.length > 0) {
-            setLoading(false);
-        }
-    }, [cities]);
+  useEffect(() => {
+    if (cities && cities.length > 0) {
+      setLoading(false);
+    }
+  }, [cities]);
 
-    useEffect(() => {
-        if (cities && cities.length > 0) {
-            setLoading(false);
-        }
-    }, [cities]);
-
-    const handleImageClick = ({ city }) => {
-        const paramValue = city.id;
-        navigate(`/city/${paramValue}`);
-    };
+  const handleImageClick = ({ city }) => {
+    const paramValue = city.id;
+    navigate(`/city/${paramValue}`);
+  };
 
     const nextSlide = () => {
         if (cities && cities.length > 0 && !isAnimating) {
