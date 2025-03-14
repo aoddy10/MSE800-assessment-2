@@ -85,12 +85,6 @@ const ProtectedLayout = () => {
                             </div>
                         </div>
                     )}
-                    {/* <button
-                        className=" bg-accent px-3 py-1 rounded"
-                        onClick={logout}
-                    >
-                        Logout
-                    </button> */}
                 </div>
             </nav>
         );
