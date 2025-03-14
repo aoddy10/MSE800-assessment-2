@@ -87,7 +87,7 @@ const AboutPage = () => {
                     </div>
                     <div className="about-hero">
                         <div className="about-column-1">
-                            <div className="about-row-1">
+                            <div className="about-row-1 !border-none !bg-white/70">
                                 <img
                                     src={CompanyStats1}
                                     alt="Company Stats"
@@ -130,7 +130,7 @@ const AboutPage = () => {
                                     backgroundSize: "cover",
                                 }}
                             ></div>
-                            <div className="about-row-4">
+                            <div className="about-row-4 !border-none !bg-white/70">
                                 <img
                                     src={CompanyStats2}
                                     alt="Company Stats"
