@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
 
@@ -11,8 +11,10 @@ import LocationCard from "../components/LocationCard";
 import ReviewSection from "../components/ReviewSection";
 import { Modal } from "../components/ui/modal";
 import ReviewForm from "../components/forms/ReviewForm";
+import AuthContext from "../context/AuthContext";
 
 const LocationPage = () => {
+    const { authUserInfo } = useContext(AuthContext);
     const { id } = useParams(); // Get location ID from URL
     const [location, setLocation] = useState([]);
     const [locations, setLocations] = useState([]);
@@ -158,11 +160,16 @@ const LocationPage = () => {
 
                     {/* Right side - Reviews Container (30%) */}
                     <div className={`${isMobile ? "w-full mt-6" : "w-[30%]"}`}>
-                        <ReviewSection
-                            reviews={reviews}
-                            user={location.user}
-                            onReviewClick={handleReviewClick}
-                        />
+                        <ReviewSection reviews={reviews} user={location.user} />
+
+                        {authUserInfo && authUserInfo.role === "user" && (
+                            <button
+                                className="text-white bg-[#31AAB7] focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 w-full mt-4"
+                                onClick={handleReviewClick}
+                            >
+                                Write Review
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
