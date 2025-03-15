@@ -26,7 +26,8 @@ def get_reviews(request):
     limit = request.GET.get("limit")
     sort_order = request.GET.get("sort_order", "desc")  # Default to newest first
 
-    reviews = Review.objects.all().select_related("user")  # Optimize query for user data
+    # Optimize query for user data
+    reviews = Review.objects.all().select_related("user")
 
     if user_id:
         reviews = reviews.filter(user_id=user_id)
@@ -50,6 +51,7 @@ def get_reviews(request):
         reviews = reviews[:int(limit)]
 
     serializer = ReviewSerializer(reviews, many=True)
+    print(serializer.data)  # Debug serialized data
     return Response(serializer.data)
 
 @api_view(["POST"])
@@ -62,13 +64,15 @@ def create_review(request):
     - review (str): The text content of the review.
     - rating (float): The rating score (1-5).
     """
-    data = request.data.copy()
-    data["user"] = request.user.id  # Set the logged-in user as the review owner
 
-    serializer = ReviewSerializer(data=data)
-    
+    print("Request Data:", request.data)  # Debug request data
+    print("Request User:", request.user)  # Debug authenticated user
+    print("Request User ID:", request.user.id)  # Debug user ID
+
+    serializer = ReviewSerializer(data=request.data)
+
     if serializer.is_valid():
-        review = serializer.save()
+        review = serializer.save(user=request.user)  # Assign user here
 
         # Log review creation in system logs
         SystemLog.objects.create(
@@ -79,5 +83,5 @@ def create_review(request):
         )
 
         return Response(serializer.data, status=201)
-    
+
     return Response(serializer.errors, status=400)

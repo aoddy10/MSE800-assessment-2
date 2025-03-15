@@ -7,7 +7,6 @@ import { getLocationByCityId, getReviews } from "../services/location.services";
 import LocationCard from "../components/LocationCard";
 import ReviewSection from "../components/ReviewSection";
 
-
 const CityPage = () => {
     const [selectedFilter, setSelectedFilter] = useState("All"); // New state for selected filter
     const { id } = useParams(); // Get city ID from URL
@@ -59,7 +58,7 @@ const CityPage = () => {
 
     const fetch_reviews = async () => {
         try {
-            const result = await getReviews({ city: id, limit: 3 });
+            const result = await getReviews({ cityId: id, limit: 3 });
             setReviews(result);
         } catch (error) {
             console.log(error);
@@ -84,10 +83,16 @@ const CityPage = () => {
     const { isMobile } = useScreenSize();
     return (
         <div className="bg-none p-0 m-0">
-            <div className={`${isMobile ? 'w-[90%]' : 'w-[70%]'} mx-auto p-0 mt-[150px]`}>
-
-                <div className={`w-full ${isMobile ? 'h-[300px]' : 'h-[500px]'} rounded-xl overflow-hidden`}>
-
+            <div
+                className={`${
+                    isMobile ? "w-[90%]" : "w-[70%]"
+                } mx-auto p-0 mt-[150px]`}
+            >
+                <div
+                    className={`w-full ${
+                        isMobile ? "h-[300px]" : "h-[500px]"
+                    } rounded-xl overflow-hidden`}
+                >
                     <img
                         src={city.image_url}
                         alt={city.title}
@@ -95,8 +100,11 @@ const CityPage = () => {
                     />
                 </div>
 
-                <div className={`p-0 flex flex-col ${isMobile ? '' : 'lg:flex-row'} gap-3 mt-[50px]`}>
-
+                <div
+                    className={`p-0 flex flex-col ${
+                        isMobile ? "" : "lg:flex-row"
+                    } gap-3 mt-[50px]`}
+                >
                     <div className="lg:w-2/3">
                         <h1 className="text-2xl font-bold">{city.title}</h1>
                         <p className="text-gray-600 mt-2">{city.description}</p>
@@ -108,8 +116,11 @@ const CityPage = () => {
                 </div>
             </div>
 
-            <section className={`${isMobile ? 'w-[90%]' : 'w-[70%]'} mx-auto p-0 mt-[50px]`}>
-
+            <section
+                className={`${
+                    isMobile ? "w-[90%]" : "w-[70%]"
+                } mx-auto p-0 mt-[50px]`}
+            >
                 <h2 className="text-2xl font-bold mb-2">
                     Things to do in {city.title}
                 </h2>
@@ -136,18 +147,24 @@ const CityPage = () => {
                 </div>
             </section>
 
-            <section className={`${isMobile ? 'w-[90%]' : 'w-[70%]'} mx-auto p-0 mt-[20px] mb-[50px] min-h-[400px]`}>
-
-                <div className={`grid grid-cols-1 ${isMobile ? '' : 'md:grid-cols-3'} gap-6`}>
-
+            <section
+                className={`${
+                    isMobile ? "w-[90%]" : "w-[70%]"
+                } mx-auto p-0 mt-[20px] mb-[50px] min-h-[400px]`}
+            >
+                <div
+                    className={`grid grid-cols-1 ${
+                        isMobile ? "" : "md:grid-cols-3"
+                    } gap-6`}
+                >
                     {locations && locations.length > 0
                         ? locations.map((location) => (
-                            <LocationCard
-                                key={`location-${location.id}`}
-                                location={location}
-                                onClick={handleLocationCardClick}
-                            />
-                        ))
+                              <LocationCard
+                                  key={`location-${location.id}`}
+                                  location={location}
+                                  onClick={handleLocationCardClick}
+                              />
+                          ))
                         : "No Data"}
                 </div>
             </section>
