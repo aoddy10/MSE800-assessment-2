@@ -62,7 +62,7 @@ const Navbar = () => {
         if (token) {
             fetchUser();
         }
-    }, [token, authUserInfo, setAuthUserInfo]);
+    }, [token]);
 
     const NavLinks = () => (
         <>
