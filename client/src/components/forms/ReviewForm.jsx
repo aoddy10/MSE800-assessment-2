@@ -11,7 +11,6 @@ function ReviewForm({ locationId, onClose, onRefresh }) {
         review: "",
         rating: 0,
         location: locationId,
-        user: 1,
     });
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState("");

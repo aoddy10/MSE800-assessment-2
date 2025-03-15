@@ -15,7 +15,6 @@ const HomeBanner = ({ cities, onSearchClick }) => {
     const [showFilters, setShowFilters] = useState(false);
 
     const HandleSearchClick = () => {
-        console.log(city);
         onSearchClick(city, type, price);
         setShowFilters(false);
     };
@@ -27,7 +26,9 @@ const HomeBanner = ({ cities, onSearchClick }) => {
     const { isMobile } = useScreenSize();
 
     return (
-        <div className={`${isMobile ? 'w-[90%]' : 'w-[70%]'} mx-auto mt-[150px]`}>
+        <div
+            className={`${isMobile ? "w-[90%]" : "w-[70%]"} mx-auto mt-[150px]`}
+        >
             <div className="w-[100%]">
                 {isMobile ? (
                     // Mobile Hero Banner
@@ -96,7 +97,10 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                                     <option value="">All</option>
                                     {cities && cities.length > 0 ? (
                                         cities.map((city) => (
-                                            <option value={city.id} key={city.id}>
+                                            <option
+                                                value={city.id}
+                                                key={city.id}
+                                            >
                                                 {city.title}
                                             </option>
                                         ))
@@ -111,47 +115,69 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="flex items-center space-x-3">
                                     <span className="bg-[#E0F2F4] p-2 rounded-lg">
-                                        <img src={searchActivityIcon} alt="Activity" className="w-7 h-7" />
+                                        <img
+                                            src={searchActivityIcon}
+                                            alt="Activity"
+                                            className="w-7 h-7"
+                                        />
                                     </span>
                                     <div className="w-full flex-1">
                                         <p className="text-[#232323] text-sm font-bold">
-                                            {t("home.heroContent.searchBox.type")}
+                                            {t(
+                                                "home.heroContent.searchBox.type"
+                                            )}
                                         </p>
                                         <select
                                             value={type}
-                                            onChange={(e) => setType(e.target.value)}
+                                            onChange={(e) =>
+                                                setType(e.target.value)
+                                            }
                                             className="text-[#767676] font-normal bg-transparent border-none focus:outline-none cursor-pointer appearance-none w-full hover:text-[#31AAB7] transition-colors relative pl-0 pr-6"
                                             style={{
                                                 backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23767676' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-                                                backgroundRepeat: 'no-repeat',
-                                                backgroundPosition: 'right center',
-                                                backgroundSize: '16px'
+                                                backgroundRepeat: "no-repeat",
+                                                backgroundPosition:
+                                                    "right center",
+                                                backgroundSize: "16px",
                                             }}
                                         >
                                             <option value="">All</option>
-                                            <option value="restaurant">Restaurants</option>
-                                            <option value="activity">Attractions</option>
+                                            <option value="restaurant">
+                                                Restaurants
+                                            </option>
+                                            <option value="activity">
+                                                Attractions
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <div className="flex items-center space-x-3">
                                     <span className="bg-[#E0F2F4] p-2 rounded-lg">
-                                        <img src={searchPriceIcon} alt="Price" className="w-7 h-7" />
+                                        <img
+                                            src={searchPriceIcon}
+                                            alt="Price"
+                                            className="w-7 h-7"
+                                        />
                                     </span>
                                     <div className="w-full flex-1">
                                         <p className="text-[#232323] text-sm font-bold">
-                                            {t("home.heroContent.searchBox.priceRange")}
+                                            {t(
+                                                "home.heroContent.searchBox.priceRange"
+                                            )}
                                         </p>
                                         <select
                                             value={price}
-                                            onChange={(e) => setPrice(e.target.value)}
+                                            onChange={(e) =>
+                                                setPrice(e.target.value)
+                                            }
                                             className="text-[#767676] font-normal bg-transparent border-none focus:outline-none cursor-pointer appearance-none w-full hover:text-[#31AAB7] transition-colors relative pl-0 pr-6"
                                             style={{
                                                 backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23767676' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-                                                backgroundRepeat: 'no-repeat',
-                                                backgroundPosition: 'right center',
-                                                backgroundSize: '16px'
+                                                backgroundRepeat: "no-repeat",
+                                                backgroundPosition:
+                                                    "right center",
+                                                backgroundSize: "16px",
                                             }}
                                         >
                                             <option value="">All</option>
@@ -161,7 +187,6 @@ const HomeBanner = ({ cities, onSearchClick }) => {
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
                         )}
 
