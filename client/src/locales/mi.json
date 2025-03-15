@@ -50,9 +50,18 @@
             }
         },
         "sectionName": {
-            "city": "Ngā Tāone Motuhake",
-            "restaurant": "Ngā Wharekai Motuhake",
-            "activity": "Ngā Mahi Motuhake"
+            "city": {
+                "title": "Ngā Tāone Motuhake",
+                "subtitle": "Tūhuratia ngā tāone o Aotearoa, mai i ngā pokapū pīkaunga nui ki ngā wāhi ataahua o te rohe."
+            },
+            "restaurant": {
+                "title": "Ngā Wharekai Motuhake",
+                "subtitle": "Waihanga i tō wheako kai i Aotearoa mā ā mātou whiringa wharekai motuhake."
+            },
+            "activity": {
+                "title": "Ngā Mahi Motuhake",
+                "subtitle": "Ngā wāhi me ngā wheako tūruhi e rongonui ai a Aotearoa puta noa i te ao."
+            }
         }
     },
     "footer": {

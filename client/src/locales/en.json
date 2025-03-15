@@ -50,9 +50,18 @@
             }
         },
         "sectionName": {
-            "city": "Featured Cities",
-            "restaurant": "Featured Restaurants",
-            "activity": "Featured Activities"
+            "city": {
+                "title": "Featured Cities",
+                "subtitle": "Explore New Zealand's urban gems, from bustling hubs to charming locales."
+            },
+            "restaurant": {
+                "title": "Featured Restaurants",
+                "subtitle": "Taste New Zealand's culinary scene with our featured restaurant picks."
+            },
+            "activity": {
+                "title": "Featured Activities",
+                "subtitle": "The must-see tourist attractions that make New Zealand a world-renowned destination."
+            }
         }
     },
     "footer": {

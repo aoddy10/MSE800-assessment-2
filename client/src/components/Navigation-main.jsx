@@ -66,31 +66,19 @@ const Navbar = () => {
 
     const NavLinks = () => (
         <>
-            <div
-                onClick={() => {
-                    console.log("explore click");
-                }}
+            <a
+                href="/explore"
                 className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
             >
                 {t("nav.navLink.explore")}
-            </div>
-            {/* <a href="/explore" className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase">
-                {t("nav.navLink.explore")}
-            </a> */}
-            <div
-                onClick={() => {
-                    console.log("about click");
-                }}
-                className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
-            >
-                {t("nav.navLink.about")}
-            </div>
-            {/* <a
+            </a>
+
+            <a
                 href="/about"
                 className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
             >
                 {t("nav.navLink.about")}
-            </a> */}
+            </a>
             <a
                 href="/maori"
                 className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
