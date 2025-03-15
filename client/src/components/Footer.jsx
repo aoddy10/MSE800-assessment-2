@@ -1,24 +1,33 @@
-import React from 'react';
-import '../styles/FooterWhite.css';
-import logo from '../assets/logo-black.png';
+import React from "react";
+import "../styles/FooterWhite.css";
+import logo from "../assets/logo-black.png";
+import { useTranslation } from "react-i18next";
 
-const FooterWhite = () => {
+const Footer = () => {
+    const { t } = useTranslation();
+
     return (
         <div className="footer-white">
             <div className="main-footer-container">
                 <div className="footer-container">
                     <div className="footer-links">
                         <div className="column-1">
-                            <img className="footer-logo" src={logo} alt="Kiwi Explorer Logo" />
+                            <img
+                                className="footer-logo"
+                                src={logo}
+                                alt="Kiwi Explorer Logo"
+                            />
 
                             <p className="landing-footer-text">
-                                Kiwi Explorer offers a range of tailored tours to suit your interests.
-                                Browse our experiences, or contact us to create your personalized Kiwi adventure.
+                                {t("footer.subtitle")}
                             </p>
 
                             <div className="socmed-icons-container">
                                 {/* Facebook */}
-                                <svg className="footer-socmed-icons" viewBox="0 0 20 20">
+                                <svg
+                                    className="footer-socmed-icons"
+                                    viewBox="0 0 20 20"
+                                >
                                     <path
                                         fill="#232323"
                                         d="M11.6,18.8v-7.9h2.4l.4-3.5h-2.8v-1.7c0-.9,
@@ -28,7 +37,10 @@ const FooterWhite = () => {
                                 </svg>
 
                                 {/* Twitter */}
-                                <svg className="footer-socmed-icons" viewBox="0 0 20 20">
+                                <svg
+                                    className="footer-socmed-icons"
+                                    viewBox="0 0 20 20"
+                                >
                                     <path
                                         fill="#232323"
                                         d="M17.9,5.9c0,.2,0,.4,0,.5,0,5.4-4.1,11.7-11.7
@@ -44,7 +56,10 @@ const FooterWhite = () => {
                                 </svg>
 
                                 {/* Instagram */}
-                                <svg className="footer-socmed-icons" viewBox="0 0 20 20">
+                                <svg
+                                    className="footer-socmed-icons"
+                                    viewBox="0 0 20 20"
+                                >
                                     <path
                                         fill="#232323"
                                         d="M15,1.7H5c-1.8,0-3.3,1.5-3.3,3.3v10c0,1.8,1.5,
@@ -56,7 +71,10 @@ const FooterWhite = () => {
                                 </svg>
 
                                 {/* LinkedIn */}
-                                <svg className="footer-socmed-icons" viewBox="0 0 20 20">
+                                <svg
+                                    className="footer-socmed-icons"
+                                    viewBox="0 0 20 20"
+                                >
                                     <path
                                         fill="#232323"
                                         d="M4.9,7H1.4v11.3h3.5V7Z M3.1,1.7c-1.3,0-2.2.8-2.2,
@@ -69,33 +87,40 @@ const FooterWhite = () => {
                             </div>
                         </div>
                         <div className="column">
-                            <h5>EXPLORE</h5>
-                            <a href="/explore#FeaturedCities">Cities</a>
-                            <a href="/explore#FeaturedRestaurants">Restaurants</a>
+                            <h5>{t("footer.column1.title")}</h5>
+                            <a href="/explore#FeaturedCities">
+                                {t("footer.column1.menu1")}
+                            </a>
+                            <a href="/explore#FeaturedRestaurants">
+                                {t("footer.column1.menu2")}
+                            </a>
 
-                            <a href="/explore#FeaturedActivities">Activities</a>
+                            <a href="/explore#FeaturedActivities">
+                                {t("footer.column1.menu3")}
+                            </a>
                         </div>
                         <div className="column">
-                            <h5>COMPANY</h5>
-                            <a href="/about">About</a>
-                            <a href="/contact">Contact</a>
-                            <a href="/explore">Explore</a>
-
+                            <h5>{t("footer.column2.title")}</h5>
+                            <a href="/about">{t("footer.column2.menu1")}</a>
+                            <a href="/contact">{t("footer.column2.menu2")}</a>
+                            <a href="/explore">{t("footer.column2.menu3")}</a>
                         </div>
 
                         <div className="column">
-                            <h5>ACCOUNT</h5>
-                            <a href="/login">Login</a>
-                            <a href="/register">Register</a>
+                            <h5>{t("footer.column3.title")}</h5>
+                            <a href="/login">{t("footer.column3.menu1")}</a>
+                            <a href="/register">{t("footer.column3.menu2")}</a>
                         </div>
                         <div className="column">
-                            <h5>LEGAL</h5>
-                            <a href="/privacy-policy">Privacy Policy</a>
-                            <a href="/terms-and-conditions">Terms & Conditions</a>
+                            <h5>{t("footer.column4.title")}</h5>
+                            <a href="/privacy-policy">
+                                {t("footer.column4.menu1")}
+                            </a>
+                            <a href="/terms-and-conditions">
+                                {t("footer.column4.menu2")}
+                            </a>
                         </div>
-
                     </div>
-
                 </div>
             </div>
             <div className="footer-white-credits">
@@ -105,8 +130,7 @@ const FooterWhite = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 
-export default FooterWhite;
+export default Footer;
