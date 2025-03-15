@@ -13,16 +13,16 @@ const FeaturedCities = ({ cities }) => {
     const itemsPerSlide = isMobile ? 1 : 3;
     const [loading, setLoading] = useState(true); // Added loading state
 
-  useEffect(() => {
-    if (cities && cities.length > 0) {
-      setLoading(false);
-    }
-  }, [cities]);
+    useEffect(() => {
+        if (cities && cities.length > 0) {
+            setLoading(false);
+        }
+    }, [cities]);
 
-  const handleImageClick = ({ city }) => {
-    const paramValue = city.id;
-    navigate(`/city/${paramValue}`);
-  };
+    const handleImageClick = ({ city }) => {
+        const paramValue = city.id;
+        navigate(`/city/${paramValue}`);
+    };
 
     const nextSlide = () => {
         if (cities && cities.length > 0 && !isAnimating) {
@@ -60,11 +60,10 @@ const FeaturedCities = ({ cities }) => {
                 <div className="flex justify-between">
                     <span className="mb-6">
                         <h2 className="text-2xl font-bold">
-                            {t("home.sectionName.city")}
+                            {t("home.sectionName.city.title")}
                         </h2>
                         <p className="text-md text-[#767676]">
-                            Explore New Zealand's urban gems, from bustling hubs
-                            to charming locales.
+                            {t("home.sectionName.city.subtitle")}
                         </p>
                     </span>
 

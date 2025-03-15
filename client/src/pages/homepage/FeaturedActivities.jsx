@@ -61,11 +61,10 @@ const FeaturedActivities = ({ activities }) => {
                 <div className="flex justify-between">
                     <span className="mb-6">
                         <h2 className="text-2xl font-bold">
-                            {t("home.sectionName.activity")}
+                            {t("home.sectionName.activity.title")}
                         </h2>
                         <p className="text-md text-[#767676]">
-                            The must-see tourist attractions that make New
-                            Zealand a world-renowned destination.
+                            {t("home.sectionName.activity.subtitle")}
                         </p>
                     </span>
 

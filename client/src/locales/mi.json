@@ -1,26 +1,46 @@
 {
     "nav": {
         "navLink": {
-            "explore": "Tūhura",
-            "about": "Mō Mātou",
+            "explore": "Tūhuratia",
+            "about": "Mō mātou",
             "maori": "Māori",
             "contact": "Whakapā",
             "register": "Rēhita",
             "login": "Takiuru",
-            "logout": "Takiuru Mai"
+            "logout": "Takiputa"
         }
     },
     "landingPage": {
         "heroContent": {
-            "button": "Whakamātauria te Makutu o Aotearoa",
-            "title": "Ngā Wā Whakahirahira i Aotearoa",
-            "scrollButton": "Panuku Raro"
+            "button": "Whakamātauria te <span className='font-bold'>Mākutu</span> o <span className='font-bold'>Aotearoa</span>",
+            "title": "Ngā Wheako Kaore e Warewaretia<br>i <span>Aotearoa</span>",
+            "scrollButton": "Pānuku ki Raro"
+        },
+        "section2": {
+            "title": "Nau mai ki Kiwi Explorer",
+            "subtitle": "Tō Kuaha ki te Aotearoa Tūturu. He tohunga mātou ki te waihanga haerenga hōhonu atu i ngā ara tūruhi noa. Tūhurahia te ataahua whakaharahara o Aotearoa, mai i ngā takutai taratara ki ngā ngahere tāwāhi, me ō mātou kaiārahi ā-rohe mātanga.",
+            "activeUser": "Ngā Kaiwhakamahi Hohe",
+            "button": "Tūhuratia ināianei"
+        },
+        "section3": {
+            "topic1": {
+                "title": "Tūhurahia a Aotearoa i runga i te āhua hou",
+                "content": "Kimihia ngā wāhi huna, ngā wāhi me toro, me ngā tino wāhi e manakohia ana e te iwi o Aotearoa."
+            },
+            "topic2": {
+                "title": "Tō Aratohu Haerenga Matua ki Aotearoa",
+                "content": "Rapua ngā wāhi whakamīharo, ngā tohutohu haerenga, me ngā taunakitanga ā-roto—katoa kei konei!"
+            },
+            "topic3": {
+                "title": "Tīmatahia tō Haerenga Kiwi i te Rā Nei",
+                "content": "Whakaritea, tūhurahia, me te wheako i ngā mea pai rawa atu o Aotearoa me Kiwi Explorer."
+            }
         }
     },
     "home": {
         "heroContent": {
-            "title": "Tūhuratia ngā Mīharotanga o Aotearoa",
-            "subtitle": "Ka tukuna e Kiwi Explorer he haerenga kua whakaritea kia rite ki ō hiahia. Tirohia ā mātou wheako, kāore rānei, whakapā mai kia waihangatia tō haerenga Kiwi ake. Mā mātou koe e ārahi i runga i tētahi haerenga kāore e warewaretia.",
+            "title": "Tūhurahia ngā Mīharo o Aotearoa",
+            "subtitle": "Kei a Kiwi Explorer he whānuitanga o ngā haerenga kua whakaritea kia hāngai ki ō hiahia. Tirohia ā mātou wheako, whakapā mai rānei kia waihangatia tō haerenga Kiwi whaiaro. Mā mātou koe e ārahi i runga i te haerenga kāore e warewaretia.",
             "searchBox": {
                 "city": "Tāone",
                 "type": "Momo",
@@ -30,9 +50,43 @@
             }
         },
         "sectionName": {
-            "city": "Ngā Tāone Whakaaturia",
-            "restaurant": "Ngā Wharekai Whakaaturia",
-            "activity": "Ngā Mahi Whakaaturia"
+            "city": {
+                "title": "Ngā Tāone Motuhake",
+                "subtitle": "Tūhuratia ngā tāone o Aotearoa, mai i ngā pokapū pīkaunga nui ki ngā wāhi ataahua o te rohe."
+            },
+            "restaurant": {
+                "title": "Ngā Wharekai Motuhake",
+                "subtitle": "Waihanga i tō wheako kai i Aotearoa mā ā mātou whiringa wharekai motuhake."
+            },
+            "activity": {
+                "title": "Ngā Mahi Motuhake",
+                "subtitle": "Ngā wāhi me ngā wheako tūruhi e rongonui ai a Aotearoa puta noa i te ao."
+            }
+        }
+    },
+    "footer": {
+        "subtitle": "Ka tuku a Kiwi Explorer i ngā haerenga kua whakaritea kia hāngai ki ō hiahia. Tirohia ā mātou wheako, whakapā mai rānei kia waihangatia tō haerenga Kiwi whaiaro.",
+        "column1": {
+            "title": "TŪHURATIA",
+            "menu1": "Ngā Tāone",
+            "menu2": "Ngā Wharekai",
+            "menu3": "Ngā Mahi"
+        },
+        "column2": {
+            "title": "KAMPANI",
+            "menu1": "Mō mātou",
+            "menu2": "Whakapā",
+            "menu3": "Tūhuratia"
+        },
+        "column3": {
+            "title": "PŪKETE",
+            "menu1": "Takiuru",
+            "menu2": "Rēhita"
+        },
+        "column4": {
+            "title": "TURE",
+            "menu1": "Kaupapahere Tūmataiti",
+            "menu2": "Ngā Ture me ngā Herenga"
         }
     }
 }
