@@ -6,8 +6,11 @@ import facebook from "../../assets/socmed/facebook.svg";
 import twitter from "../../assets/socmed/twitter.svg";
 import instagram from "../../assets/socmed/instagram.svg";
 import linkedin from "../../assets/socmed/linkedin.svg";
+import { useTranslation } from "react-i18next";
 
 const FooterLandingpage = () => {
+    const { t } = useTranslation();
+
     return (
         <div className="landing-main-footer-container">
             <div className="landing-footer-container">
@@ -19,10 +22,12 @@ const FooterLandingpage = () => {
                             alt="Kiwi Explorer Logo"
                         />
                         <p className="landing-footer-text">
-                            Kiwi Explorer offers a range of tailored tours to suit your interests. 
-                            Browse our experiences, or contact us to create your personalized Kiwi adventure.
+                            Kiwi Explorer offers a range of tailored tours to
+                            suit your interests. Browse our experiences, or
+                            contact us to create your personalized Kiwi
+                            adventure.
                         </p>
-                     
+
                         <div className="landing-socmed-icons-container">
                             <img
                                 className="landing-footer-socmed-icons"
@@ -46,29 +51,41 @@ const FooterLandingpage = () => {
                             />
                         </div>
                     </div>
+
                     <div className="landing-column">
-                        <h5>EXPLORE</h5>
-                        <a href="/explore#FeaturedCities">Cities</a>
-                        <a href="/explore#FeaturedRestaurants">Restaurants</a>
-                        <a href="/explore#FeaturedActivities">Activities</a>
+                        <h5>{t("footer.column1.title")}</h5>
+                        <a href="/explore#FeaturedCities">
+                            {t("footer.column1.menu1")}
+                        </a>
+                        <a href="/explore#FeaturedRestaurants">
+                            {t("footer.column1.menu2")}
+                        </a>
+
+                        <a href="/explore#FeaturedActivities">
+                            {t("footer.column1.menu3")}
+                        </a>
                     </div>
                     <div className="landing-column">
-                        <h5>COMPANY</h5>
-                        <a href="/about">About</a>
-                        <a href="/contact">Contact</a>
-                        <a href="/explore">Explore</a>
+                        <h5>{t("footer.column2.title")}</h5>
+                        <a href="/about">{t("footer.column2.menu1")}</a>
+                        <a href="/contact">{t("footer.column2.menu2")}</a>
+                        <a href="/explore">{t("footer.column2.menu3")}</a>
+                    </div>
+
+                    <div className="landing-column">
+                        <h5>{t("footer.column3.title")}</h5>
+                        <a href="/login">{t("footer.column3.menu1")}</a>
+                        <a href="/register">{t("footer.column3.menu2")}</a>
                     </div>
                     <div className="landing-column">
-                        <h5>ACCOUNT</h5>
-                        <a href="/login">Login</a>
-                        <a href="/register">Register</a>
+                        <h5>{t("footer.column4.title")}</h5>
+                        <a href="/privacy-policy">
+                            {t("footer.column4.menu1")}
+                        </a>
+                        <a href="/terms-and-conditions">
+                            {t("footer.column4.menu2")}
+                        </a>
                     </div>
-                    <div className="landing-column">
-                        <h5>LEGAL</h5>
-                        <a href="/privacy-policy">Privacy Policy</a>
-                        <a href="/terms-and-conditions">Terms & Conditions</a>
-                    </div>
-                    
                 </div>
                 <div className="landing-footer-credits">
                     <p>© All Rights Reserved 2025 Kiwi Explorer</p>
