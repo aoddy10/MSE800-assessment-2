@@ -1,25 +1,31 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
-import { useTranslation } from "react-i18next";
-import i18n from "../utils/i18n";
-import "../styles/NavigationWhite.css";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import logo from "../assets/logo-black.png";
 import AuthContext from "../context/AuthContext";
 import useLogout from "../hooks/useLogout";
 import { getMe } from "../services/auth.service.s";
 import { UserAvatar } from "./UserAvatar";
+import {
+    GlobeAltIcon,
+    Bars3Icon,
+    XMarkIcon,
+} from "@heroicons/react/24/outline";
+import { useTranslation } from "react-i18next";
+import i18n from "../utils/i18n";
 
-const NavigationMain = () => {
-    const { t } = useTranslation(); // Access translations
-
+const Navbar = () => {
+    const { t } = useTranslation();
     const { token, authUserInfo, setAuthUserInfo } = useContext(AuthContext);
     const logout = useLogout();
 
-    // Function to change language
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const langDropdownRef = useRef(null);
+
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
     };
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dropdownRef = useRef(null);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -28,6 +34,12 @@ const NavigationMain = () => {
                 !dropdownRef.current.contains(event.target)
             ) {
                 setIsDropdownOpen(false);
+            }
+            if (
+                langDropdownRef.current &&
+                !langDropdownRef.current.contains(event.target)
+            ) {
+                setIsLangDropdownOpen(false);
             }
         };
 
@@ -38,7 +50,6 @@ const NavigationMain = () => {
     }, []);
 
     useEffect(() => {
-        // Fetch user details
         const fetchUser = async () => {
             try {
                 const response = await getMe(token);
@@ -53,127 +64,238 @@ const NavigationMain = () => {
         }
     }, [token, authUserInfo, setAuthUserInfo]);
 
+    const NavLinks = () => (
+        <>
+            <a
+                href="/explore"
+                className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
+            >
+                {t("nav.navLink.explore")}
+            </a>
+
+            <a
+                href="/about"
+                className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
+            >
+                {t("nav.navLink.about")}
+            </a>
+            <a
+                href="/maori"
+                className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
+            >
+                {t("nav.navLink.maori")}
+            </a>
+            <a
+                href="/contact"
+                className="block px-4 py-2 text-black hover:text-[#2AA8B6] uppercase"
+            >
+                {t("nav.navLink.contact")}
+            </a>
+        </>
+    );
+
     return (
-        <nav className="navbar-white">
-            <div className="navbar-container flex items-center">
-                <div className="navbar-logo">
-                    <a href="/" className="flex items-center">
-                        <img src={logo} alt="Kiwi Explorer Logo" />
-                    </a>
-                </div>
+        <nav className="fixed w-full top-0 z-50">
+            <div className="bg-white shadow-md w-full py-7">
+                <div className="mx-auto lg:max-w-[70%] 430px:max-w-[90%]">
+                    <div className="flex items-center justify-between">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                            <a href="/" className="flex items-center">
+                                <img
+                                    src={logo}
+                                    alt="Kiwi Explorer Logo"
+                                    className="h-8 w-auto"
+                                />
+                            </a>
+                        </div>
 
-                <div className="navbar-links">
-                    <a href="/explore" className="navbar-link-white uppercase">
-                        {t("nav.navLink.explore")}
-                    </a>
-                    <a href="/about" className="navbar-link-white uppercase">
-                        {t("nav.navLink.about")}
-                    </a>
-                    <a href="/maori" className="navbar-link-white uppercase">
-                        {t("nav.navLink.maori")}
-                    </a>
-                    <a href="/contact" className="navbar-link-white uppercase">
-                        {t("nav.navLink.contact")}
-                    </a>
-                </div>
+                        {/* Desktop Navigation */}
+                        <div className="hidden md:flex md:items-center md:space-x-4">
+                            <NavLinks />
+                        </div>
 
-                {/* Language Switcher */}
-                <div className="flex items-center gap-4">
-                    <button
-                        onClick={() => changeLanguage("en")}
-                        className="px-2 py-1 border border-white rounded"
-                    >
-                        🇬🇧 English
-                    </button>
-                    <button
-                        onClick={() => changeLanguage("mi")}
-                        className="px-2 py-1 border border-white rounded"
-                    >
-                        🇳🇿 Māori
-                    </button>
-                </div>
-
-                {token ? (
-                    <div>
-                        {/* User Info & Logout */}
-                        <div className="relative min-w-max" ref={dropdownRef}>
-                            {authUserInfo && (
-                                <div
-                                    className="flex items-center gap-2 cursor-pointer"
+                        {/* Right Section */}
+                        <div className="flex items-center space-x-4">
+                            {/* Language Switcher */}
+                            <div className="relative" ref={langDropdownRef}>
+                                <button
                                     onClick={() =>
-                                        setIsDropdownOpen(!isDropdownOpen)
+                                        setIsLangDropdownOpen(
+                                            !isLangDropdownOpen
+                                        )
                                     }
+                                    className="p-2 hover:bg-black/10 rounded-full transition-colors"
                                 >
-                                    <UserAvatar
-                                        profileImageUrl={
-                                            authUserInfo.profile_image_url
-                                        }
-                                        firstName={authUserInfo.first_name}
-                                        lastName={authUserInfo.last_name}
-                                    />
-                                    <div>
-                                        <p className="text-sm">
-                                            {authUserInfo.first_name}{" "}
-                                            {authUserInfo.last_name}
-                                        </p>
-                                        <p className="text-xs opacity-80">
-                                            {authUserInfo.email}
-                                        </p>
+                                    <GlobeAltIcon className="h-6 w-6 text-black" />
+                                </button>
+
+                                {isLangDropdownOpen && (
+                                    <div className="absolute right-0 mt-3 w-36 bg-white rounded-lg shadow-lg p-2 z-50">
+                                        <button
+                                            onClick={() => {
+                                                changeLanguage("en");
+                                                setIsLangDropdownOpen(false);
+                                            }}
+                                            className="w-full px-4 py-2 text-sm text-left text-black hover:text-[#2AA8B6] flex items-center gap-2 rounded-md"
+                                        >
+                                            <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
+                                                <img
+                                                    src="https://flagcdn.com/h40/gb.png"
+                                                    alt="UK flag"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                            English
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                changeLanguage("mi");
+                                                setIsLangDropdownOpen(false);
+                                            }}
+                                            className="w-full px-4 py-2 text-sm text-left text-black hover:text-[#2AA8B6] flex items-center gap-2 rounded-md"
+                                        >
+                                            <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
+                                                <img
+                                                    src="https://flagcdn.com/h40/nz.png"
+                                                    alt="New Zealand flag"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                            Māori
+                                        </button>
                                     </div>
+                                )}
+                            </div>
+
+                            {/* Auth Section */}
+                            {token ? (
+                                <div className="relative" ref={dropdownRef}>
+                                    {authUserInfo && (
+                                        <div
+                                            className="flex items-center gap-2 cursor-pointer"
+                                            onClick={() =>
+                                                setIsDropdownOpen(
+                                                    !isDropdownOpen
+                                                )
+                                            }
+                                        >
+                                            <UserAvatar
+                                                profileImageUrl={
+                                                    authUserInfo.profile_image_url
+                                                }
+                                                firstName={
+                                                    authUserInfo.first_name
+                                                }
+                                                lastName={
+                                                    authUserInfo.last_name
+                                                }
+                                            />
+                                            <div className="hidden md:block">
+                                                <p className="text-sm text-black">
+                                                    {authUserInfo.first_name}{" "}
+                                                    {authUserInfo.last_name}
+                                                </p>
+                                                <p className="text-xs text-black/50">
+                                                    {authUserInfo.email}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {isDropdownOpen && (
+                                        <div className="absolute right-0 mt-2 w-[150px] bg-white rounded-lg shadow-lg py-2 px-2 z-50">
+                                            <a
+                                                href={
+                                                    authUserInfo &&
+                                                    [
+                                                        "admin",
+                                                        "business",
+                                                    ].includes(
+                                                        authUserInfo.role
+                                                    )
+                                                        ? "/admin/locations"
+                                                        : "/admin/profile"
+                                                }
+                                                className="block px-4 py-2 text-sm text-black hover:text-[#2AA8B6] rounded-md"
+                                            >
+                                                {authUserInfo &&
+                                                ["admin", "business"].includes(
+                                                    authUserInfo.role
+                                                )
+                                                    ? "Dashboard"
+                                                    : "Profile"}
+                                            </a>
+                                            <button
+                                                onClick={logout}
+                                                className="block w-full text-left px-4 py-2 text-sm text-black hover:text-[#2AA8B6] rounded-md"
+                                            >
+                                                Logout
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="hidden md:flex md:items-center md:space-x-4">
+                                    <a
+                                        href="/register"
+                                        className="text-black hover:text-[#2AA8B6] px-4 py-2 rounded-lg uppercase"
+                                    >
+                                        {t("nav.navLink.register")}
+                                    </a>
+                                    <a
+                                        href="/login"
+                                        className="text-black hover:text-[#2AA8B6] px-4 py-2 rounded-lg uppercase"
+                                    >
+                                        {t("nav.navLink.login")}
+                                    </a>
                                 </div>
                             )}
 
-                            {/* Dropdown Menu */}
-                            {isDropdownOpen && (
-                                <div className="absolute right-0 mt-8 min-w-[75px] bg-white rounded-md shadow-lg py-2 px-2 z-50">
-                                    <a
-                                        href={
-                                            authUserInfo &&
-                                            ["admin", "business"].includes(
-                                                authUserInfo.role
-                                            )
-                                                ? "/admin/locations"
-                                                : "/admin/profile"
-                                        }
-                                        className="block px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
-                                    >
-                                        {authUserInfo &&
-                                        ["admin", "business"].includes(
-                                            authUserInfo.role
-                                        )
-                                            ? "Dashboard"
-                                            : "Profile"}
-                                    </a>
-                                    <button
-                                        onClick={logout}
-                                        className="block w-full text-left px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
-                                    >
-                                        Logout
-                                    </button>
-                                </div>
-                            )}
+                            {/* Mobile menu button */}
+                            <button
+                                onClick={() =>
+                                    setIsMobileMenuOpen(!isMobileMenuOpen)
+                                }
+                                className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-black hover:text-[#2AA8B6]"
+                            >
+                                {isMobileMenuOpen ? (
+                                    <XMarkIcon className="block h-6 w-6" />
+                                ) : (
+                                    <Bars3Icon className="block h-6 w-6" />
+                                )}
+                            </button>
                         </div>
                     </div>
-                ) : (
-                    <div className="navbar-auth flex">
-                        <a
-                            href="/register"
-                            className="navbar-link-white uppercase"
-                        >
-                            {t("nav.navLink.register")}
-                        </a>
-                        <hr className="auth-divider-white" />
-                        <a
-                            href="/login"
-                            className="navbar-link-white uppercase"
-                        >
-                            {t("nav.navLink.logout")}
-                        </a>
-                    </div>
-                )}
+                </div>
             </div>
+
+            {/* Mobile menu */}
+            {isMobileMenuOpen && (
+                <div className="md:hidden bg-white rounded-lg mt-3 p-2 w-[90%] m-auto shadow-md">
+                    <div className="space-y-1">
+                        <NavLinks />
+                    </div>
+                    {!token && (
+                        <div className="pt-4 border-t border-black/10 mt-4 space-y-1">
+                            <a
+                                href="/register"
+                                className="block px-4 py-2 text-black hover:text-[#2AA8B6] rounded-lg uppercase"
+                            >
+                                {t("nav.navLink.register")}
+                            </a>
+                            <a
+                                href="/login"
+                                className="block px-4 py-2 text-black hover:text-[#2AA8B6] rounded-lg uppercase"
+                            >
+                                {t("nav.navLink.login")}
+                            </a>
+                        </div>
+                    )}
+                </div>
+            )}
         </nav>
     );
 };
 
-export default NavigationMain;
+export default Navbar;

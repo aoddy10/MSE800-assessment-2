@@ -2,17 +2,17 @@ import LocationCard from "../../components/LocationCard";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-
+import useScreenSize from "../../hooks/useScreenSize";
 import Skeleton from "../../components/ui/Skeleton";
 
 const FeaturedRestaurants = ({ restaurants }) => {
     const { t } = useTranslation();
-
     const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
-    const itemsPerSlide = 3;
-    const [loading, setLoading] = useState(true);
+    const { isMobile } = useScreenSize();
+    const itemsPerSlide = isMobile ? 1 : 3;
+    const [loading, setLoading] = useState(true); // Added loading state
 
     const handleRestaurantClick = (restaurant) => {
         navigate(`/location/${restaurant.id}`);
@@ -53,19 +53,16 @@ const FeaturedRestaurants = ({ restaurants }) => {
 
     return (
         <section id="FeaturedRestaurants" className="py-12 w-[100%] bg-[#fff]">
-            <div className="w-[70%] m-auto">
+            <div className="w-[90%] md:w-[70%] m-auto">
                 <div className="flex justify-between">
                     <span className="mb-6">
                         <h2 className="text-2xl font-bold">
-                            {t("home.sectionName.restaurant")}
+                            {t("home.sectionName.restaurant.title")}
                         </h2>
-
                         <p className="text-md text-[#767676]">
-                            Taste New Zealand's culinary scene with our featured
-                            restaurant picks.
+                            {t("home.sectionName.restaurant.subtitle")}
                         </p>
                     </span>
-
                     <div className="flex gap-2">
                         {/* Navigation Arrows */}
                         <button
@@ -89,7 +86,6 @@ const FeaturedRestaurants = ({ restaurants }) => {
                                 />
                             </svg>
                         </button>
-
                         <button
                             onClick={nextSlide}
                             disabled={isAnimating}
@@ -113,7 +109,6 @@ const FeaturedRestaurants = ({ restaurants }) => {
                         </button>
                     </div>
                 </div>
-
                 <div className="relative">
                     <div className="overflow-hidden">
                         {loading ? (
@@ -152,7 +147,7 @@ const FeaturedRestaurants = ({ restaurants }) => {
                                                               key={
                                                                   restaurant.id
                                                               }
-                                                              className="w-1/3"
+                                                              className="w-full md:w-1/3"
                                                           >
                                                               <LocationCard
                                                                   location={

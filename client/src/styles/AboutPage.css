@@ -53,10 +53,13 @@
 
 .about-hero {
     width: 100%;
-    height: 30vw;
+    height: 60vh; /* Changed from vw to vh for better mobile scaling */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 30px;
+    transition: all 0.3s ease-in-out;
+    min-height: 300px;
+    touch-action: manipulation;
 }
 
 .about-column-1 {
@@ -124,6 +127,64 @@
     text-align: left;
 }
 
+@media (max-width: 430px) {
+    .about-content { 
+        width: 90%;
+        padding-top: 75px;
+        padding-bottom: 75px;
+    }
+
+    .about-txt {
+        margin-top: 75px;
+        margin-bottom: 30px;
+    }
+
+    .about-text h1 {
+        font-size: 32px;
+    }
+    
+    .about-text p {
+        margin: auto;
+        width: 100%;
+    }
+
+    .about-row-2 {
+        display: none;
+    }
+
+    .about-row-3 {
+        display: none;
+    }
+
+    .about-hero {
+        height: max-content; /* Changed from vw to vh for better mobile scaling */
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 30px;
+        transition: all 0.3s ease-in-out;
+        min-height: 300px;
+        touch-action: manipulation;
+    }
+
+    .about-column-1 {
+        height: max-content;
+        display: grid;
+        grid-template-rows: 1fr;
+        row-gap: 0px;
+    }
+
+    .about-column-2 {
+        height: 40vh;
+    }
+
+    .about-column-3 {
+        height: max-content;
+        display: grid;
+        grid-template-rows: 1fr;
+        row-gap: 0px;
+    }
+}
+
 /* ------------------- Section 2  ---------------- */
 
 .about-section2 {
@@ -165,6 +226,7 @@
     text-align: left;
     font-size: 18px;
     font-family: 'LatoBold';
+    font-weight: 700;
     color: #232323;
     display: flex;
     justify-content: space-between;
@@ -182,7 +244,7 @@
 }
 
 .faq-icon {
-    font-size: 32px;
+    font-size: 24px;
     color: #31AAB7;
     font-family: 'LatoRegular';
     transition: transform 0.3s ease;
@@ -207,6 +269,28 @@
 .faq-answer.active {
     max-height: 300px;
     padding: 20px;
+}
+
+@media (max-width: 430px) {
+    .faq-container h2 {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    .faq-question {
+        width: 100%;
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .faq-answer {
+        font-size: 14px;
+    }
+    
+    .faq-answer.active {
+        max-height: max-content;
+        padding: 15px;
+    }
 }
 
 /* -------------- Section3 --------------- */
@@ -291,4 +375,15 @@
 
 .subscribe-btn:hover {
     background-color: #2a919c;
+}
+
+@media (max-width: 430px) {
+    .subscription-container h2 {
+        font-size: 32px;
+    }
+
+    .subscription-container p {
+        width: 100%;
+        font-size: 16px;
+    }
 }

@@ -20,7 +20,7 @@
     overflow: hidden;
 }
 
-.hero-content {
+.hero-content-maori {
     width: 70%;
     margin: auto;
     position: relative;
@@ -33,7 +33,7 @@
     text-align: center;
 }
 
-.blur-container {
+.blur-container-maori {
     width: max-content;
     position: relative;
     background: rgba(255, 255, 255, 0.35);
@@ -46,12 +46,12 @@
     font-family: 'LatoBold';
 }
 
-.blur-container p {
+.blur-container-maori p {
     color: #fff;
     font-family: 'LatoThin';
 }
 
-.hero-text h1 {
+.hero-text-maori h1 {
     font-size: 64px;
     color: #fff;
     font-family: 'LatoThin';
@@ -76,6 +76,23 @@
     color: #b4b4b4;
     font-family: 'LatoThin';
     font-size: 12px;
+}
+
+@media (max-width: 430px) {
+
+    .hero-content-maori {
+        width: 90%;
+    }
+
+    .hero-text-maori {
+        width: max-content;
+        height: max-content;
+    }
+
+    .hero-text-maori h1 {
+        width: max-content;
+        font-size: 28px;
+    }
 }
 
 /* -------------------Section 2--------------- */
@@ -170,6 +187,46 @@
     font-weight: 500;
 }
 
+@media (max-width: 430px) {
+    .maori-content2 {
+        width: 90%;
+        padding-top: 75px;
+        padding-bottom: 75px;
+    }
+
+    .maori-txt {
+        margin-bottom: 30px;
+    }
+    
+    .maori-text h1 {
+        font-size: 32px;
+    }
+
+    .maori-container {
+        width: 100%;
+        height: max-content;
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 30px;
+    }
+
+    .maori-card {
+        width: 100%;
+        height: 60vw;
+    }
+
+    .maori-column {
+        grid-template-rows: auto 1fr;
+        height: max-content;
+    }
+
+    .maori-column2 {
+        grid-template-rows: auto 1fr;
+        margin-top: 0px;
+        height: max-content;
+    }
+}
+
 /* --------------- Section 3 -------------- */
 
 .maori-section3 {
@@ -178,7 +235,7 @@
     background-color: #fff;
 }
 
-.box1 {
+.box1-maori {
     width: 47.5%;
     height: 500px;
     border: 1px solid #ccc;
@@ -188,7 +245,7 @@
     border-radius: 10px;
 }
 
-.box2 {
+.box2-maori {
     width: 47.5%;
     height: 500px;
     display: grid;
@@ -227,12 +284,38 @@
     font-family: 'LatoRegular';
 }
 
-.faq-container {
+@media (max-width: 430px) {
+    .box1-maori {
+        width: 100%;
+        height: 60vw;
+    }
+
+    .box2-maori {
+        width: 100%;
+        height: max-content;
+    }
+
+    .maori {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .maori-items {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        column-gap: 20px;
+        padding-right: 0;
+    }
+}
+
+/* -------------------------------------------------------- */
+
+.faq-container-maori {
     width: 100%;
     margin: 0 auto;
 }
 
-.faq-container h2 {
+.faq-container-maori h2 {
     font-size: 36px;
     color: #232323;
     font-family: 'LatoBold';
@@ -240,19 +323,19 @@
     margin-bottom: 50px;
 }
 
-.faq-list {
+.faq-list-maori {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.faq-item {
+.faq-item-maori {
     border: 1px  solid #d4d4d4;
     border-radius: 10px;
     overflow: hidden;
 }
 
-.faq-question {
+.faq-question-maori {
     width: 100%;
     padding: 25px;
     background: #f9f9fb;
@@ -268,26 +351,26 @@
     transition: background-color 0.3s ease;
 }
 
-.faq-question:hover {
+.faq-question-maori:hover {
     background-color: #f0f0f0;
 }
 
-.faq-question.active {
+.faq-question-maori.active {
     background-color: #f0f0f0;
 }
 
-.faq-icon {
+.faq-icon-maori {
     font-size: 32px;
     color: #31AAB7;
     font-family: 'LatoRegular';
     transition: transform 0.3s ease;
 }
 
-.faq-question.active .faq-icon {
+.faq-question-maori.active .faq-icon-maori {
     color: #31AAB7;
 }
 
-.faq-answer {
+.faq-answer-maori {
     text-align: left;
     max-height: 0;
     overflow: hidden;
@@ -299,7 +382,29 @@
     line-height: 1.6;
 }
 
-.faq-answer.active {
+.faq-answer-maori.active {
     max-height: 300px;
     padding: 20px;
+}
+
+@media (max-width: 430px) {
+    .faq-container-maori h2 {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    .faq-question-maori {
+        width: 100%;
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .faq-answer-maori {
+        font-size: 14px;
+    }
+    
+    .faq-answer-maori.active {
+        max-height: max-content;
+        padding: 15px;
+    }
 }

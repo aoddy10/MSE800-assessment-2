@@ -64,7 +64,7 @@
 
 .footer-logo {
     width: 75%;
-    height: max-content;
+    height: auto;
 }
 
 .column {
@@ -115,4 +115,82 @@
     font-family: 'LatoThin';
     font-size: 1em;
     line-height: 1.3em;
+}
+
+@media (max-width: 430px) {
+    .main-footer-container {
+        width: 90%;
+    }
+
+    .footer-container {
+        height: max-content;
+        padding-top: 0px;
+        padding-bottom: 50px;
+    }
+
+    .footer-links {
+        height: max-content;
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 30px;
+    }
+
+    .column-1 {
+        row-gap: 20px;
+        width: 100%;
+    }
+
+    .column-1 img {
+        margin: auto;
+    }
+    
+    .column-1 p {
+        text-align: center;
+        font-size: medium;
+    }
+    
+    .socmed-icons-container {
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        column-gap: 10px;
+        
+    }
+    
+    .footer-socmed-icons {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .footer-logo {
+        width: 65%;
+    }
+
+    .column {
+        row-gap: 5px;
+    }
+
+    .column h5 {
+        font-size: 1em;
+        font-weight: 700;
+        text-align: center;
+    }
+    
+    .column a {
+        font-size: medium;
+        text-align: center;
+    }
+
+    .footer-credits {
+        width: max-content;
+        height: max-content;
+        display: grid;
+        flex-direction: column;
+        
+    }
+    
+    .footer-credits p {
+        font-size: small;
+        text-align: center;
+    }
 }

@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
 import AuthContext from "../../context/AuthContext";
+import useScreenSize from "../../hooks/useScreenSize";
 
 import "../../styles/LoginPage.css";
 
@@ -13,6 +14,7 @@ import AuthRightSideSection from "../../components/AuthRightSideSection";
 const RegisterPage = () => {
     const { login } = useContext(AuthContext); // Use auth context to store token after registration
     const navigate = useNavigate(); // Hook for navigation
+    const { isMobile } = useScreenSize(); // Hook for Mobile Responsiveness
 
     // State to store user input fields
     const [formData, setFormData] = useState({
@@ -85,7 +87,7 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="login-container">
+        <div className={`login-container ${isMobile ? 'mobile' : ''}`}>
             {/* Back button to navigate back to home */}
             <div className="back-btn">
                 <a href="/" className="back-link">
@@ -95,7 +97,7 @@ const RegisterPage = () => {
             </div>
 
             {/* Left section: Registration form */}
-            <div className="left-container">
+            <div className={`left-container ${isMobile ? 'w-full' : ''}`}>
                 <div className="form-container">
                     {/* Logo */}
                     <img
@@ -218,7 +220,7 @@ const RegisterPage = () => {
             </div>
 
             {/* Right section: Registration page banner */}
-            <AuthRightSideSection />
+            {!isMobile && <AuthRightSideSection />}
         </div>
     );
 };

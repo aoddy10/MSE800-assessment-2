@@ -39,7 +39,7 @@
     width: 50%;
     font-size: 1em;
     line-height: 1.3em;
-    color: #232323;
+    color: #767676;
     font-family: 'LatoRegular';
     font-weight: 400;
 }
@@ -186,4 +186,35 @@
     fill: #31AAB7;
 }
 
+@media (max-width: 430px) {
+    .contact-content {
+        width: 90%;
+        padding-top: 100px;
+        padding-bottom: 75px;
+    }
 
+    .contact-text h1 {
+        font-size: 32px;
+    }
+    
+    .contact-text p {
+        margin: auto;
+        width: 100%;
+    }
+
+    .contact-txt {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .contact-form-details-box {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 30px;
+    }
+
+    .contact-box-form {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
