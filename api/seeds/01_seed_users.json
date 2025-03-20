@@ -1,0 +1,140 @@
+[
+{
+  "model": "core.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$3U0VlJKxmCiGkgB2eZTjIC$5ciybo47HQqukKTfjPJjK1zioI7GLyvRm9JOCYuqfPU=",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "Olivia",
+    "last_name": "Harrington",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-02-11T01:03:48Z",
+    "email": "admin@example.com",
+    "phone": null,
+    "role": "admin",
+    "profile_image_url": "http://localhost:8000/media/uploads/1/ef4aeace-8b85-4650-9dec-110009d3e176.jpg",
+    "is_suspended": false,
+    "last_login": "2025-03-20T22:38:52.527Z",
+    "reset_token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$Dd726n5kuHJ3tPIu8h5l4L$Ta6EolLAJAtYuYDZLHTE+pBsiUd/+LzUlg8eqbHTkVE=",
+    "is_superuser": false,
+    "username": "testuser",
+    "first_name": "Sophia",
+    "last_name": "Reynolds",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-02-11T01:40:46Z",
+    "email": "test@example.com",
+    "phone": null,
+    "role": "business",
+    "profile_image_url": "http://localhost:8000/media/uploads/2/0d9ddd6a-cbac-413a-a230-1ad4ee0e966a.jpg",
+    "is_suspended": false,
+    "last_login": "2025-02-25T01:09:07.374Z",
+    "reset_token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$eE14txUYLnNvMTMTNm0Nmc$L+EolashZW6Q7azpnzZGEb8ZWvPmvOJq++5X+wwU9G4=",
+    "is_superuser": false,
+    "username": "testuser1",
+    "first_name": "Ethan",
+    "last_name": "Caldwell",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-02-11T02:46:56Z",
+    "email": "test1@example.com",
+    "phone": null,
+    "role": "user",
+    "profile_image_url": "http://localhost:8000/media/uploads/3/bec3107a-4d90-4217-a6de-60072c757b03.jpg",
+    "is_suspended": false,
+    "last_login": "2025-02-25T01:04:55Z",
+    "reset_token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$UuKjJQgrQqiXKGqixCArKC$8QjI7SC/Vx47zQ2ajeIEmiRQiWYa9IlS+sfsnymk4O4=",
+    "is_superuser": false,
+    "username": "user",
+    "first_name": "John",
+    "last_name": "Doe",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-02-20T08:06:11Z",
+    "email": "user@example.com",
+    "phone": null,
+    "role": "user",
+    "profile_image_url": "http://localhost:8000/media/uploads/4/1fbfd697-3012-49d7-8fb4-d22616418596.jpg",
+    "is_suspended": false,
+    "last_login": "2025-03-15T21:01:39.695Z",
+    "reset_token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$FCpUHecIIJACVO0HmsfbDz$O98HwD/ER96EcsRqOkuQX1RAYHZIY/sSX5QHRb0lPCU=",
+    "is_superuser": false,
+    "username": "partner",
+    "first_name": "Liam",
+    "last_name": "Montgomery",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-02-20T08:09:07Z",
+    "email": "partner@example.com",
+    "phone": null,
+    "role": "business",
+    "profile_image_url": "http://localhost:8000/media/uploads/5/ebf54d4d-459c-48f6-8396-d32229b53bb1.jpg",
+    "is_suspended": false,
+    "last_login": "2025-02-25T00:40:07.327Z",
+    "reset_token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": 11,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$AwHgjYTKN2x1S0tGSPnM7O$dcgo2SEQtFFAXu1795/Kau+dfsr3HRy4uKGjiMB2ngE=",
+    "is_superuser": false,
+    "username": "aoddy",
+    "first_name": "Anirut",
+    "last_name": "Puangkingkaew",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-02-11T22:56:36Z",
+    "email": "admin2@example.com",
+    "phone": null,
+    "role": "admin",
+    "profile_image_url": null,
+    "is_suspended": false,
+    "last_login": "2025-03-20T22:49:34.242Z",
+    "reset_token": null,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

@@ -1,0 +1,2004 @@
+[
+{
+  "model": "core.systemlog",
+  "pk": 1,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Suspended user: testuser1",
+    "created_at": "2025-02-16T23:43:29.498Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 2,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Unsuspended user: testuser1",
+    "created_at": "2025-02-16T23:43:40.251Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 3,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Suspended user: testuser1",
+    "created_at": "2025-02-16T23:43:49.962Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 4,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Unsuspended user: testuser1",
+    "created_at": "2025-02-16T23:46:16.462Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 5,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Suspended user: testuser1",
+    "created_at": "2025-02-16T23:46:34.059Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 6,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Unsuspended user: testuser1",
+    "created_at": "2025-02-16T23:46:46.531Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 7,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Suspended user: testuser1",
+    "created_at": "2025-02-16T23:47:35.734Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 8,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Unsuspended user: testuser1",
+    "created_at": "2025-02-16T23:47:42.178Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 9,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Suspended user: testuser1",
+    "created_at": "2025-02-16T23:49:19.202Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 10,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Unsuspended user: testuser1",
+    "created_at": "2025-02-16T23:49:26.840Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 11,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Suspended user: testuser1",
+    "created_at": "2025-02-16T23:50:26.236Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 12,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 2,
+    "description": "Created location: Nelson Bay Seafood",
+    "created_at": "2025-02-18T07:09:55.786Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 13,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 3,
+    "description": "Created location: Auckland Sky Tower Bungee",
+    "created_at": "2025-02-18T07:10:23.745Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 14,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 4,
+    "description": "Created location: Wellington Coffee House",
+    "created_at": "2025-02-18T07:10:42.030Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 15,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 5,
+    "description": "Created location: Christchurch Botanic Gardens Tour",
+    "created_at": "2025-02-18T07:11:04.508Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 16,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 6,
+    "description": "Created location: Queenstown Steakhouse",
+    "created_at": "2025-02-18T07:11:20.550Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 17,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 7,
+    "description": "Created location: Auckland Sky Tower Climb",
+    "created_at": "2025-02-18T07:13:36.827Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 18,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 8,
+    "description": "Created location: Wellington Seafood Bistro",
+    "created_at": "2025-02-18T07:13:49.633Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 19,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 9,
+    "description": "Created location: Christchurch Hot Air Balloon Ride",
+    "created_at": "2025-02-18T07:14:02.389Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 20,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 10,
+    "description": "Created location: Queenstown Mountain Café",
+    "created_at": "2025-02-18T07:14:14.430Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 21,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 11,
+    "description": "Created location: Auckland Harbor Kayaking",
+    "created_at": "2025-02-18T07:16:52.112Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 22,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 12,
+    "description": "Created location: Wellington Vegan Bistro",
+    "created_at": "2025-02-18T07:17:05.298Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 23,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 13,
+    "description": "Created location: Christchurch Zipline Adventure",
+    "created_at": "2025-02-18T07:17:17.184Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 24,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 14,
+    "description": "Created location: Queenstown Sushi House",
+    "created_at": "2025-02-18T07:17:30.291Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 25,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 11,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/bub-s-famous-fish-chips.jpg",
+    "created_at": "2025-02-18T07:21:29.997Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 26,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 2,
+    "description": "Updated location: Nelson Bay Seafood",
+    "created_at": "2025-02-18T07:22:24.331Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 27,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 12,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/the-hangar.jpg",
+    "created_at": "2025-02-18T07:24:15.451Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 28,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 4,
+    "description": "Updated location: Wellington Coffee House",
+    "created_at": "2025-02-18T07:24:31.109Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 29,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 13,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/rib-eye-on-the-bone.jpg",
+    "created_at": "2025-02-18T07:25:34.748Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 30,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 6,
+    "description": "Updated location: Queenstown Steakhouse",
+    "created_at": "2025-02-18T07:25:46.477Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 31,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 14,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/the-crab-shack-1346488.webp",
+    "created_at": "2025-02-18T07:27:18.394Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 32,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 8,
+    "description": "Updated location: Wellington Seafood Bistro",
+    "created_at": "2025-02-18T07:27:34.370Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 33,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 15,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/stratosfare-view-at-night.jpg",
+    "created_at": "2025-02-18T07:28:45.731Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 34,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 10,
+    "description": "Updated location: Queenstown Mountain Café",
+    "created_at": "2025-02-18T07:28:57.466Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 35,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 16,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/ella-olsson-yb6bm_66Jdk-unsplash-1-1024x768.jpg",
+    "created_at": "2025-02-18T08:02:59.182Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 36,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 12,
+    "description": "Updated location: Wellington Vegan Bistro",
+    "created_at": "2025-02-18T08:03:10.341Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 37,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 17,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/sushi-bar-1.png",
+    "created_at": "2025-02-18T08:04:11.753Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 38,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 14,
+    "description": "Updated location: Queenstown Sushi House",
+    "created_at": "2025-02-18T08:04:23.216Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 39,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 18,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/52.jpg",
+    "created_at": "2025-02-18T08:05:35.880Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 40,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 3,
+    "description": "Updated location: Auckland Sky Tower Bungee",
+    "created_at": "2025-02-18T08:05:48.675Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 41,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 19,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/BGT-5.png",
+    "created_at": "2025-02-18T08:06:35.126Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 42,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 5,
+    "description": "Updated location: Christchurch Botanic Gardens Tour",
+    "created_at": "2025-02-18T08:06:45.603Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 43,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 20,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/claim_tower_auckland.jpg",
+    "created_at": "2025-02-18T08:08:30.188Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 44,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 7,
+    "description": "Updated location: Auckland Sky Tower Climb",
+    "created_at": "2025-02-18T08:08:48.566Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 45,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 21,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/adventure-balloons-867390.webp",
+    "created_at": "2025-02-18T08:09:54.718Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 46,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 9,
+    "description": "Updated location: Christchurch Hot Air Balloon Ride",
+    "created_at": "2025-02-18T08:10:11.148Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 47,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 22,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/31db5773-9618-4cdc-83c4-4ea760736b27.jpg",
+    "created_at": "2025-02-19T04:07:20.074Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 48,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 23,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/071d1d5a-3cfb-42fd-bdb8-6df579fa5501.jpg",
+    "created_at": "2025-02-19T04:15:10.132Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 49,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 24,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/fdd9dec6-f263-4c5d-8d15-ceafebce12c5.jpg",
+    "created_at": "2025-02-19T04:25:17.532Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 50,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 25,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/92ddfd0d-9e8a-41a3-bb63-7f7afd1b88ab.jpg",
+    "created_at": "2025-02-19T04:31:00.132Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 51,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 25,
+    "description": "Deleted image: /media/uploads/11/92ddfd0d-9e8a-41a3-bb63-7f7afd1b88ab.jpg",
+    "created_at": "2025-02-19T20:12:14.664Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 52,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 26,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/11c73da7-3c6f-4e02-8317-d017b9c5e218.webp",
+    "created_at": "2025-02-19T20:14:29.913Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 53,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 26,
+    "description": "Deleted image: /media/uploads/11/11c73da7-3c6f-4e02-8317-d017b9c5e218.webp",
+    "created_at": "2025-02-19T20:14:45.064Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 54,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 27,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/4c504588-7bb5-4c9a-a9be-7e176ac95d1a.jpg",
+    "created_at": "2025-02-19T20:15:02.796Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 55,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 27,
+    "description": "Deleted image: /media/uploads/11/4c504588-7bb5-4c9a-a9be-7e176ac95d1a.jpg",
+    "created_at": "2025-02-19T20:15:05.214Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 56,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 28,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/f56d7abd-dcf8-414f-824f-505814f77cf0.jpg",
+    "created_at": "2025-02-19T20:15:10.215Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 57,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 28,
+    "description": "Deleted image: /media/uploads/11/f56d7abd-dcf8-414f-824f-505814f77cf0.jpg",
+    "created_at": "2025-02-19T20:15:25.791Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 58,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 29,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/d348c98c-2408-4987-b7ba-a1eae9c5580b.jpg",
+    "created_at": "2025-02-19T20:16:20.297Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 59,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 30,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/4106a57c-147b-4e64-b05f-707296462001.jpg",
+    "created_at": "2025-02-19T20:32:14.006Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 60,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 15,
+    "description": "Created location: test",
+    "created_at": "2025-02-19T20:33:17.629Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 61,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 15,
+    "description": "Updated location: test",
+    "created_at": "2025-02-19T20:34:07.100Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 62,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 15,
+    "description": "Updated location: test",
+    "created_at": "2025-02-19T20:35:04.964Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 63,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": null,
+    "description": "Deleted location: test",
+    "created_at": "2025-02-19T20:35:54.171Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 64,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 31,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/b8476953-507a-4df3-8f4a-a8e495a31c73.jpg",
+    "created_at": "2025-02-19T21:01:47.836Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 65,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 16,
+    "description": "Created location: test",
+    "created_at": "2025-02-19T21:01:53.343Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 66,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 16,
+    "description": "Updated location: test",
+    "created_at": "2025-02-19T21:02:04.389Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 67,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": null,
+    "description": "Deleted location: test",
+    "created_at": "2025-02-19T21:02:16.980Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 68,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 32,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/bcbdf6da-73ad-4227-abcd-38f35291638d.jpg",
+    "created_at": "2025-02-19T22:59:55.590Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 69,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 33,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/851104ae-15dd-442b-a8bf-f5033f29372b.jpg",
+    "created_at": "2025-02-19T23:00:43.787Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 70,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 33,
+    "description": "Deleted image: /media/uploads/11/851104ae-15dd-442b-a8bf-f5033f29372b.jpg",
+    "created_at": "2025-02-19T23:00:47.393Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 71,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 34,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/d0b70b1e-6872-4bad-afb3-8ba2b40cd8f0.png",
+    "created_at": "2025-02-19T23:00:55.196Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 72,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 34,
+    "description": "Deleted image: /media/uploads/11/d0b70b1e-6872-4bad-afb3-8ba2b40cd8f0.png",
+    "created_at": "2025-02-19T23:01:05.638Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 73,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 35,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/396bce8d-626e-49a6-baf5-5dca01de552b.png",
+    "created_at": "2025-02-19T23:01:19.448Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 74,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 35,
+    "description": "Deleted image: /media/uploads/11/396bce8d-626e-49a6-baf5-5dca01de552b.png",
+    "created_at": "2025-02-19T23:01:31.522Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 75,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 36,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/7ae4ee36-9b23-46ec-9ba8-9dcc22d002fc.jpg",
+    "created_at": "2025-02-19T23:02:03.323Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 76,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 36,
+    "description": "Deleted image: /media/uploads/11/7ae4ee36-9b23-46ec-9ba8-9dcc22d002fc.jpg",
+    "created_at": "2025-02-19T23:02:38.155Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 77,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 37,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/f3355c6c-2dde-4466-b84d-c851fc9f6b21.jpg",
+    "created_at": "2025-02-19T23:03:08.545Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 78,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 17,
+    "description": "Created location: test",
+    "created_at": "2025-02-19T23:03:10.122Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 79,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 17,
+    "description": "Updated location: test",
+    "created_at": "2025-02-19T23:04:49.638Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 80,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": null,
+    "description": "Deleted location: test",
+    "created_at": "2025-02-19T23:05:01.211Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 81,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 38,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/d7a7ed66-3358-4525-9a0f-bdc2cfb46ea4.jpg",
+    "created_at": "2025-02-20T03:51:01.735Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 82,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 39,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/a0a56136-2d4d-4e51-b5a0-11b65d5252b6.jpg",
+    "created_at": "2025-02-20T04:39:56.103Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 83,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 39,
+    "description": "Deleted image: /media/uploads/11/a0a56136-2d4d-4e51-b5a0-11b65d5252b6.jpg",
+    "created_at": "2025-02-20T04:39:57.895Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 84,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 40,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/3bbad6bc-03b2-462d-8493-2603ea10929f.jpg",
+    "created_at": "2025-02-20T04:40:02.183Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 85,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 40,
+    "description": "Deleted image: /media/uploads/11/3bbad6bc-03b2-462d-8493-2603ea10929f.jpg",
+    "created_at": "2025-02-20T04:40:04.837Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 86,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 41,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/f2f62e3b-92e3-4dc3-a6c1-2bba20ba7d08.webp",
+    "created_at": "2025-02-20T04:42:28.184Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 87,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 42,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/947cc352-b136-4e3d-8731-68e2f5352901.jpg",
+    "created_at": "2025-02-20T04:42:33.211Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 88,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 41,
+    "description": "Deleted image: /media/uploads/11/f2f62e3b-92e3-4dc3-a6c1-2bba20ba7d08.webp",
+    "created_at": "2025-02-20T04:42:41.077Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 89,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 43,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/f1bf81c8-bd56-47fc-b5be-a1f949c927b2.jpg",
+    "created_at": "2025-02-20T04:42:44.649Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 90,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 43,
+    "description": "Deleted image: /media/uploads/11/f1bf81c8-bd56-47fc-b5be-a1f949c927b2.jpg",
+    "created_at": "2025-02-20T04:42:45.805Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 91,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 44,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/77cf8784-cdfd-4d5a-bf5f-b31595997459.pdf",
+    "created_at": "2025-02-20T04:42:53.799Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 92,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 44,
+    "description": "Deleted image: /media/uploads/11/77cf8784-cdfd-4d5a-bf5f-b31595997459.pdf",
+    "created_at": "2025-02-20T04:43:04.808Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 93,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 45,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/725bfd6a-4388-46f4-a2ac-234b5870143f.webp",
+    "created_at": "2025-02-20T04:44:13.278Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 94,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 18,
+    "description": "Created location: fadfa",
+    "created_at": "2025-02-20T07:51:55.180Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 95,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 46,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/11/8712a089-c23a-4e04-a890-fa4ec6d72393.jpg",
+    "created_at": "2025-02-20T07:52:16.175Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 96,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 18,
+    "description": "Updated location: fadfa",
+    "created_at": "2025-02-20T07:52:17.895Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 97,
+  "fields": {
+    "user": 11,
+    "module": "UploadedImage",
+    "relate_id": 46,
+    "description": "Deleted image: /media/uploads/11/8712a089-c23a-4e04-a890-fa4ec6d72393.jpg",
+    "created_at": "2025-02-20T07:52:23.994Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 98,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 18,
+    "description": "Updated location: fadfa",
+    "created_at": "2025-02-20T07:52:25.320Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 99,
+  "fields": {
+    "user": 4,
+    "module": "User",
+    "relate_id": 4,
+    "description": "Registered new user: user (user@example.com)",
+    "created_at": "2025-02-20T08:06:14.593Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 100,
+  "fields": {
+    "user": 5,
+    "module": "User",
+    "relate_id": 5,
+    "description": "Registered new user: partner (partner@example.com)",
+    "created_at": "2025-02-20T08:09:10.889Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 101,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Suspended user: testuser1",
+    "created_at": "2025-02-22T19:26:04.727Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 102,
+  "fields": {
+    "user": 1,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Unsuspended user: testuser1",
+    "created_at": "2025-02-22T19:47:05.513Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 103,
+  "fields": {
+    "user": 1,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Suspended user: testuser1",
+    "created_at": "2025-02-22T19:47:09.270Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 104,
+  "fields": {
+    "user": 1,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Unsuspended user: testuser1",
+    "created_at": "2025-02-22T19:47:11.845Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 105,
+  "fields": {
+    "user": 1,
+    "module": "UploadedImage",
+    "relate_id": 47,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/1/3db49104-5fa6-41c3-8c84-f6127dcdbe64.jpg",
+    "created_at": "2025-02-22T21:11:03.853Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 106,
+  "fields": {
+    "user": 1,
+    "module": "UploadedImage",
+    "relate_id": 47,
+    "description": "Deleted image: /media/uploads/1/3db49104-5fa6-41c3-8c84-f6127dcdbe64.jpg",
+    "created_at": "2025-02-22T21:11:05.533Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 107,
+  "fields": {
+    "user": 1,
+    "module": "UploadedImage",
+    "relate_id": 48,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/1/22171677-cc15-4f67-a02f-97014ad4abb7.jpg",
+    "created_at": "2025-02-22T21:11:07.008Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 108,
+  "fields": {
+    "user": 1,
+    "module": "UploadedImage",
+    "relate_id": 49,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/1/b828b574-0faa-4bb0-a04c-e1ac8b083fab.jpg",
+    "created_at": "2025-02-22T21:14:11.233Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 109,
+  "fields": {
+    "user": 1,
+    "module": "Location",
+    "relate_id": 7,
+    "description": "Updated location: Auckland Sky Tower Climb",
+    "created_at": "2025-02-23T00:08:59.748Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 111,
+  "fields": {
+    "user": 1,
+    "module": "Location",
+    "relate_id": null,
+    "description": "Deleted location: Pizza Palace",
+    "created_at": "2025-02-24T20:31:55.772Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 112,
+  "fields": {
+    "user": 1,
+    "module": "Location",
+    "relate_id": null,
+    "description": "Deleted location: fadfa",
+    "created_at": "2025-02-24T20:32:30.108Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 113,
+  "fields": {
+    "user": 1,
+    "module": "UploadedImage",
+    "relate_id": 50,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/1/67b7d953-b4f0-4ff9-a60a-98a18c98402c.jpg",
+    "created_at": "2025-02-24T20:36:37.885Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 114,
+  "fields": {
+    "user": 1,
+    "module": "Location",
+    "relate_id": 13,
+    "description": "Updated location: Christchurch Zipline Adventure",
+    "created_at": "2025-02-24T20:36:40.443Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 115,
+  "fields": {
+    "user": 1,
+    "module": "Location",
+    "relate_id": 11,
+    "description": "Updated location: Auckland Harbor Kayaking",
+    "created_at": "2025-02-24T20:38:01.719Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 116,
+  "fields": {
+    "user": 1,
+    "module": "Location",
+    "relate_id": 11,
+    "description": "Updated location: Auckland Harbor Kayaking",
+    "created_at": "2025-02-24T20:38:24.515Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 117,
+  "fields": {
+    "user": 1,
+    "module": "UploadedImage",
+    "relate_id": 51,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/1/fd3f7594-c865-49a6-8946-ffa112493def.webp",
+    "created_at": "2025-02-24T20:38:48.725Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 118,
+  "fields": {
+    "user": 1,
+    "module": "Location",
+    "relate_id": 11,
+    "description": "Updated location: Auckland Harbor Kayaking",
+    "created_at": "2025-02-24T20:38:49.865Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 119,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Suspended user: testuser1",
+    "created_at": "2025-02-24T20:46:54.218Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 120,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Unsuspended user: testuser1",
+    "created_at": "2025-02-24T20:47:11.218Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 121,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Suspended user: testuser1",
+    "created_at": "2025-02-24T20:51:03.396Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 122,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Unsuspended user: testuser1",
+    "created_at": "2025-02-24T20:51:26.588Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 123,
+  "fields": {
+    "user": 5,
+    "module": "UploadedImage",
+    "relate_id": 52,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/5/d9a1b049-0b8b-42ad-bfaf-b5574adf7eae.jpg",
+    "created_at": "2025-02-25T00:22:23.821Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 124,
+  "fields": {
+    "user": 5,
+    "module": "UploadedImage",
+    "relate_id": 52,
+    "description": "Deleted image: /media/uploads/5/d9a1b049-0b8b-42ad-bfaf-b5574adf7eae.jpg",
+    "created_at": "2025-02-25T00:22:33.840Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 125,
+  "fields": {
+    "user": 5,
+    "module": "UploadedImage",
+    "relate_id": 53,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/5/83425a25-d931-41cd-a4f6-42c45c260129.jpg",
+    "created_at": "2025-02-25T00:22:38.072Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 126,
+  "fields": {
+    "user": 5,
+    "module": "UploadedImage",
+    "relate_id": 54,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/5/d73ac4f7-ffc2-4f23-9451-a1cf14379f78.jpg",
+    "created_at": "2025-02-25T00:24:19.779Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 127,
+  "fields": {
+    "user": 5,
+    "module": "UploadedImage",
+    "relate_id": 55,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/5/ebf54d4d-459c-48f6-8396-d32229b53bb1.jpg",
+    "created_at": "2025-02-25T00:34:09.396Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 128,
+  "fields": {
+    "user": 5,
+    "module": "User",
+    "relate_id": 5,
+    "description": "Updated user: partner",
+    "created_at": "2025-02-25T00:37:10.551Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 129,
+  "fields": {
+    "user": 1,
+    "module": "UploadedImage",
+    "relate_id": 56,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/1/ef4aeace-8b85-4650-9dec-110009d3e176.jpg",
+    "created_at": "2025-02-25T00:40:54.760Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 130,
+  "fields": {
+    "user": 1,
+    "module": "User",
+    "relate_id": 1,
+    "description": "Updated user: admin",
+    "created_at": "2025-02-25T00:40:57.303Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 131,
+  "fields": {
+    "user": 1,
+    "module": "User",
+    "relate_id": 4,
+    "description": "Suspended user: user",
+    "created_at": "2025-02-25T00:47:51.171Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 132,
+  "fields": {
+    "user": 1,
+    "module": "User",
+    "relate_id": 4,
+    "description": "Unsuspended user: user",
+    "created_at": "2025-02-25T00:51:31.826Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 133,
+  "fields": {
+    "user": 1,
+    "module": "User",
+    "relate_id": 4,
+    "description": "Suspended user: user",
+    "created_at": "2025-02-25T00:53:03.773Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 134,
+  "fields": {
+    "user": 1,
+    "module": "User",
+    "relate_id": 4,
+    "description": "Unsuspended user: user",
+    "created_at": "2025-02-25T00:53:11.169Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 135,
+  "fields": {
+    "user": 1,
+    "module": "User",
+    "relate_id": 4,
+    "description": "Suspended user: user",
+    "created_at": "2025-02-25T00:55:42.353Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 136,
+  "fields": {
+    "user": 1,
+    "module": "User",
+    "relate_id": 4,
+    "description": "Unsuspended user: user",
+    "created_at": "2025-02-25T00:56:15.419Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 137,
+  "fields": {
+    "user": 4,
+    "module": "UploadedImage",
+    "relate_id": 57,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/4/1fbfd697-3012-49d7-8fb4-d22616418596.jpg",
+    "created_at": "2025-02-25T01:04:29.500Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 138,
+  "fields": {
+    "user": 4,
+    "module": "User",
+    "relate_id": 4,
+    "description": "Updated user: user",
+    "created_at": "2025-02-25T01:04:33.405Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 139,
+  "fields": {
+    "user": 3,
+    "module": "UploadedImage",
+    "relate_id": 58,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/3/bec3107a-4d90-4217-a6de-60072c757b03.jpg",
+    "created_at": "2025-02-25T01:05:44.427Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 140,
+  "fields": {
+    "user": 3,
+    "module": "User",
+    "relate_id": 3,
+    "description": "Updated user: testuser1",
+    "created_at": "2025-02-25T01:05:46.076Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 141,
+  "fields": {
+    "user": 2,
+    "module": "UploadedImage",
+    "relate_id": 59,
+    "description": "Uploaded image: http://localhost:8000/media/uploads/2/0d9ddd6a-cbac-413a-a230-1ad4ee0e966a.jpg",
+    "created_at": "2025-02-25T01:08:52.053Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 142,
+  "fields": {
+    "user": 2,
+    "module": "User",
+    "relate_id": 2,
+    "description": "Updated user: testuser",
+    "created_at": "2025-02-25T01:08:53.805Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 143,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Requested password reset",
+    "created_at": "2025-02-25T22:17:32.265Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 144,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Requested password reset",
+    "created_at": "2025-02-25T22:20:49.746Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 145,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Reset password successfully",
+    "created_at": "2025-02-25T22:41:03.725Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 146,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Requested password reset",
+    "created_at": "2025-02-25T22:48:44.687Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 147,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Reset password successfully",
+    "created_at": "2025-02-25T22:51:07.462Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 148,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Requested password reset",
+    "created_at": "2025-02-25T22:59:01.248Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 149,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Reset password successfully",
+    "created_at": "2025-02-25T22:59:34.327Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 150,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Requested password reset",
+    "created_at": "2025-02-25T23:02:52.904Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 151,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Reset password successfully",
+    "created_at": "2025-02-25T23:03:36.729Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 152,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Requested password reset",
+    "created_at": "2025-02-28T01:03:34.598Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 153,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Reset password successfully",
+    "created_at": "2025-02-28T01:04:11.218Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 154,
+  "fields": {
+    "user": null,
+    "module": "Newsletter",
+    "relate_id": 1,
+    "description": "Subscribed to the newsletter: 270566348@yoobeestudent.ac.nz",
+    "created_at": "2025-03-01T21:36:14.278Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 155,
+  "fields": {
+    "user": null,
+    "module": "Newsletter",
+    "relate_id": 2,
+    "description": "Subscribed to the newsletter: 270566348@yoobeestudent.ac.nz",
+    "created_at": "2025-03-01T21:52:06.034Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 156,
+  "fields": {
+    "user": null,
+    "module": "Newsletter",
+    "relate_id": 3,
+    "description": "Subscribed to the newsletter: vobi69p@gmail.com",
+    "created_at": "2025-03-01T21:53:31.800Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 157,
+  "fields": {
+    "user": null,
+    "module": "Newsletter",
+    "relate_id": 4,
+    "description": "Subscribed to the newsletter: vobi69p@gmail.coom",
+    "created_at": "2025-03-01T21:55:39.110Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 158,
+  "fields": {
+    "user": null,
+    "module": "Newsletter",
+    "relate_id": 5,
+    "description": "Subscribed to the newsletter: vobi69p@gmail.com",
+    "created_at": "2025-03-01T21:58:52.173Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 159,
+  "fields": {
+    "user": null,
+    "module": "Contact",
+    "relate_id": 1,
+    "description": "New contact request from John Doe (vobi69p@gmail.com)",
+    "created_at": "2025-03-02T22:07:47.432Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 160,
+  "fields": {
+    "user": null,
+    "module": "Contact",
+    "relate_id": 2,
+    "description": "New contact request from John Doe (vobi69p@gmail.com)",
+    "created_at": "2025-03-02T22:09:20.708Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 161,
+  "fields": {
+    "user": null,
+    "module": "Contact",
+    "relate_id": 3,
+    "description": "New contact request from John Doe (vobi69p@gmail.com)",
+    "created_at": "2025-03-02T22:49:50.627Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 162,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Requested password reset",
+    "created_at": "2025-03-13T21:34:38.480Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 163,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Reset password successfully",
+    "created_at": "2025-03-13T21:35:13.050Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 164,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 9,
+    "description": "Updated location: Christchurch Hot Air Balloon Ride",
+    "created_at": "2025-03-14T23:46:43.925Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 165,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 10,
+    "description": "Updated location: Queenstown Mountain Café aaaa",
+    "created_at": "2025-03-14T23:47:23.063Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 166,
+  "fields": {
+    "user": 11,
+    "module": "Location",
+    "relate_id": 10,
+    "description": "Updated location: Queenstown Mountain Cafe",
+    "created_at": "2025-03-14T23:47:32.656Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 167,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 2,
+    "description": "Suspended user: testuser",
+    "created_at": "2025-03-14T23:47:56.050Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 168,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 2,
+    "description": "Unsuspended user: testuser",
+    "created_at": "2025-03-14T23:48:10.887Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 169,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 2,
+    "description": "Suspended user: testuser",
+    "created_at": "2025-03-14T23:48:13.595Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 170,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 2,
+    "description": "Unsuspended user: testuser",
+    "created_at": "2025-03-14T23:48:16.602Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 171,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 4,
+    "description": "Suspended user: user",
+    "created_at": "2025-03-14T23:48:21.789Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 172,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 4,
+    "description": "Unsuspended user: user",
+    "created_at": "2025-03-14T23:48:24.816Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 173,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Updated user: aoddy",
+    "created_at": "2025-03-14T23:48:34.146Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 174,
+  "fields": {
+    "user": 11,
+    "module": "User",
+    "relate_id": 11,
+    "description": "Updated user: aoddy",
+    "created_at": "2025-03-14T23:48:39.897Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 175,
+  "fields": {
+    "user": null,
+    "module": "Newsletter",
+    "relate_id": 6,
+    "description": "Subscribed to the newsletter: anirut.p@idevtifytech.com",
+    "created_at": "2025-03-14T23:49:29.967Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 176,
+  "fields": {
+    "user": 11,
+    "module": "Review",
+    "relate_id": 17,
+    "description": "User aoddy reviewed Christchurch Hot Air Balloon Ride with rating 4.0.",
+    "created_at": "2025-03-15T21:00:56.032Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 177,
+  "fields": {
+    "user": 11,
+    "module": "Review",
+    "relate_id": 17,
+    "description": "User aoddy added a review for Location ID 9 with rating 4.0",
+    "created_at": "2025-03-15T21:00:56.035Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 178,
+  "fields": {
+    "user": 4,
+    "module": "Review",
+    "relate_id": 18,
+    "description": "User user reviewed Auckland Sky Tower Bungee with rating 4.0.",
+    "created_at": "2025-03-15T21:02:07.611Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 179,
+  "fields": {
+    "user": 4,
+    "module": "Review",
+    "relate_id": 18,
+    "description": "User user added a review for Location ID 3 with rating 4.0",
+    "created_at": "2025-03-15T21:02:07.613Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 180,
+  "fields": {
+    "user": 4,
+    "module": "Review",
+    "relate_id": 19,
+    "description": "User user reviewed Auckland Sky Tower Bungee with rating 5.0.",
+    "created_at": "2025-03-15T21:57:44.887Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 181,
+  "fields": {
+    "user": 4,
+    "module": "Review",
+    "relate_id": 19,
+    "description": "User user added a review for Location ID 3 with rating 5.0",
+    "created_at": "2025-03-15T21:57:44.888Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 182,
+  "fields": {
+    "user": 4,
+    "module": "Review",
+    "relate_id": 20,
+    "description": "User user reviewed Auckland Sky Tower Bungee with rating 5.0.",
+    "created_at": "2025-03-15T22:11:16.087Z"
+  }
+},
+{
+  "model": "core.systemlog",
+  "pk": 183,
+  "fields": {
+    "user": 4,
+    "module": "Review",
+    "relate_id": 20,
+    "description": "User user added a review for Location ID 3 with rating 5.0",
+    "created_at": "2025-03-15T22:11:16.089Z"
+  }
+}
+]
