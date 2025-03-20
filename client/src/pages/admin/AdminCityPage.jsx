@@ -60,7 +60,11 @@ const AdminCityPage = () => {
                             <p className=" max-w-96">{city.description}</p>
                         ),
                     },
-                    { key: "rating", label: "Rating" },
+                    {
+                        key: "rating",
+                        label: "Rating",
+                        render: (city) => city.rating.toFixed(1),
+                    },
                     {
                         key: "is_active",
                         label: "Status",

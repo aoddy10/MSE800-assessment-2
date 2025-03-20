@@ -1,0 +1,18 @@
+[
+{
+  "model": "newsletter.subscriber",
+  "pk": 5,
+  "fields": {
+    "email": "vobi69p@gmail.com",
+    "subscribed_at": "2025-03-01T21:58:49.179Z"
+  }
+},
+{
+  "model": "newsletter.subscriber",
+  "pk": 6,
+  "fields": {
+    "email": "anirut.p@idevtifytech.com",
+    "subscribed_at": "2025-03-14T23:49:27.021Z"
+  }
+}
+]

@@ -73,7 +73,7 @@ docker ps
 Test API endpoint:
 
 ```sh
-curl http://localhost:8000/api/items/
+curl http://localhost:8000/api/
 ```
 
 Test React client:
