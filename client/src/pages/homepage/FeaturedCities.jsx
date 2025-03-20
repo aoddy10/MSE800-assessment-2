@@ -182,13 +182,13 @@ const FeaturedCities = ({ cities }) => {
                                                                           }
                                                                       </h3>
                                                                       <div className="flex items-center gap-1 text-yellow-500">
-                                                                          <span className="font-semibold">
-                                                                              {
-                                                                                  city.rating
-                                                                              }
-                                                                          </span>
                                                                           <span>
                                                                               ⭐
+                                                                          </span>
+                                                                          <span className="font-semibold">
+                                                                              {city.rating.toFixed(
+                                                                                  1
+                                                                              )}
                                                                           </span>
                                                                       </div>
                                                                   </div>

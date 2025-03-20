@@ -15,17 +15,17 @@ function LocationCard({ location, onClick }) {
                         className="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                 </div>
-                    
+
                 <div className="flex flex-col mt-3">
                     <div className="flex justify-between">
                         <h3 className="text-lg font-semibold leading-normal">
                             {location.title}
                         </h3>
                         <div className="flex items-center gap-1 text-yellow-500 text-sm">
-                            <span className="font-semibold">
-                                {location.avg_rating}
-                            </span>
                             <span>⭐</span>
+                            <span className="font-semibold">
+                                {location.avg_rating.toFixed(1)}
+                            </span>
                         </div>
                     </div>
                     <p className="text-gray-600 text-sm leading-normal">
@@ -38,7 +38,9 @@ function LocationCard({ location, onClick }) {
                 <div className=" font-extrabold text-lg">
                     $ {location.price_per_person}
                 </div>
-                <button className="bg-[#31AAB7] hover:bg-[#2AA8B6] text-white text-sm py-2 px-2 rounded">View Details</button>
+                <button className="bg-[#31AAB7] hover:bg-[#2AA8B6] text-white text-sm py-2 px-2 rounded">
+                    View Details
+                </button>
             </div>
         </div>
     );

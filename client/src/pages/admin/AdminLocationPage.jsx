@@ -105,7 +105,11 @@ const AdminLocationPage = () => {
                     },
                     { key: "type", label: "Type" },
                     { key: "city", label: "City" },
-                    { key: "avg_rating", label: "Rating" },
+                    {
+                        key: "avg_rating",
+                        label: "Rating",
+                        render: (location) => location.avg_rating.toFixed(1),
+                    },
                     { key: "price_per_person", label: "Price" },
                     {
                         key: "actions",
