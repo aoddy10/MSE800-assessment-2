@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import useScreenSize from '../hooks/useScreenSize';
+import React, { useState } from "react";
+import useScreenSize from "../hooks/useScreenSize";
 
-import '../styles/ContactPage.css';
-import aod from "../assets/aod01.jpg";
-import terence from "../assets/terence.jpeg";
-import wan from "../assets/about1.jpg";
+import "../styles/ContactPage.css";
+import aod from "../assets/teams/aod01.jpg";
+import terence from "../assets/teams/terence.jpeg";
+import wan from "../assets/teams/wan.jpeg";
 import {
     FaLinkedin,
     FaEnvelope,
@@ -233,7 +233,9 @@ const ContactPage = () => {
                             </p>
                         )}
                         {error.form && (
-                            <p className="text-red-500 text-sm text-left">{error.form}</p>
+                            <p className="text-red-500 text-sm text-left">
+                                {error.form}
+                            </p>
                         )}
 
                         <button
@@ -307,43 +309,80 @@ const ContactPage = () => {
                 </div>
 
                 <section className="w-full p-0">
-          <div className="w-full mt-[100px] mx-auto text-center">
-            <h2 className="text-4xl font-bold text-gray-800">Our Team</h2>
-            <p className="text-base text-[#767676] mt-2">Lorem Ipsum Dolor Sit Amet Consectetur</p>
+                    <div className="w-full mt-[100px] mx-auto text-center flex flex-col items-center">
+                        <h2 className="text-4xl font-bold text-gray-800">
+                            Our Team
+                        </h2>
+                        <p className="text-base text-[#767676] mt-2  ">
+                            “Our team is a passionate group of professionals
+                            dedicated to innovation, collaboration, and
+                            delivering exceptional results.”
+                        </p>
 
-            <div className={`flex ${isMobile ? 'flex-col space-y-8' : 'justify-between'} mt-8`}>
-              {team.map((member, index) => (
-                <React.Fragment key={index}>
+                        <div
+                            className={`flex ${
+                                isMobile
+                                    ? "flex-col space-y-8"
+                                    : "justify-between"
+                            } mt-8`}
+                        >
+                            {team.map((member, index) => (
+                                <React.Fragment key={index}>
+                                    <div className="bg-none rounded-xl p-6 border-1 border-black/10">
+                                        <img
+                                            src={member.image}
+                                            alt=""
+                                            className={`rounded-md m-auto ${
+                                                isMobile
+                                                    ? "w-64 h-64"
+                                                    : "w-[350px] h-[350px]"
+                                            }`}
+                                            style={{ objectFit: "cover" }}
+                                        />
 
-                  <div className="bg-none rounded-xl p-6 border-1 border-black/10">
-                    <img
-                      src={member.image}
-                      alt=""
-                      className={`rounded-md m-auto ${isMobile ? 'w-64 h-64' : 'w-[350px] h-[350px]'}`}
-                      style={{ objectFit: 'cover' }}
-                    />
+                                        <h3
+                                            className={`mt-4 ${
+                                                isMobile ? "text-xl" : "text-lg"
+                                            } font-semibold text-gray-800`}
+                                        >
+                                            {member.name}
+                                        </h3>
+                                        <p
+                                            className={`text-gray-500 ${
+                                                isMobile
+                                                    ? "text-base"
+                                                    : "text-sm"
+                                            }`}
+                                        >
+                                            {member.role}
+                                        </p>
 
-                    <h3 className={`mt-4 ${isMobile ? 'text-xl' : 'text-lg'} font-semibold text-gray-800`}>{member.name}</h3>
-                    <p className={`text-gray-500 ${isMobile ? 'text-base' : 'text-sm'}`}>{member.role}</p>
-
-                    <div className="m-auto w-max flex gap-3 mt-4">
-                      <a href={member.linkedin} className="text-black hover:text-[#31AAB7]">
-                        <FaLinkedin size={16} />
-                      </a>
-                      <a href={`mailto:${member.email}`} className="text-black hover:text-[#31AAB7]">
-                        <FaEnvelope size={16} />
-                      </a>
-                      <a href={`tel:${member.phone}`} className="text-black hover:text-[#31AAB7]">
-                        <FaPhone size={16} />
-                      </a>
+                                        <div className="m-auto w-max flex gap-3 mt-4">
+                                            <a
+                                                href={member.linkedin}
+                                                className="text-black hover:text-[#31AAB7]"
+                                            >
+                                                <FaLinkedin size={16} />
+                                            </a>
+                                            <a
+                                                href={`mailto:${member.email}`}
+                                                className="text-black hover:text-[#31AAB7]"
+                                            >
+                                                <FaEnvelope size={16} />
+                                            </a>
+                                            <a
+                                                href={`tel:${member.phone}`}
+                                                className="text-black hover:text-[#31AAB7]"
+                                            >
+                                                <FaPhone size={16} />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            ))}
+                        </div>
                     </div>
-                  </div>
-
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        </section>
+                </section>
             </div>
         </div>
     );

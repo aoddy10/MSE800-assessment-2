@@ -36,14 +36,14 @@ const HomePage = () => {
         const newRestaurants = await getLocations({
             cityId: cityId,
             type: "restaurant",
-            price: price,
+            priceRange: price,
         });
         setRestaurants(newRestaurants);
         // update activities
         const newActivities = await getLocations({
             cityId: cityId,
             type: "activity",
-            price: price,
+            priceRange: price,
         });
         setActivities(newActivities);
     };

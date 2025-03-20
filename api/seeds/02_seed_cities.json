@@ -1,0 +1,112 @@
+[
+{
+  "model": "city.city",
+  "pk": 1,
+  "fields": {
+    "title": "Auckland CBD",
+    "description": "A bustling metropolis and the economic heart of New Zealand, Auckland CBD offers stunning waterfront views, a vibrant nightlife, and world-class dining.",
+    "image_url": "http://localhost:8000/media/uploads/1/b828b574-0faa-4bb0-a04c-e1ac8b083fab.jpg",
+    "rating": 4.8,
+    "is_active": true
+  }
+},
+{
+  "model": "city.city",
+  "pk": 2,
+  "fields": {
+    "title": "Wellington",
+    "description": "The capital city of New Zealand, Wellington is known for its cultural scene, government institutions, and picturesque harbor, surrounded by rolling green hills.",
+    "image_url": "http://localhost:8000/media/uploads/11/nareeta-martin-5DZjcURie54-unsplash.jpg",
+    "rating": 4.7,
+    "is_active": true
+  }
+},
+{
+  "model": "city.city",
+  "pk": 3,
+  "fields": {
+    "title": "Christchurch",
+    "description": "Known as the Garden City, Christchurch is a blend of English heritage, innovative urban design, and beautiful parks, recovering dynamically after the 2011 earthquake.",
+    "image_url": "http://localhost:8000/media/uploads/11/athithan-vignakaran-ZEpH5xqoGT4-unsplash.jpg",
+    "rating": 4.6,
+    "is_active": true
+  }
+},
+{
+  "model": "city.city",
+  "pk": 4,
+  "fields": {
+    "title": "Queenstown",
+    "description": "A paradise for adventure lovers, Queenstown is famous for its stunning lake and mountain landscapes, world-class skiing, and adrenaline-pumping activities.",
+    "image_url": "http://localhost:8000/media/uploads/11/katelyn-greer-N9in4T9dMnc-unsplash.jpg",
+    "rating": 4.9,
+    "is_active": true
+  }
+},
+{
+  "model": "city.city",
+  "pk": 5,
+  "fields": {
+    "title": "Dunedin",
+    "description": "A charming city with Scottish heritage, Dunedin is home to historic architecture, wildlife attractions, and a thriving student community from Otago University.",
+    "image_url": "http://localhost:8000/media/uploads/11/k8-Gb2LYrknHGE-unsplash.jpg",
+    "rating": 4.5,
+    "is_active": true
+  }
+},
+{
+  "model": "city.city",
+  "pk": 6,
+  "fields": {
+    "title": "Rotorua",
+    "description": "Renowned for its geothermal activity and Maori culture, Rotorua offers steaming geysers, bubbling mud pools, and rich traditions.",
+    "image_url": "http://localhost:8000/media/uploads/11/toby-hall-a8ogIHGS9tc-unsplash.jpg",
+    "rating": 4.7,
+    "is_active": true
+  }
+},
+{
+  "model": "city.city",
+  "pk": 7,
+  "fields": {
+    "title": "Hamilton",
+    "description": "Located along the Waikato River, Hamilton boasts beautiful gardens, a growing café culture, and a vibrant nightlife.",
+    "image_url": "http://localhost:8000/media/uploads/11/jari-hytonen-pT3udr5GaJg-unsplash.jpg",
+    "rating": 4.4,
+    "is_active": true
+  }
+},
+{
+  "model": "city.city",
+  "pk": 8,
+  "fields": {
+    "title": "Tauranga",
+    "description": "A coastal city with stunning beaches and a warm climate, Tauranga is a popular spot for relaxation, surfing, and exploring Mount Maunganui.",
+    "image_url": "http://localhost:8000/media/uploads/11/look-up-look-down-photography-jwn2Cjckth0-unsplash.jpg",
+    "rating": 4.6,
+    "is_active": true
+  }
+},
+{
+  "model": "city.city",
+  "pk": 9,
+  "fields": {
+    "title": "Napier",
+    "description": "Famous for its Art Deco architecture, Napier is a charming city with vineyards, beautiful coastal views, and a rich history.",
+    "image_url": "http://localhost:8000/media/uploads/11/lucy-doran-cv2GjtGy4qY-unsplash.jpg",
+    "rating": 4.5,
+    "is_active": true
+  }
+},
+{
+  "model": "city.city",
+  "pk": 10,
+  "fields": {
+    "title": "Nelson",
+    "description": "A sunny city on the South Island, Nelson is known for its vibrant arts scene, craft breweries, and access to Abel Tasman National Park.",
+    "image_url": "http://localhost:8000/media/uploads/11/te-pania-LDmOZz087vg-unsplash.jpg",
+    "rating": 4.6,
+    "is_active": true
+  }
+}
+]

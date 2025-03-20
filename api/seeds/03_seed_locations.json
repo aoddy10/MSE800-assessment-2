@@ -1,0 +1,262 @@
+[
+{
+  "model": "location.location",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "city": 10,
+    "type": "restaurant",
+    "title": "Nelson Bay Seafood",
+    "description": "Fresh seafood with a view of the bay.",
+    "contact_email": "info@nelsonbayseafood.com",
+    "contact_phone": "123-456-7890",
+    "cover_image_url": "http://localhost:8000/media/uploads/11/bub-s-famous-fish-chips.jpg",
+    "open_hour_detail": "Mon-Sun: 11am - 9pm",
+    "location_url": "https://maps.example.com/nelson",
+    "menu_url": "https://example.com/nelson-menu",
+    "price_per_person": "25.00",
+    "avg_rating": 4.7,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "city": 1,
+    "type": "activity",
+    "title": "Auckland Sky Tower Bungee",
+    "description": "Experience the thrill of jumping from the iconic Sky Tower!",
+    "contact_email": "info@skytowerbungee.com",
+    "contact_phone": "987-654-3210",
+    "cover_image_url": "http://localhost:8000/media/uploads/11/52.jpg",
+    "open_hour_detail": "Mon-Sun: 10am - 8pm",
+    "location_url": "https://maps.example.com/auckland-bungee",
+    "menu_url": "",
+    "price_per_person": "150.00",
+    "avg_rating": 4.666666666666667,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 4,
+  "fields": {
+    "user": 11,
+    "city": 2,
+    "type": "restaurant",
+    "title": "Wellington Coffee House",
+    "description": "The best artisanal coffee in Wellington!",
+    "contact_email": "contact@wellingtoncoffee.com",
+    "contact_phone": "111-222-3333",
+    "cover_image_url": "http://localhost:8000/media/uploads/11/the-hangar.jpg",
+    "open_hour_detail": "Mon-Fri: 7am - 6pm, Sat-Sun: 8am - 4pm",
+    "location_url": "https://maps.example.com/wellington-coffee",
+    "menu_url": "https://example.com/wellington-menu",
+    "price_per_person": "10.00",
+    "avg_rating": 4.8,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 5,
+  "fields": {
+    "user": 2,
+    "city": 3,
+    "type": "activity",
+    "title": "Christchurch Botanic Gardens Tour",
+    "description": "Explore the beautiful gardens of Christchurch with a guided tour.",
+    "contact_email": "info@chchgardens.com",
+    "contact_phone": "444-555-6666",
+    "cover_image_url": "http://localhost:8000/media/uploads/11/BGT-5.png",
+    "open_hour_detail": "Mon-Sun: 9am - 5pm",
+    "location_url": "https://maps.example.com/chch-gardens",
+    "menu_url": "",
+    "price_per_person": "20.00",
+    "avg_rating": 4.7,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 6,
+  "fields": {
+    "user": 3,
+    "city": 4,
+    "type": "restaurant",
+    "title": "Queenstown Steakhouse",
+    "description": "Premium steaks with stunning lake views.",
+    "contact_email": "info@queenstownsteak.com",
+    "contact_phone": "777-888-9999",
+    "cover_image_url": "http://localhost:8000/media/uploads/11/rib-eye-on-the-bone.jpg",
+    "open_hour_detail": "Mon-Sun: 12pm - 10pm",
+    "location_url": "https://maps.example.com/queenstown-steak",
+    "menu_url": "https://example.com/queenstown-menu",
+    "price_per_person": "50.00",
+    "avg_rating": 4.9,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 7,
+  "fields": {
+    "user": 3,
+    "city": 1,
+    "type": "activity",
+    "title": "Auckland Sky Tower Climb",
+    "description": "Climb to the top of Auckland's Sky Tower for breathtaking views!",
+    "contact_email": "info@skytowerclimb.com",
+    "contact_phone": "987-654-3210",
+    "cover_image_url": "http://localhost:8000/media/uploads/11/claim_tower_auckland.jpg",
+    "open_hour_detail": "Mon-Sun: 9am - 7pm",
+    "location_url": "https://maps.example.com/auckland-climb",
+    "menu_url": "",
+    "price_per_person": "80.00",
+    "avg_rating": 4.8,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 8,
+  "fields": {
+    "user": 11,
+    "city": 2,
+    "type": "restaurant",
+    "title": "Wellington Seafood Bistro",
+    "description": "A seafood lover’s paradise by the Wellington waterfront.",
+    "contact_email": "info@wellingtonseafood.com",
+    "contact_phone": "111-222-3333",
+    "cover_image_url": "http://localhost:8000/media/uploads/11/the-crab-shack-1346488.webp",
+    "open_hour_detail": "Mon-Fri: 12pm - 10pm, Sat-Sun: 10am - 11pm",
+    "location_url": "https://maps.example.com/wellington-seafood",
+    "menu_url": "https://example.com/wellington-menu",
+    "price_per_person": "35.00",
+    "avg_rating": 4.6,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 9,
+  "fields": {
+    "user": 2,
+    "city": 3,
+    "type": "activity",
+    "title": "Christchurch Hot Air Balloon Ride",
+    "description": "Enjoy a stunning sunrise view over Christchurch from a hot air balloon.",
+    "contact_email": "info@chchballoons.com",
+    "contact_phone": "444-555-6666",
+    "cover_image_url": "http://localhost:8000/media/uploads/11/adventure-balloons-867390.webp",
+    "open_hour_detail": "Mon-Sun: 5am - 8amaaa",
+    "location_url": "https://maps.example.com/chch-balloons",
+    "menu_url": "",
+    "price_per_person": "250.00",
+    "avg_rating": 4.0,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 10,
+  "fields": {
+    "user": 3,
+    "city": 4,
+    "type": "restaurant",
+    "title": "Queenstown Mountain Cafe",
+    "description": "Enjoy gourmet coffee and breakfast with a panoramic view of Queenstown.",
+    "contact_email": "info@queenstowncafe.com",
+    "contact_phone": "777-888-9999",
+    "cover_image_url": "http://localhost:8000/media/uploads/11/stratosfare-view-at-night.jpg",
+    "open_hour_detail": "Mon-Sun: 6am - 6pm",
+    "location_url": "https://maps.example.com/queenstown-cafe",
+    "menu_url": "https://example.com/queenstown-menu",
+    "price_per_person": "15.00",
+    "avg_rating": 4.7,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 11,
+  "fields": {
+    "user": 3,
+    "city": 1,
+    "type": "activity",
+    "title": "Auckland Harbor Kayaking",
+    "description": "Paddle through Auckland's scenic harbor and enjoy the skyline views.",
+    "contact_email": "info@aucklandkayak.com",
+    "contact_phone": "987-654-3210",
+    "cover_image_url": "http://localhost:8000/media/uploads/1/fd3f7594-c865-49a6-8946-ffa112493def.webp",
+    "open_hour_detail": "Mon-Sun: 6am - 6pm",
+    "location_url": "https://maps.example.com/auckland-kayak",
+    "menu_url": null,
+    "price_per_person": "45.00",
+    "avg_rating": 4.8,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 12,
+  "fields": {
+    "user": 11,
+    "city": 2,
+    "type": "restaurant",
+    "title": "Wellington Vegan Bistro",
+    "description": "A plant-based dining experience with fresh, organic ingredients.",
+    "contact_email": "contact@wellingtonvegan.com",
+    "contact_phone": "111-222-3333",
+    "cover_image_url": "http://localhost:8000/media/uploads/11/ella-olsson-yb6bm_66Jdk-unsplash-1-1024x768.jpg",
+    "open_hour_detail": "Mon-Fri: 12pm - 10pm, Sat-Sun: 10am - 11pm",
+    "location_url": "https://maps.example.com/wellington-vegan",
+    "menu_url": "https://example.com/wellington-menu",
+    "price_per_person": "30.00",
+    "avg_rating": 4.7,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 13,
+  "fields": {
+    "user": 2,
+    "city": 3,
+    "type": "activity",
+    "title": "Christchurch Zipline Adventure",
+    "description": "Experience the thrill of ziplining through Christchurch’s forests.",
+    "contact_email": "info@chchzip.com",
+    "contact_phone": "444-555-6666",
+    "cover_image_url": "http://localhost:8000/media/uploads/1/67b7d953-b4f0-4ff9-a60a-98a18c98402c.jpg",
+    "open_hour_detail": "Mon-Sun: 8am - 6pm",
+    "location_url": "https://maps.example.com/chch-zip",
+    "menu_url": null,
+    "price_per_person": "85.00",
+    "avg_rating": 4.9,
+    "is_active": true
+  }
+},
+{
+  "model": "location.location",
+  "pk": 14,
+  "fields": {
+    "user": 3,
+    "city": 4,
+    "type": "restaurant",
+    "title": "Queenstown Sushi House",
+    "description": "Authentic Japanese sushi with stunning views of the mountains.",
+    "contact_email": "info@queenstownsushi.com",
+    "contact_phone": "777-888-9999",
+    "cover_image_url": "http://localhost:8000/media/uploads/11/sushi-bar-1.png",
+    "open_hour_detail": "Mon-Sun: 11am - 10pm",
+    "location_url": "https://maps.example.com/queenstown-sushi",
+    "menu_url": "https://example.com/queenstown-menu",
+    "price_per_person": "40.00",
+    "avg_rating": 4.8,
+    "is_active": true
+  }
+}
+]
