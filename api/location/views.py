@@ -44,6 +44,7 @@ def get_locations(request):
         locations = locations.filter(title__icontains=search_text)  # Search only in title
     if min_rating:
         locations = locations.filter(avg_rating__gte=min_rating)
+        
 
     # Filter by price range
     if price_range == "low":
